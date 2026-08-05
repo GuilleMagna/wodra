@@ -8,6 +8,7 @@
 !/wp-content/themes/burger-theme/
 !/.gitignore
 !/.cpanel.yml
+!/CLAUDE.md
 
 # Bundle cacheado generado por inc/assets.php (se regenera solo)
 /wp-content/themes/burger-theme/cache/

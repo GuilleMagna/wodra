@@ -1,5 +1,8 @@
 ---
 deployment:
   tasks:
-    - export DEPLOYPATH=/home/wodra/public_html/web.wodra.ar/
-    - /usr/bin/rsync -av --exclude='.git/' --exclude='.cpanel.yml' --exclude='.gitignore' ./ $DEPLOYPATH
+    # OJO: el DEPLOYPATH apunta SOLO al directorio del theme, no al docroot.
+    # Es lo que hace seguro el --delete: si apuntara al docroot borraría
+    # WordPress core, plugins y uploads (nada de eso está en este repo).
+    - export DEPLOYPATH=/home/wodra/public_html/web.wodra.ar/wp-content/themes/burger-theme/
+    - /usr/bin/rsync -av --delete --exclude='cache/' ./wp-content/themes/burger-theme/ $DEPLOYPATH
