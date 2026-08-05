@@ -115,7 +115,7 @@ $block_id = $block['id'];
                             <?php if($tipo_de_imagen === true): ?>
 
                                 <div class="card-conoce-img mb-3">
-                                    <img class="mx-auto" style="width: auto;" src="<?php echo esc_url($imagen) ?>" alt="<?php echo esc_attr($titulo) ?>">
+                                    <img loading="lazy" decoding="async" class="mx-auto" style="width: auto;" src="<?php echo esc_url($imagen) ?>" alt="<?php echo esc_attr($titulo) ?>">
                                 </div>
 
                             <?php else:?>

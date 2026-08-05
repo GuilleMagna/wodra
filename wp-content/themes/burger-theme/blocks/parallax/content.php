@@ -85,7 +85,7 @@ $block_id = $block['id'];
                 <?php if( $mostrar_logo_parallax ): ?>
 
                     <div class="col-12 col-md-5 col-lg-4 d-flex align-items-center <?=($invertir_columnas===true) ? 'order-0' : 'order-1'; ?>" data-sal="fade-in" data-sal-duration="500">
-                        <img src="<?php echo $logo_parallax ?>" class="img-fluid p-5 p-md-0" alt="imagen parallax" data-aos="fade-up">
+                        <img loading="lazy" decoding="async" src="<?php echo $logo_parallax ?>" class="img-fluid p-5 p-md-0" alt="imagen parallax" data-aos="fade-up">
                     </div>
                     
                 <?php endif ?>

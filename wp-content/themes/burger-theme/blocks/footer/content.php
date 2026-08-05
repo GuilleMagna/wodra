@@ -56,7 +56,7 @@ $color_fondo_footer = BURGER_OPTIONS['color_fondo_footer'] ?: 'var(--primary)';
                 <p class="mb-2 mb-md-0 text-center text-lg-end" style="color: <?= $color_texto_footer ?>">
                     <?php if (!empty($enlace_agencia) and count($enlace_agencia) > 0): ?><a
                             href="<?php echo $enlace_agencia['url'] ?>" target="_blank"><?php endif ?>
-                        <?php echo $texto_agencia ?>&nbsp;<img src="<?php echo $logo_agencia ?>" style="height:12px;vertical-align:center;"
+                        <?php echo $texto_agencia ?>&nbsp;<img loading="lazy" decoding="async" src="<?php echo $logo_agencia ?>" style="height:12px;vertical-align:center;"
                             alt="<?php echo $texto_agencia ?>" title="<?php echo $texto_agencia ?>">
                         <?php if (!empty($enlace_agencia) and count($enlace_agencia) > 0): ?></a><?php endif ?>
                 </p>
@@ -74,7 +74,7 @@ $color_fondo_footer = BURGER_OPTIONS['color_fondo_footer'] ?: 'var(--primary)';
         <div class="whatsapp-button">
             <a href="https://wa.me/<?php echo BURGER_OPTIONS['whatsapp'] ?>?text=<?php echo urlencode(BURGER_OPTIONS['texto_whatsapp']) ?>"
                 class="text-decoration-none" target="_blank">
-                <img src="<?php echo BURGER_OPTIONS['logo_whatsapp'] ?>" style="width:120px" alt="logo wapp">
+                <img loading="lazy" decoding="async" src="<?php echo BURGER_OPTIONS['logo_whatsapp'] ?>" style="width:120px" alt="logo wapp">
             </a>
         </div>
 

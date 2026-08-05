@@ -69,7 +69,7 @@ $block_id = $block['id'];
                                 <div class="text-parallax color-secundario pe-3 fw-bolder">
                                     <?php echo $key+1 ?><span class="color-primario">.</span>
                                 </div>
-                                <img src="<?php echo $imagen ?>" class="img-responsive img-fluid img-iconos" alt="<?php echo esc_html($titulo) ?>" /> 
+                                <img loading="lazy" decoding="async" src="<?php echo $imagen ?>" class="img-responsive img-fluid img-iconos" alt="<?php echo esc_html($titulo) ?>" /> 
 
                             </div>
 
@@ -108,7 +108,7 @@ $block_id = $block['id'];
                     <div class="row justify-content-around align-items-center">
 
                         <div class="col-5 col-md-3 col-lg-3 d-flex align-items-center justify-content-center mx-auto mx-lg-0 mb-4 mb-lg-0">
-                            <img src="<?php echo $logo_solicitar_asesor ?>" alt="logo-empresa" class="img-fluid" data-aos="fade-in">
+                            <img loading="lazy" decoding="async" src="<?php echo $logo_solicitar_asesor ?>" alt="logo-empresa" class="img-fluid" data-aos="fade-in">
                         </div>  
 
                         <div class="col-12 col-md-6 col-lg-4 d-flex align-items-center justify-content-center mb-4 mb-lg-0">

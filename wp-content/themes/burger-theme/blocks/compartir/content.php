@@ -59,7 +59,7 @@ $block_id = $block['id'];
                     </a>
 
                     <!--a href="https://www.linkedin.com/shareArticle?mini=true&url=<?php echo $post->post_permalink; ?>&title=<?php echo $post->post_title; ?>" target="_blank" class="text-decoration-none">
-                        <img src="<?= BURGER_THEME_URL ?>/themes/images/iconos/icono-linkedin.png" alt="compartir linkedin">
+                        <img loading="lazy" decoding="async" src="<?= BURGER_THEME_URL ?>/themes/images/iconos/icono-linkedin.png" alt="compartir linkedin">
                     </a-->
 
                     <a href="https://twitter.com/intent/tweet?text=<?php echo $post->post_title; ?>&url=<?php echo $post->post_permalink; ?>" target="_blank" class="text-decoration-none">
@@ -71,7 +71,7 @@ $block_id = $block['id'];
             </div>
 
             <div class="col-6 mx-auto mt-4 mt-md-0 col-lg-3 d-flex align-items-center">
-                <img src="<?php echo $logo_compartir ?>" alt="logo" class="img-fluid w-100">
+                <img loading="lazy" decoding="async" src="<?php echo $logo_compartir ?>" alt="logo" class="img-fluid w-100">
             </div>
 
         </div>

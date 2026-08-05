@@ -39,7 +39,7 @@ $block_id = $block['id'];
 
             <div class="text-center">
 
-                <img src="<?php echo $logo_under ?>" alt="<?= $titulo_under ?> <?= $subtitulo_under ?>" class="mx-auto mb-5" style="max-height: 130px;">
+                <img loading="lazy" decoding="async" src="<?php echo $logo_under ?>" alt="<?= $titulo_under ?> <?= $subtitulo_under ?>" class="mx-auto mb-5" style="max-height: 130px;">
 
                 <h1 class="color-primario mb-4 mx-auto <?= $col_container_class ?> <?= $col_md_container_class ?> <?= $col_lg_container_class ?> <?= $text_align_class ?>">
                     <?= $titulo_under ?> <span><?= $subtitulo_under ?></span>

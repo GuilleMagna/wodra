@@ -158,7 +158,7 @@ $block_id = $block['id'];
                     <?php elseif( $mostrar_imagen && $imagen ): ?>
                     
                         <div class="col-12 col-lg-6 d-flex align-items-center justify-content-center p-0 img img-descripcion <?php if( $multimedia_derecha ) echo 'order-0 order-lg-1'; else echo 'order-0 order-lg-0' ?>">
-                            <img src="<?php echo $imagen ?>" 
+                            <img loading="lazy" decoding="async" src="<?php echo $imagen ?>" 
                                 class="img-fluid border-right-big"
                                 alt="img <?php echo $titulo_informacion ?>"
                                 style="border-radius: <?= $radio_de_los_bordes ?>">

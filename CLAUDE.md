@@ -122,9 +122,10 @@ manual. Se purga solo en cada `save_post`.
 - **Imágenes**: sigue siendo lo que más pesa. El GIF de WhatsApp de 2 MB ya se
   reemplazó (9 KB). Los JPG están guardados con calidad absurda: re-encodarlos a q85
   sin cambiar dimensiones baja `/nosotros/` de 4,4 MB a ~2,5 MB. Los PNG con
-  transparencia no se pueden bajar con GD (ver trampas). Falta lazy loading: de 61
-  `<img>` solo 6 tienen `loading="lazy"`, y los fondos salen por `background-image`,
-  que no lazyfica.
+  transparencia no se pueden bajar con GD (ver trampas). El lazy loading de los
+  `<img>` ya está (se excluyen `header` y los heroes, donde retrasaría el LCP), pero
+  los fondos salen por `background-image` y eso no lo cubre `loading="lazy"`: para
+  diferirlos hace falta IntersectionObserver o una custom property.
 - **Scroll horizontal en mobile**: los `data-aos="fade-left"` arrancan con
   `translateX(100px)` y empujan la página ~88px mientras no se dispara la animación.
   Es transversal a todos los bloques que usan ese efecto.

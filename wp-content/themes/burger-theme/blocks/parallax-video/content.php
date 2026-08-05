@@ -51,7 +51,7 @@ $block_id = $block['id'];
                     <? if (!empty($logo_parallax)): ?>
 
                         <div class="col-8 col-md-6 col-lg-5">
-                            <img src="<?php echo $logo_parallax ?>" alt="logo parallax" class="img-fluid img-video-home">
+                            <img loading="lazy" decoding="async" src="<?php echo $logo_parallax ?>" alt="logo parallax" class="img-fluid img-video-home">
                         </div>
 
                     <? endif ?>
@@ -103,7 +103,7 @@ $block_id = $block['id'];
                     <? if (!empty($logo_parallax)): ?>
 
                         <div class="col-8 col-md-6 col-lg-5">
-                            <img src="<?php echo $logo_parallax ?>" alt="logo parallax" class="img-fluid img-video-home">
+                            <img loading="lazy" decoding="async" src="<?php echo $logo_parallax ?>" alt="logo parallax" class="img-fluid img-video-home">
                         </div>
 
                     <? endif ?>
@@ -113,7 +113,7 @@ $block_id = $block['id'];
                 <? if (!empty($logo_parallax_2)): ?>
 
                     <div class="col-8 col-md-6 col-lg-5">
-                        <img src="<?php echo $logo_parallax_2 ?>" alt="logo parallax" class="img-fluid img-video-home">
+                        <img loading="lazy" decoding="async" src="<?php echo $logo_parallax_2 ?>" alt="logo parallax" class="img-fluid img-video-home">
                     </div>
 
                 <? endif ?>

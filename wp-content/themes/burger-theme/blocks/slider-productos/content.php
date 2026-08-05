@@ -85,7 +85,7 @@ $block_id = $block['id'];
                                             <div class="d-flex justify-content-start mb-4 text-white">
 
                                                 <div style="width: 35px;" class="me-2">
-                                                    <img src="<?php echo $item['icono'] ?>" style="width: 15px;">
+                                                    <img loading="lazy" decoding="async" src="<?php echo $item['icono'] ?>" style="width: 15px;">
                                                 </div>
 
                                                 <div style="width: 100%;">

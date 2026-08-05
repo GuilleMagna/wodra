@@ -88,7 +88,7 @@ $block_id = $block['id'];
             <?php if( !empty( $imagen_enviar_cv ) ): ?>
 
                 <div class="col-12 col-md-4 col-lg-5 text-center d-flex align-items-end justify-content-center">
-                    <img src="<?php echo $imagen_enviar_cv ?>" class="img-fluid" alt="trabajador">
+                    <img loading="lazy" decoding="async" src="<?php echo $imagen_enviar_cv ?>" class="img-fluid" alt="trabajador">
                 </div>
 
             <?php endif ?>

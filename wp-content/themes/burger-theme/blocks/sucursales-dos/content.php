@@ -63,18 +63,18 @@ $block_id = $block['id'];
                                     </h6>
 
                                     <p class="fs-5 mb-2">
-                                        <?php if( !empty( $icono )): ?><img src="<?= $icono ?>" class="mb-2" title="<?= $nombre ?>"><?php endif ?> <?= $ubicacion ?>
+                                        <?php if( !empty( $icono )): ?><img loading="lazy" decoding="async" src="<?= $icono ?>" class="mb-2" title="<?= $nombre ?>"><?php endif ?> <?= $ubicacion ?>
                                     </p>
 
                                     <p class="mb-3" style="font-size:0.8rem">
                                         <a href="<?= $link ?>" target="_blank">
-                                            ¿CÓMO LLEGO? <img src="<?= BURGER_THEME_URL ?>/themes/images/page-right.png" class="mb-2">
+                                            ¿CÓMO LLEGO? <img loading="lazy" decoding="async" src="<?= BURGER_THEME_URL ?>/themes/images/page-right.png" class="mb-2">
                                         </a>
                                     </p>
 
                                     <p class="mb-5">
                                         <a href="<?= $link_telefono ?>" target="_blank">
-                                            <img src="<?= BURGER_THEME_URL ?>/themes/images/Vector-2.png"><?= $telefono ?>
+                                            <img loading="lazy" decoding="async" src="<?= BURGER_THEME_URL ?>/themes/images/Vector-2.png"><?= $telefono ?>
                                         </a>
                                     </p>
 
@@ -91,7 +91,7 @@ $block_id = $block['id'];
 			</div>
 
 			<div class="col-12 col-lg-3 d-flex align-items-center">
-				<img src="<?php echo $logo_sucursales ?>" alt="logo" class="img-fluid w-100">
+				<img loading="lazy" decoding="async" src="<?php echo $logo_sucursales ?>" alt="logo" class="img-fluid w-100">
 			</div>
 
 		</div>

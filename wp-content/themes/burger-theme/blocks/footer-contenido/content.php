@@ -53,7 +53,7 @@ $block_id = $block['id'];
 			<div class="col-auto d-flex text-center align-items-start">
 
 				<a href="http://qr.afip.gob.ar/?qr=0BMrsiS7edpbML4j5IHtDw,," target="_F960AFIPInfo">
-					<img src="<?php echo $logo_datafiscal ?>" alt="logo" data-aos="fade-in" data-aos-delay="200"
+					<img loading="lazy" decoding="async" src="<?php echo $logo_datafiscal ?>" alt="logo" data-aos="fade-in" data-aos-delay="200"
 						style="width: 60px;">
 				</a>
 
@@ -61,7 +61,7 @@ $block_id = $block['id'];
 
 			<div class="col-auto d-flex flex-column">
 
-				<img src="<?php echo $logo_footer_contenidos ?>" alt="logo" class="mb-2" data-aos="fade-in"
+				<img loading="lazy" decoding="async" src="<?php echo $logo_footer_contenidos ?>" alt="logo" class="mb-2" data-aos="fade-in"
 					data-aos-delay="000" style="width: 125px !important;">
 
 				<div>
@@ -266,7 +266,7 @@ $block_id = $block['id'];
 								<div class="item">
 
 									<?php if ( !empty($link) && count($link) > 0): ?><a href="<?php echo $link['url'] ?>" target="_blank"><? endif ?>
-										<img src="<?php echo $imagen ?>" alt="asociado">
+										<img loading="lazy" decoding="async" src="<?php echo $imagen ?>" alt="asociado">
 									<?php if ( !empty($link) && count($link) > 0): ?></a><? endif ?>
 
 								</div>

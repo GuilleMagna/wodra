@@ -69,7 +69,7 @@ $block_id = $block['id'];
 
                             <div class="item item-clientes">  
                                 <div class="d-flex flex-column">
-                                    <img src="<?php echo $img ?>" class="img-fluid" style="max-height: 250px; width: auto" alt="<?= esc_html( $titulo_conoce_mas . ' ' . $subtitulo_conoce_mas ) ?>" title="<?= esc_html( $titulo_conoce_mas . ' ' . $subtitulo_conoce_mas ) ?>">
+                                    <img loading="lazy" decoding="async" src="<?php echo $img ?>" class="img-fluid" style="max-height: 250px; width: auto" alt="<?= esc_html( $titulo_conoce_mas . ' ' . $subtitulo_conoce_mas ) ?>" title="<?= esc_html( $titulo_conoce_mas . ' ' . $subtitulo_conoce_mas ) ?>">
                                 </div>
                             </div>
 
@@ -83,7 +83,7 @@ $block_id = $block['id'];
 
                     <div class="w-75 mx-auto">
 
-                        <img src="<?= $logo ?>" class="img-fluid w-100 pt-5 pb-2" alt="<?= esc_html( $titulo_conoce_mas . ' ' . $subtitulo_conoce_mas ) ?>">
+                        <img loading="lazy" decoding="async" src="<?= $logo ?>" class="img-fluid w-100 pt-5 pb-2" alt="<?= esc_html( $titulo_conoce_mas . ' ' . $subtitulo_conoce_mas ) ?>">
 
                         <?php if( !empty($boton) && !empty($boton['url']) ): ?>
 

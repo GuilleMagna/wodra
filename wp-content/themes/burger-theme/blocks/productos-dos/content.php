@@ -100,7 +100,7 @@ $block_id = $block['id'];
                         <li class="list-group-item d-flex justify-content-start">
 
                             <div style="width: 35px;" class="me-2">
-                                <img src="<?php echo $icono ?>" title="<?php echo $value['titulo'] ?>" alt="<?php echo $value['titulo'] ?>">
+                                <img loading="lazy" decoding="async" src="<?php echo $icono ?>" title="<?php echo $value['titulo'] ?>" alt="<?php echo $value['titulo'] ?>">
                             </div>
 
                             <div style="width: 100%;">
@@ -136,7 +136,7 @@ $block_id = $block['id'];
                             <div class="row mx-auto d-flex justify-content-center">
 
                                 <div class="col-auto">
-                                    <img src="<?php echo $icono ?>" style="width: 40px;" title="<?php echo $value['titulo'] ?>" alt="<?php echo $value['titulo'] ?>">
+                                    <img loading="lazy" decoding="async" src="<?php echo $icono ?>" style="width: 40px;" title="<?php echo $value['titulo'] ?>" alt="<?php echo $value['titulo'] ?>">
                                 </div>
 
                                 <div class="col d-flex align-items-center text-normal">
@@ -155,7 +155,7 @@ $block_id = $block['id'];
                     <div class="card bg-transparent border-0 rounded-0">
                         <div class="row mx-auto d-flex justify-content-center">
                             <div class="col-auto">
-                                <img src="<?php echo BURGER_THEME_URL ?>/themes/images/iconos/equipo.png" style="width: 40px;">
+                                <img loading="lazy" decoding="async" src="<?php echo BURGER_THEME_URL ?>/themes/images/iconos/equipo.png" style="width: 40px;">
                             </div>
                             <div class="col d-flex align-items-center text-normal">
                                 600 Colaboradores Participantes
@@ -168,7 +168,7 @@ $block_id = $block['id'];
                     <div class="card bg-transparent border-0 rounded-0">
                         <div class="row mx-auto d-flex justify-content-center">
                             <div class="col-auto">
-                                <img src="<?php echo BURGER_THEME_URL ?>/themes/images/iconos/camion-volquete.png" style="width: 40px;">
+                                <img loading="lazy" decoding="async" src="<?php echo BURGER_THEME_URL ?>/themes/images/iconos/camion-volquete.png" style="width: 40px;">
                             </div>
                             <div class="col d-flex align-items-center text-normal">
                                 6.000 toneladas de piedra transportadas
@@ -181,7 +181,7 @@ $block_id = $block['id'];
                     <div class="card bg-transparent border-0 rounded-0">
                         <div class="row mx-auto d-flex justify-content-center">
                             <div class="col-auto">
-                                <img src="<?php echo BURGER_THEME_URL ?>/themes/images/iconos/casco.png" style="width: 40px;">
+                                <img loading="lazy" decoding="async" src="<?php echo BURGER_THEME_URL ?>/themes/images/iconos/casco.png" style="width: 40px;">
                             </div>
                             <div class="col d-flex align-items-center text-normal">
                                 3.000 m2 construidos

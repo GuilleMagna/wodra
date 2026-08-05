@@ -58,7 +58,7 @@ $block_id = $block['id'];
 
                                             <div class="img img-novedades">
                                                 <? if( !empty($boton) && count($boton)> 0 ): ?><a href="<?php echo $boton['url'] ?>" title="<?= $titulo ?>"><? endif ?>
-                                                    <img src="<?= $imagen ?>" class="img-fluid w-100" style="aspect-ratio: 3/2; border-radius: <?= $border_radio ?>" alt="<?= esc_html($titulo) ?>">
+                                                    <img loading="lazy" decoding="async" src="<?= $imagen ?>" class="img-fluid w-100" style="aspect-ratio: 3/2; border-radius: <?= $border_radio ?>" alt="<?= esc_html($titulo) ?>">
                                                 <? if( !empty($boton) && count($boton)> 0 ): ?></a><? endif ?>
                                             </div>
 

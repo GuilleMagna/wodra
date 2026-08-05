@@ -64,7 +64,7 @@ $block_id = $block['id'];
 									<?php if( !empty( $icono )):  ?>
 
 										<div class="d-flex align-items-center">
-											<img src="<?= $icono ?>" class="me-3 mb-2" title="<?= $nombre ?> <?= $ciudad ?>">
+											<img loading="lazy" decoding="async" src="<?= $icono ?>" class="me-3 mb-2" title="<?= $nombre ?> <?= $ciudad ?>">
 										</div>
 
 									<?php endif ?>

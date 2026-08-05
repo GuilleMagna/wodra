@@ -66,7 +66,7 @@ $block_id = $block['id'];
                             <?php if(!empty($imagen)): ?>
 
                                 <div class="text-start <?php if( $key%2==0 ) echo 'text-md-start'; ?> mb-5">
-                                    <img src="<?= $imagen ?>" class="img-fluid" alt="<?= $titulo ?>" style="aspect-ratio: 1/1; border-radius: <?= $radio_de_los_bordes ?>;">
+                                    <img loading="lazy" decoding="async" src="<?= $imagen ?>" class="img-fluid" alt="<?= $titulo ?>" style="aspect-ratio: 1/1; border-radius: <?= $radio_de_los_bordes ?>;">
                                 </div>
 
                             <?php endif ?>

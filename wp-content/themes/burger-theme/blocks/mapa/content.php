@@ -38,7 +38,7 @@ $block_id = $block['id'];
         <div class="row d-flex justify-content-start justify-content-md-center">
 
             <div class="col-12 col-md-12 col-lg-6 ms-md-auto position-relative">
-                <img src="<?php echo $imagen_mapa ?>" class="img-fluid w-100" alt="imagen_mapa" title="mapa"
+                <img loading="lazy" decoding="async" src="<?php echo $imagen_mapa ?>" class="img-fluid w-100" alt="imagen_mapa" title="mapa"
                     data-aos="fade-right">
             </div>
 
@@ -46,7 +46,7 @@ $block_id = $block['id'];
 
                 <div class="d-flex flex-column py-0 py-md-5">
 
-                    <img class="mb-4 w-50 h-auto" src="<?php echo $logo_mapa ?>" alt="" width="300" height="60">
+                    <img loading="lazy" decoding="async" class="mb-4 w-50 h-auto" src="<?php echo $logo_mapa ?>" alt="" width="300" height="60">
 
                     <<?= $encabezado ?> class="titulo fs-1 fw-bold mb-4 mx-auto <?= $col_container_class ?> <?= $col_md_container_class ?> <?= $col_lg_container_class ?> <?= $text_align_class ?>" data-aos="fade-up">
                         <span><?php echo $titulo_mapa ?></span><br>

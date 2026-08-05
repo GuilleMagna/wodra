@@ -61,11 +61,11 @@ $block_id = $block['id'];
 
                             <div class="mb-4">
 
-                                <img src="<?= esc_url($imagen) ?>" class="img-fluid" alt="<?= esc_attr($titulo) ?>">
+                                <img loading="lazy" decoding="async" src="<?= esc_url($imagen) ?>" class="img-fluid" alt="<?= esc_attr($titulo) ?>">
 
                                 <?php if ( !empty($icono) ): ?>
                                     <div class="info-columna-icono">
-                                        <img src="<?= esc_url($icono) ?>" alt="">
+                                        <img loading="lazy" decoding="async" src="<?= esc_url($icono) ?>" alt="">
                                     </div>
                                 <?php endif; ?>
 
@@ -130,7 +130,7 @@ $block_id = $block['id'];
                         <div class="card-body p-3">
 
                             <div class="text-start <?php if( $key%2==0 ) echo 'text-md-start'; ?> mb-5">
-                                <img src="<?= $item['imagen'] ?>" class="img-fluid" alt="<?= $item['titulo'] ?>">
+                                <img loading="lazy" decoding="async" src="<?= $item['imagen'] ?>" class="img-fluid" alt="<?= $item['titulo'] ?>">
                             </div>
 
                             <h3 class="mb-4"><?= $item['titulo'] ?></h3>

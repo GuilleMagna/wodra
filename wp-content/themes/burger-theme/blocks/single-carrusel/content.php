@@ -97,7 +97,7 @@ $block_id = $block['id'];
 			</div>
 
 			<div class="col-12 col-md-6 text-center d-flex align-items-start justify-content-center">
-				<img src="<?php echo $imagen_servicio ?>" class="py-4 w-75" alt="<?php echo strip_tags( $post->post_title ) ?>" title="<?php echo strip_tags( $post->post_title ) ?>">
+				<img loading="lazy" decoding="async" src="<?php echo $imagen_servicio ?>" class="py-4 w-75" alt="<?php echo strip_tags( $post->post_title ) ?>" title="<?php echo strip_tags( $post->post_title ) ?>">
 			</div>
 
 		</div>
@@ -121,7 +121,7 @@ $block_id = $block['id'];
                             <div class="row mx-auto d-flex justify-content-center">
 
                                 <div class="col-auto">
-                                    <img src="<?php echo $icono ?>" style="width: 40px;" alt="<?php echo $value['titulo'] ?>">
+                                    <img loading="lazy" decoding="async" src="<?php echo $icono ?>" style="width: 40px;" alt="<?php echo $value['titulo'] ?>">
                                 </div>
 
                                 <div class="col d-flex align-items-center text-normal">

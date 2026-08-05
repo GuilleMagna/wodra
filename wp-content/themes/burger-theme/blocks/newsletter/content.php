@@ -44,7 +44,7 @@ $redes = BURGER_OPTIONS['redes'] ?? [];
 <section id="newsletter" <?= get_block_wrapper_attributes( [ 'class' => $block_id .' '. $class_container ] ) ?>>
     
     <!--div class="overlay-image">
-        <img src="<?= BURGER_URL ?>/wp-content/uploads/2025/06/Scroll_Group_3.png" alt="Scroll_Group_3" class="h-100">
+        <img loading="lazy" decoding="async" src="<?= BURGER_URL ?>/wp-content/uploads/2025/06/Scroll_Group_3.png" alt="Scroll_Group_3" class="h-100">
     </div-->
 
 	<div class="container my-5 contenido-news">

@@ -43,7 +43,7 @@ $block_id = $block['id'];
                     <?php if (!empty($imagen_zocalo_mensaje)): ?>
 
                         <div class="col-5 col-lg-3 col-xxl-3 mx-auto mx-lg-0 mb-2 mb-md-0 d-flex align-items-center justify-content-center">
-                            <img class="img-fluid mb-2 w-75" src="<?php echo $imagen_zocalo_mensaje ?>" alt="<?= esc_html($titulo_zocalo_mensajes . ' ' . $subtitulo_zocalo_mensajes) ?>" data-aos="fade-in">
+                            <img loading="lazy" decoding="async" class="img-fluid mb-2 w-75" src="<?php echo $imagen_zocalo_mensaje ?>" alt="<?= esc_html($titulo_zocalo_mensajes . ' ' . $subtitulo_zocalo_mensajes) ?>" data-aos="fade-in">
                         </div>
 
                     <?php endif ?>

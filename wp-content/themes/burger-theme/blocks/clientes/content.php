@@ -99,8 +99,8 @@ $block_id = $block['id'];
                           <?php foreach( $clientes_dupla as $item ): ?>
                               <div class="item item-clientes">
                                   <div class="d-flex flex-column">
-                                      <img src="<?php echo $item['imagen_0'] ?>" class="img-fluid" alt="<?php echo $titulo_clientes . ' ' . $subtitulo_clientes ?>" title="<?= $titulo_clientes . ' ' . $subtitulo_clientes ?>">
-                                      <img src="<?php echo $item['imagen_1'] ?>" class="img-fluid" alt="<?php echo $titulo_clientes . ' ' . $subtitulo_clientes ?>" title="<?= $titulo_clientes . ' ' . $subtitulo_clientes ?>">
+                                      <img loading="lazy" decoding="async" src="<?php echo $item['imagen_0'] ?>" class="img-fluid" alt="<?php echo $titulo_clientes . ' ' . $subtitulo_clientes ?>" title="<?= $titulo_clientes . ' ' . $subtitulo_clientes ?>">
+                                      <img loading="lazy" decoding="async" src="<?php echo $item['imagen_1'] ?>" class="img-fluid" alt="<?php echo $titulo_clientes . ' ' . $subtitulo_clientes ?>" title="<?= $titulo_clientes . ' ' . $subtitulo_clientes ?>">
                                   </div>
                               </div>
                           <?php endforeach ?>
@@ -114,7 +114,7 @@ $block_id = $block['id'];
                           <?php foreach( $clientes as $img ): ?>
                               <div class="item item-clientes">  
                                   <div class="d-flex align-items-center">
-                                      <img src="<?php echo $img ?>" class="img-fluid" alt="<?= $titulo_clientes . ' ' . $subtitulo_clientes ?>" title="<?= $titulo_clientes . ' ' . $subtitulo_clientes ?>">
+                                      <img loading="lazy" decoding="async" src="<?php echo $img ?>" class="img-fluid" alt="<?= $titulo_clientes . ' ' . $subtitulo_clientes ?>" title="<?= $titulo_clientes . ' ' . $subtitulo_clientes ?>">
                                   </div>
                               </div>
                           <?php endforeach ?>

@@ -97,7 +97,7 @@ $block_id = $block['id'];
                                         <div class="card border-0 rounded-0 mb-5" style="background:transparent" data-aos="fade-in" data-aos-delay="<?php echo $key * 200 ?>">
 
                                             <div class="img productos-otros mb-4">
-                                                <img src="<?= $imagen ?>" class="img-fluid mx-auto" style="max-height: 400px; width: auto; border-radius: <?= $radio_de_los_bordes ?>">
+                                                <img loading="lazy" decoding="async" src="<?= $imagen ?>" class="img-fluid mx-auto" style="max-height: 400px; width: auto; border-radius: <?= $radio_de_los_bordes ?>">
                                             </div>
 
                                             <div class="card-body d-flex flex-column">

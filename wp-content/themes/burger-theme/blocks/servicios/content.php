@@ -74,7 +74,7 @@ $block_id = $block['id'];
                                 <div class="col-12 px-lg-3">
 
                                     <?php if( $logo ): ?>
-                                        <img class="img-fluid pb-3 py-lg-5" src="<?php echo $logo ?>" alt="<?php echo $titulo ?>">
+                                        <img loading="lazy" decoding="async" class="img-fluid pb-3 py-lg-5" src="<?php echo $logo ?>" alt="<?php echo $titulo ?>">
                                     <?php endif ?>
 
                                     <h3 class="text-white">

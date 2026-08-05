@@ -62,7 +62,7 @@ $block_id = $block['id'];
                                     <div class="row align-items-center">
 
                                         <div class="col-12 col-md-3 col-lg-4 mx-2 mx-lg-auto d-flex align-items-center justify-content-center">
-                                            <img src="<?php echo $item['imagen'] ?>" alt="logo <?php echo $item['empresa'] ?>" class="w-75 img-fluid py-5 px-5 px-md-0">
+                                            <img loading="lazy" decoding="async" src="<?php echo $item['imagen'] ?>" alt="logo <?php echo $item['empresa'] ?>" class="w-75 img-fluid py-5 px-5 px-md-0">
                                         </div>
 
                                         <div class="col-12 col-md-8 col-lg-7 me-5">

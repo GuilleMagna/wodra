@@ -58,7 +58,7 @@ $block_id = $block['id'];
             <?php if (!empty($logo_empresa)): ?>
 
                 <div class="col-12 col-md-4 d-flex align-items-center justify-content-center">
-                    <img src="<?php echo $logo_empresa ?>" class="img-fluid logo-descripcion m-lg-5 w-50" alt="logo-empresa" data-aos="fade-in" data-aos-delay="400">
+                    <img loading="lazy" decoding="async" src="<?php echo $logo_empresa ?>" class="img-fluid logo-descripcion m-lg-5 w-50" alt="logo-empresa" data-aos="fade-in" data-aos-delay="400">
                 </div>
 
             <?php endif ?>

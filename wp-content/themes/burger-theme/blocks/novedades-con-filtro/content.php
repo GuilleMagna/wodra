@@ -207,7 +207,7 @@ $block_id = $block['id'];
 
                                     <?php if( $imagen_sin_resultados ): ?>
                                         <div class="col-12 col-md-4 col-xl-3">
-                                            <img src="<?= $imagen_sin_resultados ?>" class="img-fluid" alt="<?= $titulo_sin_resultados ?>" />
+                                            <img loading="lazy" decoding="async" src="<?= $imagen_sin_resultados ?>" class="img-fluid" alt="<?= $titulo_sin_resultados ?>" />
                                         </div>
                                     <? endif ?>
 
@@ -265,7 +265,7 @@ $block_id = $block['id'];
                                         <? if( BURGER_OPTIONS['logo_paginador'] ): ?>
 
                                             <div class="col-6 col-md-4 col-lg-3 col-xxl-2">
-                                                <img src="<?= BURGER_OPTIONS['logo_paginador'] ?>" alt="logo" class="img-fluid">
+                                                <img loading="lazy" decoding="async" src="<?= BURGER_OPTIONS['logo_paginador'] ?>" alt="logo" class="img-fluid">
                                             </div>
 
                                         <? endif ?>

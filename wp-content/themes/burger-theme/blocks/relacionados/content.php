@@ -96,7 +96,7 @@ $block_id = $block['id'];
                             <div class="card border-0 rounded-0 mb-5 text-start" style="background:transparent">
 
                                 <div class="img productos-otros mb-2 w-75 mx-auto">
-                                    <img src="<?php echo $post->post_thumbnail ?>" class="img-fluid w-100" alt="imagen slider">
+                                    <img loading="lazy" decoding="async" src="<?php echo $post->post_thumbnail ?>" class="img-fluid w-100" alt="imagen slider">
                             </div>
 
                             <div class="border-0 d-flex flex-column w-75 mx-auto">
