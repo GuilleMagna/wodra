@@ -1,0 +1,217 @@
+#novedades-con-newsletter .img-novedades {
+
+    aspect-ratio: 4/3;
+
+}
+
+
+
+#novedades-con-newsletter .form-label {
+
+    font-size: 0.875rem;
+
+    font-style: normal;
+
+    font-weight: 400;
+
+    line-height: 1.25rem;
+
+}
+
+
+
+#novedades-con-newsletter .form-select {
+
+    font-size: 0.875rem;
+
+    font-style: normal;
+
+    font-weight: 400;
+
+    line-height: 1.25rem;
+
+}
+
+
+
+#novedades-con-newsletter .form-floating {
+
+    font-size: 0.875rem;
+
+    font-style: normal;
+
+    font-weight: 400;
+
+    line-height: 1.25rem;
+
+}
+
+
+
+#novedades-con-newsletter textarea {
+
+    font-size: 0.875rem;
+
+    font-style: normal;
+
+    font-weight: 400;
+
+    line-height: 1.25rem;
+
+}
+
+
+
+#novedades-con-newsletter textarea::placeholder {
+
+    color: rgb(255, 255, 255);
+
+    opacity: 1;
+
+}
+
+
+
+/* BUTTON */
+
+/* 
+
+#novedades-con-newsletter .btn {
+
+    transition: 0.3s all ease-out;
+
+}
+
+
+
+#novedades-con-newsletter .btn:hover {
+
+    transition: 0.3s all ease-out;
+
+    transform: translateX(15px);
+
+}
+
+
+
+#novedades-con-newsletter .btn .icon-btn path {
+
+    stroke: var(--primary);
+
+    transition: 0.3s all ease-out;
+
+}
+
+
+
+#novedades-con-newsletter .btn:hover .icon-btn path {
+
+    stroke: var(--white);
+
+    transition: 0.3s all ease-out;
+
+}
+
+
+
+#novedades-con-newsletter .btn .icon-btn {
+
+    transition: 0.3s all ease-out;
+
+}
+
+
+
+#novedades-con-newsletter .btn:hover .icon-btn {
+
+    transform: rotate(45deg);
+
+    transition: 0.3s all ease-out;
+
+}
+
+
+
+#novedades-con-newsletter .btn-check:checked+.btn, .btn.active, .btn.show, .btn:first-child:active, :not(.btn-check)+.btn:active {
+
+    color: var(--secondary);
+
+    background-color: var(--secondary);
+
+    border-color: var(--secondary);
+
+}
+
+
+
+
+
+/* BUTTON */
+
+/* 
+
+#novedades-con-newsletter .btn {
+
+    transition: 0.3s all ease-out;
+
+}
+
+
+
+#novedades-con-newsletter .btn:hover {
+
+    transition: 0.3s all ease-out;
+
+    transform: translateX(15px);
+
+}
+
+
+
+#novedades-con-newsletter .btn .icon-btn path {
+
+    stroke: var(--primary);
+
+    transition: 0.3s all ease-out;
+
+}
+
+
+
+#novedades-con-newsletter .btn:hover .icon-btn path {
+
+    stroke: var(--primary);
+
+    transition: 0.3s all ease-out;
+
+}
+
+
+
+#novedades-con-newsletter .btn .icon-btn {
+
+    transition: 0.3s all ease-out;
+
+}
+
+
+
+#novedades-con-newsletter .btn:hover .icon-btn {
+
+    transform: rotate(45deg);
+
+    transition: 0.3s all ease-out;
+
+}
+
+
+
+#novedades-con-newsletter .btn-check:checked+.btn, .btn.active, .btn.show, .btn:first-child:active, :not(.btn-check)+.btn:active {
+
+    color: var(--white);
+
+    background-color: var(--white);
+
+    border-color: var(--white);
+
+} */ 

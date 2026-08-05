@@ -1,0 +1,22 @@
+#productos-informacion-dos .img-descripcion {
+    aspect-ratio: 2/1;
+}
+
+#productos-informacion-dos .informacion-columna h2 {
+    color: var(--primary);
+    transition: all 0.3s ease;
+}
+
+#productos-informacion-dos .informacion-columna {
+    transition: all 0.3s ease;
+}
+
+#productos-informacion-dos .informacion-largo:hover .informacion-columna {
+    transition: all 0.3s ease;
+    background-color: #ffffff;
+}
+
+#productos-informacion-dos .informacion-largo:hover .informacion-columna p {
+    transition: all 0.3s ease;
+    color: #000000;
+}

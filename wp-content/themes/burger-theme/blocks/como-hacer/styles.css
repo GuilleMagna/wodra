@@ -1,0 +1,31 @@
+#como-hacer .card-como-comprar .card-header{
+    height: 125px;
+}
+
+#como-hacer .card-como-comprar .card-title{
+    margin-bottom: 1.5rem;
+}
+
+#como-hacer .text-btn-01 {
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 20px;
+}
+
+#como-hacer .img-iconos {
+    width: 50%;
+}
+
+@media (max-width: 576px) {
+  #como-hacer .img-iconos {
+    width: 25%;
+}
+
+}
+
+@media (min-width: 577px) and (max-width: 767px) {
+
+  #como-hacer .img-iconos {
+    width: 30%;
+}
+}

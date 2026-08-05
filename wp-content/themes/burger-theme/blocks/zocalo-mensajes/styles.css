@@ -1,0 +1,29 @@
+/* BOTON 
+
+#zocalo-mensaje .btn {
+    transition: 0.3s all ease-out;
+}
+
+#zocalo-mensaje .btn:hover {
+    transition: 0.3s all ease-out;
+    transform: translateX(15px);
+}
+
+#zocalo-mensaje .btn .icon-btn path {
+    stroke: var(--secondary);
+    transition: 0.3s all ease-out;
+}
+
+#zocalo-mensaje .btn:hover .icon-btn path {
+    stroke: var(--primary);
+    transition: 0.3s all ease-out;
+}
+
+#zocalo-mensaje .btn .icon-btn {
+    transition: 0.3s all ease-out;
+}
+
+#zocalo-mensaje .btn:hover .icon-btn {
+    transform: rotate(45deg);
+    transition: 0.3s all ease-out;
+} */

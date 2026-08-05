@@ -1,0 +1,83 @@
+#novedades .card-novedades .novedades-img  {
+
+    aspect-ratio: 1/1;
+
+}
+
+
+
+#novedades .card-novedades .novedades-titulo {
+
+    height: 90px;
+
+    overflow: hidden;
+
+}
+
+
+
+#novedades .card-novedades .novedades-descripcion {
+
+    height: 170px;
+
+    overflow: hidden;
+
+}
+
+
+
+@media (max-width: 576px)
+
+{
+
+
+
+    #novedades .card-novedades .novedades-titulo {
+
+        height: auto;
+
+        overflow: hidden;
+
+    }
+
+    
+
+    #novedades .card-novedades .novedades-descripcion {
+
+        height: auto;
+
+        overflow: hidden;
+
+    }
+
+}
+
+
+
+@media  (min-width: 577px) and (max-width: 767px)
+
+{
+
+
+
+    #novedades .card-novedades .novedades-titulo {
+
+        height: auto;
+
+        overflow: hidden;
+
+    }
+
+    
+
+    #novedades .card-novedades .novedades-descripcion {
+
+        height: auto;
+
+        overflow: hidden;
+
+    }
+
+
+
+}

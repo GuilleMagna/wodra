@@ -1,0 +1,154 @@
+/* Cuando hay menos items que el "items" del breakpoint actual (ver
+   scripts.js), sin loop no hay nada para navegar: se centran en vez de
+   quedar pegados a la izquierda. */
+#clientes .owl-clientes.owl-not-enough .owl-stage-outer {
+    display: flex;
+    justify-content: center;
+}
+
+#clientes .owl-clientes.owl-not-enough .owl-stage {
+    transform: none !important;
+    width: auto !important;
+    flex: 0 0 auto !important;
+}
+
+#clientes .owl-clientes.owl-not-enough .owl-nav {
+    display: none;
+}
+
+#clientes .owl-theme .owl-dots {
+
+    text-align: center;
+
+    -webkit-tap-highlight-color: transparent;
+
+    margin-top: 30px;
+
+}
+
+  
+
+#clientes .owl-theme .owl-dots .owl-dot {
+
+    display: inline-block;
+
+    zoom: 1;
+
+    display: inline; 
+
+}
+
+  
+
+#clientes .owl-theme .owl-dots .owl-dot span {
+
+    width: 8px;
+
+    height: 8px;
+
+    margin: 7px 10px;
+
+    background: #ccc;
+
+    display: block;
+
+    opacity: 0.5;
+
+    transition: opacity 200ms ease;
+
+    border-radius: 30px;
+
+}
+
+
+
+#clientes .owl-theme .owl-dots .owl-dot span {
+
+    background: var(--primary);
+
+    border: 1px var(--primary) solid !important;
+
+}
+
+
+
+#clientes .owl-theme .owl-dots .owl-dot:hover span {
+
+    background: var(--primary) !important;
+
+    transition: all 200ms ease;
+
+    opacity: 1;
+
+}
+
+#clientes .owl-theme .owl-dots .owl-dot.active span {
+
+    background: var(--primary) !important;
+
+    opacity: 1;
+
+    transform: scale(2);
+
+    transition: all 200ms ease;
+
+}
+
+#clientes .item.item-clientes {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+#clientes .item.item-clientes img {
+    filter: grayscale(1);
+}
+
+#clientes .owl-carousel .owl-prev,
+#clientes .owl-carousel .owl-next {
+
+    position: absolute;
+
+    top: 0;
+
+    height: 50px;
+
+    top: 30%;
+
+}
+
+
+
+#clientes .owl-carousel .owl-prev:hover,
+
+#clientes .owl-carousel .owl-next:hover {
+
+    position: absolute;
+
+    top: 0;
+
+    height: 50px;
+
+    top: 30%;
+
+    background-color: transparent !important;
+
+}
+
+
+
+#clientes .owl-carousel .owl-prev {
+
+    left: -60px;
+
+}
+
+
+
+#clientes .owl-carousel .owl-next {
+
+    right: -60px;
+
+}

@@ -1,0 +1,446 @@
+#fixedNav {
+    height: 105px;
+    z-index: 9;
+}
+
+#mainNav .logo-head {
+    margin-top: -70px;
+}
+
+#mainNav .logo-head img {
+    max-height: 75px;
+}
+
+/*
+#preNav .nav-item {
+    border-left: 1px solid #e7e7e7 !important;
+    padding: 0px 15px;
+}
+
+#preNav .first-item {
+    border-left: none !important;
+}
+*/
+
+#preNav .nav-item {
+    position: relative;
+    padding: 0px 15px;
+}
+
+#preNav .nav-item:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 48%;
+    transform: translateY(-50%);
+    height: 12px;
+    width: 1px;
+    background-color: rgba(255, 255, 255, 0.4);
+}
+
+#fixedNav a.glink {
+    padding-left: 15px !important;
+}
+
+#fixedNav .nav-link {
+    color: #ffffff;
+    transition: all 0.2s ease-in;
+}
+
+#mainNav .nav-item:hover,
+#mainNav .nav-item a:hover, 
+#mainNav .nav-item button:hover {
+    color: var(--primary);
+    transition: all 0.2s ease-in;
+    font-weight: 700;
+}
+
+#preNav .nav-link:hover,
+#preNav .nav-item a:hover {
+    color: var(--white);
+    transition: all 0.2s ease-in;
+    font-weight: 700;
+}
+
+#mainNav .nav-item a {
+    font-size: 1rem;
+    line-height: 1rem;
+    color: #ffffff;
+    padding: 7px 5px;
+    margin: 0px;
+    transition: all 0.2s;
+    letter-spacing: 0.5px;
+    text-decoration: none;
+    display: inline-block;
+    position: relative;
+}
+
+/*
+#mainNav .nav-item {
+    border-left: 1px solid var(--white) !important;
+    padding: 0px 25px;
+    transition: all 0.2s ease-in;
+}
+
+#mainNav .nav-item:nth-child(1) {
+    border-left: none !important;
+}
+*/
+
+#mainNav .nav-item {
+    position: relative;
+    padding: 0px 25px;
+    transition: all 0.2s ease-in;
+}
+
+#mainNav .nav-item:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 37%;
+    transform: translateY(-50%);
+    height: 11px;
+    width: 1px;
+    background-color: rgba(255, 255, 255, 0.4);
+}
+
+#mainNav .nav-item:has(.icon-swap) {
+    padding-right: 0;
+}
+
+#mainNav .icon-swap {
+    position: relative;
+    display: inline-block;
+}
+
+#mainNav .icon-swap img {
+    display: block;
+}
+
+#mainNav .icon-swap .icon-hover {
+    position: absolute;
+    top: 7px;
+    left: 5px;
+    opacity: 0;
+}
+
+#mainNav .icon-swap:hover .icon-default {
+    opacity: 0;
+}
+
+#mainNav .icon-swap:hover .icon-hover {
+    opacity: 1;
+}
+
+
+/* Estilo de Internas */
+#fixedNav.is-page {
+    background-color: var(--secondary) !important;
+}
+
+/* Fuentes */
+
+#secondNav .nav-link {
+    color: var(--primary);
+}
+
+#secondNav .nav-item:first-child .nav-link {
+    color: var(--secondary);
+}
+
+@media (max-width: 576px) {
+
+    #preNav .nav-item:not(:last-child)::after {
+        content: "";
+        position: absolute;
+        right: 0;
+        top: 48%;
+        transform: translateY(-50%);
+        height: 12px;
+        width: 1px;
+        background-color: #cccccc00;
+    }
+
+    #mainNav .nav-item:not(:last-child)::after {
+        content: "";
+        position: absolute;
+        right: 0;
+        top: 48%;
+        transform: translateY(-50%);
+        height: 12px;
+        width: 1px;
+        background-color: #cccccc00;
+    }
+
+
+    #fixedNav a.glink {
+        padding-left: 10px !important;
+    }
+
+
+    .offcanvas-body {
+        background-color: var(--secondary);
+    }
+
+    #fixedNav {
+        height: 80px;
+    }
+
+    #mainNav {
+        height: 100%;
+    }
+
+    #mainNav .logo-head {
+        margin-top: 0px;
+    }
+
+    #mainNav .logo-head img {
+        max-height: 35px;
+    }
+
+    #mainNav .nav-item {
+        border-left: 0px !important;
+        padding: 7px 15px;
+    }
+
+    #preNav .nav-item .nav-link {
+        font-size: 11px;
+        line-height: 100%;
+    }
+
+    #mainNav .nav-item .nav-link {
+        font-size: 12px;
+        line-height: 100%;
+    }
+
+    #secondNav .nav-link {
+        font-size: 0.8rem;
+        font-style: normal;
+    }
+
+}
+
+@media (min-width: 577px) and (max-width: 767px) {
+
+    .offcanvas-body {
+        background-color: var(--dark);
+    }
+
+    #preNav .nav-item:not(:last-child)::after {
+        content: "";
+        position: absolute;
+        right: 0;
+        top: 48%;
+        transform: translateY(-50%);
+        height: 12px;
+        width: 1px;
+        background-color: #cccccc00;
+    }
+
+    #mainNav .nav-item:not(:last-child)::after {
+        content: "";
+        position: absolute;
+        right: 0;
+        top: 48%;
+        transform: translateY(-50%);
+        height: 12px;
+        width: 1px;
+        background-color: #cccccc00;
+    }
+
+    #fixedNav {
+        height: 80px;
+    }
+
+    #mainNav {
+        height: 100%;
+    }
+
+    #mainNav .logo-head {
+        margin-top: 0px;
+    }
+
+    #mainNav .logo-head img {
+        max-height: 40px;
+    }
+
+    #mainNav .nav-item {
+        border-left: 0px !important;
+        padding: 7px 15px;
+    }
+
+    #preNav .nav-item .nav-link {
+        font-size: 11px;
+        line-height: 100%;
+    }
+
+    #mainNav .nav-item .nav-link {
+        font-size: 12px;
+        line-height: 100%;
+    }
+
+    #secondNav .nav-link {
+        font-size: 0.8rem;
+        font-style: normal;
+    }
+
+    .offcanvas-body {
+        background-color: var(--secondary);
+    }
+
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+
+    .offcanvas-body {
+        background-color: var(--dark);
+    }
+
+    #fixedNav {
+        height: 80px;
+    }
+
+    #mainNav .logo-head {
+        margin-top: 0px;
+    }
+
+    #mainNav .logo-head img {
+        max-height: 40px;
+    }
+
+    #mainNav .nav-item {
+        border-left: 0px !important;
+        padding: 7px 15px;
+    }
+
+    #preNav .nav-item .nav-link {
+        font-size: 12px;
+        line-height: 100%;
+    }
+
+    #mainNav .nav-item .nav-link {
+        font-size: 13px;
+        line-height: 100%;
+    }
+
+    #secondNav .nav-link {
+        font-size: 0.65rem;
+        font-style: normal;
+    }
+
+    #preNav .nav-item:not(:last-child)::after {
+        content: "";
+        position: absolute;
+        right: 0;
+        top: 48%;
+        transform: translateY(-50%);
+        height: 12px;
+        width: 1px;
+        background-color: #cccccc00;
+    }
+
+    #mainNav .nav-item:not(:last-child)::after {
+        content: "";
+        position: absolute;
+        right: 0;
+        top: 48%;
+        transform: translateY(-50%);
+        height: 12px;
+        width: 1px;
+        background-color: #cccccc00;
+    }
+
+    .offcanvas-body {
+        background-color: var(--secondary);
+    }
+
+}
+
+@media (min-width: 992px) and (max-width: 1200px) {
+
+    #preNav .nav-item {
+        padding: 0px 10px;
+    }
+
+    #mainNav .logo-head {
+        margin-top: -60px;
+    }
+
+    #mainNav .logo-head img {
+        max-height: 40px;
+    }
+
+    #mainNav .nav-item {
+        padding: 0px 10px;
+    }
+
+    #preNav .nav-item .nav-link {
+        font-size: 12px;
+        line-height: 100%;
+    }
+
+    #mainNav .nav-item .nav-link {
+        font-size: 13px;
+        line-height: 100%;
+    }
+
+    #secondNav .nav-link {
+        font-size: 0.85rem;
+        font-style: normal;
+    }
+
+}
+
+@media (min-width: 1200px) and (max-width: 1400px) {
+
+    #mainNav .logo-head {
+        margin-top: -65px;
+    }
+
+    #mainNav .logo-head img {
+        max-height: 50px;
+    }
+
+    #preNav .nav-item .nav-link {
+        font-size: 13px;
+        line-height: 100%;
+    }
+
+    #mainNav .nav-item .nav-link {
+        font-size: 14px;
+        line-height: 100%;
+    }
+
+    #secondNav .nav-link {
+        font-size: 0.85rem;
+        font-style: normal;
+    }
+
+}
+
+@media (min-width: 1401px) and (max-width: 1600px) {
+
+    #mainNav .logo-head {
+        margin-top: -65px;
+    }
+
+    #mainNav .logo-head img {
+        max-height: 50px;
+    }
+
+    #preNav .nav-item .nav-link {
+        font-size: 13px;
+        line-height: 100%;
+    }
+
+    #mainNav .nav-item .nav-link {
+        font-size: 14px;
+        line-height: 100%;
+    }
+
+    #secondNav .nav-link {
+        font-size: 0.85rem;
+        font-style: normal;
+    }
+
+}

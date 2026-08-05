@@ -1,0 +1,957 @@
+.btn {
+    border-radius: 50rem;
+    padding: 1rem 1.4rem;
+}
+
+@media (max-width: 576px) {
+    .btn {
+        padding: 0.5rem 1rem;
+    }
+}
+
+.btn-sus {
+    border-radius: 50rem;
+    padding: 1rem 1.7rem;
+}
+
+.text-btn-01 {
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 20px;
+}
+
+/*BTN TEXT ONLY*/
+
+.btn-text {
+    color: var(--primary) !important;
+    background-color: transparent !important;
+    border-color: transparent !important;
+    transition: 0.3s all ease-out;
+    padding: 0 !important;
+}
+
+.btn-text:hover {
+    color: var(--black) !important;
+    background-color: transparent !important;
+    border-color: transparent !important;
+    transition: 0.3s all ease-out;
+}
+
+.btn-text .icon-btn {
+    transition: 0.3s all ease-out;
+}
+
+.btn-text:hover .icon-btn {
+    transform: translateX(0.5rem);
+    transition: 0.3s all ease-out;
+}
+
+.btn-text .icon-btn path {
+    stroke: var(--primary);
+    transition: 0.3s all ease-out;
+}
+
+.btn-text:hover .icon-btn path {
+    stroke: var(--black);
+    transition: 0.3s all ease-out;
+}
+
+.btn-text-white {
+    color: var(--white) !important;
+    background-color: transparent !important;
+    border-color: transparent !important;
+    transition: 0.3s all ease-out;
+    padding: 0 !important;
+}
+
+.btn-text-white:hover {
+    color: var(--black) !important;
+    background-color: transparent !important;
+    border-color: transparent !important;
+    transition: 0.3s all ease-out;
+}
+
+.btn-text-white .icon-btn {
+    transition: 0.3s all ease-out;
+}
+
+.btn-text-white:hover .icon-btn {
+    transform: translateX(0.5rem);
+    transition: 0.3s all ease-out;
+}
+
+.btn-text-white .icon-btn path {
+    stroke: var(--white);
+    transition: 0.3s all ease-out;
+}
+
+.btn-text-white:hover .icon-btn path {
+    stroke: var(--black);
+    transition: 0.3s all ease-out;
+}
+
+.btn-check:checked+.btn-text,
+.btn-text.active,
+.btn-text.show,
+.btn-text:first-child:active,
+:not(.btn-check)+.btn-text:active {
+    color: transparent;
+    background-color: transparent;
+    border-color: transparent;
+}
+
+/*BTN PRIMARY*/
+.btn-primary {
+    color: var(--white) !important;
+    background-color: var(--primary);
+    border-color: var(--primary) !important;
+    transition: 0.3s all ease-out;
+}
+
+.btn-primary:hover {
+    color: var(--primary) !important;
+    background-color: var(--white) !important;
+    border-color: var(--primary) !important;
+    font-weight: 700;
+    transition: 0.3s all ease-out;
+}
+
+.btn-primary:hover .icon-btn {
+    transform: translateX(0.5rem);
+    transition: 0.3s all ease-out;
+}
+
+.btn-primary .icon-btn path {
+    stroke: var(--white) !important;
+    transition: 0.3s all ease-out;
+}
+
+.btn-primary:hover .icon-btn path {
+    stroke: var(--primary) !important;
+    transition: 0.3s all ease-out;
+}
+
+.btn-check:checked+.btn-primary,
+.btn-primary.active,
+.btn-primary.show,
+.btn-primary:first-child:active,
+:not(.btn-check)+.btn-primary:active {
+    color: transparent;
+    background-color: transparent;
+    border-color: transparent;
+}
+
+/*BTN SECONDARY*/
+.btn-secondary {
+    color: var(--white) !important;
+    background-color: var(--secondary);
+    border-color: var(--secondary);
+    transition: 0.3s all ease-out;
+}
+
+.btn-secondary:hover {
+    color: var(--white) !important;
+    background-color: var(--secondary-two);
+    border-color: var(--secondary-two);
+    font-weight: 700;
+    transition: 0.3s all ease-out;
+}
+
+.btn-secondary:hover .icon-btn {
+    transform: translateX(0.5rem);
+    transition: 0.3s all ease-out;
+}
+
+.btn-secondary .icon-btn path {
+    stroke: var(--white);
+    transition: 0.3s all ease-out;
+}
+
+.btn-secondary:hover .icon-btn path {
+    stroke: var(--white);
+    transition: 0.3s all ease-out;
+}
+
+.btn-check:checked+.btn-secondary,
+.btn-secondary.active,
+.btn-secondary.show,
+.btn-secondary:first-child:active,
+:not(.btn-check)+.btn-secondary:active {
+    color: transparent;
+    background-color: transparent;
+    border-color: transparent;
+}
+
+/*BTN BLACK*/
+/* .btn-black {
+    color: var(--white) !important;
+    background-color: var(--black);
+    border-color: var(--black);
+    transition: 0.3s all ease-out;
+}
+.btn-black:hover {
+    background-color: var(--black-two);
+    border-color: var(--black-two);
+    font-weight: 700;
+    transition: 0.3s all ease-out;
+    transform: scale(1.05);
+}
+.btn-black .icon-btn path {
+    stroke: var(--secondary);
+    transition: 0.3s all ease-out;
+    margin-top: 1%;
+}
+.btn-black:hover .icon-btn path {
+    stroke: var(--secondary);
+    transition: 0.3s all ease-out;
+}
+.btn-check:checked+.btn-black, .btn-black.active, .btn-black.show, .btn-black:first-child:active, :not(.btn-check)+.btn-black:active {
+    color: transparent;
+    background-color: transparent;
+    border-color: transparent;
+} */
+/*BTN WHITE*/
+.btn-white {
+    color: var(--primary) !important;
+    background-color: var(--white) !important;
+    border-color: var(--primary) !important;
+    transition: 0.3s all ease-out;
+}
+
+.btn-white:hover {
+    color: var(--white) !important;
+    background-color: var(--primary) !important;
+    border-color: var(--primary) !important;
+    transition: 0.3s all ease-out;
+}
+
+.btn-white:hover .icon-btn {
+    transform: translateX(0.5rem);
+    transition: 0.3s all ease-out;
+}
+
+.btn-white .icon-btn path {
+    stroke: var(--primary);
+    transition: 0.3s all ease-out;
+}
+
+.btn-white:hover .icon-btn path {
+    stroke: var(--white);
+    transition: 0.3s all ease-out;
+}
+
+.btn-check:checked+.btn-white,
+.btn-white.active,
+.btn-white.show,
+.btn-white:first-child:active,
+:not(.btn-check)+.btn-white:active {
+    color: transparent;
+    background-color: transparent;
+    border-color: transparent;
+}
+
+/* BUTTON OUTLINE 'conocer mas home'*/
+.btn-outline-conocer {
+    color: var(--white) !important;
+    background-color: transparent !important;
+    border: 1px solid var(--primary) !important;
+    transition: 0.3s all ease-out;
+}
+
+.btn-outline-conocer:hover {
+    color: var(--primary) !important;
+    background-color: 1px solid var(--primary) !important;
+    transition: 0.3s all ease-out;
+}
+
+.btn-outline-conocer:hover .icon-btn {
+    transform: translateX(0.5rem);
+    transition: 0.3s all ease-out;
+}
+
+.btn-outline-conocer .icon-btn path {
+    stroke: var(--primary);
+    transition: 0.3s all ease-out;
+}
+
+.btn-outline-conocer:hover .icon-btn path {
+    stroke: var(--primary);
+    transition: 0.3s all ease-out;
+}
+
+.btn-check:checked+.btn-outline-conocer,
+.btn-outline-conocer.active,
+.btn-outline-conocer.show,
+.btn-outline-conocer:first-child:active,
+:not(.btn-check)+.btn-outline-conocer:active {
+    color: transparent;
+    background-color: transparent;
+    border-color: transparent;
+}
+
+/* BUTTON OUTLINE PRIMARY*/
+.btn-outline-primary {
+    color: var(--primary);
+    border: 1px solid var(--primary);
+    background-color: transparent;
+    transition: 0.3s all ease-out;
+}
+
+.btn-outline-primary:hover {
+    color: var(--white);
+    border: 1px solid var(--primary);
+    background-color: var(--primary);
+    transition: 0.3s all ease-out;
+    transform: scale(1.05);
+}
+
+.btn-outline-primary:hover .icon-btn {
+    transform: translateX(0.5rem);
+    transition: 0.3s all ease-out;
+}
+
+.btn-outline-primary .icon-btn path {
+    stroke: var(--primary);
+    transition: 0.3s all ease-out;
+}
+
+.btn-outline-primary:hover .icon-btn path {
+    stroke: var(--white);
+    transition: 0.3s all ease-out;
+}
+
+/* BUTTON OUTLINE NOSOTROS */
+.btn-outline-nosotros {
+    color: var(--white);
+    border: 1px solid var(--white);
+    background-color: transparent;
+    transition: 0.3s all ease-out;
+}
+
+.btn-outline-nosotros:hover {
+    color: var(--primary);
+    border: 1px solid var(--primary);
+    background-color: var(--white);
+    transition: 0.3s all ease-out;
+    transform: scale(1.05);
+}
+
+.btn-outline-nosotros:hover .icon-btn {
+    transform: translateX(0.5rem);
+    transition: 0.3s all ease-out;
+}
+
+.btn-outline-nosotros path {
+    transition: 0.3s all ease-out;
+}
+
+.btn-outline-nosotros:hover path {
+    fill: var(--primary);
+    transition: 0.3s all ease-out;
+}
+
+/* BUTTON OUTLINE CONTACTO */
+.btn-outline-contacto {
+    color: var(--white);
+    border: 1px solid var(--white);
+    background-color: transparent;
+    transition: 0.3s all ease-out;
+}
+
+.btn-outline-contacto:hover {
+    color: var(--primary);
+    border: 1px solid var(--primary);
+    background-color: var(--white);
+    transition: 0.3s all ease-out;
+    transform: scale(1.05);
+}
+
+.btn-outline-contacto:hover .icon-btn {
+    transform: translateX(0.5rem);
+    transition: 0.3s all ease-out;
+}
+
+.btn-outline-contacto path {
+    transition: 0.3s all ease-out;
+}
+
+.btn-outline-contacto:hover path {
+    fill: var(--primary);
+    transition: 0.3s all ease-out;
+}
+
+/* BUTTON OUTLINE SOLICITAR */
+.btn-outline-solicitar {
+    color: var(--white);
+    border: 1px solid var(--white);
+    background-color: transparent;
+    transition: 0.3s all ease-out;
+}
+
+.btn-outline-solicitar:hover {
+    color: var(--primary);
+    border: 1px solid var(--primary);
+    background-color: var(--white);
+    transition: 0.3s all ease-out;
+    transform: scale(1.05);
+}
+
+.btn-outline-solicitar:hover .icon-btn {
+    transform: translateX(0.5rem);
+    transition: 0.3s all ease-out;
+}
+
+.btn-outline-solicitar path {
+    transition: 0.3s all ease-out;
+}
+
+.btn-outline-solicitar:hover path {
+    fill: var(--primary);
+    transition: 0.3s all ease-out;
+}
+
+/* BUTTON OUTLINE Suscribirme */
+.btn-outline-suscribirme {
+    color: var(--white);
+    border: 1px solid var(--white);
+    background-color: transparent;
+    transition: 0.3s all ease-out;
+}
+
+.btn-outline-suscribirme:hover {
+    color: var(--primary);
+    border: 1px solid var(--primary);
+    background-color: var(--white);
+    transition: 0.3s all ease-out;
+    transform: scale(1.05);
+}
+
+.btn-outline-suscribirme:hover .icon-btn {
+    transform: translateX(0.5rem);
+    transition: 0.3s all ease-out;
+}
+
+.btn-outline-suscribirme path {
+    transition: 0.3s all ease-out;
+}
+
+.btn-outline-suscribirme:hover path {
+    fill: var(--primary);
+    transition: 0.3s all ease-out;
+}
+
+.btn-check:checked+.btn-outline-primary,
+.btn-outline-primary.active,
+.btn-outline-primary.show,
+.btn-outline-primary:first-child:active,
+:not(.btn-check)+.btn-outline-primary:active {
+    color: transparent;
+    background-color: transparent;
+    border-color: transparent;
+}
+
+/* BUTTON OUTLINE WHITE */
+.btn-outline-white {
+    color: var(--white) !important;
+    background-color: transparent !important;
+    border: var(--white)1px solid !important;
+    transition: 0.3s all ease-out;
+}
+
+.btn-outline-white:hover {
+    color: var(--white) !important;
+    background-color: var(--primary) !important;
+    border: var(--primary)1px solid !important;
+    transition: 0.3s all ease-out;
+}
+
+.btn-outline-white:hover path {
+    stroke: var(--white) !important;
+}
+
+.btn-outline-white:hover .icon-btn {
+    transform: translateX(0.5rem);
+    transition: 0.3s all ease-out;
+}
+
+.btn-outline-white .icon-e {
+    transition: 0.3s all ease-out;
+}
+
+.btn-outline-white .icon-s {
+    transition: 0.3s all ease-out;
+}
+
+.btn-outline-white:hover .icon-e {
+    transform: translateX(0.5rem) !important;
+    transition: 0.3s all ease-out;
+}
+
+.btn-outline-white:hover .icon-s {
+    transform: translateX(-0.5rem) !important;
+    transition: 0.3s all ease-out;
+}
+
+.btn-outline-white .icon-btn path {
+    stroke: var(--white) !important;
+    transition: 0.3s all ease-out;
+}
+
+.btn-outline-white:hover .icon-btn path {
+    stroke: var(--white) !important;
+    transition: 0.3s all ease-out;
+}
+
+.btn-check:checked+.btn-outline-white,
+.btn-outline-white.active,
+.btn-outline-white.show,
+.btn-outline-white:first-child:active,
+:not(.btn-check)+.btn-outline-white:active {
+    color: var(--primary);
+    background-color: transparent;
+    border-color: transparent;
+}
+
+/*BTN PRIMARY SOLICITAR*/
+.btn-primary-solicitar {
+    color: var(--white) !important;
+    background-color: var(--primary);
+    transition: 0.3s all ease-out;
+}
+
+.btn-primary-solicitar:hover {
+    color: var(--primary) !important;
+    background-color: var(--white) !important;
+    font-weight: 700;
+    transition: 0.3s all ease-out;
+}
+
+.btn-primary-solicitar svg {
+    fill: var(--white) !important;
+}
+
+.btn-primary-solicitar:hover svg path {
+    fill: var(--primary) !important;
+}
+
+.btn-primary-solicitar .icon-e {
+    transition: 0.3s all ease-out;
+}
+
+.btn-primary-solicitar .icon-s {
+    transition: 0.3s all ease-out;
+}
+
+.btn-primary-solicitar:hover .icon-e {
+    transform: translateX(0.5rem);
+    transition: 0.3s all ease-out;
+}
+
+.btn-primary-solicitar:hover .icon-s {
+    transform: translateX(-0.5rem);
+    transition: 0.3s all ease-out;
+}
+
+.btn-primary-solicitar .icon-btn path {
+    stroke: var(--white);
+    transition: 0.3s all ease-out;
+}
+
+.btn-primary-solicitar:hover .icon-btn path {
+    stroke: var(--primary);
+    transition: 0.3s all ease-out;
+}
+
+.btn-check:checked+.btn-primary-solicitar,
+.btn-primary-solicitar.active,
+.btn-primary-solicitar.show,
+.btn-primary-solicitar:first-child:active,
+:not(.btn-check)+.btn-primary-solicitar:active {
+    color: transparent;
+    background-color: transparent;
+    border-color: transparent;
+}
+
+/*BTN PRIMARY CONOCENOS*/
+.btn-primary-conocenos {
+    color: var(--white) !important;
+    background-color: var(--primary);
+    border-color: var(--primary) 2px solid !important;
+    transition: 0.3s all ease-out;
+}
+
+.btn-primary-conocenos:hover {
+    color: var(--primary) !important;
+    background-color: var(--white) !important;
+    border-color: var(--primary) 2px solid !important;
+    font-weight: 700;
+    transition: 0.3s all ease-out;
+}
+
+.btn-primary-conocenos:hover svg path {
+    stroke: var(--primary) !important;
+}
+
+.btn-primary-conocenos .icon-e {
+    transition: 0.3s all ease-out;
+}
+
+.btn-primary-conocenos .icon-s {
+    transition: 0.3s all ease-out;
+}
+
+.btn-primary-conocenos:hover .icon-e {
+    transform: translateX(0.5rem);
+    transition: 0.3s all ease-out;
+}
+
+.btn-primary-conocenos:hover .icon-s {
+    transform: translateX(-0.5rem);
+    transition: 0.3s all ease-out;
+}
+
+.btn-primary-conocenos .icon-btn path {
+    stroke: var(--white);
+    transition: 0.3s all ease-out;
+}
+
+.btn-primary-conocenos:hover .icon-btn path {
+    stroke: var(--primary);
+    transition: 0.3s all ease-out;
+}
+
+.btn-check:checked+.btn-primary-conocenos,
+.btn-primary-conocenos.active,
+.btn-primary-conocenos.show,
+.btn-primary-conocenos:first-child:active,
+:not(.btn-check)+.btn-primary-conocenos:active {
+    color: transparent;
+    background-color: transparent;
+    border-color: transparent;
+}
+
+/*BTN PRIMARY SUSCRIBIRME*/
+.btn-primary-suscribirme {
+    color: var(--white) !important;
+    background-color: var(--primary);
+    transition: 0.3s all ease-out;
+}
+
+.btn-primary-suscribirme:hover {
+    color: var(--primary) !important;
+    background-color: var(--white) !important;
+    font-weight: 700;
+    transition: 0.3s all ease-out;
+}
+
+.btn-primary-suscribirme svg {
+    fill: var(--white) !important;
+}
+
+.btn-primary-suscribirme:hover svg path {
+    fill: var(--primary) !important;
+}
+
+.btn-primary-suscribirme .icon-e {
+    transition: 0.3s all ease-out;
+}
+
+.btn-primary-suscribirme .icon-s {
+    transition: 0.3s all ease-out;
+}
+
+.btn-primary-suscribirme:hover .icon-e {
+    transform: translateX(0.5rem);
+    transition: 0.3s all ease-out;
+}
+
+.btn-primary-suscribirme:hover .icon-s {
+    transform: translateX(-0.5rem);
+    transition: 0.3s all ease-out;
+}
+
+.btn-primary-suscribirme .icon-btn path {
+    stroke: var(--white);
+    transition: 0.3s all ease-out;
+}
+
+.btn-primary-suscribirme:hover .icon-btn path {
+    stroke: var(--primary);
+    transition: 0.3s all ease-out;
+}
+
+.btn-check:checked+.btn-primary-suscribirme,
+.btn-primary-suscribirme.active,
+.btn-primary-suscribirme.show,
+.btn-primary-suscribirme:first-child:active,
+:not(.btn-check)+.btn-primary-suscribirme:active {
+    color: transparent;
+    background-color: transparent;
+    border-color: transparent;
+}
+
+/*BTN PRIMARY CV*/
+.btn-primary-cv {
+    color: var(--white) !important;
+    background-color: var(--primary);
+    border-color: var(--primary) 2px solid !important;
+    transition: 0.3s all ease-out;
+}
+
+.btn-primary-cv:hover {
+    color: var(--primary) !important;
+    background-color: var(--white) !important;
+    font-weight: 700;
+    transition: 0.3s all ease-out;
+}
+
+.btn-primary-cv .icon-e {
+    transition: 0.3s all ease-out;
+}
+
+.btn-primary-cv .icon-s {
+    transition: 0.3s all ease-out;
+}
+
+.btn-primary-cv:hover .icon-e {
+    transform: translateX(0.5rem);
+    transition: 0.3s all ease-out;
+}
+
+.btn-primary-cv:hover .icon-s {
+    transform: translateX(-0.5rem);
+    transition: 0.3s all ease-out;
+}
+
+.btn-primary-cv .icon-btn path {
+    stroke: var(--white);
+    transition: 0.3s all ease-out;
+}
+
+.btn-primary-cv:hover .icon-btn path {
+    stroke: var(--primary) !important;
+    transition: 0.3s all ease-out;
+}
+
+.btn-check:checked+.btn-primary-cv,
+.btn-primary-cv.active,
+.btn-primary-cv.show,
+.btn-primary-cv:first-child:active,
+:not(.btn-check)+.btn-primary-cv:active {
+    color: transparent;
+    background-color: transparent;
+    border-color: transparent;
+}
+
+/*BTN PRIMARY COMPARTIR*/
+.btn-primary-compartir {
+    color: var(--white) !important;
+    background-color: var(--primary);
+    border-color: var(--primary) 2px solid !important;
+    transition: 0.3s all ease-out;
+}
+
+.btn-primary-compartir:hover {
+    color: var(--primary) !important;
+    background-color: var(--white) !important;
+    border-color: var(--primary) 2px solid !important;
+    font-weight: 700;
+    transition: 0.3s all ease-out;
+}
+
+.btn-primary-compartir .icon-e {
+    transition: 0.3s all ease-out;
+}
+
+.btn-primary-compartir .icon-s {
+    transition: 0.3s all ease-out;
+}
+
+.btn-primary-compartir:hover .icon-e {
+    transform: translateX(0.5rem);
+    transition: 0.3s all ease-out;
+}
+
+.btn-primary-compartir:hover .icon-s {
+    transform: translateX(-0.5rem);
+    transition: 0.3s all ease-out;
+}
+
+.btn-primary-compartir .icon-btn path {
+    stroke: var(--white);
+    transition: 0.3s all ease-out;
+}
+
+.btn-primary-compartir:hover .icon-btn path {
+    stroke: var(--primary);
+    transition: 0.3s all ease-out;
+}
+
+.btn-check:checked+.btn-primary-compartir,
+.btn-primary-compartir.active,
+.btn-primary-compartir.show,
+.btn-primary-compartir:first-child:active,
+:not(.btn-check)+.btn-primary-compartir:active {
+    color: transparent;
+    background-color: transparent;
+    border-color: transparent;
+}
+
+/*BTN WHITE CONOCENOS*/
+.btn-white-conocenos {
+    color: var(--primary) !important;
+    background-color: var(--white) !important;
+    border-color: var(--primary) !important;
+    transition: 0.3s all ease-out;
+}
+
+.btn-white-conocenos:hover {
+    color: var(--white) !important;
+    background-color: var(--primary) !important;
+    border-color: var(--primary) !important;
+    transition: 0.3s all ease-out;
+}
+
+.btn-white-conocenos .icon-e {
+    transition: 0.3s all ease-out;
+}
+
+.btn-white-conocenos .icon-s {
+    transition: 0.3s all ease-out;
+}
+
+.btn-white-conocenos:hover .icon-e {
+    transform: translateX(0.5rem);
+    transition: 0.3s all ease-out;
+}
+
+.btn-white-conocenos:hover .icon-s {
+    transform: translateX(-0.5rem);
+    transition: 0.3s all ease-out;
+}
+
+.btn-white-conocenos .icon-btn path {
+    stroke: var(--primary);
+    transition: 0.3s all ease-out;
+}
+
+.btn-white-conocenos:hover .icon-btn path {
+    stroke: var(--white);
+    transition: 0.3s all ease-out;
+}
+
+.btn-check:checked+.btn-white-conocenos,
+.btn-white-conocenos.active,
+.btn-white-conocenos.show,
+.btn-white-conocenos:first-child:active,
+:not(.btn-check)+.btn-white-conocenos:active {
+    color: transparent;
+    background-color: transparent;
+    border-color: transparent;
+}
+
+/*BTN WHITE SEDES*/
+.btn-white-sedes {
+    color: var(--primary) !important;
+    background-color: var(--white) !important;
+    border-color: var(--primary) !important;
+    transition: 0.3s all ease-out;
+}
+
+.btn-white-sedes:hover {
+    color: var(--white) !important;
+    background-color: var(--primary) !important;
+    border-color: var(--primary) !important;
+    transition: 0.3s all ease-out;
+}
+
+.btn-white-sedes .icon-e {
+    transition: 0.3s all ease-out;
+}
+
+.btn-white-sedes .icon-s {
+    transition: 0.3s all ease-out;
+}
+
+.btn-white-sedes:hover .icon-e {
+    transform: translateX(0.5rem);
+    transition: 0.3s all ease-out;
+}
+
+.btn-white-sedes:hover .icon-s {
+    transform: translateX(-0.5rem);
+    transition: 0.3s all ease-out;
+}
+
+.btn-white-sedes .icon-btn path {
+    stroke: var(--primary);
+    transition: 0.3s all ease-out;
+}
+
+.btn-white-sedes:hover .icon-btn path {
+    stroke: var(--white);
+    transition: 0.3s all ease-out;
+}
+
+.btn-check:checked+.btn-white-sedes,
+.btn-white-sedes.active,
+.btn-white-sedes.show,
+.btn-white-sedes:first-child:active,
+:not(.btn-check)+.btn-white-sedes:active {
+    color: transparent;
+    background-color: transparent;
+    border-color: transparent;
+}
+
+/*BTN WHITE SUSCRIBIRME*/
+.btn-white-suscribirme {
+    color: var(--primary) !important;
+    background-color: var(--white) !important;
+    border-color: var(--primary) !important;
+    transition: 0.3s all ease-out;
+}
+
+.btn-white-suscribirme:hover {
+    color: var(--white) !important;
+    background-color: var(--primary) !important;
+    border-color: var(--primary) !important;
+    transition: 0.3s all ease-out;
+}
+
+.btn-white-suscribirme .icon-e {
+    transition: 0.3s all ease-out;
+}
+
+.btn-white-suscribirme .icon-s {
+    transition: 0.3s all ease-out;
+}
+
+.btn-white-suscribirme:hover .icon-e {
+    transform: translateX(0.5rem);
+    transition: 0.3s all ease-out;
+}
+
+.btn-white-suscribirme:hover .icon-s {
+    transform: translateX(-0.5rem);
+    transition: 0.3s all ease-out;
+}
+
+.btn-white-suscribirme .icon-btn path {
+    stroke: var(--primary);
+    transition: 0.3s all ease-out;
+}
+
+.btn-white-suscribirme:hover .icon-btn path {
+    stroke: var(--white);
+    transition: 0.3s all ease-out;
+}
+
+.btn-check:checked+.btn-white-suscribirme,
+.btn-white-suscribirme.active,
+.btn-white-suscribirme.show,
+.btn-white-suscribirme:first-child:active,
+:not(.btn-check)+.btn-white-suscribirme:active {
+    color: transparent;
+    background-color: transparent;
+    border-color: transparent;
+}

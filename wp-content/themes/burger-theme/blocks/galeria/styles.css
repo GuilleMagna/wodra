@@ -1,0 +1,285 @@
+#galeria .carousel-indicators {
+    position: relative;
+    margin: 0; /* resetea también el margin-bottom: 1rem que trae Bootstrap por default */
+    display: block;
+}
+
+#galeria .img-indicators {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1/1;
+    margin-top: 0px;
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+#galeria .img-carousel {
+    aspect-ratio: 16/9; /* cambiar a 4/3 acá si se prefiere ese formato */
+}
+
+#galeria .galeria-owl {
+    aspect-ratio: 1/1;
+}
+
+#galeria .thumbs-col {
+  align-self: flex-start; /* nunca se estira por el alto de la columna vecina */
+}
+
+#galeria .thumbs-container {
+  overflow: hidden;
+  position: relative;
+  /* el alto máximo lo calcula JS para igualar la altura real de la imagen principal */
+}
+
+#galeria .thumbs-container .carousel-indicators {
+  transition: transform 0.4s ease-in-out;
+}
+
+#galeria .thumb-nav {
+  display: block; /* Bootstrap los deja en inline-block; eso genera un espacio en blanco
+                      entre botón y contenedor por el salto de línea del HTML */
+  flex: 0 0 auto;
+  margin: 0; /* pisa el .btn { margin-bottom: 10px } genérico de styler.css */
+  transition: opacity 0.2s ease-in-out;
+}
+
+/* d-none no alcanza acá: .d-lg-block se declara después en Bootstrap y con la misma
+   especificidad + !important le gana siempre a partir de 992px. Clase propia con más
+   especificidad para que el ocultado por JS funcione de verdad en desktop. */
+#galeria .thumb-nav.thumb-nav-hidden {
+  display: none !important;
+}
+
+/* OWL */
+
+/* Cuando hay menos imágenes que el "items" del breakpoint actual (ver
+   scripts.js), no hace falta loopear ni navegar: se centran en vez de
+   quedar pegadas a la izquierda. */
+#galeria .owl-single-gal.owl-not-enough .owl-stage-outer {
+    display: flex;
+    justify-content: center;
+}
+
+#galeria .owl-single-gal.owl-not-enough .owl-stage {
+    transform: none !important;
+    width: auto !important;
+    flex: 0 0 auto !important;
+}
+
+#galeria .owl-single-gal.owl-not-enough .owl-nav {
+    display: none;
+}
+
+#galeria .owl-theme .owl-dots {
+    text-align: center;
+    -webkit-tap-highlight-color: transparent;
+    margin-top: 30px;
+}
+
+#galeria .owl-theme .owl-dots .owl-dot {
+    display: inline-block;
+    zoom: 1;
+    display: inline; 
+}
+
+#galeria .owl-theme .owl-dots .owl-dot span {
+    width: 8px;
+    height: 8px;
+    margin: 5px 7px;
+    background: #ccc;
+    display: block;
+    transition: opacity 200ms ease;
+    border-radius: 30px;
+}
+
+#galeria .owl-theme .owl-dots .owl-dot.active span, .owl-theme .owl-dots .owl-dot:hover span {
+    background: #84BD00;
+}
+
+#galeria .owl-theme .owl-dots .owl-dot span {
+    width: 10px !important;
+    height: 11px !important;
+    background: #fff;
+    border: 1px #84BD00 solid !important;
+}
+
+#galeria .owl-theme .owl-dots .owl-dot.active span, #single-galeria .owl-theme .owl-dots .owl-dot:hover span {
+    background: #84BD00 !important;
+}
+
+/* NAVS */
+#galeria .owl-carousel .owl-prev,
+#galeria .owl-carousel .owl-next {
+    position: absolute;
+    top: 0;
+    height: 30px;
+    top: 40%;
+}
+
+#galeria .owl-carousel .owl-prev:hover,
+#galeria .owl-carousel .owl-next:hover {
+    position: absolute;
+    top: 0;
+    height: 30px;
+    top: 40%;
+    background-color: transparent !important;
+}
+
+#galeria .carousel-control-prev  {
+    bottom: 33%!important;
+    left: 0px!important;
+}
+
+#galeria .carousel-control-next {
+    bottom: 33%!important;
+    right: 0px!important;
+}
+
+#galeria .carousel-control-next, .carousel-control-prev {
+    bottom: 33%!important;
+}
+
+#galeria .w-75{
+    width: 100%!important;
+}
+
+#galeria .owl-carousel .owl-dots.disabled, .owl-carousel .owl-nav.disabled{
+    display: block;
+}
+
+@media (max-width: 576px)
+{
+    #galeria .carousel-indicators {
+        position: relative;
+        margin-left: 0px;
+        margin-right: 0px;
+        margin-bottom: 0;
+        display: flex;
+        justify-content: center;
+        bottom: 0px;
+    }
+
+    #galeria .img-indicators {
+        width: 60px;
+        height: auto;
+        aspect-ratio: 1/1;
+        margin-top: 0px;
+        margin-left: 3px;
+        margin-right: 3px;
+    }
+
+    #galeria .img-carousel {
+        aspect-ratio: 2/1;
+    }
+
+    #galeria .w-75{
+        width: 75%!important;
+    }
+    #galeria .carousel-control-prev {
+        bottom: 28% !important;
+        left: -2px !important;
+    }
+    #galeria .carousel-control-next {
+        bottom: 28% !important;
+        right: -2px !important;
+    }
+}
+
+@media  (min-width: 577px) and (max-width: 767px)
+{
+    #galeria .carousel-indicators {
+        position: relative;
+        margin-left: 0px;
+        margin-right: 0px;
+        margin-bottom: 0;
+        display: flex;
+        justify-content: center;
+        bottom: 0px;
+    }
+
+    #galeria .img-indicators {
+        width: 60px;
+        height: auto;
+        aspect-ratio: 1/1;
+        margin-top: 0px;
+        margin-left: 3px;
+        margin-right: 3px;
+    }
+
+    #galeria .img-carousel {
+        aspect-ratio: 2/1;
+    }
+    #galeria .carousel-control-prev {
+        bottom: 28% !important;
+        left: -8px !important;
+    }
+    #galeria .carousel-control-next {
+        bottom: 28% !important;
+        right: -8px !important;
+    }
+    #galeria .w-75{
+        width: 75%!important;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 991px) 
+{
+    #galeria .carousel-indicators {
+        position: relative;
+        margin-left: 0px;
+        margin-right: 0px;
+        margin-bottom: 0;
+        display: flex;
+        justify-content: center;
+        bottom: 0px;
+    }
+
+    #galeria .img-indicators {
+        width: 60px;
+        height: auto;
+        aspect-ratio: 1/1;
+        margin-top: 0px;
+        margin-left: 3px;
+        margin-right: 3px;
+    }
+
+    #galeria .img-carousel {
+        aspect-ratio: 2/1;
+    }
+
+    #galeria .carousel-control-prev {
+        left: -20px!important;
+    }
+
+    #galeria .carousel-control-next {
+        right: -28px!important;
+    }
+
+    #galeria .w-75{
+        width: 85%!important;
+    }
+
+}
+
+@media (min-width: 992px) and (max-width: 1200px) 
+{
+    #galeria .carousel-control-next, .carousel-control-prev {
+        bottom: 25%!important;
+    }
+}
+
+@media  (min-width: 1201px) and (max-width: 1400px)
+{
+    #galeria .owl-carousel .carousel-control-prev {
+        left: 30px!important;
+    }
+
+    #galeria .owl-carousel .carousel-control-next {
+        right: -44px!important;
+    }
+
+    #galeria .carousel-control-next, .carousel-control-prev {
+        bottom: 28%!important;
+    }
+
+}

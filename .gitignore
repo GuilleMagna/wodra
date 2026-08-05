@@ -1,0 +1,20 @@
+# Este repo trackea SOLO el theme (wp-content/themes/burger-theme).
+# WordPress core, plugins de terceros, uploads, etc. no se versionan acá.
+/*
+!/wp-content/
+/wp-content/*
+!/wp-content/themes/
+/wp-content/themes/*
+!/wp-content/themes/burger-theme/
+!/.gitignore
+
+# Bundle cacheado generado por inc/assets.php (se regenera solo)
+/wp-content/themes/burger-theme/cache/
+
+# Server and editor artifacts
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.log
+*.bak

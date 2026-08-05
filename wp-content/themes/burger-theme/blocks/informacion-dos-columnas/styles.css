@@ -1,0 +1,110 @@
+#informacion-dos-columnas .btn-check:checked+.btn, .btn.active, .btn.show, .btn:first-child:active, :not(.btn-check)+.btn:active {
+    color: var(--white);
+    background-color: var(--white);
+    border-color: var(--white);
+}
+
+/* BOTON */
+#informacion-dos-columnas .btn {
+    transition: 0.3s all ease-out;
+}
+
+#informacion-dos-columnas .btn:hover {
+    transition: 0.3s all ease-out;
+}
+
+#informacion-dos-columnas .btn .icon-btn path {
+    stroke: var(--secondary);
+    transition: 0.3s all ease-out;
+}
+
+#informacion-dos-columnas .btn:hover .icon-btn path {
+    stroke: var(--primary);
+    transition: 0.3s all ease-out;
+}
+
+#informacion-dos-columnas .btn .icon-btn {
+    transition: 0.3s all ease-out;
+}
+
+#informacion-dos-columnas .btn:hover .icon-btn {
+    transform: rotate(45deg);
+    transition: 0.3s all ease-out;
+}
+
+
+#informacion-dos-columnas .informacion-columnas-wrap {
+    max-width: 900px;
+    margin-inline: auto;
+}
+
+#informacion-dos-columnas.info-columna {
+    position: relative;
+}
+
+#informacion-dos-columnas .info-columna-imagen-wrap {
+    position: relative;
+    display: inline-block;
+    max-width: 360px;
+}
+
+#informacion-dos-columnas .info-columna-imagen {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+#informacion-dos-columnas .info-columna-icono {
+    width: 88px;
+    height: 88px;
+    border-radius: 50%;
+    background: #fff;
+    position: absolute;
+    left: 50%;
+    bottom: -34px;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 25px rgba(0,0,0,.08);
+}
+
+#informacion-dos-columnas .info-columna-icono img {
+    max-width: 48px;
+    max-height: 48px;
+}
+
+#informacion-dos-columnas .info-columna-titulo {
+    margin-top: 38px;
+    color: <?= $color_secundario ?>;
+    font-size: 1.45rem;
+    font-weight: 500;
+    line-height: 1.2;
+}
+
+#informacion-dos-columnas .info-columna-titulo span {
+    color: <?= $color_primario ?>;
+}
+
+#informacion-dos-columnas .info-columna-texto {
+    color: <?= $color_secundario ?>;
+    font-size: .9rem;
+    line-height: 1.45;
+    max-width: 390px;
+    margin-inline: auto;
+}
+
+#informacion-dos-columnas .btn-info-columna {
+    background: <?= $color_primario ?>;
+    color: #fff;
+    border-radius: 999px;
+    padding: .65rem 1.8rem;
+    border: 0;
+    font-size: .85rem;
+    text-transform: uppercase;
+}
+
+#informacion-dos-columnas .btn-info-columna:hover {
+    color: #fff;
+    opacity: .9;
+}

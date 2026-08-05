@@ -1,0 +1,19 @@
+#single-agenda .compartir-link .compartir-icon .compartir-icon-fondo {
+    fill: var(--secondary);
+    transition: 0.3s all ease;
+}
+
+#single-agenda .compartir-link:hover .compartir-icon .compartir-icon-fondo {
+    fill: var(--primary);
+    transition: 0.3s all ease;
+}
+
+#single-agenda #form-newsletter-single .compartir-link .compartir-icon.compartir-icon-facebook .compartir-icon-fondo {
+    fill: var(--white);
+    transition: 0.3s all ease;
+}
+
+#single-agenda #form-newsletter-single .compartir-link:hover .compartir-icon.compartir-icon-facebook .compartir-icon-fondo {
+    fill: var(--primary);
+    transition: 0.3s all ease;
+}

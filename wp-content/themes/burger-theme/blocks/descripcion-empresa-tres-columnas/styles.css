@@ -1,0 +1,18 @@
+#descripcion-empresa-tres-columnas .fw-bold.fs-6 strong,
+#descripcion-empresa-tres-columnas .fw-bold.fs-6 b {
+    font-weight: 700;
+}
+
+#descripcion-empresa-tres-columnas p {
+    margin-bottom: 0 !important;
+}
+
+#descripcion-empresa-tres-columnas h5 {
+    margin-bottom: 0 !important;
+}
+
+@media (max-width: 767px) {
+    #descripcion-empresa-tres-columnas .logo-descripcion {
+        width: 70%;
+    }
+}

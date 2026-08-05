@@ -1,0 +1,159 @@
+#agenda h3.color-primario {
+    font-size: 30px !important;
+    font-weight: 500 !important;
+    line-height: 33px !important;
+}
+
+#agenda div.color-secundario {
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 400;
+}
+
+#agenda div.color-secundario strong,
+#agenda div.color-secundario b {
+    font-weight: 700;
+}
+
+#informacion .img-descripcion {
+  aspect-ratio: 2/1;
+}
+
+#informacion .wpcf7 {
+  width: 100% !important;
+}
+
+/* #informacion .img-descripcion {
+    aspect-ratio: 4/2.5;
+} */
+
+/*
+#informacion .border-right-big{
+    border-radius: 0px 10rem 0rem 0px;
+}
+
+#informacion .border-left-big{
+    border-radius: 0 6rem 0 0;
+}
+*/
+
+#informacion .informacion-columna #informacion li span,
+#informacion li {
+  color: #ffffff;
+  transition: all 0.3s ease;
+}
+
+#informacion .btn-outline-white .icon-btn path {
+  stroke: var(--white) !important;
+}
+
+#informacion .informacion-columna {
+  transition: all 0.3s ease;
+}
+
+#informacion .informacion-largo:hover .informacion-columna {
+  transition: all 0.3s ease;
+  background-color: #ffffff;
+}
+
+#informacion .informacion-largo:hover .informacion-columna #informacion li span,
+#informacion li {
+  transition: all 0.3s ease;
+  color: #000000;
+}
+
+#informacion-repetida li span,
+#informacion-repetida li {
+  font-weight: 400;
+  font-size: 0.8rem;
+  line-height: 20px;
+  letter-spacing: 0%;
+}
+
+#informacion-repetida .form-control,
+#informacion-repetida .form-select {
+  background-color: transparent !important;
+  border-bottom: 1px solid white !important;
+  border: 0;
+}
+
+#informacion-repetida .wpcf7 {
+  width: 75%;
+}
+
+#informacion-repetida .form-label {
+  color: #fff !important;
+}
+
+@media (max-width: 576px) {
+  #informacion-repetida .img-responsive.w-75 {
+    width: 100% !important;
+  }
+
+  #informacion-repetida .img-fluid {
+    max-width: 100%;
+    height: auto;
+  }
+
+  #informacion-repetida li span,
+  #informacion-repetida li {
+    font-size: 0.87rem;
+    line-height: 24px;
+  }
+
+}
+
+@media (min-width: 577px) and (max-width: 767px) {
+
+  #informacion-repetida .img-responsive.w-75 {
+    width: 100% !important;
+  }
+
+  #informacion-repetida .img-fluid {
+    max-width: 100%;
+    height: auto;
+  }
+
+  #informacion-repetida li span,
+  #informacion-repetida li {
+    font-size: 0.87rem;
+    line-height: 24px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+
+  #informacion-repetida li span,
+  #informacion-repetida li {
+    font-size: 0.9rem;
+    line-height: 20px;
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1200px) {
+
+  #informacion-repetida li span,
+  #informacion-repetida li {
+    font-size: 0.9rem;
+    line-height: 20px;
+  }
+}
+
+@media (min-width: 1200px) and (max-width: 1400px) {
+
+  #informacion-repetida li span,
+  #informacion-repetida li {
+    font-size: 0.9rem;
+    line-height: 20px;
+  }
+}
+
+@media (min-width: 1401px) and (max-width: 1600px) {
+
+  #informacion-repetida li span,
+  #informacion-repetida li {
+    font-size: 0.9rem;
+    line-height: 20px;
+  }
+
+}

@@ -1,0 +1,35 @@
+#descripcion .img-descripcion {
+    min-height: 250px;
+}
+
+#descripcion .informacion-columna p {
+    color: #ffffff;
+    transition: all 0.3s ease;
+}
+
+#descripcion .informacion-columna {
+    transition: all 0.3s ease;
+}
+
+#descripcion .informacion-largo:hover .informacion-columna {
+    transition: all 0.3s ease;
+    background-color:#ffffff;
+}
+
+#descripcion .informacion-largo:hover .informacion-columna p {
+    transition: all 0.3s ease;
+    color: #000000;
+}
+
+#descripcion .informacion-largo:hover .btn {
+    transition: all 0.3s ease;
+    background-color: var(--primary);
+    color:   var(--white);
+}
+
+#descripcion .informacion-largo .btn {
+    transition: all 0.3s ease;
+    background-color:  var(--white);
+    color: var(--primary);
+}
+  

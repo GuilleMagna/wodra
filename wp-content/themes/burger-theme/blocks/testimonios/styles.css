@@ -1,0 +1,87 @@
+#testimonios .bg-light-test .card-bg{
+    background-color: var(--light)!important;
+}
+
+#testimonios .owl-theme .owl-dots {
+    text-align: center;
+    -webkit-tap-highlight-color: transparent;
+    margin-top: 10px;
+}
+
+#testimonios .owl-theme .owl-dots .owl-dot {
+    display: inline-block;
+    zoom: 1;
+    display: inline; 
+}
+
+#testimonios .owl-theme .owl-dots .owl-dot span {
+    width: 8px;
+    height: 8px;
+    margin: 7px 10px;
+    background: #ccc;
+    display: block;
+    opacity: 0.5;
+    transition: opacity 200ms ease;
+    border-radius: 30px;
+}
+
+#testimonios .owl-theme .owl-dots .owl-dot span {
+    background: var(--primary);
+    border: 1px var(--primary) solid !important;
+}
+
+#testimonios .owl-theme .owl-dots .owl-dot:hover span {
+    background: var(--primary) !important;
+    transition: all 200ms ease;
+    opacity: 1;
+}
+
+#testimonios .owl-theme .owl-dots .owl-dot.active span {
+    background: var(--primary) !important;
+    opacity: 1;
+    transform: scale(2);
+    transition: all 200ms ease;
+}
+
+#testimonios .item.item-comentarios {
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#testimonios .item.item-comentarios img {
+    filter: grayscale(1);
+}
+
+#testimonios .owl-carousel .owl-prev,
+#testimonios .owl-carousel .owl-next {
+    position: absolute;
+    top: 0;
+    height: 30px;
+    top: 40%;
+}
+
+#testimonios .owl-carousel .owl-prev:hover,
+#testimonios .owl-carousel .owl-next:hover {
+    position: absolute;
+    top: 0;
+    height: 30px;
+    top: 40%;
+    background-color: transparent !important;
+}
+
+#testimonios .owl-carousel .owl-prev {
+    left: -60px;
+}
+
+#testimonios .owl-carousel .owl-next {
+    right: -60px;
+}
+
+#testimonios .comentario {
+    color: var(--secondary);
+    font-size: 1.4rem;
+    font-weight: 400;
+    line-height: 100%;
+}

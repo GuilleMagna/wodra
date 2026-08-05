@@ -1,0 +1,137 @@
+#team .owl-theme .owl-dots {
+
+    text-align: center;
+
+    -webkit-tap-highlight-color: transparent;
+
+    margin-top: 30px;
+
+}
+
+
+
+#team .owl-theme .owl-dots .owl-dot span {
+
+    width: 8px;
+
+    height: 8px;
+
+    margin: 7px 10px;
+
+    background: #ccc;
+
+    display: block;
+
+    opacity: 0.5;
+
+    transition: opacity 200ms ease;
+
+    border-radius: 30px;
+
+}
+
+
+
+#team .owl-theme .owl-dots .owl-dot span {
+
+    background: var(--primary);
+
+    border: 1px var(--primary) solid !important;
+
+}
+
+
+
+#team .owl-theme .owl-dots .owl-dot:hover span {
+
+    background: var(--primary) !important;
+
+    transition: all 200ms ease;
+
+    opacity: 1;
+
+}
+
+
+
+#team .owl-theme .owl-dots .owl-dot.active span {
+
+    background: var(--primary) !important;
+
+    opacity: 1;
+
+    transform: scale(2);
+
+    transition: all 200ms ease;
+
+}
+
+
+
+
+
+/* NAVS */
+
+
+
+#team .owl-carousel .owl-prev,
+
+#team .owl-carousel .owl-next {
+
+    position: absolute;
+
+    top: 0;
+
+    height: 30px;
+
+    top: 40%;
+
+}
+
+
+
+#team .owl-carousel .owl-prev:hover,
+
+#team .owl-carousel .owl-next:hover {
+
+    position: absolute;
+
+    top: 0;
+
+    height: 30px;
+
+    top: 40%;
+
+    background-color: transparent !important;
+
+}
+
+
+
+#team .owl-carousel .owl-prev {
+
+    left: -60px;
+
+}
+
+
+
+#team .owl-carousel .owl-next {
+
+    right: -60px;
+
+}
+
+
+
+
+
+/**CARD**/
+
+
+
+#team .card-title{
+
+    height: 36px;
+
+}

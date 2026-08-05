@@ -1,0 +1,16 @@
+#hero-image .imagen-interna {
+    aspect-ratio: 2.5/1;
+
+}
+
+@media (max-width: 576px) {
+    #hero-image .imagen-interna {
+        aspect-ratio: 2.5/1;
+    }
+}
+
+@media (min-width: 577px) and (max-width: 767px) {
+    #hero-image .imagen-interna {
+        aspect-ratio: 2.5/1;
+    }
+}

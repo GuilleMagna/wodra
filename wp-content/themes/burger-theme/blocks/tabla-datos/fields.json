@@ -1,0 +1,627 @@
+[
+  {
+    "key": "group_burger_tabla_datos",
+    "title": "Bloque: Tabla de datos",
+    "fields": [
+      {
+        "key": "field_td_tab_contenido",
+        "label": "Contenido",
+        "name": "",
+        "type": "tab",
+        "placement": "left"
+      },
+      {
+        "key": "field_td_titulo",
+        "label": "Título",
+        "name": "titulo",
+        "type": "text",
+        "wrapper": {
+          "width": "100"
+        }
+      },
+      {
+        "key": "field_td_subtitulo",
+        "label": "Subtítulo",
+        "name": "subtitulo",
+        "type": "text",
+        "wrapper": {
+          "width": "100"
+        }
+      },
+      {
+        "key": "field_td_descripcion",
+        "label": "Descripción",
+        "name": "descripcion",
+        "type": "wysiwyg",
+        "tabs": "all",
+        "toolbar": "basic",
+        "media_upload": 0,
+        "delay": 0,
+        "wrapper": {
+          "width": "100"
+        }
+      },
+      {
+        "key": "field_td_tab_datos",
+        "label": "Datos",
+        "name": "",
+        "type": "tab",
+        "placement": "left"
+      },
+      {
+        "key": "field_td_origen_datos",
+        "label": "Origen de datos",
+        "name": "origen_datos",
+        "type": "radio",
+        "choices": {
+          "manual": "Manual",
+          "csv": "CSV",
+          "xlsx": "Excel (.xlsx)"
+        },
+        "default_value": "manual",
+        "layout": "horizontal",
+        "return_format": "value",
+        "wrapper": {
+          "width": "100"
+        }
+      },
+      {
+        "key": "field_td_archivo_dataset",
+        "label": "Archivo de datos",
+        "name": "archivo_dataset",
+        "type": "file",
+        "instructions": "Subí un CSV o XLSX. En CSV se detecta automáticamente si usa coma o punto y coma.",
+        "required": 0,
+        "conditional_logic": [
+          [
+            {
+              "field": "field_td_origen_datos",
+              "operator": "!=",
+              "value": "manual"
+            }
+          ]
+        ],
+        "return_format": "array",
+        "library": "all",
+        "mime_types": "csv,xlsx",
+        "wrapper": {
+          "width": "50"
+        }
+      },
+      {
+        "key": "field_td_primera_fila_encabezados",
+        "label": "Primera fila contiene encabezados",
+        "name": "primera_fila_encabezados",
+        "type": "true_false",
+        "conditional_logic": [
+          [
+            {
+              "field": "field_td_origen_datos",
+              "operator": "!=",
+              "value": "manual"
+            }
+          ]
+        ],
+        "default_value": 1,
+        "ui": 1,
+        "wrapper": {
+          "width": "25"
+        }
+      },
+      {
+        "key": "field_td_hoja_excel",
+        "label": "Hoja Excel",
+        "name": "hoja_excel",
+        "type": "number",
+        "instructions": "Número de hoja. Por defecto 1.",
+        "conditional_logic": [
+          [
+            {
+              "field": "field_td_origen_datos",
+              "operator": "==",
+              "value": "xlsx"
+            }
+          ]
+        ],
+        "default_value": 1,
+        "min": 1,
+        "step": 1,
+        "wrapper": {
+          "width": "25"
+        }
+      },
+      {
+        "key": "field_td_tab_columnas",
+        "label": "Columnas",
+        "name": "",
+        "type": "tab",
+        "placement": "left"
+      },
+      {
+        "key": "field_td_columnas",
+        "label": "Columnas configurables",
+        "name": "columnas",
+        "type": "repeater",
+        "instructions": "Para CSV/XLSX, la Key debe coincidir con el encabezado normalizado: minúsculas, sin acentos y con guiones bajos. Ej: Precio Socio → precio_socio.",
+        "collapsed": "field_td_col_nombre",
+        "layout": "row",
+        "button_label": "Agregar columna",
+        "sub_fields": [
+          {
+            "key": "field_td_col_nombre",
+            "label": "Nombre",
+            "name": "nombre",
+            "type": "text",
+            "wrapper": {
+              "width": "25"
+            }
+          },
+          {
+            "key": "field_td_col_key",
+            "label": "Key",
+            "name": "key",
+            "type": "text",
+            "wrapper": {
+              "width": "20"
+            }
+          },
+          {
+            "key": "field_td_col_tipo",
+            "label": "Tipo",
+            "name": "tipo",
+            "type": "select",
+            "choices": {
+              "texto": "Texto",
+              "numero": "Número",
+              "moneda": "Moneda",
+              "fecha": "Fecha",
+              "html": "HTML"
+            },
+            "default_value": "texto",
+            "return_format": "value",
+            "wrapper": {
+              "width": "15"
+            }
+          },
+          {
+            "key": "field_td_col_clase_css",
+            "label": "Clase CSS",
+            "name": "clase_css",
+            "type": "text",
+            "wrapper": {
+              "width": "15"
+            }
+          },
+          {
+            "key": "field_td_col_visible",
+            "label": "Visible",
+            "name": "visible",
+            "type": "true_false",
+            "default_value": 1,
+            "ui": 1,
+            "wrapper": {
+              "width": "8"
+            }
+          },
+          {
+            "key": "field_td_col_ordenable",
+            "label": "Ordenable",
+            "name": "ordenable",
+            "type": "true_false",
+            "default_value": 1,
+            "ui": 1,
+            "wrapper": {
+              "width": "8"
+            }
+          },
+          {
+            "key": "field_td_col_buscable",
+            "label": "Buscable",
+            "name": "buscable",
+            "type": "true_false",
+            "default_value": 1,
+            "ui": 1,
+            "wrapper": {
+              "width": "9"
+            }
+          }
+        ]
+      },
+      {
+        "key": "field_td_tab_manual",
+        "label": "Carga manual",
+        "name": "",
+        "type": "tab",
+        "placement": "left",
+        "conditional_logic": [
+          [
+            {
+              "field": "field_td_origen_datos",
+              "operator": "==",
+              "value": "manual"
+            }
+          ]
+        ]
+      },
+      {
+        "key": "field_td_filas_manual",
+        "label": "Filas manuales",
+        "name": "filas_manual",
+        "type": "repeater",
+        "conditional_logic": [
+          [
+            {
+              "field": "field_td_origen_datos",
+              "operator": "==",
+              "value": "manual"
+            }
+          ]
+        ],
+        "layout": "block",
+        "button_label": "Agregar fila",
+        "sub_fields": [
+          {
+            "key": "field_td_fila_celdas",
+            "label": "Celdas",
+            "name": "celdas",
+            "type": "repeater",
+            "layout": "table",
+            "button_label": "Agregar celda",
+            "sub_fields": [
+              {
+                "key": "field_td_celda_key",
+                "label": "Key",
+                "name": "key",
+                "type": "text",
+                "wrapper": {
+                  "width": "30"
+                }
+              },
+              {
+                "key": "field_td_celda_valor",
+                "label": "Valor",
+                "name": "valor",
+                "type": "textarea",
+                "rows": 2,
+                "new_lines": "br",
+                "wrapper": {
+                  "width": "70"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "field_td_tab_configuracion",
+        "label": "Configuración",
+        "name": "",
+        "type": "tab",
+        "placement": "left"
+      },
+      {
+        "key": "field_td_mostrar_buscador",
+        "label": "Mostrar buscador",
+        "name": "mostrar_buscador",
+        "type": "true_false",
+        "default_value": 1,
+        "ui": 1,
+        "wrapper": {
+          "width": "25"
+        }
+      },
+      {
+        "key": "field_td_mostrar_paginacion",
+        "label": "Mostrar paginación",
+        "name": "mostrar_paginacion",
+        "type": "true_false",
+        "default_value": 1,
+        "ui": 1,
+        "wrapper": {
+          "width": "25"
+        }
+      },
+      {
+        "key": "field_td_mostrar_info",
+        "label": "Mostrar información inferior",
+        "name": "mostrar_info",
+        "type": "true_false",
+        "default_value": 1,
+        "ui": 1,
+        "wrapper": {
+          "width": "25"
+        }
+      },
+      {
+        "key": "field_td_filas_por_pagina",
+        "label": "Filas por página",
+        "name": "filas_por_pagina",
+        "type": "select",
+        "choices": {
+          "10": "10",
+          "25": "25",
+          "50": "50",
+          "100": "100"
+        },
+        "default_value": "10",
+        "return_format": "value",
+        "wrapper": {
+          "width": "25"
+        }
+      },
+      {
+        "key": "field_td_orden_columna",
+        "label": "Orden inicial: índice de columna",
+        "name": "orden_columna",
+        "type": "number",
+        "instructions": "Usá -1 para no aplicar orden inicial. La primera columna es 0.",
+        "default_value": -1,
+        "step": 1,
+        "wrapper": {
+          "width": "25"
+        }
+      },
+      {
+        "key": "field_td_orden_direccion",
+        "label": "Dirección",
+        "name": "orden_direccion",
+        "type": "select",
+        "choices": {
+          "asc": "ASC",
+          "desc": "DESC"
+        },
+        "default_value": "asc",
+        "return_format": "value",
+        "wrapper": {
+          "width": "25"
+        }
+      },
+      {
+        "key": "field_td_texto_buscar",
+        "label": "Texto buscador",
+        "name": "texto_buscar",
+        "type": "text",
+        "default_value": "Buscar:",
+        "wrapper": {
+          "width": "25"
+        }
+      },
+      {
+        "key": "field_td_texto_sin_resultados",
+        "label": "Texto sin resultados",
+        "name": "texto_sin_resultados",
+        "type": "text",
+        "default_value": "No se encontraron resultados.",
+        "wrapper": {
+          "width": "25"
+        }
+      },
+      {
+        "key": "field_td_tab_boton",
+        "label": "Botón",
+        "name": "",
+        "type": "tab",
+        "placement": "left"
+      },
+      {
+        "key": "field_td_mostrar_boton",
+        "label": "Mostrar botón",
+        "name": "mostrar_boton",
+        "type": "true_false",
+        "default_value": 0,
+        "ui": 1,
+        "wrapper": {
+          "width": "20"
+        }
+      },
+      {
+        "key": "field_td_boton_texto",
+        "label": "Texto botón",
+        "name": "boton_texto",
+        "type": "text",
+        "conditional_logic": [
+          [
+            {
+              "field": "field_td_mostrar_boton",
+              "operator": "==",
+              "value": "1"
+            }
+          ]
+        ],
+        "wrapper": {
+          "width": "20"
+        }
+      },
+      {
+        "key": "field_td_boton_url",
+        "label": "URL botón",
+        "name": "boton_url",
+        "type": "url",
+        "conditional_logic": [
+          [
+            {
+              "field": "field_td_mostrar_boton",
+              "operator": "==",
+              "value": "1"
+            }
+          ]
+        ],
+        "wrapper": {
+          "width": "30"
+        }
+      },
+      {
+        "key": "field_td_boton_target",
+        "label": "Target",
+        "name": "boton_target",
+        "type": "select",
+        "conditional_logic": [
+          [
+            {
+              "field": "field_td_mostrar_boton",
+              "operator": "==",
+              "value": "1"
+            }
+          ]
+        ],
+        "choices": {
+          "_self": "Misma ventana",
+          "_blank": "Nueva ventana"
+        },
+        "default_value": "_self",
+        "return_format": "value",
+        "wrapper": {
+          "width": "15"
+        }
+      },
+      {
+        "key": "field_td_boton_estilo",
+        "label": "Estilo botón",
+        "name": "boton_estilo",
+        "type": "text",
+        "conditional_logic": [
+          [
+            {
+              "field": "field_td_mostrar_boton",
+              "operator": "==",
+              "value": "1"
+            }
+          ]
+        ],
+        "default_value": "btn-primary",
+        "instructions": "Clase Bootstrap/Burger. Ej: btn-primary, btn-secondary, btn-outline-primary.",
+        "wrapper": {
+          "width": "15"
+        }
+      },
+      {
+        "key": "field_td_tab_estilos_tabla",
+        "label": "Estilos tabla",
+        "name": "",
+        "type": "tab",
+        "placement": "left"
+      },
+      {
+        "key": "field_td_table_header_background",
+        "label": "Fondo encabezado",
+        "name": "table_header_background",
+        "type": "color_picker",
+        "instructions": "Si queda vacío usa Color Primario del diseño global.",
+        "return_format": "string",
+        "wrapper": {
+          "width": "25"
+        }
+      },
+      {
+        "key": "field_td_table_header_color",
+        "label": "Color encabezado",
+        "name": "table_header_color",
+        "type": "color_picker",
+        "instructions": "Si queda vacío usa Color Secundario del diseño global.",
+        "return_format": "string",
+        "wrapper": {
+          "width": "25"
+        }
+      },
+      {
+        "key": "field_td_table_row_hover",
+        "label": "Hover fila",
+        "name": "table_row_hover",
+        "type": "color_picker",
+        "return_format": "string",
+        "wrapper": {
+          "width": "25"
+        }
+      },
+      {
+        "key": "field_td_table_border",
+        "label": "Borde tabla",
+        "name": "table_border",
+        "type": "color_picker",
+        "return_format": "string",
+        "wrapper": {
+          "width": "25"
+        }
+      },
+      {
+        "key": "field_td_table_striped",
+        "label": "Filas alternadas",
+        "name": "table_striped",
+        "type": "true_false",
+        "default_value": 0,
+        "ui": 1,
+        "wrapper": {
+          "width": "25"
+        }
+      },
+      {
+        "key": "field_td_table_class",
+        "label": "Clase CSS tabla",
+        "name": "table_class",
+        "type": "text",
+        "instructions": "Clases CSS opcionales para el <table>.",
+        "wrapper": {
+          "width": "100"
+        }
+      },
+      {
+        "key": "field_td_thead_class",
+        "label": "Clase CSS thead",
+        "name": "thead_class",
+        "type": "text",
+        "instructions": "Clases CSS opcionales para el <thead>.",
+        "wrapper": {
+          "width": "50"
+        }
+      },
+      {
+        "key": "field_td_th_class",
+        "label": "Clase CSS th",
+        "name": "th_class",
+        "type": "text",
+        "instructions": "Clases CSS opcionales para todos los <th>.",
+        "wrapper": {
+          "width": "50"
+        }
+      },
+      {
+        "key": "field_td_tr_class",
+        "label": "Clase CSS tr",
+        "name": "tr_class",
+        "type": "text",
+        "instructions": "Clases CSS opcionales para cada <tr> del cuerpo de la tabla.",
+        "wrapper": {
+          "width": "50"
+        }
+      },
+      {
+        "key": "field_td_td_class",
+        "label": "Clase CSS td",
+        "name": "td_class",
+        "type": "text",
+        "instructions": "Clases CSS opcionales para todos los <td>.",
+        "wrapper": {
+          "width": "50"
+        }
+      }
+    ],
+    "location": [
+      [
+        {
+          "param": "block",
+          "operator": "==",
+          "value": "acf/tabla-datos"
+        }
+      ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "Campos del bloque Tabla de datos para Burger.",
+    "show_in_rest": 0
+  }
+]

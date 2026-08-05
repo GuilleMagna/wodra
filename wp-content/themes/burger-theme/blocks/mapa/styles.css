@@ -1,0 +1,18 @@
+#mapa .p-mapa{
+    padding-top: 6rem;
+    padding-bottom: 6rem;
+}
+
+#mapa .text-btn-01 {
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 20px;
+}
+
+@media  (max-width: 991px) {
+    #mapa .p-mapa{
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+
+}

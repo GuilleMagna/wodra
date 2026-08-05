@@ -1,0 +1,69 @@
+#informacion-tres-columnas .btn-check:checked+.btn, .btn.active, .btn.show, .btn:first-child:active, :not(.btn-check)+.btn:active {
+
+    color: var(--white);
+
+    background-color: var(--white);
+
+    border-color: var(--white);
+
+}
+
+
+
+/* BOTON */
+
+
+
+#informacion-tres-columnas .btn {
+
+    transition: 0.3s all ease-out;
+
+}
+
+
+
+#informacion-tres-columnas .btn:hover {
+
+    transition: 0.3s all ease-out;
+
+    transform: translateX(15px);
+
+}
+
+
+
+#informacion-tres-columnas .btn .icon-btn path {
+
+    stroke: var(--secondary);
+
+    transition: 0.3s all ease-out;
+
+}
+
+
+
+#informacion-tres-columnas .btn:hover .icon-btn path {
+
+    stroke: var(--primary);
+
+    transition: 0.3s all ease-out;
+
+}
+
+
+
+#informacion-tres-columnas .btn .icon-btn {
+
+    transition: 0.3s all ease-out;
+
+}
+
+
+
+#informacion-tres-columnas .btn:hover .icon-btn {
+
+    transform: rotate(45deg);
+
+    transition: 0.3s all ease-out;
+
+}

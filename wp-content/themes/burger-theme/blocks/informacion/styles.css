@@ -1,0 +1,158 @@
+#informacion .img-descripcion {
+  aspect-ratio: 2/1;
+}
+
+#informacion .img-descripcion{
+    min-height: 450px;
+}
+
+#informacion .img-descripcion img{
+    max-height: 90%;
+    width: auto;
+    object-fit: contain;
+}
+
+#informacion .wpcf7 {
+  width: 100% !important;
+}
+
+/* #informacion .img-descripcion {
+    aspect-ratio: 4/2.5;
+} */
+
+/*
+#informacion .border-right-big{
+    border-radius: 0px 10rem 0rem 0px;
+}
+
+#informacion .border-left-big{
+    border-radius: 0 6rem 0 0;
+}
+*/
+
+#informacion .informacion-columna #informacion li span,
+#informacion li {
+  color: #ffffff;
+  transition: all 0.3s ease;
+}
+
+#informacion .btn-outline-white .icon-btn path {
+  stroke: var(--white) !important;
+}
+
+#informacion .informacion-columna {
+  transition: all 0.3s ease;
+}
+
+#informacion .informacion-largo:hover .informacion-columna {
+  transition: all 0.3s ease;
+  background-color: #ffffff;
+}
+
+#informacion .informacion-largo:hover .informacion-columna #informacion li span,
+#informacion li {
+  transition: all 0.3s ease;
+  color: #000000;
+}
+
+#informacion li span,
+#informacion li {
+  font-weight: 400;
+  font-size: 0.8rem;
+  line-height: 20px;
+  letter-spacing: 0%;
+}
+
+#informacion .form-control,
+#informacion .form-select {
+  background-color: transparent !important;
+  border-bottom: 1px solid white !important;
+  border: 0;
+}
+
+#informacion .wpcf7 {
+  width: 75%;
+}
+
+#informacion .form-label {
+  color: #fff !important;
+}
+
+#informacion .text-btn-01 {
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 20px;
+}
+
+@media (max-width: 576px) {
+  #informacion .img-responsive.w-75 {
+    width: 100% !important;
+  }
+
+  #informacion .img-fluid {
+    max-width: 100%;
+    height: auto;
+  }
+
+  #informacion li span,
+  #informacion li {
+    font-size: 0.87rem;
+    line-height: 24px;
+  }
+
+}
+
+@media (min-width: 577px) and (max-width: 767px) {
+
+  #informacion .img-responsive.w-75 {
+    width: 100% !important;
+  }
+
+  #informacion .img-fluid {
+    max-width: 100%;
+    height: auto;
+  }
+
+  #informacion li span,
+  #informacion li {
+    font-size: 0.87rem;
+    line-height: 24px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+
+  #informacion li span,
+  #informacion li {
+    font-size: 0.9rem;
+    line-height: 20px;
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1200px) {
+
+  #informacion li span,
+  #informacion li {
+    font-size: 0.9rem;
+    line-height: 20px;
+  }
+}
+
+@media (min-width: 1200px) and (max-width: 1400px) {
+
+  #informacion li span,
+  #informacion li {
+    font-size: 0.9rem;
+    line-height: 20px;
+  }
+}
+
+@media (min-width: 1401px) and (max-width: 1600px) {
+
+  #informacion li span,
+  #informacion li {
+    font-size: 0.9rem;
+    line-height: 20px;
+  }
+
+}

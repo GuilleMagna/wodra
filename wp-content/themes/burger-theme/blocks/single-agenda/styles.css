@@ -1,0 +1,21 @@
+#descripcion-empresa .img-descripcion {
+    width: 75%;
+}
+
+@media (max-width: 576px)
+{
+
+    #descripcion-empresa .img-descripcion {
+        width: 45%;
+    }
+
+}
+
+@media  (min-width: 577px) and (max-width: 767px)
+{
+
+    #descripcion-empresa .img-descripcion {
+        width: 45%;
+    }
+
+}

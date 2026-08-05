@@ -1,0 +1,80 @@
+#novedades-carrusel .card-novedades .novedades-img  {
+    aspect-ratio: 1/1;
+}
+
+#novedades-carrusel .card-novedades .novedades-titulo {
+    height: 90px;
+    overflow: hidden;
+}
+
+#novedades-carrusel .card-novedades .novedades-descripcion {
+    min-height: 88px;
+    overflow: hidden;
+}
+
+@media (max-width: 576px) {
+
+    #novedades-carrusel .card-novedades .novedades-titulo {
+        height: auto;
+        overflow: hidden;
+    } 
+
+    #novedades-carrusel .card-novedades .novedades-descripcion {
+        height: auto;
+        overflow: hidden;
+    }
+
+}
+
+@media  (min-width: 577px) and (max-width: 767px) {
+
+    #novedades-carrusel .card-novedades .novedades-titulo {
+        height: auto;
+        overflow: hidden;
+    } 
+
+    #novedades-carrusel .card-novedades .novedades-descripcion {
+        height: auto;
+        overflow: hidden;
+    }
+
+}
+
+/* OWL */
+
+#novedades-carrusel .owl-theme .owl-dots {
+    text-align: center;
+    -webkit-tap-highlight-color: transparent;
+    margin-top: 30px;
+}
+
+#novedades-carrusel .owl-theme .owl-dots .owl-dot {
+    display: inline-block;
+    zoom: 1;
+    display: inline; 
+}
+
+#novedades-carrusel .owl-theme .owl-dots .owl-dot span {
+    width: 8px;
+    height: 8px;
+    margin: 5px 7px;
+    background: #ccc;
+    display: block;
+    transition: opacity 200ms ease;
+    border-radius: 30px;
+}
+
+#novedades-carrusel .owl-theme .owl-dots .owl-dot.active span, .owl-theme .owl-dots .owl-dot:hover span {
+    background: var(--primary);
+}
+
+#novedades-carrusel .owl-theme .owl-dots .owl-dot span {
+    width: 10px !important;
+    height: 11px !important;
+    background: #fff;
+    border: 1px var(--primary)solid !important;
+}
+
+#novedades-carrusel .owl-theme .owl-dots .owl-dot.active span, #novedades-carrusel .owl-theme .owl-dots .owl-dot:hover span {
+    background: var(--primary) !important;
+}

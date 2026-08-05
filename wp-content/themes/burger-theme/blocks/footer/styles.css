@@ -1,0 +1,50 @@
+#footer {
+    position: relative;
+}
+
+.modal {
+    z-index: 999;
+}
+
+.modal-backdrop {
+    z-index: 9;
+}
+
+.whatsapp-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    left: auto;
+    z-index: 999;
+    transform: scale(0.8);
+    transition: 0.3s all ease;
+}
+
+.whatsapp-button:hover {
+    transform: scale(1);
+    transition: 0.3s all ease;
+}
+
+@media (max-width: 576px) {
+    .whatsapp-button {
+        right: -15px;
+        transform: scale(0.6);
+    }
+
+    .whatsapp-button:hover {
+        transform: scale(0.8);
+    }
+
+}
+
+@media (min-width: 577px) and (max-width: 767px) {
+    .whatsapp-button {
+        right: 0;
+        transform: scale(0.7);
+    }
+
+    .whatsapp-button:hover {
+        transform: scale(0.9);
+    }
+
+}

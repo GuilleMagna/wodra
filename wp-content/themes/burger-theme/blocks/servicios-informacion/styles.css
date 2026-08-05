@@ -1,0 +1,18 @@
+#servicios-informacion .img-descripcion {
+    aspect-ratio: 4/2;
+}
+
+#servicios-informacion .informacion-columna h2 {
+    color: var(--primary);
+    transition: all 0.3s ease;
+}
+
+.rounded-info-e {
+  border-top-right-radius: 1rem;
+  border-bottom-right-radius: 1rem;
+}
+
+.rounded-info-s {
+  border-bottom-left-radius: 1rem;
+  border-top-left-radius: 1rem;
+}

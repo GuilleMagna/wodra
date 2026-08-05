@@ -1,0 +1,389 @@
+.customize-support .fixed-top {
+    top: 32px !important;
+}
+
+.titulo.fs-4 {
+    line-height: 1.6rem;
+}
+
+.wpcf7 form.sent .wpcf7-response-output {
+    background-color: #46b450;
+    /* Green */
+    margin: 20px 0;
+}
+
+.wpcf7 form.failed .wpcf7-response-output,
+.wpcf7 form.aborted .wpcf7-response-output {
+    background-color: #dc3232;
+    /* Red */
+    margin: 20px 0;
+}
+
+.wpcf7 form.spam .wpcf7-response-output {
+    background-color: #f56e28;
+    /* Orange */
+    margin: 20px 0;
+}
+
+.wpcf7 form.invalid .wpcf7-response-output,
+.wpcf7 form.unaccepted .wpcf7-response-output,
+.wpcf7 form.payment-required .wpcf7-response-output {
+    background-color: #ffb900;
+    /* Yellow */
+    margin: 20px 0;
+}
+
+.section {
+    padding: var(--section-padding);
+    margin: var(--section-margin);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+}
+
+.section.no-border-radius {
+    border-radius: 0 !important;
+}
+
+.img {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.parallax {
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
+    background-position: center !important;
+}
+
+.text-big {
+    font-size: 2rem !important;
+}
+
+.btn {
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    line-height: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-align: center;
+    border-radius: 50rem;
+    display: inline-block;
+    margin: 10px 0px 10px 0px;
+    padding: 14px 25px 13px 25px;
+    transition: all 0.2s;
+}
+
+.btn-lg {
+    font-size: 1rem;
+    line-height: 1.2rem;
+    padding: 20px 40px 19px 40px;
+    font-weight: 400;
+}
+
+.page-numbers {
+    font-size: 1rem;
+    line-height: 1rem;
+    font-weight: 700;
+    background: unset;
+    color: #cfcfd0;
+    border: none;
+    padding: 10px 14px;
+    margin: 0px 2px;
+    box-shadow: none;
+    text-decoration: none;
+    outline: none;
+    border-radius: 50px;
+}
+
+.page-numbers.current {
+    font-size: 1rem;
+    line-height: 1rem;
+    color: #faa419;
+}
+
+.page-numbers:hover,
+.page-numbers.focus,
+.page-numbers.active {
+    background-color: #ffffff00;
+    color: #faa419;
+    border: none;
+    outline: none;
+    box-shadow: none;
+    text-decoration: none;
+    outline: none;
+}
+
+.page-numbers:hover,
+.page-numbers.focus,
+.page-numbers.active i {
+    border-color: #faa419;
+}
+
+.page-item:first-child .page-numbers,
+.page-item:last-child .page-numbers {
+    border-radius: 50px;
+}
+
+ul.personalizado {
+    padding-left: 16px;
+}
+
+.personalizado li {
+    margin-bottom: 0.5rem;
+    padding-left: 8px;
+}
+
+.personalizado li::marker {
+    font-family: 'Font Awesome 5 Pro';
+    font-weight: 600;
+    color: #000;
+    content: "\f00c";
+}
+
+.form-control:focus {
+    color: var(--bs-body-color);
+    background-color: var(--bs-body-bg);
+    border-color: #86b7fe00;
+    outline: 0;
+    box-shadow: 0 0 0 .25rem rgba(13, 109, 253, 0) !important;
+}
+
+.form-select:focus {
+    color: var(--bs-body-color);
+    background-color: var(--bs-body-bg);
+    border-color: #86b6fe00;
+    outline: 0;
+    box-shadow: 0 0 0 .25rem rgba(13, 109, 253, 0) !important;
+}
+
+.form-select option {
+    color: var(--dark) !important;
+}
+
+/*************************************************************************** AGREGADO FLOR **********************************************/
+/* .bg-green-image{
+    background: -webkit-linear-gradient(90deg,#d7ff7a 0%,#d7ff7a 35%,#d7ff7a 100%), url(https://gruposit.wodra.ar/wp-content/uploads/2025/06/bg-contador-scaled.jpg);
+    background-size: cover;
+    background-position: center;
+} */
+.section-rounded {
+    border-radius: 0 0 4rem 4rem;
+}
+
+.bg-green-image {
+    position: relative;
+    background: url(https://gruposit.wodra.ar/wp-content/uploads/2025/06/bg-contador-scaled.jpg);
+    background-size: cover;
+    background-position: center;
+    border-radius: 0 0 66px 66px;
+}
+
+.bg-green-image::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(132, 189, 0, 0.85);
+    z-index: 1;
+    border-radius: 0 0 66px 66px;
+}
+
+.bg-green-image>* {
+    position: relative;
+    z-index: 2;
+}
+
+.bg-count-image {
+    position: relative;
+    background: url(https://gruposit.wodra.ar/wp-content/uploads/2025/06/d86714775af60bb772f744e2a5f0817a27e5dd2c-scaled.jpg);
+    background-size: cover;
+    background-position: center;
+    border-radius: 0 0 66px 66px;
+}
+
+.bg-count-image::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(#25282ae3 50%, #25282ae3 100%);
+    z-index: 1;
+    border-radius: 0 0 66px 66px;
+}
+
+.bg-count-image>* {
+    position: relative;
+    z-index: 2;
+}
+
+.bg-video {
+    position: relative;
+    background: url(https://gruposit.wodra.ar/wp-content/uploads/2025/06/Mineria-argentina-Grupo-SIT-Servicios-Integrales-Topograficos-720p-h264.mp4);
+    background-size: cover;
+    background-position: center;
+    border-radius: 0 0 66px 66px;
+}
+
+.bg-video::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url(https://gruposit.wodra.ar/wp-content/uploads/2025/06/overlay-video-scaled.png);
+    z-index: 1;
+    border-radius: 0 0 66px 66px;
+}
+
+.bg-video>* {
+    position: relative;
+    z-index: 2;
+}
+
+.bg-conoce-image {
+    position: relative;
+    background: url(https://gruposit.wodra.ar/wp-content/uploads/2025/06/626ce5e0656906babaebe6412c7d70889734a361-scaled.jpg);
+    background-size: cover;
+    background-position: center;
+    border-radius: 0;
+}
+
+.bg-conoce-image::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(#25282ae3 100%, #25282ae3 100%);
+    z-index: 1;
+    border-radius: 0;
+}
+
+.bg-conoce-image>* {
+    position: relative;
+    z-index: 2;
+}
+
+.border-right-big {
+    border-radius: 0px 4rem 4rem 0px;
+}
+
+.border-left-big {
+    border-radius: 4rem 0px 0px 4rem;
+}
+
+@media (max-width: 576px) {
+
+    .section {
+        padding-top: 3rem;
+        padding-bottom: 3rem;
+    }
+
+    .backg-fix {
+        background-size: 375% !important;
+        background-repeat: no-repeat;
+    }
+
+}
+
+@media (min-width: 577px) and (max-width: 767px) {
+
+    .section {
+        padding-top: 3rem;
+        padding-bottom: 3rem;
+    }
+
+    .backg-fix {
+        background-size: 300% !important;
+        background-repeat: no-repeat;
+    }
+
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+
+    .section {
+        padding-top: 4rem;
+        padding-bottom: 4rem;
+    }
+
+}
+
+@media (min-width: 992px) and (max-width: 1200px) {
+
+    .section {
+        padding-top: 5rem;
+        padding-bottom: 5rem;
+    }
+
+}
+
+@media (min-width: 1200px) and (max-width: 1400px) {
+
+    .section {
+        padding-top: 5rem;
+        padding-bottom: 5rem;
+    }
+
+}
+
+@media (min-width: 1401px) and (max-width: 1600px) {
+
+    .section {
+        padding-top: 5rem;
+        padding-bottom: 5rem;
+    }
+
+}
+
+.wpcf7-form.invalid [aria-invalid="true"] {
+    border-color: red !important;
+    background-color: #ffe6e6;
+}
+
+.um-button#um-submit-btn {
+    color: var(--white) !important;
+    background-color: var(--primary);
+    border-color: var(--primary) !important;
+    transition: 0.3s all ease-out !important;
+    border-radius: 50rem !important;
+    padding: 1rem 1.7rem !important;
+}
+
+.um .um-button.um-alt {
+    color: var(--white) !important;
+    background-color: var(--secondary) !important;
+    border-color: var(--secondary) !important;
+    transition: 0.3s all ease-out !important;
+    border-radius: 50rem !important;
+    padding: 1rem 1.7rem !important;
+}
+
+.um-form a.um-link-alt {
+    color: var(--secondary) !important;
+    font-weight: bold !important;
+    text-align: left !important;
+}
+
+.um.um-login {
+    margin-left: unset !important;
+}
+
+.um-form label,
+.um-form .um-field-block,
+.um-form .um-field-checkbox-option {
+    color: var(--secondary) !important;
+    font-weight: bold !important;
+}
+
+.um-field-checkbox:not(.um-field),
+.um-field-radio:not(.um-field) {
+    margin: 20px 0 !important;
+}

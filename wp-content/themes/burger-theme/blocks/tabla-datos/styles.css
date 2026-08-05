@@ -1,0 +1,124 @@
+#tabla-datos .burger-table-fallback-pagination .btn {
+    padding: 8px 15px !important;
+    border-radius: 15px !important;
+}
+
+.burger-tabla-datos .subtitulo{
+    margin-bottom:.75rem;
+    font-weight:600;
+}
+
+.burger-tabla-datos .titulo{
+    margin-bottom:1rem;
+}
+
+.burger-tabla-datos .descripcion{
+    margin-bottom:2rem;
+}
+
+.burger-tabla-datos .tabla-datos-wrapper{
+    width:100%;
+    overflow-x:auto;
+}
+
+.burger-tabla-datos table.burger-datatable{
+    width:100% !important;
+    margin-bottom:0;
+    border-color:var(--td-border);
+}
+
+.burger-tabla-datos table.burger-datatable thead th{
+    background:var(--td-header-bg);
+    color:var(--td-header-color);
+    border-color:var(--td-border);
+    vertical-align:middle;
+    white-space:nowrap;
+    text-align:center;
+}
+
+.burger-tabla-datos table.burger-datatable thead th:first-child {
+    text-align:left !important;
+}
+
+.burger-tabla-datos table.burger-datatable tbody td{
+    border-color:var(--td-border);
+    color: white;
+    vertical-align:middle;
+    text-align:center;
+}
+
+.burger-tabla-datos table.burger-datatable tbody td:first-child {
+    text-align:left !important;
+}
+
+.burger-tabla-datos table.burger-datatable tbody tr:hover td{
+    background:var(--td-row-hover);
+}
+
+.burger-tabla-datos table.burger-datatable tbody tr:nth-child(even) td{
+    background:color-mix(in srgb, var(--td-row-hover) calc(var(--td-striped) * 100%), transparent);
+}
+
+.burger-tabla-datos .burger-table-fallback-search label {
+    color: white;
+}
+
+.burger-tabla-datos .dataTables_wrapper .dataTables_filter{
+    margin-bottom:1rem;
+}
+
+.burger-tabla-datos .dataTables_wrapper .dataTables_filter input{
+    margin-left:.5rem;
+    border:1px solid var(--td-border);
+    border-radius:.375rem;
+    padding:.4rem .65rem;
+}
+
+.burger-tabla-datos .dataTables_wrapper .dataTables_length select{
+    border:1px solid var(--td-border);
+    border-radius:.375rem;
+    padding:.35rem .5rem;
+}
+
+.burger-tabla-datos .dataTables_wrapper .dataTables_info{
+    padding-top:1rem;
+}
+
+.burger-tabla-datos .dataTables_wrapper .dataTables_paginate{
+    padding-top:1rem;
+}
+
+.burger-tabla-datos .dataTables_wrapper .dataTables_paginate .paginate_button{
+    border:1px solid var(--td-border);
+    border-radius:.375rem;
+    padding:.35rem .65rem;
+    margin-left:.25rem;
+    cursor:pointer;
+}
+
+.burger-tabla-datos .dataTables_wrapper .dataTables_paginate .paginate_button.current{
+    background:var(--td-header-bg);
+    color:var(--td-header-color) !important;
+}
+
+.burger-tabla-datos .tabla-datos-button-wrapper{
+    margin-top:2rem;
+}
+
+@media (max-width:767.98px){
+    .burger-tabla-datos .dataTables_wrapper .dataTables_filter,
+    .burger-tabla-datos .dataTables_wrapper .dataTables_length,
+    .burger-tabla-datos .dataTables_wrapper .dataTables_info,
+    .burger-tabla-datos .dataTables_wrapper .dataTables_paginate{
+        text-align:left;
+    }
+}
+
+.burger-tabla-datos .burger-table-fallback-controls,
+.burger-tabla-datos .burger-table-fallback-footer{
+    color: inherit;
+}
+
+.burger-tabla-datos .burger-table-fallback-pagination .btn{
+    line-height: 1.2;
+}
