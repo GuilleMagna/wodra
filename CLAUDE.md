@@ -97,6 +97,17 @@ manual. Se purga solo en cada `save_post`.
   `/<p(?:\s[^>]*)?>/`. Este bug hacía desaparecer los íconos SVG de Contact Form 7
   (el culpable estaba en `inc/setup.php`, no en CF7).
 
+## Pendientes al 2026-08-05
+
+- **Imágenes**: falta lazy loading y compresión. Es lo que más pesa en el front
+  y quedó sin tocar.
+- **Caché de página completa y object cache**: los maneja el usuario, no tocar
+  sin que lo pida.
+
+Ya cerrado y funcionando, no rehacer: paridad visual del editor con el front,
+caché de bloques con su UI de configuración, bundler de CSS/JS, centrado de los
+carruseles con config ACF completa, y el deploy por git descrito arriba.
+
 ## Entorno local
 
 - XAMPP: Apache + MariaDB. El vhost está en `C:\xampp\apache\conf\extra\httpd-vhosts.conf`.
