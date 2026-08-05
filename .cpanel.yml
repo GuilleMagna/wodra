@@ -1,5 +1,5 @@
 ---
 deployment:
   tasks:
-    - export DEPLOYPATH=/home/wodraar/public_html/web.wodra.ar/
+    - export DEPLOYPATH=/home/wodra/public_html/web.wodra.ar/
     - /usr/bin/rsync -av --exclude='.git/' --exclude='.cpanel.yml' --exclude='.gitignore' ./ $DEPLOYPATH
