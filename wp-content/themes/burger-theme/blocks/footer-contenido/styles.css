@@ -171,7 +171,7 @@
 
 #footer-contenido .owl-carousel .owl-prev {
 
-    left: -25px;
+    left: var(--footer-contenido-flecha, -25px);
 
 }
 
@@ -179,6 +179,22 @@
 
 #footer-contenido .owl-carousel .owl-next {
 
-    right: -25px;
+    right: var(--footer-contenido-flecha, -25px);
+
+}
+
+
+
+/* Mismo caso que en #clientes, pero con 25px de salida: las franjas donde el
+   margen libre del container no alcanza son menos y más angostas. */
+@media (max-width: 589.98px),
+       (min-width: 768px) and (max-width: 769.98px),
+       (min-width: 992px) and (max-width: 1009.98px) {
+
+    #footer-contenido .owl-carousel {
+
+        --footer-contenido-flecha: 5px;
+
+    }
 
 }

@@ -51,6 +51,20 @@
     text-align:left !important;
 }
 
+/* Links de celda: texto + icono siempre en la misma linea */
+.burger-tabla-datos table.burger-datatable tbody td a{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:.4rem;
+    white-space:nowrap;
+}
+
+.burger-tabla-datos table.burger-datatable tbody td a .icon-btn{
+    flex:0 0 auto;
+    margin:0 !important;
+}
+
 .burger-tabla-datos table.burger-datatable tbody tr:hover td{
     background:var(--td-row-hover);
 }

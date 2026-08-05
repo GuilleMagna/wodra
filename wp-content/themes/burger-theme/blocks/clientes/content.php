@@ -41,9 +41,15 @@ $block_id = $block['id'];
     .<?= $block_id ?> .color-primario {
         color:<?php echo $color_primario ?>
     }
-    .<?= $block_id ?> .owl-clientes,
-    .<?= $block_id ?> .owl-clientes .owl-stage-outer {
+    .<?= $block_id ?> .owl-clientes {
         overflow: <?php echo $overflow ?>;
+    }
+    /* .owl-stage-outer es la ventana que recorta el carrusel: si queda en
+       overflow visible, la tira completa de slides sobresale del contenedor y
+       genera scroll horizontal en toda la página. El overflow configurable se
+       aplica al wrapper, que es lo que permite ver las flechas por fuera. */
+    .<?= $block_id ?> .owl-clientes .owl-stage-outer {
+        overflow: hidden;
     }
 </style>
 

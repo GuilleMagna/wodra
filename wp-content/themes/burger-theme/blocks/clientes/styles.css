@@ -141,7 +141,7 @@
 
 #clientes .owl-carousel .owl-prev {
 
-    left: -60px;
+    left: var(--clientes-flecha, -60px);
 
 }
 
@@ -149,6 +149,27 @@
 
 #clientes .owl-carousel .owl-next {
 
-    right: -60px;
+    right: var(--clientes-flecha, -60px);
+
+}
+
+
+
+/* Las flechas viven 60px por fuera del .container. En los anchos de ventana
+   donde el margen libre a los costados del container es menor a 60px, quedan
+   fuera del viewport y generan scroll horizontal en toda la página. En esas
+   franjas se meten para adentro. Cada condición es una franja de Bootstrap:
+   container 100% (<576) y 540 / 720 / 960 / 1140 / 1320. */
+@media (max-width: 659.98px),
+       (min-width: 768px)  and (max-width: 839.98px),
+       (min-width: 992px)  and (max-width: 1079.98px),
+       (min-width: 1200px) and (max-width: 1259.98px),
+       (min-width: 1400px) and (max-width: 1439.98px) {
+
+    #clientes .owl-carousel {
+
+        --clientes-flecha: 10px;
+
+    }
 
 }

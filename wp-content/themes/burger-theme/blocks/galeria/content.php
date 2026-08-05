@@ -44,9 +44,14 @@ $main_col_class   = is_single() ? 'col-lg-10' : 'col-lg-11';
     .<?= $block_id ?> .color-primario {
         color:<?php echo $color_primario ?>
     }
-    .<?= $block_id ?> .owl-single-gal,
-    .<?= $block_id ?> .owl-single-gal .owl-stage-outer {
+    .<?= $block_id ?> .owl-single-gal {
         overflow: <?php echo $overflow ?>;
+    }
+    /* .owl-stage-outer es la ventana que recorta el carrusel: si queda en
+       overflow visible, la tira completa de slides sobresale del contenedor y
+       genera scroll horizontal en toda la página. */
+    .<?= $block_id ?> .owl-single-gal .owl-stage-outer {
+        overflow: hidden;
     }
 </style>
 

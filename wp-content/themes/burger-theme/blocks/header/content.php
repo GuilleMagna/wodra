@@ -146,7 +146,9 @@ $color_header = BURGER_OPTIONS['color_header'] ?? 'var(--secondary)';
 
                                             <ul class="dropdown-menu py-0 py-lg-3 px-0 px-lg-4 border-0 rounded-0">
 
-                                                <?php foreach ($menu['submenu'] as $submenu): ?>
+                                                <?php // ACF devuelve false (no array vacío) cuando el repeater del submenú
+                                                      // no tiene filas, y hay items con "tiene submenu" tildado y sin cargar. ?>
+                                                <?php foreach ( ( $menu['submenu'] ?: [] ) as $submenu ): ?>
 
                                                     <li>
                                                         <a class="dropdown-item nav-link text-nav py-lg-2"

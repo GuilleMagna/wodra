@@ -139,8 +139,10 @@ $block_id = $block['id'];
 
                             <div class="text-start <?php if( $key%2==0 ) echo 'text-md-start' ?>">
 
-                                <?php if ( $item['mostrar_boton'] ): ?>
-                                    <?php echo get_burger_button ( $item['boton'], $item['estilo'] ) ?>
+                                <?php // Las filas guardadas antes de que existieran estos subcampos no traen
+                                      // 'boton' ni 'estilo', así que hay que contemplar que falten. ?>
+                                <?php if ( ! empty( $item['mostrar_boton'] ) && ! empty( $item['boton'] ) ): ?>
+                                    <?php echo get_burger_button ( $item['boton'], $item['estilo'] ?? '' ) ?>
                                 <?php endif ?>
 
                             </div>

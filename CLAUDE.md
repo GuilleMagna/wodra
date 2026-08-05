@@ -97,10 +97,37 @@ manual. Se purga solo en cada `save_post`.
   `/<p(?:\s[^>]*)?>/`. Este bug hacía desaparecer los íconos SVG de Contact Form 7
   (el culpable estaba en `inc/setup.php`, no en CF7).
 
+- **WP 7.0 se come los `styles.css` de bloque.** `wp_hoist_late_printed_styles()`
+  captura los estilos encolados después de `wp_head` para reinyectarlos en el `<head>`
+  vía output buffer. Los CSS de bloque se encolan en el `enqueue_assets` de ACF (o sea,
+  durante el render), así que caen ahí; cuando la reinyección no ocurre, se pierden en
+  silencio y la página sale **sin ningún CSS de bloque** — header y footer incluidos.
+  `inc/assets.php` desengancha esa acción en `template_redirect`. Síntoma: 4 hojas de
+  estilo en vez de 17, y `blocks/*/styles.css` sin aparecer en el HTML mientras los
+  `scripts.js` de bloque sí cargan. En PRD el buffer no estaba activo, así que el bug
+  se veía solo en local.
+
+- **`.owl-stage-outer` no se toca.** Es la ventana que recorta el carrusel: con
+  `overflow: visible` la tira completa de slides desborda y genera scroll horizontal en
+  toda la página (600px en `/nosotros/`). El `overflow` configurable por ACF va al
+  wrapper, nunca al `stage-outer`. Pasaba en `clientes`, `galeria`, `relacionados`,
+  `conoce-mas` y `conoce-mas-dos`.
+
+- **`imagetruecolortopalette()` de GD destruye el canal alfa**, con dithering y sin él.
+  Sirve para PNG opacos; para los que usan transparencia hace falta un cuantizador
+  alfa-aware (pngquant) o pasar a WebP.
+
 ## Pendientes al 2026-08-05
 
-- **Imágenes**: falta lazy loading y compresión. Es lo que más pesa en el front
-  y quedó sin tocar.
+- **Imágenes**: sigue siendo lo que más pesa. El GIF de WhatsApp de 2 MB ya se
+  reemplazó (9 KB). Los JPG están guardados con calidad absurda: re-encodarlos a q85
+  sin cambiar dimensiones baja `/nosotros/` de 4,4 MB a ~2,5 MB. Los PNG con
+  transparencia no se pueden bajar con GD (ver trampas). Falta lazy loading: de 61
+  `<img>` solo 6 tienen `loading="lazy"`, y los fondos salen por `background-image`,
+  que no lazyfica.
+- **Scroll horizontal en mobile**: los `data-aos="fade-left"` arrancan con
+  `translateX(100px)` y empujan la página ~88px mientras no se dispara la animación.
+  Es transversal a todos los bloques que usan ese efecto.
 - **Caché de página completa y object cache**: los maneja el usuario, no tocar
   sin que lo pida.
 

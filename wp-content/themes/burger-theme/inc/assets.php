@@ -85,6 +85,28 @@ function burger_write_asset_bundle( $bundle_path, $type, array $files, $theme_pa
     file_put_contents( $bundle_path, $output );
 }
 
+/**
+ * WP 7.0 agregó `wp_hoist_late_printed_styles()`: intercepta los estilos que se
+ * encolan después de wp_head (los "late styles"), los captura en un output
+ * buffer y los reinyecta en el <head>.
+ *
+ * Los styles.css de cada bloque se encolan en el `enqueue_assets` de ACF, o sea
+ * durante el render del contenido => son late styles. Cuando la reinyección no
+ * ocurre, esos estilos quedan capturados y nunca se imprimen: la página sale sin
+ * NINGÚN CSS de bloque (header, footer y todo lo demás sin estilo).
+ *
+ * Core deja el opt-out a mano: alcanza con desenganchar la acción. Los late
+ * styles vuelven a imprimirse normalmente en el footer, como hasta WP 6.x.
+ *
+ * Se hace en `template_redirect` porque la acción se engancha en
+ * `wp_default_styles`, que puede dispararse antes de que se cargue el theme (si
+ * un plugin instancia wp_styles() temprano). `template_redirect` corre siempre
+ * antes de `wp_before_include_template`, que es donde arranca el buffer.
+ */
+add_action( 'template_redirect', function () {
+    remove_action( 'wp_template_enhancement_output_buffer_started', 'wp_hoist_late_printed_styles' );
+}, 0 );
+
 add_action( 'wp_enqueue_scripts', function () {
 
     if ( is_admin() ) {

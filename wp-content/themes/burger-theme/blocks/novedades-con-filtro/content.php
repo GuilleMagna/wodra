@@ -242,8 +242,9 @@ $block_id = $block['id'];
 
                                         <? } else { ?>    
 
-                                            <div class="d-flex align-items-start justify-content-start">
-                                                <svg width="20" height="20" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" class="me-3 pt-1" style="transform: rotate(-180deg);">
+                                            <div class="d-flex align-items-center justify-content-start">
+
+                                                <svg width="20" height="20" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" class="me-3 flex-shrink-0" style="transform: rotate(-180deg);">
                                                     <g clip-path="url(#clip0_4365_1021)">
                                                         <path d="M6.875 5.3125L9.0625 7.5L6.875 9.6875" stroke="<?= $color_flechas_paginador ?>" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                                         <path d="M7.5 13.75C10.9517 13.75 13.75 10.9517 13.75 7.5C13.75 4.04822 10.9517 1.25 7.5 1.25C4.04822 1.25 1.25 4.04822 1.25 7.5C1.25 10.9517 4.04822 13.75 7.5 13.75Z" stroke="<?= $color_flechas_paginador?>" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -254,7 +255,9 @@ $block_id = $block['id'];
                                                         </clipPath>
                                                     </defs>
                                                 </svg>
-                                                <span class="color-secundario text-btn d-none d-md-block"><?php echo BURGER_OPTIONS['anterior_paginador'] ?></span>
+
+                                                <span class="color-secundario text-btn"><?php echo BURGER_OPTIONS['anterior_paginador'] ?></span>
+
                                             </div>
                                         
                                         <? } ?>    
@@ -262,7 +265,7 @@ $block_id = $block['id'];
                                         <? if( BURGER_OPTIONS['logo_paginador'] ): ?>
 
                                             <div class="col-6 col-md-4 col-lg-3 col-xxl-2">
-                                                <img src="<?= BURGER_OPTIONS['logo_paginador'] ?>" alt="logo Grupo Sit" class="img-fluid">
+                                                <img src="<?= BURGER_OPTIONS['logo_paginador'] ?>" alt="logo" class="img-fluid">
                                             </div>
 
                                         <? endif ?>
@@ -280,9 +283,11 @@ $block_id = $block['id'];
                                             
                                             <? } else { ?>    
                                                 
-                                                <div class="d-flex align-items-start justify-content-start">
-                                                    <span class="color-secundario text-btn d-none d-md-block"><?php echo BURGER_OPTIONS['posterior_paginador'] ?></span>
-                                                    <svg width="20" height="20" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" class="ms-3 pb-1">
+                                                <div class="d-flex align-items-center justify-content-start">
+
+                                                    <span class="color-secundario text-btn"><?php echo BURGER_OPTIONS['posterior_paginador'] ?></span>
+
+                                                    <svg width="20" height="20" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" class="ms-3 flex-shrink-0">
                                                         <g clip-path="url(#clip0_4365_1021)">
                                                             <path d="M6.875 5.3125L9.0625 7.5L6.875 9.6875" stroke="<?= $color_flechas_paginador?>" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                                             <path d="M7.5 13.75C10.9517 13.75 13.75 10.9517 13.75 7.5C13.75 4.04822 10.9517 1.25 7.5 1.25C4.04822 1.25 1.25 4.04822 1.25 7.5C1.25 10.9517 4.04822 13.75 7.5 13.75Z" stroke="<?= $color_flechas_paginador?>" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -293,6 +298,7 @@ $block_id = $block['id'];
                                                             </clipPath>
                                                         </defs>
                                                     </svg>
+
                                              </div>
                                         
                                         <? } ?>     

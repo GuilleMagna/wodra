@@ -33,8 +33,11 @@ $block_id = $block['id'];
     .<?= $block_id ?> #owl-slider #owl-slider-<?php echo $block['id'] ?> {
         overflow: <?php echo $overflow ?>;
     }
+    /* .owl-stage-outer es la ventana que recorta el carrusel: si queda en
+       overflow visible, la tira completa de slides sobresale del contenedor y
+       genera scroll horizontal en toda la página. */
     .<?= $block_id ?> #owl-slider #owl-slider-<?php echo $block['id'] ?> .owl-stage-outer {
-        overflow: <?php echo $overflow ?>;
+        overflow: hidden;
     }
 </style>
 
