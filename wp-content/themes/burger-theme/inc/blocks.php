@@ -1448,44 +1448,91 @@ function burger_value_or_option( $value, $option_name, $fallback = '' ) {
     return burger_option( $option_name, $fallback );
 }
 
-/** Alimenta los selects de estilo con la configuración global de botones. */
-function burger_load_button_style_field( $field ) {
-    $name = $field['name'] ?? '';
-    $is_button_style = $name === 'estilo'
-        || $name === 'boton_estilo'
-        || str_contains( $name, 'estilo_boton' )
-        || str_contains( $name, 'estilo_del_boton' );
+/**
+ * Tipo de campo ACF que ofrece los estilos definidos en la configuración
+ * global de botones, sin tener que repetir las opciones en cada field group.
+ */
+if ( class_exists( 'acf_field_select' ) && function_exists( 'acf_register_field_type' ) ) {
 
-    if ( ! $is_button_style || ! function_exists( 'get_field' ) ) {
-        return $field;
-    }
+    class Burger_ACF_Field_Select_Button extends acf_field_select {
 
-    $styles = get_field( 'icono_de_botones', 'option' );
-    if ( ! is_array( $styles ) || $styles === [] ) {
-        return $field;
-    }
+        public function initialize() {
+            $this->name          = 'select_button';
+            $this->label         = 'Selector de botón';
+            $this->category      = 'choice';
+            $this->description   = 'Selecciona un estilo configurado en Estilos de Botones.';
+            $this->preview_image = acf_get_url() . '/assets/images/field-type-previews/field-preview-select.png';
+            $this->defaults      = [
+                'multiple'      => 0,
+                'allow_null'    => 0,
+                'choices'       => [],
+                'default_value' => '',
+                'ui'            => 1,
+                'ajax'          => 0,
+                'placeholder'   => '',
+                'return_format' => 'value',
+            ];
+        }
 
-    $choices = [];
-    foreach ( $styles as $style ) {
-        $type = trim( (string) ( $style['tipo'] ?? '' ) );
-        if ( $type !== '' ) {
-            $choices[ $type ] = $type;
+        public function load_field( $field ) {
+            $field['choices']       = $this->get_button_choices();
+            $field['multiple']      = 0;
+            $field['ui']            = 1;
+            $field['ajax']          = 0;
+            $field['return_format'] = 'value';
+
+            return $field;
+        }
+
+        public function render_field_settings( $field ) {
+            acf_render_field_setting(
+                $field,
+                [
+                    'label'        => 'Opciones',
+                    'instructions' => 'Se cargan automáticamente desde Configuración General > Estilos de Botones.',
+                    'name'         => '_button_choices_info',
+                    'type'         => 'message',
+                    'message'      => 'No es necesario cargar opciones manualmente.',
+                ]
+            );
+
+            acf_render_field_setting(
+                $field,
+                [
+                    'label'         => 'Valor predeterminado',
+                    'name'          => 'default_value',
+                    'type'          => 'select',
+                    'choices'       => $this->get_button_choices(),
+                    'allow_null'    => 1,
+                    'return_format' => 'value',
+                ]
+            );
+        }
+
+        private function get_button_choices() {
+            $styles  = function_exists( 'get_field' )
+                ? get_field( 'icono_de_botones', 'option' )
+                : [];
+            $choices = [];
+
+            if ( ! is_array( $styles ) ) {
+                return $choices;
+            }
+
+            foreach ( $styles as $style ) {
+                $type = trim( (string) ( $style['tipo'] ?? '' ) );
+
+                if ( $type !== '' ) {
+                    $choices[ $type ] = $type;
+                }
+            }
+
+            return $choices;
         }
     }
 
-    if ( $choices === [] ) {
-        return $field;
-    }
-
-    $field['type']          = 'select';
-    $field['choices']       = $choices;
-    $field['ui']            = 1;
-    $field['allow_null']    = empty( $field['required'] ) ? 1 : 0;
-    $field['return_format'] = 'value';
-
-    return $field;
+    acf_register_field_type( 'Burger_ACF_Field_Select_Button' );
 }
-add_filter( 'acf/load_field', 'burger_load_button_style_field' );
 function get_burger_button( $boton, $estilo = '' ) {
 
     if (
