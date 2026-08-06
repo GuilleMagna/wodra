@@ -1405,7 +1405,17 @@ function get_block_values($slug, $block = []){
 
 function burger_get_selected_preset_id( $block, $block_name ) {
 
-    if ( empty( $block['data'] ) || ! is_array( $block['data'] ) || ! function_exists( 'acf_get_field' ) ) {
+    if ( empty( $block['data'] ) || ! is_array( $block['data'] ) ) {
+        return false;
+    }
+
+    if ( ! empty( $block['data']['preset_seleccionado'] ) ) {
+        $preset_id = absint( $block['data']['preset_seleccionado'] );
+
+        return burger_preset_matches_block( $preset_id, $block_name ) ? $preset_id : false;
+    }
+
+    if ( ! function_exists( 'acf_get_field' ) ) {
         return false;
     }
 
@@ -1690,6 +1700,104 @@ if ( class_exists( 'acf_field_select' ) && function_exists( 'acf_register_field_
     }
 
     acf_register_field_type( 'Burger_ACF_Field_Select_Preset' );
+}
+/**
+ * Agrega automáticamente el selector junto al toggle "preset" en los grupos
+ * asignados a bloques. Ambos campos comparten la misma fila (30% / 70%).
+ */
+add_filter( 'acf/load_fields', function ( $fields, $parent ) {
+
+    $block_name = burger_get_block_name_from_field_group( $parent );
+
+    if ( ! $block_name || ! is_array( $fields ) ) {
+        return $fields;
+    }
+
+    $preset_index   = null;
+    $selector_index = null;
+
+    foreach ( $fields as $index => $field ) {
+        if ( ( $field['name'] ?? '' ) === 'preset' ) {
+            $preset_index = $index;
+        }
+
+        if ( ( $field['name'] ?? '' ) === 'preset_seleccionado' || ( $field['type'] ?? '' ) === 'select_preset' ) {
+            $selector_index = $index;
+        }
+    }
+
+    if ( $preset_index === null ) {
+        return $fields;
+    }
+
+    $fields[ $preset_index ]['wrapper']['width'] = '30';
+
+    if ( $selector_index !== null ) {
+        $fields[ $selector_index ]['wrapper']['width'] = '70';
+        return $fields;
+    }
+
+    $preset_field = $fields[ $preset_index ];
+    $field_key    = 'field_burger_preset_' . substr( md5( $parent['key'] ?? $block_name ), 0, 16 );
+    $field_type   = function_exists( 'acf_get_field_type' ) ? acf_get_field_type( 'select_preset' ) : false;
+    $choices      = $field_type ? $field_type->get_preset_choices( $block_name ) : [];
+
+    $selector = [
+        'key'               => $field_key,
+        'label'             => 'Preset seleccionado',
+        'name'              => 'preset_seleccionado',
+        'type'              => 'select_preset',
+        'instructions'      => '',
+        'required'          => 0,
+        'conditional_logic' => [
+            [
+                [
+                    'field'    => $preset_field['key'],
+                    'operator' => '==',
+                    'value'    => '1',
+                ],
+            ],
+        ],
+        'wrapper'           => [
+            'width' => '70',
+            'class' => '',
+            'id'    => '',
+        ],
+        'choices'           => $choices,
+        'default_value'     => '',
+        'allow_null'        => 1,
+        'multiple'          => 0,
+        'ui'                => 1,
+        'ajax'              => 0,
+        'return_format'     => 'value',
+        'placeholder'       => 'Usar preset predeterminado',
+        'parent'            => $parent['key'] ?? '',
+        'menu_order'        => (int) ( $preset_field['menu_order'] ?? $preset_index ) + 1,
+    ];
+
+    $selector           = acf_validate_field( $selector );
+    $selector['prefix'] = 'acf';
+
+    array_splice( $fields, $preset_index + 1, 0, [ $selector ] );
+
+    return $fields;
+}, 20, 2 );
+
+function burger_get_block_name_from_field_group( $group ) {
+
+    foreach ( (array) ( $group['location'] ?? [] ) as $rules ) {
+        foreach ( (array) $rules as $rule ) {
+            if (
+                ( $rule['param'] ?? '' ) === 'block'
+                && ( $rule['operator'] ?? '' ) === '=='
+                && ! empty( $rule['value'] )
+            ) {
+                return str_replace( 'acf/', '', $rule['value'] );
+            }
+        }
+    }
+
+    return '';
 }
 function get_burger_button( $boton, $estilo = '' ) {
 
