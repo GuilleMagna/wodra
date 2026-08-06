@@ -1448,6 +1448,44 @@ function burger_value_or_option( $value, $option_name, $fallback = '' ) {
     return burger_option( $option_name, $fallback );
 }
 
+/** Alimenta los selects de estilo con la configuración global de botones. */
+function burger_load_button_style_field( $field ) {
+    $name = $field['name'] ?? '';
+    $is_button_style = $name === 'estilo'
+        || $name === 'boton_estilo'
+        || str_contains( $name, 'estilo_boton' )
+        || str_contains( $name, 'estilo_del_boton' );
+
+    if ( ! $is_button_style || ! function_exists( 'get_field' ) ) {
+        return $field;
+    }
+
+    $styles = get_field( 'icono_de_botones', 'option' );
+    if ( ! is_array( $styles ) || $styles === [] ) {
+        return $field;
+    }
+
+    $choices = [];
+    foreach ( $styles as $style ) {
+        $type = trim( (string) ( $style['tipo'] ?? '' ) );
+        if ( $type !== '' ) {
+            $choices[ $type ] = $type;
+        }
+    }
+
+    if ( $choices === [] ) {
+        return $field;
+    }
+
+    $field['type']          = 'select';
+    $field['choices']       = $choices;
+    $field['ui']            = 1;
+    $field['allow_null']    = empty( $field['required'] ) ? 1 : 0;
+    $field['return_format'] = 'value';
+
+    return $field;
+}
+add_filter( 'acf/load_field', 'burger_load_button_style_field' );
 function get_burger_button( $boton, $estilo = '' ) {
 
     if (
