@@ -1365,7 +1365,11 @@ function resolve_block_data($block) {
 
         $slug = str_replace('acf/', '', $block['name']);
 
-        $preset_id = get_default_preset_id($slug);
+        $preset_id = burger_get_selected_preset_id($block, $slug);
+
+        if ( ! $preset_id ) {
+            $preset_id = get_default_preset_id($slug);
+        }
 
         if ($preset_id) {
             return get_fields($preset_id) ?: [];
@@ -1384,14 +1388,61 @@ function resolve_block_data($block) {
     return get_fields() ?: [];
 }
 
-function get_block_values($slug){ 
+function get_block_values($slug, $block = []){
 
-      $preset_id = get_default_preset_id($slug);
+      $preset_id = burger_get_selected_preset_id($block, $slug);
+
+      if ( ! $preset_id ) {
+          $preset_id = get_default_preset_id($slug);
+      }
+
       if( ! $preset_id ) return null;
 
       $preset_values = get_fields($preset_id);
 
       return $preset_values;
+}
+
+function burger_get_selected_preset_id( $block, $block_name ) {
+
+    if ( empty( $block['data'] ) || ! is_array( $block['data'] ) || ! function_exists( 'acf_get_field' ) ) {
+        return false;
+    }
+
+    foreach ( $block['data'] as $name => $value ) {
+        if ( strpos( (string) $name, '_' ) === 0 || empty( $block['data'][ '_' . $name ] ) ) {
+            continue;
+        }
+
+        $field = acf_get_field( $block['data'][ '_' . $name ] );
+
+        if ( ! $field || ( $field['type'] ?? '' ) !== 'select_preset' ) {
+            continue;
+        }
+
+        $preset_id = absint( $value );
+
+        return burger_preset_matches_block( $preset_id, $block_name ) ? $preset_id : false;
+    }
+
+    return false;
+}
+
+function burger_preset_matches_block( $preset_id, $block_name ) {
+
+    if ( ! $preset_id || get_post_type( $preset_id ) !== 'preset' || get_post_status( $preset_id ) !== 'publish' ) {
+        return false;
+    }
+
+    $assigned_block = get_post_meta( $preset_id, 'grupo_acf_preset', true );
+
+    if ( $assigned_block !== '' ) {
+        return $assigned_block === $block_name;
+    }
+
+    $preset = get_post( $preset_id );
+
+    return $preset && $preset->post_name === $block_name;
 }
 
 function get_default_preset_id($block_name) {
@@ -1532,6 +1583,113 @@ if ( class_exists( 'acf_field_select' ) && function_exists( 'acf_register_field_
     }
 
     acf_register_field_type( 'Burger_ACF_Field_Select_Button' );
+
+    class Burger_ACF_Field_Select_Preset extends acf_field_select {
+
+        public function initialize() {
+            $this->name          = 'select_preset';
+            $this->label         = 'Selector de preset';
+            $this->category      = 'choice';
+            $this->description   = 'Selecciona un preset publicado correspondiente al bloque.';
+            $this->preview_image = acf_get_url() . '/assets/images/field-type-previews/field-preview-select.png';
+            $this->defaults      = [
+                'multiple'      => 0,
+                'allow_null'    => 1,
+                'choices'       => [],
+                'default_value' => '',
+                'ui'            => 1,
+                'ajax'          => 0,
+                'placeholder'   => 'Usar preset predeterminado',
+                'return_format' => 'value',
+            ];
+        }
+
+        public function load_field( $field ) {
+            $field['choices']       = $this->get_preset_choices( $this->get_current_block_name( $field ) );
+            $field['multiple']      = 0;
+            $field['allow_null']    = 1;
+            $field['ui']            = 1;
+            $field['ajax']          = 0;
+            $field['return_format'] = 'value';
+
+            return $field;
+        }
+
+        public function render_field_settings( $field ) {
+            acf_render_field_setting(
+                $field,
+                [
+                    'label'        => 'Opciones',
+                    'instructions' => 'Se cargan automáticamente con los presets publicados asignados al mismo bloque.',
+                    'name'         => '_preset_choices_info',
+                    'type'         => 'message',
+                    'message'      => 'No es necesario cargar opciones manualmente.',
+                ]
+            );
+        }
+
+        public function get_preset_choices( $block_name ) {
+            if ( ! $block_name ) {
+                return [];
+            }
+
+            $preset_ids = get_posts([
+                'post_type'      => 'preset',
+                'post_status'    => 'publish',
+                'posts_per_page' => -1,
+                'orderby'        => 'title',
+                'order'          => 'ASC',
+                'fields'         => 'ids',
+                'meta_key'       => 'grupo_acf_preset',
+                'meta_value'     => $block_name,
+            ]);
+            $choices = [];
+
+            foreach ( $preset_ids as $preset_id ) {
+                $choices[ $preset_id ] = get_the_title( $preset_id );
+            }
+
+            return $choices;
+        }
+
+        private function get_current_block_name( $field ) {
+            if ( ! empty( $_REQUEST['block'] ) ) {
+                $block = json_decode( wp_unslash( $_REQUEST['block'] ), true );
+
+                if ( ! empty( $block['name'] ) ) {
+                    return str_replace( 'acf/', '', $block['name'] );
+                }
+            }
+
+            $parent = $field['parent'] ?? '';
+
+            while ( $parent && function_exists( 'acf_get_field' ) ) {
+                $parent_field = acf_get_field( $parent );
+
+                if ( ! $parent_field ) {
+                    break;
+                }
+
+                $parent = $parent_field['parent'] ?? '';
+            }
+
+            $group = $parent && function_exists( 'acf_get_field_group' )
+                ? acf_get_field_group( $parent )
+                : false;
+
+            foreach ( (array) ( $group['location'] ?? [] ) as $rules ) {
+                foreach ( (array) $rules as $rule ) {
+                    if ( ( $rule['param'] ?? '' ) === 'block' && ( $rule['operator'] ?? '' ) === '==' ) {
+                        return str_replace( 'acf/', '', $rule['value'] ?? '' );
+                    }
+                }
+            }
+
+            return '';
+        }
+    }
+
+    acf_register_field_type( 'Burger_ACF_Field_Select_Preset' );
 }
 function get_burger_button( $boton, $estilo = '' ) {
 
@@ -1843,7 +2001,7 @@ function burger_apply_button_icons( $html ) {
 function get_block_design( $block ) {
 
     $slug    = str_replace( 'acf/', '', $block['name'] );
-    $presets = get_block_values( $slug );
+    $presets = get_block_values( $slug, $block );
 
     $source = ! empty( $block['data']['preset_design'] )
         ? ( $presets ?: [] )
