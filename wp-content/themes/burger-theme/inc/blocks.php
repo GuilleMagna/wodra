@@ -1509,6 +1509,27 @@ function burger_value_or_option( $value, $option_name, $fallback = '' ) {
     return burger_option( $option_name, $fallback );
 }
 
+function burger_get_button_style_choices() {
+    $styles  = function_exists( 'get_field' )
+        ? get_field( 'icono_de_botones', 'option' )
+        : [];
+    $choices = [];
+
+    if ( ! is_array( $styles ) ) {
+        return $choices;
+    }
+
+    foreach ( $styles as $style ) {
+        $type = trim( (string) ( $style['tipo'] ?? '' ) );
+
+        if ( $type !== '' ) {
+            $choices[ $type ] = $type;
+        }
+    }
+
+    return $choices;
+}
+
 /**
  * Tipo de campo ACF que ofrece los estilos definidos en la configuración
  * global de botones, sin tener que repetir las opciones en cada field group.
@@ -1536,7 +1557,7 @@ if ( class_exists( 'acf_field_select' ) && function_exists( 'acf_register_field_
         }
 
         public function load_field( $field ) {
-            $field['choices']       = $this->get_button_choices();
+            $field['choices']       = burger_get_button_style_choices();
             $field['multiple']      = 0;
             $field['ui']            = 1;
             $field['ajax']          = 0;
@@ -1563,33 +1584,14 @@ if ( class_exists( 'acf_field_select' ) && function_exists( 'acf_register_field_
                     'label'         => 'Valor predeterminado',
                     'name'          => 'default_value',
                     'type'          => 'select',
-                    'choices'       => $this->get_button_choices(),
+                    'choices'       => burger_get_button_style_choices(),
                     'allow_null'    => 1,
                     'return_format' => 'value',
                 ]
             );
         }
 
-        private function get_button_choices() {
-            $styles  = function_exists( 'get_field' )
-                ? get_field( 'icono_de_botones', 'option' )
-                : [];
-            $choices = [];
 
-            if ( ! is_array( $styles ) ) {
-                return $choices;
-            }
-
-            foreach ( $styles as $style ) {
-                $type = trim( (string) ( $style['tipo'] ?? '' ) );
-
-                if ( $type !== '' ) {
-                    $choices[ $type ] = $type;
-                }
-            }
-
-            return $choices;
-        }
     }
 
     acf_register_field_type( 'Burger_ACF_Field_Select_Button' );
@@ -1701,6 +1703,44 @@ if ( class_exists( 'acf_field_select' ) && function_exists( 'acf_register_field_
 
     acf_register_field_type( 'Burger_ACF_Field_Select_Preset' );
 }
+/**
+ * Convierte los campos históricos de estilo de botón al selector centralizado
+ * sin cambiar su nombre, key ni los valores ya guardados.
+ */
+function burger_convert_button_style_field( $field ) {
+    $field['type']          = 'select_button';
+    $field['choices']       = burger_get_button_style_choices();
+    $field['multiple']      = 0;
+    $field['allow_null']    = 0;
+    $field['ui']            = 1;
+    $field['ajax']          = 0;
+    $field['return_format'] = 'value';
+
+    $default_value = trim( (string) ( $field['default_value'] ?? '' ) );
+
+    if ( $default_value !== '' && ! isset( $field['choices'][ $default_value ] ) ) {
+        $field['choices'][ $default_value ] = $default_value . ' (valor actual)';
+    }
+
+    return $field;
+}
+
+add_filter( 'acf/load_field/name=estilo', 'burger_convert_button_style_field', 20 );
+add_filter( 'acf/load_field/name=estilo_boton', 'burger_convert_button_style_field', 20 );
+
+function burger_preserve_current_button_style( $field ) {
+    $value = trim( (string) ( $field['value'] ?? '' ) );
+
+    if ( $value !== '' && ! isset( $field['choices'][ $value ] ) ) {
+        $field['choices'][ $value ] = $value . ' (valor actual)';
+    }
+
+    return $field;
+}
+
+add_filter( 'acf/prepare_field/name=estilo', 'burger_preserve_current_button_style', 20 );
+add_filter( 'acf/prepare_field/name=estilo_boton', 'burger_preserve_current_button_style', 20 );
+
 /**
  * Agrega automáticamente el selector junto al toggle "preset" en los grupos
  * asignados a bloques. Ambos campos comparten la misma fila (30% / 70%).
