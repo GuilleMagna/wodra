@@ -7,7 +7,8 @@ $post = $wp_query->queried_object;
 $titulo_evento     = get_field( 'titulo_evento' ,     $post->ID ) ?? '';
 $subtitulo_evento  = get_field( 'subtitulo_evento' ,  $post->ID ) ?? '';
 $encabezado        = get_field( 'encabezado' ,        $post->ID ) ?? 'h1';
-$texto_evento      = $post->post_content ?? get_field( 'texto_evento' ,      $post->ID );
+$texto_evento      = get_field( 'texto_evento', $post->ID );
+if ( '' === trim( (string) $texto_evento ) ) $texto_evento = $post->post_content ?? '';
 $botones_evento    = get_field( 'botones_evento' ,    $post->ID ) ?? [];
 $informacion       = get_field( 'informacion' ,       $post->ID ) ?? [];
 

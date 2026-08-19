@@ -257,7 +257,7 @@ function burger_fixed_structure_fields() {
         [
             'key' => 'field_burger_page_structure_overrides', 'label' => 'Excepciones por página',
             'name' => 'burger_page_structure_overrides', 'type' => 'repeater', 'layout' => 'block',
-            'instructions' => 'Elegí una página —por ejemplo Nosotros o Contacto— y definí su estructura particular. Si no figura aquí, usa la estructura general de páginas.',
+            'instructions' => 'Elegí una página y definí su estructura particular. Si no figura aquí, usa la estructura general de páginas.',
             'button_label' => 'Agregar excepción',
             'sub_fields' => [
                 [
