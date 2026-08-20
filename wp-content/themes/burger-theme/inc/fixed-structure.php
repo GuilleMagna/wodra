@@ -132,6 +132,12 @@ add_filter( 'rest_prepare_post', 'burger_lock_fixed_structure_rest_response', 20
 add_filter( 'wp_insert_post_data', function ( $data, $postarr ) {
     if ( ! in_array( $data['post_type'] ?? '', [ 'page', 'post' ], true ) ) return $data;
     if ( ! isset( $data['post_content'] ) ) return $data;
+
+    // Gutenberg guarda mediante REST. Otros procesos (por ejemplo Duplicate Page)
+    // pueden insertar el contenido sin el slash adicional que espera wp_insert_post().
+    // Parsearlo en ese punto elimina los atributos JSON de los bloques ACF duplicados.
+    if ( ! defined( 'REST_REQUEST' ) || ! REST_REQUEST ) return $data;
+
     $data['post_content'] = burger_lock_fixed_structure_content( $data['post_content'] );
     return $data;
 }, 20, 2 );
