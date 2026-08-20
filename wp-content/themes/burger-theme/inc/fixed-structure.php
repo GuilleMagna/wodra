@@ -104,12 +104,35 @@ function burger_lock_fixed_structure_content( $content ) {
     if ( ! is_string( $content ) || '' === trim( $content ) ) return $content;
     return serialize_blocks( burger_lock_fixed_structure_blocks( parse_blocks( $content ) ) );
 }
+
+// WordPress 7.1 siempre aísla el editor en un iframe. ACF 6.2 no puede
+// ejecutar formularios v2 dentro de ese iframe, pero sí puede mostrarlos en
+// la barra lateral cuando el bloque permanece en modo preview.
+function burger_force_acf_preview_blocks( $blocks ) {
+    foreach ( $blocks as &$block ) {
+        if ( str_starts_with( $block['blockName'] ?? '', 'acf/' ) ) {
+            $block['attrs'] = (array) ( $block['attrs'] ?? [] );
+            $block['attrs']['mode'] = 'preview';
+        }
+        if ( ! empty( $block['innerBlocks'] ) ) {
+            $block['innerBlocks'] = burger_force_acf_preview_blocks( $block['innerBlocks'] );
+        }
+    }
+    unset( $block );
+    return $blocks;
+}
+
+function burger_prepare_iframed_editor_content( $content ) {
+    if ( ! is_string( $content ) || '' === trim( $content ) ) return $content;
+    $blocks = burger_lock_fixed_structure_blocks( parse_blocks( $content ) );
+    return serialize_blocks( burger_force_acf_preview_blocks( $blocks ) );
+}
 // La carga inicial de Gutenberg no siempre pasa por REST. Estos filtros
 // entregan el contenido bloqueado sin reescribir la base automáticamente.
 function burger_lock_fixed_structure_editor_content( $content, $post_id = 0 ) {
     $post_type = $post_id ? get_post_type( $post_id ) : '';
     if ( ! in_array( $post_type, [ 'page', 'post', 'template' ], true ) ) return $content;
-    return burger_lock_fixed_structure_content( $content );
+    return burger_prepare_iframed_editor_content( $content );
 }
 add_filter( 'edit_post_content', 'burger_lock_fixed_structure_editor_content', 20, 2 );
 add_filter( 'content_edit_pre', 'burger_lock_fixed_structure_editor_content', 20, 2 );
@@ -120,7 +143,7 @@ function burger_lock_fixed_structure_rest_response( $response, $post, $request )
 
     $data = $response->get_data();
     if ( isset( $data['content']['raw'] ) ) {
-        $data['content']['raw'] = burger_lock_fixed_structure_content( $data['content']['raw'] );
+        $data['content']['raw'] = burger_prepare_iframed_editor_content( $data['content']['raw'] );
         $response->set_data( $data );
     }
     return $response;
@@ -132,6 +155,18 @@ add_filter( 'rest_prepare_post', 'burger_lock_fixed_structure_rest_response', 20
 add_filter( 'wp_insert_post_data', function ( $data, $postarr ) {
     if ( ! in_array( $data['post_type'] ?? '', [ 'page', 'post' ], true ) ) return $data;
     if ( ! isset( $data['post_content'] ) ) return $data;
+
+    // Duplicate Page entrega post_content sin wp_slash() cuando está configurado
+    // para el editor clásico. Recuperamos la fuente para no perder escapes JSON.
+    $action = sanitize_key( $_REQUEST['action'] ?? '' );
+    if ( 'dt_duplicate_post_as_draft' === $action ) {
+        $source_id = absint( $_REQUEST['post'] ?? 0 );
+        $source = $source_id ? get_post( $source_id ) : null;
+        if ( $source && $source->post_type === ( $data['post_type'] ?? '' ) ) {
+            $data['post_content'] = burger_lock_fixed_structure_content( $source->post_content );
+        }
+        return $data;
+    }
 
     // Gutenberg guarda mediante REST. Otros procesos (por ejemplo Duplicate Page)
     // pueden insertar el contenido sin el slash adicional que espera wp_insert_post().

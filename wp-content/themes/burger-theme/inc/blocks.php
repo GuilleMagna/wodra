@@ -567,6 +567,8 @@ function burger_extend_blocks() {
 
     if ( function_exists( 'acf_register_block' ) ) {
 
+        $acf_blocks_v3 = defined( 'ACF_VERSION' ) && version_compare( ACF_VERSION, '6.6', '>=' );
+
         if( !empty(BURGER_OPTIONS['bloques_disponibles']) && count( BURGER_OPTIONS['bloques_disponibles'] ) > 0 ){
 
             foreach( BURGER_OPTIONS['bloques_disponibles'] as $bloque ){
@@ -580,6 +582,9 @@ function burger_extend_blocks() {
                     'title'             => ucfirst($slug),
                     'description'       => 'Imprime el '.ucfirst($slug).' del sitio',
                     'render_callback'   => 'burger_render_blocks',
+                    'api_version'       => $acf_blocks_v3 ? 3 : 2,
+                    'acf_block_version' => $acf_blocks_v3 ? 3 : 2,
+                    'hide_fields_in_sidebar' => $acf_blocks_v3,
                     'category'          => 'layout',
                     'icon'              => '<svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <rect x="0" fill="none" width="20" height="20"></rect> <g> <path d="M15 6V4h-3v2H8V4H5v2H4c-.6 0-1 .4-1 1v8h14V7c0-.6-.4-1-1-1h-1z"></path> </g> </g></svg>',
                     'supports'          => array( 'align' => array( 'wide', 'full' ),'layout'  => true ),
@@ -1206,6 +1211,42 @@ function nakama_enqueue_editor_frontend_styles() {
 add_action('enqueue_block_editor_assets', 'nakama_enqueue_editor_frontend_styles');
 
 /**
+ * WordPress 7.1 siempre renderiza el contenido del editor dentro de un iframe.
+ * enqueue_block_assets es el hook que Core replica dentro de ese documento.
+ */
+function nakama_enqueue_editor_canvas_styles() {
+    if (!is_admin()) {
+        return;
+    }
+
+    $screen = function_exists('get_current_screen') ? get_current_screen() : null;
+    if (!$screen || !$screen->is_block_editor()) {
+        return;
+    }
+
+    nakama_enqueue_editor_frontend_styles();
+    add_editor_dynamic_styles();
+
+    // Los bloques estructurales se agregan al contenido editado después de que
+    // Core recopila los assets del iframe, así que su CSS debe entrar antes.
+    if (function_exists('burger_fixed_structure_choices')) {
+        foreach (array_keys(burger_fixed_structure_choices()) as $slug) {
+            $style_path = BURGER_THEME_PATH . '/blocks/' . $slug . '/styles.css';
+            if (!file_exists($style_path)) {
+                continue;
+            }
+            wp_enqueue_style(
+                'burger-block-' . $slug,
+                BURGER_THEME_URL . '/blocks/' . $slug . '/styles.css',
+                [],
+                filemtime($style_path)
+            );
+        }
+    }
+}
+add_action('enqueue_block_assets', 'nakama_enqueue_editor_canvas_styles', 20);
+
+/**
  * Este WP no aísla el canvas del editor en un iframe, así que el esquema
  * de color de wp-admin (wp-admin/css/colors/{scheme}/colors.min.css) le
  * pisa reglas genéricas (ej. "a { color: ... }") al contenido de los
@@ -1214,7 +1255,7 @@ add_action('enqueue_block_editor_assets', 'nakama_enqueue_editor_frontend_styles
  */
 add_action('admin_enqueue_scripts', function () {
     $screen = get_current_screen();
-    if ($screen && $screen->is_block_editor()) {
+    if ($screen && $screen->is_block_editor() && version_compare(get_bloginfo('version'), '7.1', '<')) {
         wp_dequeue_style('colors');
         wp_deregister_style('colors');
     }
