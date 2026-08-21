@@ -297,6 +297,36 @@ add_action( 'enqueue_block_editor_assets', function () {
         unsubscribe();
     });
 })(window.wp);
+
+// SCF v3 puede actualizar la preview sin consolidar attributes.data antes
+// de publicar. Sincroniza explícitamente cada cambio del formulario ACF.
+(function (wp, $) {
+    var bound = false, timers = {};
+    function bind() {
+        if (bound) return;
+        if (!wp || !wp.data || !$ || !window.acf || !window.acf.serialize) {
+            window.setTimeout(bind, 100);
+            return;
+        }
+        bound = true;
+        $(document).on('change input', '.acf-block-fields [name^="acf-block_"]', function () {
+            var form = this.closest('.acf-block-fields');
+            if (!form) return;
+            var match = (this.name || '').match(/^acf-block_([^\[]+)/);
+            var clientId = match ? match[1] : form.getAttribute('data-block-id');
+            if (!clientId) return;
+            window.clearTimeout(timers[clientId]);
+            timers[clientId] = window.setTimeout(function () {
+                var block = wp.data.select('core/block-editor').getBlock(clientId);
+                if (!block) return;
+                var data = window.acf.serialize($(form), 'acf-block_' + clientId);
+                if (!data || JSON.stringify(data) === JSON.stringify(block.attributes.data || {})) return;
+                wp.data.dispatch('core/block-editor').updateBlockAttributes(clientId, { data: data });
+            }, 50);
+        });
+    }
+    bind();
+})(window.wp, window.jQuery);
 JS;
     wp_add_inline_script( 'wp-blocks', $script, 'after' );
 } );
