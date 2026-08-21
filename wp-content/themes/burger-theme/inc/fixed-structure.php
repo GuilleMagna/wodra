@@ -358,6 +358,20 @@ JS;
     wp_add_inline_script( 'acf-blocks', $save_script, 'after' );
 }, 20 );
 
+function burger_restore_stripped_json_unicode( $value ) {
+    if ( is_array( $value ) ) {
+        foreach ( $value as $key => $item ) $value[ $key ] = burger_restore_stripped_json_unicode( $item );
+        return $value;
+    }
+    if ( ! is_string( $value ) ) return $value;
+
+    return str_ireplace(
+        [ 'u003c', 'u003e', 'u0022', 'u0027', 'u0026', 'u002f', 'u005c' ],
+        [ '<', '>', '"', "'", '&', '/', '\\' ],
+        $value
+    );
+}
+
 add_action( 'wp_ajax_burger_save_expanded_block', function () {
     check_ajax_referer( 'burger_save_expanded_block', 'nonce' );
     $post_id    = absint( $_POST['post_id'] ?? 0 );
@@ -365,6 +379,7 @@ add_action( 'wp_ajax_burger_save_expanded_block', function () {
     $occurrence = max( 0, absint( $_POST['occurrence'] ?? 0 ) );
     $raw_data   = wp_unslash( $_POST['block_data'] ?? '' );
     $block_data = is_string( $raw_data ) && strlen( $raw_data ) <= 2000000 ? json_decode( $raw_data, true ) : null;
+    if ( is_array( $block_data ) ) $block_data = burger_restore_stripped_json_unicode( $block_data );
 
     if ( ! $post_id || ! str_starts_with( $block_name, 'acf/' ) || ! is_array( $block_data ) || ! current_user_can( 'edit_post', $post_id ) ) {
         wp_send_json_error( [ 'message' => 'invalid_request' ], 403 );
@@ -396,7 +411,7 @@ add_action( 'wp_ajax_burger_save_expanded_block', function () {
     };
 
     if ( ! $update( $blocks ) ) wp_send_json_error( [ 'message' => 'block_not_found' ], 404 );
-    $result = wp_update_post( [ 'ID' => $post_id, 'post_content' => serialize_blocks( $blocks ) ], true );
+    $result = wp_update_post( [ 'ID' => $post_id, 'post_content' => wp_slash( serialize_blocks( $blocks ) ) ], true );
     if ( is_wp_error( $result ) ) wp_send_json_error( [ 'message' => $result->get_error_message() ], 500 );
     wp_send_json_success( [ 'block' => $block_name, 'occurrence' => $occurrence ] );
 } );
