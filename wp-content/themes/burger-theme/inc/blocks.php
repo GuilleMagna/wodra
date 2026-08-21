@@ -1247,6 +1247,63 @@ function nakama_enqueue_editor_canvas_styles() {
 add_action('enqueue_block_assets', 'nakama_enqueue_editor_canvas_styles', 20);
 
 /**
+ * SCF v3 convierte la preview a JSX y no conserva los <style> generados por
+ * cada content.php. Los copia al head del canvas y reemplaza la versión previa
+ * de la misma instancia para mantener la paridad visual con el front.
+ */
+function burger_keep_instance_styles_in_editor() {
+    $screen = function_exists('get_current_screen') ? get_current_screen() : null;
+    if (!$screen || !$screen->is_block_editor()) return;
+
+    $script = <<<'JS'
+(function (acf) {
+    if (!acf || !acf.addFilter) return;
+
+    function canvasDocument() {
+        var iframe = document.querySelector('iframe[name="editor-canvas"]');
+        return iframe && iframe.contentDocument ? iframe.contentDocument : document;
+    }
+
+    function styleKey(css, index) {
+        var scope = css.match(/\.((?:block|acf-block)[A-Za-z0-9_-]+)\b/);
+        if (scope) return scope[1];
+        var hash = 0;
+        for (var i = 0; i < css.length; i++) hash = ((hash << 5) - hash + css.charCodeAt(i)) | 0;
+        return 'anonymous-' + index + '-' + Math.abs(hash);
+    }
+
+    function injectStyles(styles) {
+        var doc = canvasDocument();
+        if (!doc || !doc.head) return;
+        styles.forEach(function (css, index) {
+            var key = styleKey(css, index);
+            doc.querySelectorAll('style[data-burger-block-inline]').forEach(function (existing) {
+                if (existing.getAttribute('data-burger-block-inline') === key) existing.remove();
+            });
+            var style = doc.createElement('style');
+            style.setAttribute('data-burger-block-inline', key);
+            style.textContent = css;
+            doc.head.appendChild(style);
+        });
+    }
+
+    acf.addFilter('blocks/preview/render', function (html) {
+        if (typeof html !== 'string' || html.indexOf('<style') === -1) return html;
+        var styles = [], regex = /<style(?:\s[^>]*)?>([\s\S]*?)<\/style>/gi, match;
+        while ((match = regex.exec(html)) !== null) styles.push(match[1]);
+        if (styles.length) {
+            injectStyles(styles);
+            window.setTimeout(function () { injectStyles(styles); }, 0);
+        }
+        return html;
+    }, 1);
+})(window.acf);
+JS;
+    wp_add_inline_script('acf-blocks', $script, 'after');
+}
+add_action('enqueue_block_editor_assets', 'burger_keep_instance_styles_in_editor', 30);
+
+/**
  * Este WP no aísla el canvas del editor en un iframe, así que el esquema
  * de color de wp-admin (wp-admin/css/colors/{scheme}/colors.min.css) le
  * pisa reglas genéricas (ej. "a { color: ... }") al contenido de los

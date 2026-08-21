@@ -65,5 +65,5 @@ $block_id = $block['id'];
 </style>
 
 <section id="hero-image" <?= get_block_wrapper_attributes(['class' => $block_id . ' section']) ?>>
-    <div class="imagen-interna parallax" style="background: url( '<?php echo $imagen ?>');"></div>
+    <div class="imagen-interna parallax" style="background-image: url('<?php echo esc_url($imagen) ?>'); background-position: center; background-repeat: no-repeat; background-size: cover;"></div>
 </section>
