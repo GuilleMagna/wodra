@@ -302,58 +302,104 @@ JS;
 
     $nonce = wp_create_nonce( 'burger_save_expanded_block' );
     $save_script = <<<'JS'
-(function (wp) {
-    if (!wp || !wp.data) return;
+(function (wp, $, acf) {
+    if (!wp || !wp.data || !$ || !acf || !acf.serialize) return;
+    function flatten(items, result) {
+        result = result || [];
+        (items || []).forEach(function (block) {
+            result.push(block);
+            flatten(block.innerBlocks, result);
+        });
+        return result;
+    }
     document.addEventListener('pointerdown', function (event) {
         var button = event.target.closest('.acf-block-form-modal__done-button, .acf-block-form-modal .components-button.is-primary');
         if (!button) return;
-        var input = document.querySelector('[data-key="field_67d823304e320"] input[type="hidden"]');
+        var modal = button.closest('.acf-block-form-modal');
+        var form = modal && modal.querySelector('.acf-block-fields');
+        var block = wp.data.select('core/block-editor').getSelectedBlock();
         var postId = wp.data.select('core/editor').getCurrentPostId();
-        if (!input || !input.value || !postId) return;
+        if (!form || !block || block.name.indexOf('acf/') !== 0 || !postId) return;
+
+        var data = acf.serialize($(form), 'acf-block_' + block.clientId) || {};
+        form.querySelectorAll(':scope > .acf-field[data-name][data-key]').forEach(function (element) {
+            var type = element.getAttribute('data-type') || '';
+            if (['repeater', 'group', 'flexible_content', 'clone', 'gallery'].indexOf(type) !== -1) return;
+            var field = acf.getField(element);
+            if (!field || typeof field.val !== 'function') return;
+            var name = element.getAttribute('data-name');
+            var key = element.getAttribute('data-key');
+            if (!name || !key) return;
+            data[name] = field.val();
+            data['_' + name] = key;
+        });
+        if (!Object.keys(data).length) return;
+        var sameType = flatten(wp.data.select('core/block-editor').getBlocks()).filter(function (item) {
+            return item.name === block.name;
+        });
+        var occurrence = sameType.findIndex(function (item) { return item.clientId === block.clientId; });
+        if (occurrence < 0) return;
+
         var body = new URLSearchParams({
-            action: 'burger_save_descripcion_empresa_logo',
+            action: 'burger_save_expanded_block',
             nonce: __BURGER_NONCE__,
             post_id: postId,
-            logo_id: input.value
+            block_name: block.name,
+            occurrence: occurrence,
+            block_data: JSON.stringify(data)
         });
         window.setTimeout(function () {
             window.fetch(window.ajaxurl, { method: 'POST', credentials: 'same-origin', body: body });
         }, 500);
     }, true);
-})(window.wp);
+})(window.wp, window.jQuery, window.acf);
 JS;
     $save_script = str_replace( '__BURGER_NONCE__', wp_json_encode( $nonce ), $save_script );
     wp_add_inline_script( 'acf-blocks', $save_script, 'after' );
 }, 20 );
 
-add_action( 'wp_ajax_burger_save_descripcion_empresa_logo', function () {
+add_action( 'wp_ajax_burger_save_expanded_block', function () {
     check_ajax_referer( 'burger_save_expanded_block', 'nonce' );
-    $post_id = absint( $_POST['post_id'] ?? 0 );
-    $logo_id = absint( $_POST['logo_id'] ?? 0 );
-    if ( ! $post_id || ! $logo_id || ! current_user_can( 'edit_post', $post_id ) ) wp_send_json_error( [ 'message' => 'invalid_request' ], 403 );
+    $post_id    = absint( $_POST['post_id'] ?? 0 );
+    $block_name = sanitize_text_field( wp_unslash( $_POST['block_name'] ?? '' ) );
+    $occurrence = max( 0, absint( $_POST['occurrence'] ?? 0 ) );
+    $raw_data   = wp_unslash( $_POST['block_data'] ?? '' );
+    $block_data = is_string( $raw_data ) && strlen( $raw_data ) <= 2000000 ? json_decode( $raw_data, true ) : null;
+
+    if ( ! $post_id || ! str_starts_with( $block_name, 'acf/' ) || ! is_array( $block_data ) || ! current_user_can( 'edit_post', $post_id ) ) {
+        wp_send_json_error( [ 'message' => 'invalid_request' ], 403 );
+    }
 
     $post = get_post( $post_id );
     if ( ! $post || ! in_array( $post->post_type, [ 'page', 'post' ], true ) ) wp_send_json_error( [ 'message' => 'invalid_post' ], 404 );
 
     $blocks = parse_blocks( $post->post_content );
-    $saved  = false;
-    foreach ( $blocks as &$block ) {
-        if ( 'acf/descripcion-empresa' !== ( $block['blockName'] ?? '' ) ) continue;
-        $block['attrs'] = (array) ( $block['attrs'] ?? [] );
-        $block['attrs']['data'] = (array) ( $block['attrs']['data'] ?? [] );
-        $block['attrs']['data']['logo_empresa']  = $logo_id;
-        $block['attrs']['data']['_logo_empresa'] = 'field_67d823304e320';
-        $saved = true;
-        break;
-    }
-    unset( $block );
-    if ( ! $saved ) wp_send_json_error( [ 'message' => 'block_not_found' ], 404 );
+    $seen   = 0;
+    $update = static function ( &$items ) use ( &$update, &$seen, $block_name, $occurrence, $block_data ) {
+        foreach ( $items as &$block ) {
+            if ( $block_name === ( $block['blockName'] ?? '' ) ) {
+                if ( $seen === $occurrence ) {
+                    $block['attrs'] = (array) ( $block['attrs'] ?? [] );
+                    $block['attrs']['data'] = $block_data;
+                    unset( $block );
+                    return true;
+                }
+                $seen++;
+            }
+            if ( ! empty( $block['innerBlocks'] ) && $update( $block['innerBlocks'] ) ) {
+                unset( $block );
+                return true;
+            }
+        }
+        unset( $block );
+        return false;
+    };
 
+    if ( ! $update( $blocks ) ) wp_send_json_error( [ 'message' => 'block_not_found' ], 404 );
     $result = wp_update_post( [ 'ID' => $post_id, 'post_content' => serialize_blocks( $blocks ) ], true );
     if ( is_wp_error( $result ) ) wp_send_json_error( [ 'message' => $result->get_error_message() ], 500 );
-    wp_send_json_success( [ 'logo_id' => $logo_id ] );
+    wp_send_json_success( [ 'block' => $block_name, 'occurrence' => $occurrence ] );
 } );
-
 // Graba los defaults una sola vez para que el tab no aparezca vacío.
 add_action( 'admin_init', function () {
     if ( ! current_user_can( 'manage_options' ) || ! function_exists( 'acf_get_metadata' ) || ! function_exists( 'update_field' ) ) return;
