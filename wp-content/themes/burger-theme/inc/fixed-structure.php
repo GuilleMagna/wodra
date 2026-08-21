@@ -105,6 +105,47 @@ function burger_lock_fixed_structure_content( $content ) {
     return serialize_blocks( burger_lock_fixed_structure_blocks( parse_blocks( $content ) ) );
 }
 
+/**
+ * Gutenberg puede cargar correctamente bloques ACF heredados y, al publicar,
+ * serializarlos sin `name`, `data` ni `mode`. Si el bloque ya existía y el
+ * request no trae `data`, conserva sus atributos guardados. Un `data` presente
+ * (incluso con valores vacíos) siempre se respeta para permitir ediciones.
+ */
+function burger_preserve_missing_acf_block_data( $incoming, $stored ) {
+    foreach ( $incoming as $index => &$block ) {
+        $previous = $stored[ $index ] ?? null;
+        if ( ! is_array( $previous ) || ( $block['blockName'] ?? '' ) !== ( $previous['blockName'] ?? '' ) ) continue;
+
+        if ( str_starts_with( $block['blockName'] ?? '', 'acf/' ) ) {
+            $attrs          = (array) ( $block['attrs'] ?? [] );
+            $previous_attrs = (array) ( $previous['attrs'] ?? [] );
+
+            if ( ! array_key_exists( 'data', $attrs ) && array_key_exists( 'data', $previous_attrs ) ) {
+                foreach ( [ 'name', 'data', 'mode' ] as $key ) {
+                    if ( ! array_key_exists( $key, $attrs ) && array_key_exists( $key, $previous_attrs ) ) {
+                        $attrs[ $key ] = $previous_attrs[ $key ];
+                    }
+                }
+                $block['attrs'] = $attrs;
+            }
+        }
+
+        if ( ! empty( $block['innerBlocks'] ) && ! empty( $previous['innerBlocks'] ) ) {
+            $block['innerBlocks'] = burger_preserve_missing_acf_block_data( $block['innerBlocks'], $previous['innerBlocks'] );
+        }
+    }
+    unset( $block );
+    return $incoming;
+}
+
+function burger_preserve_missing_acf_content( $content, $post_id ) {
+    if ( ! is_string( $content ) || '' === trim( $content ) || ! $post_id ) return $content;
+    $stored = get_post_field( 'post_content', $post_id, 'raw' );
+    if ( ! is_string( $stored ) || '' === trim( $stored ) ) return $content;
+
+    return serialize_blocks( burger_preserve_missing_acf_block_data( parse_blocks( $content ), parse_blocks( $stored ) ) );
+}
+
 // WordPress 7.1 siempre aísla el editor en un iframe. ACF 6.2 no puede
 // ejecutar formularios v2 dentro de ese iframe, pero sí puede mostrarlos en
 // la barra lateral cuando el bloque permanece en modo preview.
@@ -173,6 +214,7 @@ add_filter( 'wp_insert_post_data', function ( $data, $postarr ) {
     // Parsearlo en ese punto elimina los atributos JSON de los bloques ACF duplicados.
     if ( ! defined( 'REST_REQUEST' ) || ! REST_REQUEST ) return $data;
 
+    $data['post_content'] = burger_preserve_missing_acf_content( $data['post_content'], absint( $postarr['ID'] ?? 0 ) );
     $data['post_content'] = burger_lock_fixed_structure_content( $data['post_content'] );
     return $data;
 }, 20, 2 );
