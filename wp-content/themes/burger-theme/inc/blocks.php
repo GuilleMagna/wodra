@@ -567,8 +567,6 @@ function burger_extend_blocks() {
 
     if ( function_exists( 'acf_register_block' ) ) {
 
-        $acf_blocks_v3 = defined( 'ACF_VERSION' ) && version_compare( ACF_VERSION, '6.6', '>=' );
-
         if( !empty(BURGER_OPTIONS['bloques_disponibles']) && count( BURGER_OPTIONS['bloques_disponibles'] ) > 0 ){
 
             foreach( BURGER_OPTIONS['bloques_disponibles'] as $bloque ){
@@ -582,9 +580,11 @@ function burger_extend_blocks() {
                     'title'             => ucfirst($slug),
                     'description'       => 'Imprime el '.ucfirst($slug).' del sitio',
                     'render_callback'   => 'burger_render_blocks',
-                    'api_version'       => $acf_blocks_v3 ? 3 : 2,
-                    'acf_block_version' => $acf_blocks_v3 ? 3 : 2,
-                    'hide_fields_in_sidebar' => $acf_blocks_v3,
+                    // Son bloques PHP heredados cuyos campos viven en el atributo
+                    // `data`. Registrarlos como v3 hace que Gutenberg 7.1 descarte
+                    // ese atributo al guardar y vacíe todas las opciones del bloque.
+                    'api_version'       => 2,
+                    'acf_block_version' => 2,
                     'category'          => 'layout',
                     'icon'              => '<svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <rect x="0" fill="none" width="20" height="20"></rect> <g> <path d="M15 6V4h-3v2H8V4H5v2H4c-.6 0-1 .4-1 1v8h14V7c0-.6-.4-1-1-1h-1z"></path> </g> </g></svg>',
                     'supports'          => array( 'align' => array( 'wide', 'full' ),'layout'  => true ),
