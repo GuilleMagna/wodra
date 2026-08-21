@@ -707,6 +707,7 @@ function burger_render_blocks( $block ) {
         'post_modified' => $post_modified,
         'locale'        => determine_locale(),
         'theme_version' => wp_get_theme()->get( 'Version' ),
+        'template_mtime' => filemtime( $content_php ),
     ];
 
     $cache_key = 'burger_block_v2_' . md5(
@@ -741,6 +742,22 @@ function burger_render_blocks( $block ) {
     include $content_php;
 
     $html = ob_get_clean();
+
+    // SCF v3 convierte la preview a JSX y descarta los <style>. Transportamos
+    // una copia codificada junto al bloque; un controlador del editor la vuelve
+    // a instalar aunque React reconstruya el canvas varios segundos después.
+    if (is_admin() && is_string($html) && str_contains($html, '<style')) {
+        $html = preg_replace_callback(
+            '/<style(?:\s[^>]*)?>([\s\S]*?)<\/style>/i',
+            static function ($matches) {
+                return $matches[0]
+                    . '<span hidden aria-hidden="true" data-burger-instance-css="'
+                    . esc_attr(base64_encode($matches[1]))
+                    . '"></span>';
+            },
+            $html
+        );
+    }
 
     /*
     * Solo se guarda si el HTML renderizado parece válido.
@@ -1161,6 +1178,7 @@ function nakama_enqueue_editor_frontend_styles() {
 
     $vendor_files = [
         'vendors/bootstrap5.2/css/bootstrap.min.css',
+        'vendors/owlcarousel2/assets/owl.carousel.min.css',
         'vendors/font-awesome6/css/all.min.css',
         'vendors/fancybox/fancybox.css',
         'vendors/swiperjs/swiper-bundle.min.css',
@@ -1227,21 +1245,70 @@ function nakama_enqueue_editor_canvas_styles() {
     nakama_enqueue_editor_frontend_styles();
     add_editor_dynamic_styles();
 
-    // Los bloques estructurales se agregan al contenido editado después de que
-    // Core recopila los assets del iframe, así que su CSS debe entrar antes.
-    if (function_exists('burger_fixed_structure_choices')) {
-        foreach (array_keys(burger_fixed_structure_choices()) as $slug) {
-            $style_path = BURGER_THEME_PATH . '/blocks/' . $slug . '/styles.css';
-            if (!file_exists($style_path)) {
-                continue;
-            }
-            wp_enqueue_style(
-                'burger-block-' . $slug,
-                BURGER_THEME_URL . '/blocks/' . $slug . '/styles.css',
-                [],
-                filemtime($style_path)
-            );
+    // Los scripts inline de las previews se ejecutan al insertar su HTML.
+    // El iframe del editor no hereda las librerías del front, por lo que las
+    // dependencias deben estar disponibles en el head antes del primer bloque.
+    wp_enqueue_script('jquery');
+
+    $editor_vendor_scripts = [
+        'burger-editor-countup' => 'vendors/countUp.min.js',
+        'burger-editor-swiper' => 'vendors/swiperjs/swiper-bundle.min.js',
+        'burger-editor-owl' => 'vendors/owlcarousel2/owl.carousel.min.js',
+    ];
+
+    foreach ($editor_vendor_scripts as $handle => $relative_path) {
+        $absolute_path = BURGER_THEME_PATH . '/' . $relative_path;
+        if (!file_exists($absolute_path)) {
+            continue;
         }
+        wp_enqueue_script(
+            $handle,
+            BURGER_THEME_URL . '/' . $relative_path,
+            ['jquery'],
+            filemtime($absolute_path),
+            false
+        );
+    }
+
+    // Bootstrap necesita que el body del iframe ya exista. Se carga al final:
+    // las previews de tipo carrusel usan sus data attributes una vez renderizadas.
+    $bootstrap_path = BURGER_THEME_PATH . '/vendors/bootstrap5.2/js/bootstrap.bundle.min.js';
+    if (file_exists($bootstrap_path)) {
+        wp_enqueue_script(
+            'burger-editor-bootstrap',
+            BURGER_THEME_URL . '/vendors/bootstrap5.2/js/bootstrap.bundle.min.js',
+            [],
+            filemtime($bootstrap_path),
+            true
+        );
+    }
+
+    // ACF puede renderizar una preview después de que Core ya recopiló sus
+    // assets. Precargamos el CSS de todos los bloques activos, no solamente el
+    // de la estructura fija, para que cada preview nazca con su diseño completo.
+    $editor_block_slugs = [];
+    if (!empty(BURGER_OPTIONS['bloques_disponibles'])) {
+        foreach (BURGER_OPTIONS['bloques_disponibles'] as $available_block) {
+            if (!empty($available_block['activo']) && !empty($available_block['slug'])) {
+                $editor_block_slugs[] = $available_block['slug'];
+            }
+        }
+    }
+    if (function_exists('burger_fixed_structure_choices')) {
+        $editor_block_slugs = array_merge($editor_block_slugs, array_keys(burger_fixed_structure_choices()));
+    }
+
+    foreach (array_unique($editor_block_slugs) as $slug) {
+        $style_path = BURGER_THEME_PATH . '/blocks/' . $slug . '/styles.css';
+        if (!file_exists($style_path)) {
+            continue;
+        }
+        wp_enqueue_style(
+            'burger-block-' . $slug,
+            BURGER_THEME_URL . '/blocks/' . $slug . '/styles.css',
+            [],
+            filemtime($style_path)
+        );
     }
 }
 add_action('enqueue_block_assets', 'nakama_enqueue_editor_canvas_styles', 20);
@@ -1272,20 +1339,55 @@ function burger_keep_instance_styles_in_editor() {
         return 'anonymous-' + index + '-' + Math.abs(hash);
     }
 
-    function injectStyles(styles) {
+    var storedStyles = {};
+
+    function ensureStyles() {
         var doc = canvasDocument();
         if (!doc || !doc.head) return;
-        styles.forEach(function (css, index) {
-            var key = styleKey(css, index);
+
+        doc.querySelectorAll('[data-burger-instance-css]').forEach(function (marker, index) {
+            var encoded = marker.getAttribute('data-burger-instance-css');
+            if (!encoded) return;
+            try {
+                var bytes = window.atob(encoded);
+                var escaped = '';
+                for (var i = 0; i < bytes.length; i++) {
+                    escaped += '%' + ('00' + bytes.charCodeAt(i).toString(16)).slice(-2);
+                }
+                var css = decodeURIComponent(escaped);
+                storedStyles[styleKey(css, index)] = css;
+            } catch (error) {}
+        });
+
+        Object.keys(storedStyles).forEach(function (key) {
+            var found = null;
             doc.querySelectorAll('style[data-burger-block-inline]').forEach(function (existing) {
-                if (existing.getAttribute('data-burger-block-inline') === key) existing.remove();
+                if (existing.getAttribute('data-burger-block-inline') !== key) return;
+                if (!found) found = existing;
+                else existing.remove();
             });
-            var style = doc.createElement('style');
-            style.setAttribute('data-burger-block-inline', key);
-            style.textContent = css;
-            doc.head.appendChild(style);
+            if (!found) {
+                found = doc.createElement('style');
+                found.setAttribute('data-burger-block-inline', key);
+                doc.head.appendChild(found);
+            }
+            if (found.textContent !== storedStyles[key]) found.textContent = storedStyles[key];
+        });
+
+        doc.querySelectorAll('[data-burger-bg-color]').forEach(function (element) {
+            var color = element.getAttribute('data-burger-bg-color');
+            if (color) element.style.setProperty('background-color', color, 'important');
         });
     }
+
+    function injectStyles(styles) {
+        styles.forEach(function (css, index) {
+            storedStyles[styleKey(css, index)] = css;
+        });
+        ensureStyles();
+    }
+
+    window.setInterval(ensureStyles, 500);
 
     acf.addFilter('blocks/preview/render', function (html) {
         if (typeof html !== 'string' || html.indexOf('<style') === -1) return html;
@@ -1418,6 +1520,10 @@ function get_block_content_fields($block, $fields = []) {
             $result[$field] = $source[$field] ?? '';
         }
 
+        if (function_exists('burger_restore_stripped_json_unicode')) {
+            $result = burger_restore_stripped_json_unicode($result);
+        }
+
         return $result;
     }
 
@@ -1434,9 +1540,12 @@ function get_block_content_fields($block, $fields = []) {
         $result['encabezado'] = 'h2';
     }
 
+    if (function_exists('burger_restore_stripped_json_unicode')) {
+        $result = burger_restore_stripped_json_unicode($result);
+    }
+
     return $result;
 }
-
 /*
 function get_block_content_fields( $block, $fields = [] ) {
 

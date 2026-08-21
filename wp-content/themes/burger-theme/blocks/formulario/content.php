@@ -9,6 +9,14 @@ $design = get_block_design( $block );
 extract( $design );
 
 $block_id = $block['id'];
+$wrapper_style = sprintf(
+    'margin:%s !important;padding:%s !important;border-radius:%s !important;background-color:%s !important;background-image:url("%s");background-size:cover;background-repeat:no-repeat;',
+    $section_margin,
+    $section_padding,
+    $border_radius,
+    $color_fondo,
+    esc_url($imagen_fondo)
+);
 ?>
 
 <style>
@@ -16,7 +24,7 @@ $block_id = $block['id'];
         margin: <?= $section_margin ?> !important;
         padding: <?= $section_padding ?> !important;
         border-radius: <?= $border_radius ?> !important;
-        background-color: <?= $color_fondo ?>; 
+        background-color: <?= $color_fondo ?> !important;
         background-image: url('<?= $imagen_fondo ?>');
         background-size: cover;
         background-repeat: no-repeat;
@@ -31,7 +39,7 @@ $block_id = $block['id'];
     }
 </style>
 
-<section id="formulario" <?= get_block_wrapper_attributes( [ 'class' => $block_id .' '. $class_container ] ) ?>>
+<section id="formulario" <?= get_block_wrapper_attributes( [ 'class' => $block_id .' '. $class_container, 'style' => $wrapper_style, 'data-burger-bg-color' => $color_fondo ] ) ?>>
     
 	<div class="container">
 
@@ -60,7 +68,7 @@ $block_id = $block['id'];
 	<div class="container pt-5">
 
 		<div class="mx-auto col-12 col-md-8 color-secundario">
-			<?php echo $shortcode_formulario ?>
+			<?php echo do_shortcode( $shortcode_formulario ) ?>
 		</div>
 
         <div class="pt-5 d-flex flex-column flex-sm-row align-items-md-center justify-content-md-center">
