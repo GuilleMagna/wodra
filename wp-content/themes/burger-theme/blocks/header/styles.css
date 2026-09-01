@@ -24,7 +24,7 @@
 
 #preNav .nav-item {
     position: relative;
-    padding: 0px 15px;
+    padding: 0px 10px;
 }
 
 #preNav .nav-item:not(:last-child)::after {
