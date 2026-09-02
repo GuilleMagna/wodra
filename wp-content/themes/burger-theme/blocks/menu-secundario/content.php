@@ -47,6 +47,12 @@ $block_id = $block['id'];
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
+            <button class="second-nav-arrow second-nav-arrow-prev" type="button" aria-label="Desplazar menú hacia la izquierda">
+                <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M12.5 4.5 7 10l5.5 5.5"/></svg>
+            </button>
+
+            <div class="second-nav-scroll">
+
             <ul class="navbar-nav w-100 text-uppercase py-4 py-lg-0">
 
                 <li class="nav-item px-lg-2 my-auto first-item d-none d-lg-block">
@@ -67,8 +73,56 @@ $block_id = $block['id'];
 
             </ul>
 
+            </div>
+
+            <button class="second-nav-arrow second-nav-arrow-next" type="button" aria-label="Desplazar menú hacia la derecha">
+                <svg viewBox="0 0 20 20" aria-hidden="true"><path d="m7.5 4.5 5.5 5.5-5.5 5.5"/></svg>
+            </button>
+
         </div>
 
   	</div>
 
 </nav>
+
+<script>
+(function () {
+    const root = document.querySelector('.<?= esc_js( $block_id ) ?>');
+    if (!root) return;
+
+    const scroller = root.querySelector('.second-nav-scroll');
+    const previous = root.querySelector('.second-nav-arrow-prev');
+    const next = root.querySelector('.second-nav-arrow-next');
+    if (!scroller || !previous || !next) return;
+
+    const update = function () {
+        const overflow = scroller.scrollWidth > scroller.clientWidth + 2;
+        const maxScroll = Math.max(0, scroller.scrollWidth - scroller.clientWidth);
+        previous.classList.toggle('is-visible', overflow);
+        next.classList.toggle('is-visible', overflow);
+        previous.disabled = !overflow || scroller.scrollLeft <= 2;
+        next.disabled = !overflow || scroller.scrollLeft >= maxScroll - 2;
+
+        const link = scroller.querySelector('.nav-link');
+        if (link) root.style.setProperty('--second-nav-arrow-color', getComputedStyle(link).color);
+    };
+
+    const move = function (direction) {
+        scroller.scrollBy({
+            left: direction * Math.max(180, scroller.clientWidth * .65),
+            behavior: 'smooth'
+        });
+    };
+
+    previous.addEventListener('click', function () { move(-1); });
+    next.addEventListener('click', function () { move(1); });
+    scroller.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update, { passive: true });
+
+    if ('ResizeObserver' in window) {
+        new ResizeObserver(update).observe(scroller);
+    }
+
+    requestAnimationFrame(update);
+})();
+</script>

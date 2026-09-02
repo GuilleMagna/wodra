@@ -226,8 +226,8 @@ $color_header = BURGER_OPTIONS['color_header'] ?? 'var(--secondary)';
                                     <?php if (!empty($redes_menu) && count($redes_menu) > 0) foreach ($redes_menu as $red): ?>
 
                                         <a href="<?php echo $red['url'] ?>" class="nav-link text-nav icon-swap" title="<?php echo $red['nombre'] ?>" target="_blank">
-                                            <img src="<?php echo $red['icono'] ?>" class="icon-default me-1 pb-1" alt="icono <?php echo $red['nombre'] ?>" style="width:auto;height:20px;">
-                                            <img src="<?php echo $red['icono_hover'] ?>" class="icon-hover me-1 pb-1" alt="icono <?php echo $red['nombre'] ?>" style="width:auto;height:20px;">
+                                            <img src="<?php echo $red['icono'] ?>" class="icon-default me-1 pb-1" alt="icono <?php echo $red['nombre'] ?>" style="width:auto;height:25px;">
+                                            <img src="<?php echo $red['icono_hover'] ?>" class="icon-hover me-1 pb-1" alt="icono <?php echo $red['nombre'] ?>" style="width:auto;height:25px;">
                                         </a>
 
                                     <?php endforeach ?>

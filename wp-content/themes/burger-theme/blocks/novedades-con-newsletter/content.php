@@ -1,9 +1,64 @@
 <?php
 //Block Name: Novedades con Newsletter
 
-$content_fields = ['titulo_novedades_newsletter', 'subtitulo_novedades_newsletter', 'encabezado', 'novedades', 'ver_boton_mas_novedades', 'boton_mas_novedades', 'estilo_boton_mas_novedades', 'imagen_novedades_newsletter', 'titulo_formulario_novedades', 'redes_novedades', 'shortcode_formulario_novedades'];
+$content_fields = ['titulo_novedades_newsletter', 'subtitulo_novedades_newsletter', 'encabezado', 'carga_automatica', 'tipo_publicacion', 'cantidad_publicaciones', 'novedades', 'ver_boton_mas_novedades', 'boton_mas_novedades', 'estilo_boton_mas_novedades', 'imagen_novedades_newsletter', 'titulo_formulario_novedades', 'redes_novedades', 'shortcode_formulario_novedades'];
 $fields = get_block_content_fields($block, $content_fields);
 extract($fields);
+if ( ! empty( $carga_automatica ) ) {
+    $tipo_publicacion = in_array( $tipo_publicacion, [ 'post', 'evento' ], true ) ? $tipo_publicacion : 'post';
+    $cantidad_publicaciones = min( 24, max( 1, absint( $cantidad_publicaciones ?: 6 ) ) );
+    $query_args = [
+        'post_type' => $tipo_publicacion,
+        'post_status' => 'publish',
+        'posts_per_page' => $cantidad_publicaciones,
+        'suppress_filters' => false,
+        'no_found_rows' => true,
+    ];
+
+    if ( 'evento' === $tipo_publicacion ) {
+        $query_args['meta_key'] = 'fecha_evento';
+        $query_args['meta_query'] = [ [
+            'key' => 'fecha_evento',
+            'value' => current_time( 'Ymd' ),
+            'compare' => '>=',
+            'type' => 'NUMERIC',
+        ] ];
+        $query_args['orderby'] = 'meta_value_num';
+        $query_args['order'] = 'ASC';
+    } else {
+        $query_args['orderby'] = 'date';
+        $query_args['order'] = 'DESC';
+    }
+
+    $novedades = [];
+    foreach ( get_posts( $query_args ) as $publicacion ) {
+        $texto = has_excerpt( $publicacion )
+            ? get_the_excerpt( $publicacion )
+            : wp_trim_words( wp_strip_all_tags( strip_shortcodes( $publicacion->post_content ) ), 28 );
+
+        if ( 'evento' === $tipo_publicacion ) {
+            $fecha_guardada = get_post_meta( $publicacion->ID, 'fecha_evento', true );
+            $fecha_objeto = DateTime::createFromFormat( '!Ymd', (string) $fecha_guardada, wp_timezone() );
+            if ( $fecha_objeto ) {
+                $fecha = date_i18n( 'd F Y', $fecha_objeto->getTimestamp() );
+                $texto = '<strong>' . esc_html( $fecha ) . '</strong>' . ( $texto ? '<br>' . $texto : '' );
+            }
+        }
+
+        $novedades[] = [
+            'imagen' => get_the_post_thumbnail_url( $publicacion, 'large' ) ?: '',
+            'titulo' => get_the_title( $publicacion ),
+            'texto' => $texto,
+            'border_radio' => '30px',
+            'boton' => [
+                'title' => 'LEER MÁS',
+                'url' => get_permalink( $publicacion ),
+                'target' => '_self',
+            ],
+            'estilo' => 'btn-texto',
+        ];
+    }
+}
 
 $design = get_block_design($block);
 extract($design);
@@ -68,9 +123,9 @@ $block_id = $block['id'];
 
                                             <div>
 
-                                                <h4 class="color-secundario mb-2 mb-lg-3">
+                                                <h3 class="color-secundario mb-2 mb-lg-3">
                                                     <?= $titulo ?>
-                                                </h4>
+                                                </h3>
 
                                                 <p class="color-secundario">
                                                     <?= $texto ?>

@@ -2384,6 +2384,79 @@ function get_block_design( $block ) {
     ];
 }
 
+function burger_get_current_preset_screen_id() {
+    $raw_post_id = $_GET['post'] ?? ( $_POST['post_id'] ?? ( $GLOBALS['post']->ID ?? 0 ) );
+    $decoded     = function_exists( 'acf_decode_post_id' ) ? acf_decode_post_id( $raw_post_id ) : [];
+    $post_id     = ( $decoded['type'] ?? '' ) === 'post' ? absint( $decoded['id'] ?? 0 ) : absint( $raw_post_id );
+
+    return $post_id && get_post_type( $post_id ) === 'preset' ? $post_id : 0;
+}
+
+// ACF 6.9 no siempre conserva las reglas heredadas de SCF al montar los metaboxes.
+// Para el preset abierto agregamos una regla nativa equivalente, solo en memoria.
+add_filter( 'acf/load_field_group', function ( $group ) {
+    $post_id = burger_get_current_preset_screen_id();
+    if ( ! $post_id ) return $group;
+
+    $selected_group = get_post_meta( $post_id, 'grupo_acf_preset', true );
+
+    // SCF omite por completo los metaboxes si detecta una ubicación de bloque.
+    // En la edición del preset conservamos solo las ubicaciones no vinculadas a Gutenberg.
+    $group['location'] = array_values( array_filter(
+        (array) ( $group['location'] ?? [] ),
+        static function ( $rules ) {
+            foreach ( (array) $rules as $rule ) {
+                if ( ( $rule['param'] ?? '' ) === 'block' ) return false;
+            }
+            return true;
+        }
+    ) );
+    foreach ( (array) ( $group['location'] ?? [] ) as $rules ) {
+        foreach ( (array) $rules as $rule ) {
+            if (
+                ( $rule['param'] ?? '' ) === 'burger_preset_group'
+                && ( $rule['operator'] ?? '' ) === '=='
+                && ( $rule['value'] ?? '' ) === $selected_group
+            ) {
+                $group['location'][] = [ [
+                    'param' => 'post', 'operator' => '==', 'value' => (string) $post_id,
+                ] ];
+                return $group;
+            }
+        }
+    }
+
+    return $group;
+}, 5 );
+
+if ( class_exists( 'ACF_Location' ) && function_exists( 'acf_register_location_type' ) ) {
+    class Burger_ACF_Location_Preset_Group extends ACF_Location {
+        public function initialize() {
+            $this->name        = 'burger_preset_group';
+            $this->label       = 'Burger Preset Group';
+            $this->category    = 'Burger';
+            $this->object_type = 'post';
+        }
+
+        public function match( $rule, $screen, $field_group ) {
+            $raw_post_id = $screen['post_id'] ?? 0;
+            $decoded     = function_exists( 'acf_decode_post_id' ) ? acf_decode_post_id( $raw_post_id ) : [];
+            $post_id     = ( $decoded['type'] ?? '' ) === 'post' ? absint( $decoded['id'] ?? 0 ) : absint( $raw_post_id );
+
+            if ( ! $post_id || get_post_type( $post_id ) !== 'preset' ) return false;
+
+            $selected_group = get_post_meta( $post_id, 'grupo_acf_preset', true );
+            return $this->compare_to_rule( $selected_group, $rule );
+        }
+
+        public function get_values( $rule ) {
+            return function_exists( 'burger_get_block_choices' ) ? burger_get_block_choices() : [];
+        }
+    }
+
+    acf_register_location_type( 'Burger_ACF_Location_Preset_Group' );
+}
+
 add_filter('acf/location/rule_types', function ($choices) {
 
     $choices['Burger']['burger_preset_group'] = 'Burger Preset Group';
@@ -2424,10 +2497,15 @@ add_filter('acf/location/rule_match/burger_preset_group', function ($match, $rul
 
     $post_id = 0;
 
-    if (!empty($options['post_id'])) {
-        $post_id = (int) $options['post_id'];
-    } elseif (!empty($_POST['post_id'])) {
-        $post_id = (int) $_POST['post_id'];
+    $raw_post_id = $options['post_id'] ?? ( $_POST['post_id'] ?? 0 );
+
+    if ( function_exists( 'acf_decode_post_id' ) ) {
+        $decoded = acf_decode_post_id( $raw_post_id );
+        if ( ( $decoded['type'] ?? '' ) === 'post' ) {
+            $post_id = absint( $decoded['id'] ?? 0 );
+        }
+    } elseif ( is_numeric( $raw_post_id ) ) {
+        $post_id = absint( $raw_post_id );
     }
 
     if (!$post_id) {

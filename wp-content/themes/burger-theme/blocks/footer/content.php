@@ -56,7 +56,7 @@ $color_fondo_footer = BURGER_OPTIONS['color_fondo_footer'] ?: 'var(--primary)';
                 <p class="mb-2 mb-md-0 text-center text-lg-end" style="color: <?= $color_texto_footer ?>">
                     <?php if (!empty($enlace_agencia) and count($enlace_agencia) > 0): ?><a
                             href="<?php echo $enlace_agencia['url'] ?>" target="_blank"><?php endif ?>
-                        <?php echo $texto_agencia ?>&nbsp;<img loading="lazy" decoding="async" src="<?php echo $logo_agencia ?>" style="height:12px;vertical-align:center;"
+                        <?php echo $texto_agencia ?>&nbsp;<img loading="lazy" decoding="async" src="<?php echo $logo_agencia ?>" style="height:12px;vertical-align:middle;"
                             alt="<?php echo $texto_agencia ?>" title="<?php echo $texto_agencia ?>">
                         <?php if (!empty($enlace_agencia) and count($enlace_agencia) > 0): ?></a><?php endif ?>
                 </p>

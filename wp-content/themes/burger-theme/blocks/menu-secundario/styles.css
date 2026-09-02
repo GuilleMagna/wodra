@@ -96,3 +96,68 @@
 
 
 @media (min-width: 1401px) and (max-width: 1600px) {}
+#secondNav .second-nav-arrow {
+    display: none;
+    flex: 0 0 auto;
+    width: 32px;
+    height: 32px;
+    padding: 5px;
+    border: 0;
+    background: transparent;
+    color: var(--second-nav-arrow-color, currentColor);
+    transition: opacity .2s ease;
+}
+
+#secondNav .second-nav-arrow svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.6;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+@media (min-width: 992px) {
+    #secondNav .navbar-collapse {
+        min-width: 0;
+    }
+
+    #secondNav .second-nav-scroll {
+        min-width: 0;
+        flex: 1 1 auto;
+        overflow-x: auto;
+        overflow-y: hidden;
+        scroll-behavior: smooth;
+        scrollbar-width: none;
+        overscroll-behavior-inline: contain;
+    }
+
+    #secondNav .second-nav-scroll::-webkit-scrollbar {
+        display: none;
+    }
+
+    #secondNav .second-nav-scroll .navbar-nav {
+        width: max-content !important;
+        min-width: 100%;
+        flex-wrap: nowrap;
+    }
+
+    #secondNav .second-nav-scroll .nav-item {
+        flex: 0 0 auto;
+    }
+
+    #secondNav .second-nav-scroll .nav-link {
+        white-space: nowrap;
+    }
+
+    #secondNav .second-nav-arrow.is-visible {
+        display: block;
+    }
+
+    #secondNav .second-nav-arrow:disabled {
+        opacity: .25;
+        cursor: default;
+    }
+}

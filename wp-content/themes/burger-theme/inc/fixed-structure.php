@@ -87,6 +87,9 @@ function burger_lock_fixed_structure_blocks( $blocks ) {
     $fixed = array_map( static fn( $slug ) => 'acf/' . $slug, array_keys( burger_fixed_structure_choices() ) );
 
     foreach ( $blocks as &$block ) {
+        if ( ! empty( $block['attrs']['data'] ) && is_array( $block['attrs']['data'] ) && function_exists( 'burger_restore_stripped_json_unicode' ) ) {
+            $block['attrs']['data'] = burger_restore_stripped_json_unicode( $block['attrs']['data'] );
+        }
         if ( in_array( $block['blockName'] ?? '', $fixed, true ) ) {
             $block['attrs'] = (array) ( $block['attrs'] ?? [] );
             $block['attrs']['lock'] = [ 'move' => true, 'remove' => true ];
@@ -204,7 +207,7 @@ add_filter( 'wp_insert_post_data', function ( $data, $postarr ) {
         $source_id = absint( $_REQUEST['post'] ?? 0 );
         $source = $source_id ? get_post( $source_id ) : null;
         if ( $source && $source->post_type === ( $data['post_type'] ?? '' ) ) {
-            $data['post_content'] = burger_lock_fixed_structure_content( $source->post_content );
+            $data['post_content'] = wp_slash( burger_lock_fixed_structure_content( $source->post_content ) );
         }
         return $data;
     }
@@ -214,8 +217,10 @@ add_filter( 'wp_insert_post_data', function ( $data, $postarr ) {
     // Parsearlo en ese punto elimina los atributos JSON de los bloques ACF duplicados.
     if ( ! defined( 'REST_REQUEST' ) || ! REST_REQUEST ) return $data;
 
-    $data['post_content'] = burger_preserve_missing_acf_content( $data['post_content'], absint( $postarr['ID'] ?? 0 ) );
-    $data['post_content'] = burger_lock_fixed_structure_content( $data['post_content'] );
+    $content = wp_unslash( $data['post_content'] );
+    $content = burger_preserve_missing_acf_content( $content, absint( $postarr['ID'] ?? 0 ) );
+    $content = burger_lock_fixed_structure_content( $content );
+    $data['post_content'] = wp_slash( $content );
     return $data;
 }, 20, 2 );
 
@@ -358,18 +363,35 @@ JS;
     wp_add_inline_script( 'acf-blocks', $save_script, 'after' );
 }, 20 );
 
-function burger_restore_stripped_json_unicode( $value ) {
+function burger_restore_stripped_json_unicode( $value, $field_name = '' ) {
     if ( is_array( $value ) ) {
-        foreach ( $value as $key => $item ) $value[ $key ] = burger_restore_stripped_json_unicode( $item );
+        foreach ( $value as $key => $item ) {
+            $child_field_name = is_string( $key ) ? $key : $field_name;
+            if ( is_string( $key ) && strpos( $key, '_' ) !== 0 && ! empty( $value[ '_' . $key ] ) && function_exists( 'acf_get_field' ) ) {
+                $field = acf_get_field( $value[ '_' . $key ] );
+                if ( in_array( $field['type'] ?? '', [ 'textarea', 'wysiwyg' ], true ) ) {
+                    $child_field_name = '__burger_multiline__' . $key;
+                }
+            }
+            $value[ $key ] = burger_restore_stripped_json_unicode( $item, $child_field_name );
+        }
         return $value;
     }
     if ( ! is_string( $value ) ) return $value;
 
-    return str_ireplace(
+    $value = str_ireplace(
         [ 'u003c', 'u003e', 'u0022', 'u0027', 'u0026', 'u002f', 'u005c' ],
         [ '<', '>', '"', "'", '&', '/', '\\' ],
         $value
     );
+
+    // ACF puede quitar las barras de CRLF: \r\n termina como texto literal rn.
+    if ( str_starts_with( $field_name, '__burger_multiline__' ) || preg_match( '/(?:^|_)(?:intro|texto_slider)(?:$|_)/i', $field_name ) ) {
+        $value = str_replace( 'rnrn', "\n\n", $value );
+        $value = preg_replace( '/rn(?=[\p{Lu}<])/u', "\n", $value );
+    }
+
+    return $value;
 }
 
 add_action( 'wp_ajax_burger_save_expanded_block', function () {
@@ -377,8 +399,14 @@ add_action( 'wp_ajax_burger_save_expanded_block', function () {
     $post_id    = absint( $_POST['post_id'] ?? 0 );
     $block_name = sanitize_text_field( wp_unslash( $_POST['block_name'] ?? '' ) );
     $occurrence = max( 0, absint( $_POST['occurrence'] ?? 0 ) );
-    $raw_data   = wp_unslash( $_POST['block_data'] ?? '' );
-    $block_data = is_string( $raw_data ) && strlen( $raw_data ) <= 2000000 ? json_decode( $raw_data, true ) : null;
+    $raw_data = $_POST['block_data'] ?? '';
+    $block_data = null;
+    if ( is_string( $raw_data ) && strlen( $raw_data ) <= 2000000 ) {
+        $block_data = json_decode( $raw_data, true );
+        if ( ! is_array( $block_data ) ) {
+            $block_data = json_decode( wp_unslash( $raw_data ), true );
+        }
+    }
     if ( is_array( $block_data ) ) $block_data = burger_restore_stripped_json_unicode( $block_data );
 
     if ( ! $post_id || ! str_starts_with( $block_name, 'acf/' ) || ! is_array( $block_data ) || ! current_user_can( 'edit_post', $post_id ) ) {

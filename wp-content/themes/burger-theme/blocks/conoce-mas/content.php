@@ -1,9 +1,64 @@
 <?php
 //Block Name: Conoce más
 
-$content_fields = ['titulo_conoce_mas', 'subtitulo_conoce_mas', 'encabezado', 'servicios', 'items', 'items_mobile', 'items_tablet', 'items_desktop', 'margin', 'autoplay', 'nav', 'dots', 'loop', 'overflow', 'mostrar_boton_final', 'boton_final', 'estilo_del_boton_final', 'tipo_de_imagen' ];
+$content_fields = ['titulo_conoce_mas', 'subtitulo_conoce_mas', 'encabezado', 'carga_automatica', 'tipo_publicacion', 'cantidad_publicaciones', 'servicios', 'items', 'items_mobile', 'items_tablet', 'items_desktop', 'margin', 'autoplay', 'nav', 'dots', 'loop', 'overflow', 'mostrar_boton_final', 'boton_final', 'estilo_del_boton_final', 'tipo_de_imagen' ];
 $fields = get_block_content_fields($block, $content_fields);
 extract($fields);
+if ( ! empty( $carga_automatica ) ) {
+    $tipo_publicacion = in_array( $tipo_publicacion, [ 'post', 'evento' ], true ) ? $tipo_publicacion : 'post';
+    $cantidad_publicaciones = min( 24, max( 1, absint( $cantidad_publicaciones ?: 6 ) ) );
+    $query_args = [
+        'post_type'        => $tipo_publicacion,
+        'post_status'      => 'publish',
+        'posts_per_page'   => $cantidad_publicaciones,
+        'suppress_filters' => false,
+        'no_found_rows'    => true,
+    ];
+
+    if ( 'evento' === $tipo_publicacion ) {
+        $query_args['meta_key'] = 'fecha_evento';
+        $query_args['meta_query'] = [ [
+            'key' => 'fecha_evento',
+            'value' => current_time( 'Ymd' ),
+            'compare' => '>=',
+            'type' => 'NUMERIC',
+        ] ];
+        $query_args['orderby'] = 'meta_value_num';
+        $query_args['order'] = 'ASC';
+    } else {
+        $query_args['orderby'] = 'date';
+        $query_args['order'] = 'DESC';
+    }
+
+    $servicios = [];
+    foreach ( get_posts( $query_args ) as $publicacion ) {
+        $texto = has_excerpt( $publicacion )
+            ? get_the_excerpt( $publicacion )
+            : wp_trim_words( wp_strip_all_tags( strip_shortcodes( $publicacion->post_content ) ), 24 );
+
+        if ( 'evento' === $tipo_publicacion ) {
+            $fecha_guardada = get_post_meta( $publicacion->ID, 'fecha_evento', true );
+            $fecha_objeto = DateTime::createFromFormat( '!Ymd', (string) $fecha_guardada, wp_timezone() );
+            if ( $fecha_objeto ) {
+                $fecha = date_i18n( 'd F Y', $fecha_objeto->getTimestamp() );
+                $texto = '<time datetime="' . esc_attr( $fecha_objeto->format( 'Y-m-d' ) ) . '"><strong>' . esc_html( $fecha ) . '</strong></time>'
+                    . ( $texto ? '<br>' . $texto : '' );
+            }
+        }
+
+        $servicios[] = [
+            'imagen' => get_the_post_thumbnail_url( $publicacion, 'large' ) ?: '',
+            'titulo' => get_the_title( $publicacion ),
+            'texto'  => $texto,
+            'boton'  => [
+                'title' => 'Conocer más',
+                'url' => get_permalink( $publicacion ),
+                'target' => '_self',
+            ],
+            'estilo_del_boton' => 'btn-texto-blanco',
+        ];
+    }
+}
 
 $design = get_block_design($block);
 extract($design);

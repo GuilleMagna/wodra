@@ -75,7 +75,7 @@ $block_id = $block['id'];
 
                         <?php if ( !empty($titulo) ): ?>
 
-                            <h3 class="titulo info-columna-titulo mb-3">
+                            <h3 class="titulo mb-3">
                                 <?= $titulo ?>
                             </h3>
 
