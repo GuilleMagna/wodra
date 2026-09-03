@@ -15,7 +15,7 @@ $post_content       = $post->post_content ?? '';
 $post_permalink     = get_permalink( $post_id );
 $post_categorias    = get_the_terms( $post_id, 'category' );
 
-$categorias_names = [];
+$categorias_links = [];
 if( !empty( $post_categorias ) and count($post_categorias) > 0 ){
     foreach( $post_categorias as $term ){
         if ($term->term_id != 11) {
@@ -62,17 +62,17 @@ $block_id = $block['id'];
                         <?= $post_title ?>
                     </h1>
 
-                    <?php if( !empty( $categorias_names ) and count($categorias_names) > 0 ): ?>
+                    <?php if ( ! empty( $categorias_links ) ) : ?>
 
                         <h6 class="fw-bold">
-                            <?= implode( ', ',  $categorias_names ); ?>
+                            <?= implode( ', ', $categorias_links ); ?>
                         </h6>
 
                     <?php endif ?>
 
                     <?= apply_filters( 'the_content', $post_content ) ?>
                         
-                    <div class="mt-5">
+                    <div id="compartir-ahora" class="mt-5">
             
                         <h4 class="fs-3 color-secundario text-center text-md-start mb-4">
                             <?= $titulo_compartir ?> <?= $subtitulo_compartir ?>

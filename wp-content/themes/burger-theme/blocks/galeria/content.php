@@ -59,7 +59,7 @@ $main_col_class   = is_single() ? 'col-lg-10' : 'col-lg-11';
 
     <div class="container">
 
-        <<?= $encabezado ?> class="mb-5 mx-auto color-primario <?= $col_container_class ?> <?= $col_md_container_class ?> <?= $col_lg_container_class ?> <?= $text_align_class ?>">
+        <<?= $encabezado ?> class="titulo mb-5 mx-auto <?= $col_container_class ?> <?= $col_md_container_class ?> <?= $col_lg_container_class ?> <?= $text_align_class ?>">
             <?php echo $titulo_galeria ?>&nbsp;<span><?php echo $subtitulo_galeria ?></span>
         </<?= $encabezado ?>>
 

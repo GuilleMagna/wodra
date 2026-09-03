@@ -71,9 +71,9 @@ $block_id = $block['id'];
     
                                         <div class="mb-3 me-5">
     
-                                            <h2 class="color-primario">
+                                            <<?= $encabezado ?> class="color-primario">
                                                 <?php echo $titulo ?>
-                                            </h2>
+                                            </<?= $encabezado ?>>
 
                                             <?php if($mostrar_fecha): ?>
 

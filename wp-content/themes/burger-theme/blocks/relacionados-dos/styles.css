@@ -1,26 +1,26 @@
-#relacionados-dos .card-servicios {
+.relacionados-dos .card-servicios {
     transition: all 0.3s ease;
     aspect-ratio: 1/1;
 }
 
-#relacionados-dos .card-servicios.card-ultimo-servicio {
+.relacionados-dos .card-servicios.card-ultimo-servicio {
     transition: all 0.3s ease;
     aspect-ratio: 1/1;
 }
 
-#relacionados-dos .card-servicios h3{
+.relacionados-dos .card-servicios h3{
     color: var(--white)!important;
     margin-bottom: 2rem;
     transition: all 0.3s ease;
 }
 
-#relacionados-dos .card-servicios:hover h3{
+.relacionados-dos .card-servicios:hover h3{
     color: var(--primary)!important;
     margin-bottom: 3rem;
     transition: all 0.3s ease;
 }
 
-#relacionados-dos .overlay-servicios-inicio {
+.relacionados-dos .overlay-servicios-inicio {
     /* background: -webkit-linear-gradient(270deg, rgba(0, 0, 0, 0) 50%, rgba(79, 72, 66, 0.7) 50%); */
     background: rgba(0, 0, 0, 0.5);
     opacity: 1;
@@ -29,12 +29,12 @@
 
 @media (max-width: 576px) {
 
-    #relacionados-dos .card-servicios {
+    .relacionados-dos .card-servicios {
         transition: all 0.3s ease;
         aspect-ratio: 2/1;
     }
 
-    #relacionados-dos .card-servicios.card-ultimo-servicio {
+    .relacionados-dos .card-servicios.card-ultimo-servicio {
         transition: all 0.3s ease;
         aspect-ratio: 2/1;
     }
@@ -43,12 +43,12 @@
 
 @media  (min-width: 577px) and (max-width: 767px) {
 
-    #relacionados-dos .card-servicios {
+    .relacionados-dos .card-servicios {
         transition: all 0.3s ease;
         aspect-ratio: 2/1;
     }
 
-    #relacionados-dos .card-servicios.card-ultimo-servicio {
+    .relacionados-dos .card-servicios.card-ultimo-servicio {
         transition: all 0.3s ease;
         aspect-ratio: 2/1;
     }
@@ -57,12 +57,12 @@
 
 @media (min-width: 768px) and (max-width: 991px) {
 
-    #relacionados-dos .card-servicios {
+    .relacionados-dos .card-servicios {
         transition: all 0.3s ease;
         aspect-ratio: 2/1;
     }
 
-    #relacionados-dos .card-servicios.card-ultimo-servicio {
+    .relacionados-dos .card-servicios.card-ultimo-servicio {
         transition: all 0.3s ease;
         aspect-ratio: 2/1;
     }

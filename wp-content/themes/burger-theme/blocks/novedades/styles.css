@@ -1,4 +1,4 @@
-#novedades .card-novedades .novedades-img  {
+.novedades .card-novedades .novedades-img  {
 
     aspect-ratio: 1/1;
 
@@ -6,7 +6,7 @@
 
 
 
-#novedades .card-novedades .novedades-titulo {
+.novedades .card-novedades .novedades-titulo {
 
     height: 90px;
 
@@ -16,7 +16,7 @@
 
 
 
-#novedades .card-novedades .novedades-descripcion {
+.novedades .card-novedades .novedades-descripcion {
 
     height: 170px;
 
@@ -32,7 +32,7 @@
 
 
 
-    #novedades .card-novedades .novedades-titulo {
+    .novedades .card-novedades .novedades-titulo {
 
         height: auto;
 
@@ -42,7 +42,7 @@
 
     
 
-    #novedades .card-novedades .novedades-descripcion {
+    .novedades .card-novedades .novedades-descripcion {
 
         height: auto;
 
@@ -60,7 +60,7 @@
 
 
 
-    #novedades .card-novedades .novedades-titulo {
+    .novedades .card-novedades .novedades-titulo {
 
         height: auto;
 
@@ -70,7 +70,7 @@
 
     
 
-    #novedades .card-novedades .novedades-descripcion {
+    .novedades .card-novedades .novedades-descripcion {
 
         height: auto;
 

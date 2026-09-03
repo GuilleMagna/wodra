@@ -13,6 +13,15 @@ $post_id            = $post->ID ?? '';
 $post_title         = $post->post_title ?? '';
 $post_content       = $post->post_content ?? '';
 $post_permalink     = get_permalink( $post_id );
+$post_categories    = get_the_category( $post_id );
+$post_category      = ! empty( $post_categories ) ? $post_categories[0] : null;
+
+foreach ( $post_categories as $category ) {
+    if ( 'todas' !== $category->slug ) {
+        $post_category = $category;
+        break;
+    }
+}
 
 $design = get_block_design( $block );
 extract( $design );
@@ -48,9 +57,15 @@ $block_id = $block['id'];
 
 				<div class="text-start mb-5">
 
-					<h1 class="color-primario regular mb-0 <?= $col_container_class ?> <?= $col_md_container_class ?> <?= $col_lg_container_class ?> <?= $text_align_class ?>">
+					<h1 class="color-primario regular mb-3 <?= $col_container_class ?> <?= $col_md_container_class ?> <?= $col_lg_container_class ?> <?= $text_align_class ?>">
                         <?php echo $post_title ?>
                     </h1>
+
+                    <?php if ( $post_category ) : ?>
+                        <a class="color-secundario" href="<?= esc_url( get_category_link( $post_category->term_id ) ); ?>">
+                            <?= esc_html( $post_category->name ); ?>
+                        </a>
+                    <?php endif; ?>
 
 				</div>
 
@@ -58,7 +73,7 @@ $block_id = $block['id'];
 			    	<?= apply_filters( 'the_content', $post_content ) ?>
                 </div>        
 
-                <div class="mt-5">
+                <div id="compartir-ahora" class="mt-5">
         
                     <h4 class="fs-3 titulo text-center text-md-start mb-4">
                         <?= $titulo_compartir ?> <span><?= $subtitulo_compartir ?></span>

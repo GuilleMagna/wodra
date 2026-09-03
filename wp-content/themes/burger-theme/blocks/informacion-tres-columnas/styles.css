@@ -1,4 +1,4 @@
-#informacion-tres-columnas .btn-check:checked+.btn, .btn.active, .btn.show, .btn:first-child:active, :not(.btn-check)+.btn:active {
+.informacion-tres-columnas .btn-check:checked+.btn, .btn.active, .btn.show, .btn:first-child:active, :not(.btn-check)+.btn:active {
 
     color: var(--white);
 
@@ -14,7 +14,7 @@
 
 
 
-#informacion-tres-columnas .btn {
+.informacion-tres-columnas .btn {
 
     transition: 0.3s all ease-out;
 
@@ -22,7 +22,7 @@
 
 
 
-#informacion-tres-columnas .btn:hover {
+.informacion-tres-columnas .btn:hover {
 
     transition: 0.3s all ease-out;
 
@@ -32,7 +32,7 @@
 
 
 
-#informacion-tres-columnas .btn .icon-btn path {
+.informacion-tres-columnas .btn .icon-btn path {
 
     stroke: var(--secondary);
 
@@ -42,7 +42,7 @@
 
 
 
-#informacion-tres-columnas .btn:hover .icon-btn path {
+.informacion-tres-columnas .btn:hover .icon-btn path {
 
     stroke: var(--primary);
 
@@ -52,7 +52,7 @@
 
 
 
-#informacion-tres-columnas .btn .icon-btn {
+.informacion-tres-columnas .btn .icon-btn {
 
     transition: 0.3s all ease-out;
 
@@ -60,7 +60,7 @@
 
 
 
-#informacion-tres-columnas .btn:hover .icon-btn {
+.informacion-tres-columnas .btn:hover .icon-btn {
 
     transform: rotate(45deg);
 

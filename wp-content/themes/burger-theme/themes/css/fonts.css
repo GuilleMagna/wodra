@@ -12,7 +12,7 @@ a {
 
 .text-parallax p {
   font-weight: 400;
-  font-size: clamp(35px, 2.2rem + 2vw, 45px);
+  font-size: clamp(30px, 2.2rem + 2vw, 40px);
   line-height: 1;
   letter-spacing: 0%;
 }
@@ -83,7 +83,7 @@ li {
 
 .text-formulario {
   font-weight: normal;
-  font-size: clamp(16px, 1rem, 20px);
+  font-size: clamp(14px, 1rem, 18px);
   line-height: 1;
   text-transform: uppercase;
 }

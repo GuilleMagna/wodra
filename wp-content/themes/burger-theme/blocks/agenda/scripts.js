@@ -18,3 +18,89 @@ jQuery(document).ready(function($) {
     $('.wpcf7-submit.submit_archivo').replaceWith(html);
 
 });
+(function () {
+    const burgerAgendaAjax = true;
+
+    document.addEventListener('click', function (event) {
+        const link = event.target.closest('[data-agenda-pagination] a');
+
+        if (!link || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) {
+            return;
+        }
+
+        const agenda = link.closest('[data-agenda-block]');
+        const pagination = link.closest('[data-agenda-pagination]');
+
+        if (!agenda || !pagination || pagination.dataset.loading === 'true') {
+            return;
+        }
+
+        event.preventDefault();
+
+        const url = link.href;
+        const blockKey = agenda.getAttribute('data-agenda-block');
+
+        pagination.dataset.loading = 'true';
+        pagination.setAttribute('aria-busy', 'true');
+        agenda.classList.add('agenda-is-loading');
+
+        fetch(url, {
+            credentials: 'same-origin',
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest'
+            }
+        })
+            .then(function (response) {
+                if (!response.ok) {
+                    throw new Error('No se pudo cargar la agenda.');
+                }
+
+                return response.text();
+            })
+            .then(function (html) {
+                const page = new DOMParser().parseFromString(html, 'text/html');
+                const nextAgenda = Array.from(page.querySelectorAll('[data-agenda-block]')).find(function (item) {
+                    return item.getAttribute('data-agenda-block') === blockKey;
+                });
+
+                if (!nextAgenda) {
+                    throw new Error('No se encontro el bloque Agenda en la respuesta.');
+                }
+
+                const currentResults = agenda.querySelector('[data-agenda-results]');
+                const nextResults = nextAgenda.querySelector('[data-agenda-results]');
+                const currentPagination = agenda.querySelector('[data-agenda-pagination]');
+                const nextPagination = nextAgenda.querySelector('[data-agenda-pagination]');
+
+                if (!currentResults || !nextResults) {
+                    throw new Error('La respuesta de Agenda esta incompleta.');
+                }
+
+                currentResults.innerHTML = nextResults.innerHTML;
+
+                if (currentPagination && nextPagination) {
+                    currentPagination.replaceWith(nextPagination);
+                } else if (currentPagination) {
+                    currentPagination.remove();
+                }
+
+                window.history.replaceState({}, '', url);
+
+                if (window.AOS && typeof window.AOS.refreshHard === 'function') {
+                    window.AOS.refreshHard();
+                }
+            })
+            .catch(function () {
+                window.location.assign(url);
+            })
+            .finally(function () {
+                agenda.classList.remove('agenda-is-loading');
+
+                const activePagination = agenda.querySelector('[data-agenda-pagination]');
+                if (activePagination) {
+                    delete activePagination.dataset.loading;
+                    activePagination.removeAttribute('aria-busy');
+                }
+            });
+    });
+})();

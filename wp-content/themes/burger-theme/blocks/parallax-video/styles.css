@@ -1,11 +1,11 @@
-#parallax-video {
+.parallax-video {
     position: relative;
     overflow: hidden;
     height: 90vh;
     background: #000;
 }
 
-#parallax-video .overlay-image {
+.parallax-video .overlay-image {
     position: absolute;
     top: 0;
     left: 0;
@@ -14,7 +14,7 @@
     z-index: 1;
 }
 
-#parallax-video .overlay::before {
+.parallax-video .overlay::before {
     content: "";
     position: absolute;
     top: 0;
@@ -25,33 +25,33 @@
     z-index: 1;
 }
 
-#parallax-video .contenido-video {
+.parallax-video .contenido-video {
     position: relative;
     z-index: 3;
 }
 
-#parallax-video .p-video {
+.parallax-video .p-video {
     min-width: 100%;
     min-height: auto;
 }
 
-#parallax-video .img-video-home {
+.parallax-video .img-video-home {
     max-width: 100%;
     height: auto;
 }
 
-#parallax-video .titulo {
+.parallax-video .titulo {
     font-weight: 400 !important;
     font-size: clamp(28px, 3.1vw, 45px);
     line-height: 1.15;
 }
 
-#parallax-video .titulo strong,
-#parallax-video .titulo b {
+.parallax-video .titulo strong,
+.parallax-video .titulo b {
     font-weight: 700;
 }
 
-#parallax-video div.text-white {
+.parallax-video div.text-white {
     font-size: 16px;
     line-height: 22px;
     font-weight: 400;
@@ -59,17 +59,17 @@
 
 @media (max-width: 576px) {
 
-    #parallax-video .img-video-home {
+    .parallax-video .img-video-home {
         max-width: 100%;
         height: auto;
     }
 
-    #parallax-video .p-video {
+    .parallax-video .p-video {
         min-width: 134vh;
         min-height: 100%;
     }
 
-    #parallax-video {
+    .parallax-video {
         height: 120vh;
     }
 
@@ -77,17 +77,17 @@
 
 @media (min-width: 577px) and (max-width: 767px) {
 
-    #parallax-video .img-video-home {
+    .parallax-video .img-video-home {
         max-width: 100%;
         height: auto;
     }
 
-    #parallax-video .p-video {
+    .parallax-video .p-video {
         min-width: 134vh;
         min-height: 100%;
     }
 
-    #parallax-video {
+    .parallax-video {
         height: 86vh;
     }
 
@@ -95,12 +95,12 @@
 
 @media (min-width: 768px) and (max-width: 991px) {
 
-    #parallax-video .img-video-home {
+    .parallax-video .img-video-home {
         max-width: 100%;
         height: auto;
     }
 
-    #parallax-video .p-video {
+    .parallax-video .p-video {
         min-width: 134vh;
         min-height: auto;
     }

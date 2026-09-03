@@ -1,16 +1,16 @@
-#formulario .wpcf7-spinner {
+.formulario .wpcf7-spinner {
     position: absolute;
     top: 18px;
     right: -9px;
 }
 
-#formulario .text-btn-01 {
+.formulario .text-btn-01 {
     font-weight: 700;
     font-size: 16px;
     line-height: 20px;
     margin: 0 30px;
 }
 
-#formulario .form-control, #formulario .form-select  {
+.formulario .form-control, .formulario .form-select  {
     border-radius: 0px !important;
 }

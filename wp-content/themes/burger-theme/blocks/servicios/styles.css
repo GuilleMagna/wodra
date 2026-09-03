@@ -1,47 +1,47 @@
-#servicios .card-servicios {
+.servicios .card-servicios {
     transition: all 0.3s ease;
     aspect-ratio: 9/16;
 }
 
-#servicios .card-servicios .card-body div.text-white {
+.servicios .card-servicios .card-body div.text-white {
     font-size: 16px !important;
     line-height: 20px !important;
     font-weight: 400;
 }
 
-#servicios .btn-outline-white .icon-btn path {
+.servicios .btn-outline-white .icon-btn path {
     stroke: var(--white) !important;
 }
 
-#servicios .overlay-servicios-inicio {
+.servicios .overlay-servicios-inicio {
     background: -webkit-linear-gradient(270deg, rgba(0, 0, 0, 0) 7%, rgba(79, 72, 66, 0.7) 64%);
     opacity: 1;
     transition: 0.3s all ease-out;
 }
 
-#servicios .overlay-servicios-fin {
+.servicios .overlay-servicios-fin {
     background: -webkit-linear-gradient(270deg, rgba(0, 0, 0, 0) 7%, color-mix(in srgb, var(--primary) 80%, transparent) 64%);
     opacity: 0;
     transition: 0.3s all ease-out;
 }
 
-#servicios .card-servicios h2, 
-#servicios .card-servicios h3 {
+.servicios .card-servicios h2,
+.servicios .card-servicios h3 {
     transition: all 0.3s ease;
 }
 
-#servicios .card-servicios:hover h2, 
-#servicios .card-servicios:hover h3 {
+.servicios .card-servicios:hover h2,
+.servicios .card-servicios:hover h3 {
     transition: all 0.3s ease;
 }
 
-#servicios .card-servicios:hover .overlay-servicios-inicio {
+.servicios .card-servicios:hover .overlay-servicios-inicio {
     background: -webkit-linear-gradient(270deg, rgba(0, 0, 0, 0) 7%, rgba(79, 72, 66, 0.7) 64%);
     opacity: 0;
     transition: 0.3s all ease-out;
 }
 
-#servicios .card-servicios:hover .overlay-servicios-fin {
+.servicios .card-servicios:hover .overlay-servicios-fin {
     background: -webkit-linear-gradient(270deg, rgba(0, 0, 0, 0) 7%, color-mix(in srgb, var(--primary) 80%, transparent) 64%);
     opacity: 1;
     transition: 0.3s all ease-out;
@@ -49,36 +49,36 @@
 
 /* BUTTON */
 
-#servicios .btn {
+.servicios .btn {
     transition: 0.3s all ease-out;
 }
 
-#servicios .btn .icon-btn path {
+.servicios .btn .icon-btn path {
     stroke: var(--white);
     transition: 0.3s all ease-out;
 }
 
-#servicios .btn:hover .icon-btn path {
+.servicios .btn:hover .icon-btn path {
     stroke: var(--white);
     transition: 0.3s all ease-out;
 }
 
-#servicios .btn .icon-btn {
+.servicios .btn .icon-btn {
     transition: 0.3s all ease-out;
 }
 
-#servicios .btn:hover .icon-btn {
+.servicios .btn:hover .icon-btn {
     transform: rotate(45deg);
     transition: 0.3s all ease-out;
 }
 
-#servicios .btn-check:checked+.btn, .btn.active, .btn.show, .btn:first-child:active, :not(.btn-check)+.btn:active {
+.servicios .btn-check:checked+.btn, .btn.active, .btn.show, .btn:first-child:active, :not(.btn-check)+.btn:active {
     color: var(--white);
     background-color: var(--white);
     border-color: var(--white);
 }
 
-#servicios .text-btn-01 {
+.servicios .text-btn-01 {
     font-weight: 700;
     font-size: 14px;
     line-height: 20px;
@@ -98,13 +98,13 @@
 
 @media (min-width: 992px) and (max-width: 1200px) {
 
-} 
+}
 
 @media  (min-width: 1200px) and (max-width: 1400px) {
 
-} 
+}
 
 @media  (min-width: 1401px) and (max-width: 1600px) {
 
-} 
+}
 

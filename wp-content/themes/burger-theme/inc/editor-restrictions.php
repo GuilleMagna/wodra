@@ -80,7 +80,13 @@ add_filter( 'acf/load_field_group', function ( $group ) {
     $title_slug = sanitize_title( preg_replace( '/^Block\s+/i', '', $group['title'] ?? '' ) );
     if ( ! $title_slug ) return $group;
 
-    foreach ( burger_rigid_post_types() as $post_type => $block_slug ) {
+    $field_group_locations = burger_rigid_post_types();
+
+    if ( 'contenido' === burger_editor_mode( 'evento' ) ) {
+        $field_group_locations['evento'] = 'single-agenda';
+    }
+
+    foreach ( $field_group_locations as $post_type => $block_slug ) {
         if ( $title_slug !== sanitize_title( $block_slug ) ) continue;
         $has_location = false;
         foreach ( (array) ( $group['location'] ?? [] ) as $rules ) {
@@ -164,3 +170,13 @@ function burger_validate_configured_blocks( $valid, $value, $field, $input ) {
 }
 add_filter( 'acf/validate_value/key=field_69b5b34bb03ed', 'burger_validate_configured_blocks', 20, 4 );
 add_filter( 'acf/validate_value/key=field_6a6b662e87856', 'burger_validate_configured_blocks', 20, 4 );
+
+function burger_hide_legacy_event_text_field( $field ) {
+    if ( 'contenido' !== burger_editor_mode( 'evento' ) ) return $field;
+
+    $screen = function_exists( 'get_current_screen' ) ? get_current_screen() : null;
+    if ( $screen && 'evento' === $screen->post_type ) return false;
+
+    return $field;
+}
+add_filter( 'acf/prepare_field/name=texto_evento', 'burger_hide_legacy_event_text_field' );

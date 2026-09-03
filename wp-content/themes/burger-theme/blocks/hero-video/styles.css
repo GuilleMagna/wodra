@@ -1,9 +1,9 @@
-#hero-video {
+.hero-video {
     height: 100vh;
     position: relative;
 }
 
-#hero-video .overlay-video {
+.hero-video .overlay-video {
     position: absolute;
     left: 0;
     top: 0;
@@ -13,12 +13,12 @@
     background: linear-gradient(0deg, #00000000, #00000000), linear-gradient(180deg, rgba(0, 0, 0, 0.5) 0%, rgba(102, 102, 102, 0) 100%), linear-gradient(360deg, rgba(255, 255, 255, 0.16) 0%, rgba(0, 0, 0, 0.4) 84.13%);
 }
 
-#hero-video .contenido-video {
+.hero-video .contenido-video {
     z-index: 9;
     width: 100%;
 }
 
-#hero-video .titulo.text-slider {
+.hero-video .titulo.text-slider {
     color: #fff;
     font-size: 4.5rem;
     line-height: 0.89;
@@ -28,23 +28,23 @@
     z-index: 9;
 }
 
-#hero-video .titulo.text-slider strong,
-#hero-video .titulo.text-slider b {
+.hero-video .titulo.text-slider strong,
+.hero-video .titulo.text-slider b {
     font-weight: 700;
 }
 
-#hero-video .align-items-end {
+.hero-video .align-items-end {
     align-items: center !important;
 }
 
-#hero-video .header-inicio {
+.hero-video .header-inicio {
     position: relative;
     min-height: 100vh;
     width: 100%;
     overflow: hidden;
 }
 
-#hero-video .video-home {
+.hero-video .video-home {
     position: absolute;
     min-width: 100vw;
     min-height: 100vh;
@@ -55,7 +55,7 @@
     bottom: auto;
 }
 
-#hero-video .trama-hero-video {
+.hero-video .trama-hero-video {
     position: absolute;
     left: 0;
     top: 0;
@@ -64,19 +64,19 @@
     z-index: 5;
 }
 
-#hero-video .flechita-abajo {
+.hero-video .flechita-abajo {
     width: 100%;
     left: 0;
     bottom: 80px;
 }
 
-#hero-video .imagen-interna {
+.hero-video .imagen-interna {
     min-height: 80vh;
 }
 
 @media (max-width: 576px) {
 
-    #hero-video .video-home {
+    .hero-video .video-home {
         z-index: 9;
         width: 100%;
         right: 0;
@@ -85,7 +85,7 @@
         bottom: auto;
     }
 
-    #hero-video .trama-hero-video {
+    .hero-video .trama-hero-video {
         position: absolute;
         left: 0;
         bottom: -10%;
@@ -98,7 +98,7 @@
 
 @media (min-width: 577px) and (max-width: 767px) {
 
-    #hero-video .imagen-interna {
+    .hero-video .imagen-interna {
         min-height: 50vh;
     }
 

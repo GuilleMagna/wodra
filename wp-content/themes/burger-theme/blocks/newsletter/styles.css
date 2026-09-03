@@ -1,11 +1,11 @@
-#newsletter{
+.newsletter{
     position: relative;
     overflow: hidden;
     min-height: 60vh;
     background: #000;
 }
 
-#newsletter .overlay-image {
+.newsletter .overlay-image {
     position: absolute;
     top: 0;
     left: 0;
@@ -14,12 +14,12 @@
     z-index: 1;
 }
 
-#newsletter .contenido-news{
+.newsletter .contenido-news{
     position: relative;
     z-index: 3;
 }
 
-#newsletter .btn-outline-white .icon-btn path {
+.newsletter .btn-outline-white .icon-btn path {
   stroke: var(--white) !important;
   transition: 0.3s all ease-out;
 }

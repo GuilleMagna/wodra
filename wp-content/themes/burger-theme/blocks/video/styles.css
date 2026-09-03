@@ -1,11 +1,11 @@
-#video .video-overlay {
+.video .video-overlay {
     position: absolute;
     cursor: pointer;
     top: 0;
     left: 0;
 }
 
-#video #video-cambio, 
-#video #play-video {
+.video #video-cambio,
+.video #play-video {
     aspect-ratio: 3/1;
 }

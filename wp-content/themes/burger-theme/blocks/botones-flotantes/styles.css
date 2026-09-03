@@ -1,4 +1,4 @@
-#botones-flotantes {
+.botones-flotantes {
 	left: 0;
 	right: 0;
 	bottom: 51px;
@@ -6,7 +6,7 @@
 	z-index: 997;
 }
 
-#botones-flotantes .text-btn-01 {
+.botones-flotantes .text-btn-01 {
     font-weight: 700;
     font-size: 14px;
     line-height: 20px;

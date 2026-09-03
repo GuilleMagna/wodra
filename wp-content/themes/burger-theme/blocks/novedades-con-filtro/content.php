@@ -42,27 +42,27 @@ $block_id = $block['id'];
         color: <?= $color_primario ?>
     }
 
-    #novedades-con-filtro .nav-pills .nav-link {
+    .novedades-con-filtro .nav-pills .nav-link {
         background: <?= $color_fondo ?>;
         color: <?= $color_primario ?>;
         border-left: 0px solid <?= $color_primario ?> !important;
         text-decoration: underline;
     }
 
-    #novedades-con-filtro .nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+    .novedades-con-filtro .nav-pills .nav-link.active, .nav-pills .show>.nav-link {
         background-color: <?= $color_fondo ?>;
         color: <?= $color_secundario ?>;
         border-left: 1px solid <?= $color_primario ?> !important;
         font-weight: 800;
     }
 
-    #novedades-con-filtro .nav-pills .show>.nav-link.first-item {
+    .novedades-con-filtro .nav-pills .show>.nav-link.first-item {
         background-color: <?= $color_fondo ?>;
         color: <?= $color_secundario ?>;
         border-left: 0px solid <?= $color_primario ?> !important;
     }
 
-    #novedades-con-filtro .nav-pills .nav-link.active.first-item {
+    .novedades-con-filtro .nav-pills .nav-link.active.first-item {
         background-color: <?= $color_fondo ?>;
         color: <?= $color_secundario ?>;
         border-left: 0px solid <?= $color_secundario ?> !important;
@@ -161,9 +161,9 @@ $block_id = $block['id'];
 
                                         <div class="card-body px-0 border-0 d-flex flex-column">
 
-                                            <h2 class="color-secundario mb-3">
+                                            <h3 class="color-secundario mb-3">
                                                 <?= cortar_texto( $post->post_title ) ?>
-                                            </h2>
+                                            </h3>
 
                                             <p class="color-secundario mb-3">
                                                 <?= $post->post_category[0]->name; ?>
@@ -246,8 +246,8 @@ $block_id = $block['id'];
 
                                                 <svg width="20" height="20" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" class="me-3 flex-shrink-0" style="transform: rotate(-180deg);">
                                                     <g clip-path="url(#clip0_4365_1021)">
-                                                        <path d="M6.875 5.3125L9.0625 7.5L6.875 9.6875" stroke="<?= $color_flechas_paginador ?>" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                                        <path d="M7.5 13.75C10.9517 13.75 13.75 10.9517 13.75 7.5C13.75 4.04822 10.9517 1.25 7.5 1.25C4.04822 1.25 1.25 4.04822 1.25 7.5C1.25 10.9517 4.04822 13.75 7.5 13.75Z" stroke="<?= $color_flechas_paginador?>" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                        <path d="M6.875 5.3125L9.0625 7.5L6.875 9.6875" stroke="#9b9b9b" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                        <path d="M7.5 13.75C10.9517 13.75 13.75 10.9517 13.75 7.5C13.75 4.04822 10.9517 1.25 7.5 1.25C4.04822 1.25 1.25 4.04822 1.25 7.5C1.25 10.9517 4.04822 13.75 7.5 13.75Z" stroke="#9b9b9b" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                                     </g>
                                                     <defs>
                                                         <clipPath id="clip0_4365_1021">
@@ -256,7 +256,7 @@ $block_id = $block['id'];
                                                     </defs>
                                                 </svg>
 
-                                                <span class="color-secundario text-btn"><?php echo BURGER_OPTIONS['anterior_paginador'] ?></span>
+                                                <span class="color-secundario text-btn" style="color: #9b9b9b !important;"><?php echo BURGER_OPTIONS['anterior_paginador'] ?></span>
 
                                             </div>
                                         
@@ -285,12 +285,12 @@ $block_id = $block['id'];
                                                 
                                                 <div class="d-flex align-items-center justify-content-start">
 
-                                                    <span class="color-secundario text-btn"><?php echo BURGER_OPTIONS['posterior_paginador'] ?></span>
+                                                    <span class="color-secundario text-btn" style="color: #9b9b9b !important;"><?php echo BURGER_OPTIONS['posterior_paginador'] ?></span>
 
                                                     <svg width="20" height="20" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" class="ms-3 flex-shrink-0">
                                                         <g clip-path="url(#clip0_4365_1021)">
-                                                            <path d="M6.875 5.3125L9.0625 7.5L6.875 9.6875" stroke="<?= $color_flechas_paginador?>" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                                            <path d="M7.5 13.75C10.9517 13.75 13.75 10.9517 13.75 7.5C13.75 4.04822 10.9517 1.25 7.5 1.25C4.04822 1.25 1.25 4.04822 1.25 7.5C1.25 10.9517 4.04822 13.75 7.5 13.75Z" stroke="<?= $color_flechas_paginador?>" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                            <path d="M6.875 5.3125L9.0625 7.5L6.875 9.6875" stroke="#9b9b9b" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                            <path d="M7.5 13.75C10.9517 13.75 13.75 10.9517 13.75 7.5C13.75 4.04822 10.9517 1.25 7.5 1.25C4.04822 1.25 1.25 4.04822 1.25 7.5C1.25 10.9517 4.04822 13.75 7.5 13.75Z" stroke="#9b9b9b" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                                         </g>
                                                         <defs>
                                                             <clipPath id="clip0_4365_1021">

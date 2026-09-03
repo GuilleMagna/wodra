@@ -1,45 +1,45 @@
-#acordeon .accordion-button {
+.acordeon .accordion-button {
     color: var(--primary);
     background-color: var(--white);
 }
 
-#acordeon .accordion-button:focus {
+.acordeon .accordion-button:focus {
     z-index: 3;
     outline: 0;
     box-shadow: 0 0 0 0 rgba(13, 110, 253, 0) !important;
 }
 
-#acordeon .accordion-button::before {
+.acordeon .accordion-button::before {
     margin-right: 1rem !important;
     content: "";
 }
 
-#acordeon .accordion-button::before {
+.acordeon .accordion-button::before {
     background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='13.5' height='17.5' viewBox='0 0 13.5 17.5'><path d='M6.22.22A.75.75,0,0,1,7.28.22l6,6A.75.75,0,0,1,12.22,7.28L7.5,2.561V16.75a.75.75,0,0,1-1.5,0V2.561L1.28,7.28A.75.75,0,0,1,.22,6.22Z' fill='%23bd9b60' fill-rule='evenodd'/></svg>") !important;
     transform: rotate(-180deg);
 }
 
-#acordeon .accordion-button:not(.collapsed)::before {
+.acordeon .accordion-button:not(.collapsed)::before {
     background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='13.5' height='17.5' viewBox='0 0 13.5 17.5'><path d='M6.22.22A.75.75,0,0,1,7.28.22l6,6A.75.75,0,0,1,12.22,7.28L7.5,2.561V16.75a.75.75,0,0,1-1.5,0V2.561L1.28,7.28A.75.75,0,0,1,.22,6.22Z' fill='%23ffffff' fill-rule='evenodd'/></svg>") !important;
     transform: rotate(-360deg);
 }
 
-#acordeon .accordion-button::after {
+.acordeon .accordion-button::after {
     background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='13.5' height='17.5' viewBox='0 0 13.5 17.5'><path d='M6.22.22A.75.75,0,0,1,7.28.22l6,6A.75.75,0,0,1,12.22,7.28L7.5,2.561V16.75a.75.75,0,0,1-1.5,0V2.561L1.28,7.28A.75.75,0,0,1,.22,6.22Z' fill='%23bd9b60' fill-rule='evenodd'/></svg>") !important;
     transform: rotate(-180deg);
 }
 
-#acordeon .accordion-button:not(.collapsed)::after {
+.acordeon .accordion-button:not(.collapsed)::after {
     background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='13.5' height='17.5' viewBox='0 0 13.5 17.5'><path d='M6.22.22A.75.75,0,0,1,7.28.22l6,6A.75.75,0,0,1,12.22,7.28L7.5,2.561V16.75a.75.75,0,0,1-1.5,0V2.561L1.28,7.28A.75.75,0,0,1,.22,6.22Z' fill='%23ffffff' fill-rule='evenodd'/></svg>") !important;
     transform: rotate(-360deg);
 }
 
-#acordeon .accordion-button:not(.collapsed) {
+.acordeon .accordion-button:not(.collapsed) {
     color: var(--white);
     background-color: var(--primary);
 }
 
-#acordeon .accordion-item:first-of-type>.accordion-header .accordion-button {
+.acordeon .accordion-item:first-of-type>.accordion-header .accordion-button {
     border-top-left-radius: 0px;
     border-top-right-radius: 0px;
 }

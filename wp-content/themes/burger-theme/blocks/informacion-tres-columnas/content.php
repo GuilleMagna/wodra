@@ -43,7 +43,7 @@ $block_id = $block['id'];
                         <?php echo $titulo_informacion ?> <span><?php echo $subtitulo_informacion ?></span>
                     </<?= $encabezado ?>>
                     
-                    <div data-aos="fade-in" data-aos-delay="300">
+                    <div class="color-primario" data-aos="fade-in" data-aos-delay="300">
                         <?php echo $texto_informacion ?>
                     </div>
 

@@ -1,22 +1,22 @@
 /* Cuando hay menos items que el "items" del breakpoint actual (ver
    scripts.js), sin loop no hay nada para navegar: se centran en vez de
    quedar pegados a la izquierda. */
-#clientes .owl-clientes.owl-not-enough .owl-stage-outer {
+.clientes .owl-clientes.owl-not-enough .owl-stage-outer {
     display: flex;
     justify-content: center;
 }
 
-#clientes .owl-clientes.owl-not-enough .owl-stage {
+.clientes .owl-clientes.owl-not-enough .owl-stage {
     transform: none !important;
     width: auto !important;
     flex: 0 0 auto !important;
 }
 
-#clientes .owl-clientes.owl-not-enough .owl-nav {
+.clientes .owl-clientes.owl-not-enough .owl-nav {
     display: none;
 }
 
-#clientes .owl-theme .owl-dots {
+.clientes .owl-theme .owl-dots {
 
     text-align: center;
 
@@ -28,7 +28,7 @@
 
   
 
-#clientes .owl-theme .owl-dots .owl-dot {
+.clientes .owl-theme .owl-dots .owl-dot {
 
     display: inline-block;
 
@@ -40,7 +40,7 @@
 
   
 
-#clientes .owl-theme .owl-dots .owl-dot span {
+.clientes .owl-theme .owl-dots .owl-dot span {
 
     width: 8px;
 
@@ -62,7 +62,7 @@
 
 
 
-#clientes .owl-theme .owl-dots .owl-dot span {
+.clientes .owl-theme .owl-dots .owl-dot span {
 
     background: var(--primary);
 
@@ -72,7 +72,7 @@
 
 
 
-#clientes .owl-theme .owl-dots .owl-dot:hover span {
+.clientes .owl-theme .owl-dots .owl-dot:hover span {
 
     background: var(--primary) !important;
 
@@ -82,7 +82,7 @@
 
 }
 
-#clientes .owl-theme .owl-dots .owl-dot.active span {
+.clientes .owl-theme .owl-dots .owl-dot.active span {
 
     background: var(--primary) !important;
 
@@ -94,7 +94,7 @@
 
 }
 
-#clientes .item.item-clientes {
+.clientes .item.item-clientes {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -102,12 +102,12 @@
 
 
 
-#clientes .item.item-clientes img {
+.clientes .item.item-clientes img {
     filter: grayscale(1);
 }
 
-#clientes .owl-carousel .owl-prev,
-#clientes .owl-carousel .owl-next {
+.clientes .owl-carousel .owl-prev,
+.clientes .owl-carousel .owl-next {
 
     position: absolute;
 
@@ -121,9 +121,9 @@
 
 
 
-#clientes .owl-carousel .owl-prev:hover,
+.clientes .owl-carousel .owl-prev:hover,
 
-#clientes .owl-carousel .owl-next:hover {
+.clientes .owl-carousel .owl-next:hover {
 
     position: absolute;
 
@@ -139,7 +139,7 @@
 
 
 
-#clientes .owl-carousel .owl-prev {
+.clientes .owl-carousel .owl-prev {
 
     left: var(--clientes-flecha, -60px);
 
@@ -147,7 +147,7 @@
 
 
 
-#clientes .owl-carousel .owl-next {
+.clientes .owl-carousel .owl-next {
 
     right: var(--clientes-flecha, -60px);
 
@@ -166,7 +166,7 @@
        (min-width: 1200px) and (max-width: 1259.98px),
        (min-width: 1400px) and (max-width: 1439.98px) {
 
-    #clientes .owl-carousel {
+    .clientes .owl-carousel {
 
         --clientes-flecha: 10px;
 

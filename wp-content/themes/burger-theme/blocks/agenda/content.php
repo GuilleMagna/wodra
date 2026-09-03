@@ -17,8 +17,9 @@ $orden                      = ( 'pasados' === $tipo_eventos ) ? 'DESC' : 'ASC';
 
 $pagina                     = ( !empty( $_GET['pag'] ) ) ? $_GET['pag'] : 1;
 $siguiente                  = $pagina+1;
+$agenda_anchor              = ! empty( $block['anchor'] ) ? sanitize_title( $block['anchor'] ) : 'agenda';
 
-$boton_ver_mas['url']       = "?pag={$siguiente}#agenda";
+$boton_ver_mas['url']       = add_query_arg( 'pag', $siguiente ) . "#{$agenda_anchor}";
 $boton_ver_mas['title']     = $texto_boton_ver_mas;
 $boton_ver_mas['target']    = "_self";
 
@@ -42,6 +43,10 @@ $eventos_query = new WP_Query(
 
 $eventos = $eventos_query->posts;
 $resultados_eventos = $eventos_query->found_posts;
+
+if ( empty( $eventos ) ) {
+    return;
+}
  
 usort(
     $eventos,
@@ -73,7 +78,7 @@ usort(
     }
 </style>
 
-<section id="agenda" <?= get_block_wrapper_attributes( [ 'class' => $block_id.' '.$class_container ] ) ?>>
+<section id="agenda" <?= get_block_wrapper_attributes( [ 'class' => $block_id.' '.$class_container, 'data-agenda-block' => $block_id ] ) ?>>
 
     <div class="container my-5">
 
@@ -103,7 +108,7 @@ usort(
 
     </div>
 
-	<div class="container-fluid">
+	<div class="container-fluid" data-agenda-results>
 
         <?php if ( ! empty( $eventos ) ) : ?>
 
@@ -190,7 +195,7 @@ usort(
 
     <?php if( $mostrar_boton_ver_mas && $resultados_eventos > $cantidad_eventos ): ?>
 
-        <div class="container py-5">
+        <div class="container py-5" data-agenda-pagination>
 
             <div class="row justify-content-center">
 

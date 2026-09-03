@@ -179,9 +179,9 @@ $block_id = $block['id'];
 
                             <?php endif;?>
 
-                            <h4 class="color-primario card-conoce-fecha mb-3">
+                            <h3 class="color-primario card-conoce-fecha mb-3">
                                 <?php echo $titulo ?>
-                            </h4>
+                            </h3>
 
                             <?php if ( !empty($texto) ): ?>
                                 <div class="color-secundario card-conoce-texto mb-4">

@@ -1,140 +1,140 @@
-#productos .card-productos {
+.productos .card-productos {
     aspect-ratio: 2/0.8;
 }
 
-#productos .card-productos .badge {
+.productos .card-productos .badge {
     position: absolute;
     top: 30px;
     left: 30px;
 }
 
-@media (max-width: 576px) { 
-    #productos .card-productos {
+@media (max-width: 576px) {
+    .productos .card-productos {
         aspect-ratio: 3/4;
     }
 }
 
 /* Swipper */
 
-#productos .mySwiperNav .swiper-button-prev, .swiper-rtl .swiper-button-next 
+.productos .mySwiperNav .swiper-button-prev, .swiper-rtl .swiper-button-next
 {
     left: var(--swiper-navigation-sides-offset, 40%);
     right: auto;
 }
-  
-#productos .mySwiperNav .swiper-button-next, .swiper-button-prev {
+
+.productos .mySwiperNav .swiper-button-next, .swiper-button-prev {
     top: var(--swiper-navigation-top-offset, 10%);
 }
-  
-#productos .mySwiperNav .swiper-button-prev, .swiper-rtl .swiper-button-next {
+
+.productos .mySwiperNav .swiper-button-prev, .swiper-rtl .swiper-button-next {
     left: var(--swiper-navigation-sides-offset, 40%);
     right: auto;
   }
-  
-#productos .mySwiperNav .swiper-button-next, .swiper-button-prev {
+
+.productos .mySwiperNav .swiper-button-next, .swiper-button-prev {
     top: var(--swiper-navigation-top-offset, 10%);
   }
-  
-#productos .mySwiperNav .swiper-button-next.swiper-button-disabled, .swiper-button-prev.swiper-button-disabled {
+
+.productos .mySwiperNav .swiper-button-next.swiper-button-disabled, .swiper-button-prev.swiper-button-disabled {
     opacity: .0 !important;
     transition: 0.2s all ease;
   }
-  
+
   @media (max-width: 576px)
   {
-    #productos .mySwiperNav .swiper-button-prev, .swiper-rtl .swiper-button-next {
+    .productos .mySwiperNav .swiper-button-prev, .swiper-rtl .swiper-button-next {
         left: var(--swiper-navigation-sides-offset, 72%);
         right: auto;
     }
-    #productos .mySwiperNav .swiper-button-next.swiper-button-disabled, .swiper-button-prev.swiper-button-disabled {
+    .productos .mySwiperNav .swiper-button-next.swiper-button-disabled, .swiper-button-prev.swiper-button-disabled {
         opacity: .3 !important;
         transition: 0.2s all ease;
     }
-    #productos .mySwiperNav .swiper-button-prev, .swiper-rtl .swiper-button-next {
+    .productos .mySwiperNav .swiper-button-prev, .swiper-rtl .swiper-button-next {
       left: var(--swiper-navigation-sides-offset, 72%);
       right: auto;
     }
-    #productos .mySwiperNav .swiper-button-next.swiper-button-disabled, .swiper-button-prev.swiper-button-disabled {
+    .productos .mySwiperNav .swiper-button-next.swiper-button-disabled, .swiper-button-prev.swiper-button-disabled {
         opacity: .3 !important;
         transition: 0.2s all ease;
     }
   }
-  
+
   @media  (min-width: 577px) and (max-width: 767px)
   {
-    #productos .mySwiperNav .swiper-button-prev, .swiper-rtl .swiper-button-next {
+    .productos .mySwiperNav .swiper-button-prev, .swiper-rtl .swiper-button-next {
         left: var(--swiper-navigation-sides-offset, 75%);
         right: auto;
     }
-    #productos .mySwiperNav .swiper-button-next.swiper-button-disabled, .swiper-button-prev.swiper-button-disabled {
+    .productos .mySwiperNav .swiper-button-next.swiper-button-disabled, .swiper-button-prev.swiper-button-disabled {
         opacity: .3 !important;
         transition: 0.2s all ease;
     }
-    #productos .mySwiperNav .swiper-button-prev, .swiper-rtl .swiper-button-next {
+    .productos .mySwiperNav .swiper-button-prev, .swiper-rtl .swiper-button-next {
       left: var(--swiper-navigation-sides-offset, 75%);
       right: auto;
     }
-    #productos .mySwiperNav .swiper-button-next.swiper-button-disabled, .swiper-button-prev.swiper-button-disabled {
+    .productos .mySwiperNav .swiper-button-next.swiper-button-disabled, .swiper-button-prev.swiper-button-disabled {
         opacity: .3 !important;
         transition: 0.2s all ease;
     }
   }
-  
+
   @media (min-width: 768px) and (max-width: 991px) {
-    #productos .mySwiperNav .swiper-button-prev, .swiper-rtl .swiper-button-next {
+    .productos .mySwiperNav .swiper-button-prev, .swiper-rtl .swiper-button-next {
         left: var(--swiper-navigation-sides-offset, 80%);
         right: auto;
     }
-    #productos .mySwiperNav .swiper-button-next.swiper-button-disabled, .swiper-button-prev.swiper-button-disabled {
+    .productos .mySwiperNav .swiper-button-next.swiper-button-disabled, .swiper-button-prev.swiper-button-disabled {
         opacity: .3 !important;
         transition: 0.2s all ease;
     }
-    #productos .mySwiperNav .swiper-button-prev, .swiper-rtl .swiper-button-next {
+    .productos .mySwiperNav .swiper-button-prev, .swiper-rtl .swiper-button-next {
       left: var(--swiper-navigation-sides-offset, 80%);
       right: auto;
     }
-    #productos .mySwiperNav .swiper-button-next.swiper-button-disabled, .swiper-button-prev.swiper-button-disabled {
+    .productos .mySwiperNav .swiper-button-next.swiper-button-disabled, .swiper-button-prev.swiper-button-disabled {
         opacity: .0 !important;
         transition: 0.2s all ease;
     }
   }
-  
+
   @media (min-width: 992px) and (max-width: 1200px) {
-    #productos .mySwiperNav .swiper-button-prev, .swiper-rtl .swiper-button-next {
+    .productos .mySwiperNav .swiper-button-prev, .swiper-rtl .swiper-button-next {
         left: var(--swiper-navigation-sides-offset, 20%);
         right: auto;
     }
-    #productos .mySwiperNav .swiper-button-next.swiper-button-disabled, .swiper-button-prev.swiper-button-disabled {
+    .productos .mySwiperNav .swiper-button-next.swiper-button-disabled, .swiper-button-prev.swiper-button-disabled {
         opacity: .3 !important;
         transition: 0.2s all ease;
     }
-    #productos .mySwiperNav .swiper-button-prev, .swiper-rtl .swiper-button-next {
+    .productos .mySwiperNav .swiper-button-prev, .swiper-rtl .swiper-button-next {
       left: var(--swiper-navigation-sides-offset, 20%);
       right: auto;
     }
-    #productos .mySwiperNav .swiper-button-next.swiper-button-disabled, .swiper-button-prev.swiper-button-disabled {
+    .productos .mySwiperNav .swiper-button-next.swiper-button-disabled, .swiper-button-prev.swiper-button-disabled {
         opacity: .0 !important;
         transition: 0.2s all ease;
     }
   }
-  
+
   @media  (min-width: 1200px) and (max-width: 1400px)
   {
-    #productos .mySwiperNav .swiper-button-prev, .swiper-rtl .swiper-button-next {
+    .productos .mySwiperNav .swiper-button-prev, .swiper-rtl .swiper-button-next {
         left: var(--swiper-navigation-sides-offset, 25%);
         right: auto;
     }
-    #productos .mySwiperNav .swiper-button-next.swiper-button-disabled, .swiper-button-prev.swiper-button-disabled {
+    .productos .mySwiperNav .swiper-button-next.swiper-button-disabled, .swiper-button-prev.swiper-button-disabled {
         opacity: .3 !important;
         transition: 0.2s all ease;
     }
-    #productos .mySwiperNav .swiper-button-prev, .swiper-rtl .swiper-button-next {
+    .productos .mySwiperNav .swiper-button-prev, .swiper-rtl .swiper-button-next {
       left: var(--swiper-navigation-sides-offset, 25%);
       right: auto;
     }
-    #productos .mySwiperNav .swiper-button-next.swiper-button-disabled, .swiper-button-prev.swiper-button-disabled {
+    .productos .mySwiperNav .swiper-button-next.swiper-button-disabled, .swiper-button-prev.swiper-button-disabled {
         opacity: .0 !important;
         transition: 0.2s all ease;
     }
-  
+
   }

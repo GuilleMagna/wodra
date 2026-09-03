@@ -79,9 +79,9 @@ $block_id = $block['id'];
 
                         <div class="card-body px-0 border-0 d-flex flex-column">
 
-                            <h2 class="color-secundario mb-3">
+                            <h3 class="color-secundario mb-3">
                                 <?= cortar_texto( $post->post_title ) ?>
-                            </h2>
+                            </h3>
 
                             <p class="color-secundario mb-3">
                                 <?= $post->post_category[0]->name; ?>

@@ -1,55 +1,55 @@
-#secondNav {
+.secondNav {
     z-index: 8;
 }
 
-#secondNav {
+.secondNav {
     top: 100px;
 }
 
-.customize-support #secondNav {
+.customize-support .secondNav {
     top: 132px !important;
 }
 
-#secondNav .nav-link:hover {
+.secondNav .nav-link:hover {
     color: var(--black);
     font-weight: 700;
 }
 
-#secondNav .nav-item {
+.secondNav .nav-item {
     border-left: 1px solid var(--primary);
 }
 
-#secondNav .navbar-toggler:focus {
+.secondNav .navbar-toggler:focus {
     text-decoration: none;
     outline: 0;
     box-shadow: 0 0 0 0;
 }
 
-#secondNav .nav-item.first-item {
+.secondNav .nav-item.first-item {
     border-left: 0px;
 }
 
-#secondNav .icon-mobile:not(.collapsed) {
+.secondNav .icon-mobile:not(.collapsed) {
     transform: rotate(0deg);
     transition: 0.3s all ease;
 }
 
-#secondNav .icon-mobile.collapsed {
+.secondNav .icon-mobile.collapsed {
     transform: rotate(180deg);
     transition: 0.3s all ease;
 }
 
 @media (max-width: 576px) {
 
-    #secondNav {
+    .secondNav {
         top: 77px;
     }
 
-    #secondNav .nav-item {
+    .secondNav .nav-item {
         border-left: 0px solid var(--primary);
     }
 
-    .customize-support #secondNav {
+    .customize-support .secondNav {
         top: 112px !important;
     }
 
@@ -57,15 +57,15 @@
 
 @media (min-width: 577px) and (max-width: 767px) {
 
-    #secondNav .nav-item {
+    .secondNav .nav-item {
         border-left: 0px solid var(--primary);
     }
 
-    #secondNav {
+    .secondNav {
         top: 80px;
     }
 
-    .customize-support #secondNav {
+    .customize-support .secondNav {
         top: 112px !important;
     }
 
@@ -73,15 +73,15 @@
 
 @media (min-width: 768px) and (max-width: 991px) {
 
-    #secondNav .nav-item {
+    .secondNav .nav-item {
         border-left: 0px solid var(--primary);
     }
 
-    #secondNav {
+    .secondNav {
         top: 80px;
     }
 
-    .customize-support #secondNav {
+    .customize-support .secondNav {
         top: 112px !important;
     }
 
@@ -96,7 +96,7 @@
 
 
 @media (min-width: 1401px) and (max-width: 1600px) {}
-#secondNav .second-nav-arrow {
+.secondNav .second-nav-arrow {
     display: none;
     flex: 0 0 auto;
     width: 32px;
@@ -108,7 +108,7 @@
     transition: opacity .2s ease;
 }
 
-#secondNav .second-nav-arrow svg {
+.secondNav .second-nav-arrow svg {
     display: block;
     width: 100%;
     height: 100%;
@@ -120,11 +120,11 @@
 }
 
 @media (min-width: 992px) {
-    #secondNav .navbar-collapse {
+    .secondNav .navbar-collapse {
         min-width: 0;
     }
 
-    #secondNav .second-nav-scroll {
+    .secondNav .second-nav-scroll {
         min-width: 0;
         flex: 1 1 auto;
         overflow-x: auto;
@@ -134,29 +134,29 @@
         overscroll-behavior-inline: contain;
     }
 
-    #secondNav .second-nav-scroll::-webkit-scrollbar {
+    .secondNav .second-nav-scroll::-webkit-scrollbar {
         display: none;
     }
 
-    #secondNav .second-nav-scroll .navbar-nav {
+    .secondNav .second-nav-scroll .navbar-nav {
         width: max-content !important;
         min-width: 100%;
         flex-wrap: nowrap;
     }
 
-    #secondNav .second-nav-scroll .nav-item {
+    .secondNav .second-nav-scroll .nav-item {
         flex: 0 0 auto;
     }
 
-    #secondNav .second-nav-scroll .nav-link {
+    .secondNav .second-nav-scroll .nav-link {
         white-space: nowrap;
     }
 
-    #secondNav .second-nav-arrow.is-visible {
+    .secondNav .second-nav-arrow.is-visible {
         display: block;
     }
 
-    #secondNav .second-nav-arrow:disabled {
+    .secondNav .second-nav-arrow:disabled {
         opacity: .25;
         cursor: default;
     }

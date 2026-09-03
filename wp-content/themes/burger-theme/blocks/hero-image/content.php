@@ -16,7 +16,7 @@ $block_id = $block['id'];
 
 <style>
     
-    #hero-image {
+    .hero-image {
         margin: 105px auto 0 !important;
         padding: <?= $section_padding ?> !important;
         border-radius: <?= $border_radius ?> !important;
@@ -26,7 +26,7 @@ $block_id = $block['id'];
         background-size: contain;
     }
 
-    #hero-image .imagen-interna{
+    .hero-image .imagen-interna{
         height: 80vh;
         width: 100%;
         background-image:url('<?= esc_url($imagen) ?>');
@@ -38,7 +38,7 @@ $block_id = $block['id'];
     
     @media (max-width: 991px){
 
-        #hero-image {
+        .hero-image {
             margin: 65px auto 0 !important;
         }
 
@@ -46,19 +46,19 @@ $block_id = $block['id'];
 
     @media (max-width: 768px){
 
-        #hero-image .imagen-interna {
+        .hero-image .imagen-interna {
             height: 30vh;
         }
 
     }
 
-    #hero-image .titulo,
-    #hero-image .color-secundario {
+    .hero-image .titulo,
+    .hero-image .color-secundario {
         color: <?php echo $color_secundario ?>
     }
 
-    #hero-image .titulo span,
-    #hero-image .color-primario {
+    .hero-image .titulo span,
+    .hero-image .color-primario {
         color: <?php echo $color_primario ?>
     }
 

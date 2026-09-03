@@ -1,17 +1,17 @@
-#agenda h3.color-primario {
+.agenda h3.color-primario {
     font-size: 30px !important;
     font-weight: 500 !important;
     line-height: 33px !important;
 }
 
-#agenda div.color-secundario {
-    font-size: 14px;
-    line-height: 20px;
+.agenda div.color-secundario {
+    font-size: 16px;
+    line-height: 22px;
     font-weight: 400;
 }
 
-#agenda div.color-secundario strong,
-#agenda div.color-secundario b {
+.agenda div.color-secundario strong,
+.agenda div.color-secundario b {
     font-weight: 700;
 }
 
@@ -156,4 +156,14 @@
     line-height: 20px;
   }
 
+}
+.agenda.agenda-is-loading [data-agenda-results],
+.agenda.agenda-is-loading [data-agenda-pagination] {
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+.agenda [data-agenda-results],
+.agenda [data-agenda-pagination] {
+  transition: opacity 0.2s ease;
 }

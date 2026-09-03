@@ -7,6 +7,8 @@ $post = $wp_query->queried_object;
 
 $post_title     = $post->post_title ?? '';
 $post_content   = $post->post_content ?? '';
+$post_categories = get_the_category( $post->ID );
+$post_category   = ! empty( $post_categories ) ? $post_categories[0] : null;
 
 $design = get_block_design( $block );
 extract( $design );
@@ -40,9 +42,17 @@ $block_id = $block['id'];
 
             <div class="mx-auto <?= $col_container_class ?> <?= $col_md_container_class ?> <?= $col_lg_container_class ?> <?= $text_align_class ?> color-secundario">
 
-                <h1 class="titulo text-ultra-big color-primario semi-bold mb-5">
+                <h1 class="titulo text-ultra-big color-primario semi-bold mb-3">
                     <?php echo $post_title ?>
                 </h1>
+
+                <?php if ( $post_category ) : ?>
+                    <div class="single-category mb-5">
+                        <a class="color-secundario" href="<?= esc_url( get_category_link( $post_category->term_id ) ); ?>">
+                            <?= esc_html( $post_category->name ); ?>
+                        </a>
+                    </div>
+                <?php endif; ?>
 
                 <?php echo apply_filters( 'the_content', $post_content ) ?>
 

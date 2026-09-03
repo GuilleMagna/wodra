@@ -9,6 +9,19 @@ extract( $fields );
 $design = get_block_design( $block );
 extract( $design );
 
+global $wp_query;
+$post = $wp_query->queried_object;
+
+$post_categories = get_the_category( $post->ID );
+$post_category   = ! empty( $post_categories ) ? $post_categories[0] : null;
+
+foreach ( $post_categories as $category ) {
+    if ( 'todas' !== $category->slug ) {
+        $post_category = $category;
+        break;
+    }
+}
+
 $block_id = $block['id'];
 ?>
 
@@ -32,6 +45,18 @@ $block_id = $block['id'];
 
 <section id="single-compartir-whatsapp" <?= get_block_wrapper_attributes( [ 'class' => $block_id.' '.$class_container ] ) ?>>
 
+    <div class="container mb-5">
+        <h1 class="titulo color-primario mb-3">
+            <?= esc_html( $post->post_title ); ?>
+        </h1>
+
+        <?php if ( $post_category ) : ?>
+            <a class="color-secundario" href="<?= esc_url( get_category_link( $post_category->term_id ) ); ?>">
+                <?= esc_html( $post_category->name ); ?>
+            </a>
+        <?php endif; ?>
+    </div>
+
     <div class="row">
 
         <div class="col-12 text-center">
@@ -51,7 +76,7 @@ $block_id = $block['id'];
 
                     <?php endif; ?>
 
-                    <div class="d-flex align-items-center">
+                    <div id="compartir-ahora" class="d-flex align-items-center">
 
                         <p class="text-big text-dark ligth mb-0 d-none d-md-block me-3">
                             <?php echo $titulo_compartir; ?>

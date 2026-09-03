@@ -2,16 +2,20 @@
 //Block Name: Single agenda
 
 global $wp_query;
-$post = $wp_query->queried_object; 
+$post = $wp_query->queried_object;
 
-$titulo_evento     = get_field( 'titulo_evento' ,     $post->ID ) ?? '';
-$subtitulo_evento  = get_field( 'subtitulo_evento' ,  $post->ID ) ?? '';
-$encabezado        = get_field( 'encabezado' ,        $post->ID ) ?? 'h1';
+$post_title        = $post->post_title;
+$post_content      = $post->post_content ?? '';
 $texto_evento      = get_field( 'texto_evento', $post->ID );
-if ( '' === trim( (string) $texto_evento ) ) $texto_evento = $post->post_content ?? '';
-$botones_evento    = get_field( 'botones_evento' ,    $post->ID ) ?? [];
-$informacion       = get_field( 'informacion' ,       $post->ID ) ?? [];
+$botones_evento    = get_field( 'botones_evento', $post->ID ) ?? [];
+$informacion       = get_field( 'informacion', $post->ID ) ?? [];
+$logo_evento       = get_field( 'logo_evento', $post->ID );
+$modo_contenido    = function_exists( 'burger_editor_mode' ) && 'contenido' === burger_editor_mode( 'evento' );
+$contenido_bloques = '';
 
+if ( $modo_contenido ) {
+    $contenido_bloques = apply_filters( 'the_content', $post_content );
+}
 $design = get_block_design($block);
 extract($design);
 
@@ -47,21 +51,25 @@ $block_id = $block['id'];
 
                 <div data-aos="fade-left">
 
-                    <?php if (!empty($titulo_evento)): ?>
+                    <div class="<?= $col_container_class ?> <?= $col_md_container_class ?> <?= $col_lg_container_class ?> <?= $text_align_class ?>">
 
-                        <div class="<?= $col_container_class ?> <?= $col_md_container_class ?> <?= $col_lg_container_class ?> <?= $text_align_class ?>">
+                        <h1 class="titulo text-ultra-big color-primario semi-bold mb-5">
+                            <?php echo $post_title ?>
+                        </h1>
 
-                            <<?= $encabezado ?> class="titulo mb-4" data-aos="zoom-in">
-                                <?php echo $titulo_evento ?> <span><?php echo $subtitulo_evento ?></span>
-                            </<?= $encabezado ?>>
+                    </div>
 
+                    <?php if ( $modo_contenido && '' !== trim( $contenido_bloques ) ) : ?>
+                        <div class="single-agenda-content">
+                            <?php echo $contenido_bloques; ?>
                         </div>
-
                     <?php endif; ?>
 
-                    <div class="color-secundario">
-                        <?php echo $texto_evento ?>
-                    </div>
+                    <?php if ( ! $modo_contenido && '' !== trim( (string) $texto_evento ) ) : ?>
+                        <div class="color-secundario">
+                            <?php echo $texto_evento; ?>
+                        </div>
+                    <?php endif; ?>
 
                     <?php if (!empty($botones_evento) AND count($botones_evento) > 0): ?>
 
@@ -82,10 +90,10 @@ $block_id = $block['id'];
                         <?php foreach( $informacion as $item ): extract( $item ) ?>
                             <li class="list-group-item border-0">
                                 <div class="d-flex align-items-center justify-content-start">
-                                    <img src="<?php echo $icono ?>" title="<?php echo $texto ?>" alt="<?php echo $texto ?>" class="me-2"> 
+                                    <img src="<?php echo $icono ?>" title="<?php echo $texto ?>" alt="<?php echo $texto ?>" class="me-2">
                                     <div><?php echo $texto ?></div>
                                 </div>
-                                
+
                             </li>
                         <?php endforeach ?>
                     </ul>

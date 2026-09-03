@@ -520,7 +520,8 @@ foreach ($columns_to_render as $index => $column) {
     }
 </style>
 
-<section id="tabla-datos" class="burger-tabla-datos <?= esc_attr($uid); ?>">
+<?php $anchor_id = ! empty( $block['anchor'] ) ? sanitize_title( $block['anchor'] ) : 'tabla-datos'; ?>
+<section id="<?= esc_attr( $anchor_id ); ?>" class="tabla-datos burger-tabla-datos <?= esc_attr($uid); ?>">
 
     <div class="<?= esc_attr($class_container); ?>">
 

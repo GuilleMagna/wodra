@@ -1,8 +1,8 @@
-#servicios-informacion .img-descripcion {
+.servicios-informacion .img-descripcion {
     aspect-ratio: 4/2;
 }
 
-#servicios-informacion .informacion-columna h2 {
+.servicios-informacion .informacion-columna h2 {
     color: var(--primary);
     transition: all 0.3s ease;
 }

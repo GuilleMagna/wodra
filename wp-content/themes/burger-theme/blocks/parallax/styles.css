@@ -1,4 +1,4 @@
-#parallax .parallax {
+.parallax .parallax {
     background-position: center !important;
     background-repeat: no-repeat !important;
     background-size: cover !important;
@@ -9,7 +9,7 @@
     justify-content: center;
 }
 
-#parallax .marco-parallax {
+.parallax .marco-parallax {
     top: auto;
     bottom: 0;
     left: 0;
@@ -17,7 +17,7 @@
     width: 100%;
 }
 
-#parallax .overlay-image {
+.parallax .overlay-image {
     position: absolute;
     top: 0;
     left: 0;
@@ -29,7 +29,7 @@
     opacity: 0.2;
 }
 
-#parallax .contenido {
+.parallax .contenido {
     position: relative;
     z-index: 3;
     height: 100%;
@@ -39,21 +39,21 @@
 
 @media (max-width: 576px)
 {
-    #parallax .overlay-image {
+    .parallax .overlay-image {
         width: 100%;
     }
 }
 
 @media  (min-width: 577px) and (max-width: 767px)
 {
-    #parallax .overlay-image {
+    .parallax .overlay-image {
         width: 75%;
     }
 }
 
 @media (min-width: 768px) and (max-width: 991px) 
 {
-    #parallax .overlay-image {
+    .parallax .overlay-image {
         width: 75%;
     }
 

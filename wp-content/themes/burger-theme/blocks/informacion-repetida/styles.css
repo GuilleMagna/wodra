@@ -1,17 +1,17 @@
-#informacion-repetida h3.color-primario {
+.informacion-repetida h3.color-primario {
     font-size: 30px !important;
     font-weight: 500 !important;
     line-height: 33px !important;
 }
 
-#informacion-repetida div.color-secundario {
+.informacion-repetida div.color-secundario {
     font-size: 14px;
     line-height: 20px;
     font-weight: 400;
 }
 
-#informacion-repetida div.color-secundario strong,
-#informacion-repetida div.color-secundario b {
+.informacion-repetida div.color-secundario strong,
+.informacion-repetida div.color-secundario b {
     font-weight: 700;
 }
 
@@ -62,41 +62,41 @@
   color: #000000;
 }
 
-#informacion-repetida li span,
-#informacion-repetida li {
+.informacion-repetida li span,
+.informacion-repetida li {
   font-weight: 400;
   font-size: 0.8rem;
   line-height: 20px;
   letter-spacing: 0%;
 }
 
-#informacion-repetida .form-control,
-#informacion-repetida .form-select {
+.informacion-repetida .form-control,
+.informacion-repetida .form-select {
   background-color: transparent !important;
   border-bottom: 1px solid white !important;
   border: 0;
 }
 
-#informacion-repetida .wpcf7 {
+.informacion-repetida .wpcf7 {
   width: 75%;
 }
 
-#informacion-repetida .form-label {
+.informacion-repetida .form-label {
   color: #fff !important;
 }
 
 @media (max-width: 576px) {
-  #informacion-repetida .img-responsive.w-75 {
+  .informacion-repetida .img-responsive.w-75 {
     width: 100% !important;
   }
 
-  #informacion-repetida .img-fluid {
+  .informacion-repetida .img-fluid {
     max-width: 100%;
     height: auto;
   }
 
-  #informacion-repetida li span,
-  #informacion-repetida li {
+  .informacion-repetida li span,
+  .informacion-repetida li {
     font-size: 0.87rem;
     line-height: 24px;
   }
@@ -105,17 +105,17 @@
 
 @media (min-width: 577px) and (max-width: 767px) {
 
-  #informacion-repetida .img-responsive.w-75 {
+  .informacion-repetida .img-responsive.w-75 {
     width: 100% !important;
   }
 
-  #informacion-repetida .img-fluid {
+  .informacion-repetida .img-fluid {
     max-width: 100%;
     height: auto;
   }
 
-  #informacion-repetida li span,
-  #informacion-repetida li {
+  .informacion-repetida li span,
+  .informacion-repetida li {
     font-size: 0.87rem;
     line-height: 24px;
   }
@@ -123,8 +123,8 @@
 
 @media (min-width: 768px) and (max-width: 991px) {
 
-  #informacion-repetida li span,
-  #informacion-repetida li {
+  .informacion-repetida li span,
+  .informacion-repetida li {
     font-size: 0.9rem;
     line-height: 20px;
   }
@@ -132,8 +132,8 @@
 
 @media (min-width: 992px) and (max-width: 1200px) {
 
-  #informacion-repetida li span,
-  #informacion-repetida li {
+  .informacion-repetida li span,
+  .informacion-repetida li {
     font-size: 0.9rem;
     line-height: 20px;
   }
@@ -141,8 +141,8 @@
 
 @media (min-width: 1200px) and (max-width: 1400px) {
 
-  #informacion-repetida li span,
-  #informacion-repetida li {
+  .informacion-repetida li span,
+  .informacion-repetida li {
     font-size: 0.9rem;
     line-height: 20px;
   }
@@ -150,8 +150,8 @@
 
 @media (min-width: 1401px) and (max-width: 1600px) {
 
-  #informacion-repetida li span,
-  #informacion-repetida li {
+  .informacion-repetida li span,
+  .informacion-repetida li {
     font-size: 0.9rem;
     line-height: 20px;
   }

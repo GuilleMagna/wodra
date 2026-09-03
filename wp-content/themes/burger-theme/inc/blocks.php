@@ -587,7 +587,11 @@ function burger_extend_blocks() {
                     'hide_fields_in_sidebar' => $acf_blocks_v3,
                     'category'          => 'layout',
                     'icon'              => '<svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <rect x="0" fill="none" width="20" height="20"></rect> <g> <path d="M15 6V4h-3v2H8V4H5v2H4c-.6 0-1 .4-1 1v8h14V7c0-.6-.4-1-1-1h-1z"></path> </g> </g></svg>',
-                    'supports'          => array( 'align' => array( 'wide', 'full' ),'layout'  => true ),
+                    'supports'          => array(
+                        'align'  => array( 'wide', 'full' ),
+                        'layout' => true,
+                        'anchor' => true,
+                    ),
                     'enqueue_assets'    => function() use ($slug) {
 
                         $style_path  = get_template_directory() . '/blocks/' . $slug . '/styles.css';
@@ -702,8 +706,11 @@ function burger_render_blocks( $block ) {
     $cache_data = [
         'slug'          => $slug,
         'block_id'      => $block['id'] ?? '',
+        'anchor'        => $block['anchor'] ?? '',
+        'request_pag'   => isset( $_GET['pag'] ) ? absint( $_GET['pag'] ) : 1,
         'block_data'    => $block['data'] ?? [],
         'post_id'       => $post_id,
+        'queried_id'    => get_queried_object_id(),
         'post_modified' => $post_modified,
         'locale'        => determine_locale(),
         'theme_version' => wp_get_theme()->get( 'Version' ),
@@ -742,6 +749,7 @@ function burger_render_blocks( $block ) {
     include $content_php;
 
     $html = ob_get_clean();
+    $html = burger_apply_block_anchor( $html, $block );
 
     // SCF v3 convierte la preview a JSX y descarta los <style>. Transportamos
     // una copia codificada junto al bloque; un controlador del editor la vuelve
@@ -774,6 +782,53 @@ function burger_render_blocks( $block ) {
     }
 
     echo $html;
+}
+
+function burger_apply_block_anchor( $html, $block ) {
+    if ( ! is_string( $html ) || trim( $html ) === '' ) {
+        return $html;
+    }
+
+    $custom_anchor = sanitize_title( $block['anchor'] ?? '' );
+    $block_slug    = sanitize_html_class( str_replace( 'acf/', '', $block['name'] ?? '' ) );
+
+    return preg_replace_callback(
+        '/<(section|div|header|footer|nav)\b[^>]*\bid=(["\'])([^"\']+)\2[^>]*>/i',
+        static function ( $matches ) use ( $custom_anchor, $block_slug ) {
+            $tag       = $matches[0];
+            $legacy_id = sanitize_html_class( $matches[3] );
+            $final_id  = $custom_anchor !== '' ? $custom_anchor : $legacy_id;
+
+            $tag = preg_replace(
+                '/\bid=(["\'])[^"\']+\1/i',
+                'id="' . esc_attr( $final_id ) . '"',
+                $tag,
+                1
+            );
+
+            if ( preg_match( '/\bclass=(["\'])([^"\']*)\1/i', $tag, $class_match ) ) {
+                $classes = preg_split( '/\s+/', trim( $class_match[2] ) );
+
+                foreach ( array_filter( [ $legacy_id, $block_slug ] ) as $required_class ) {
+                    if ( ! in_array( $required_class, $classes, true ) ) {
+                        $classes[] = $required_class;
+                    }
+                }
+
+                $class_attr = 'class="' . esc_attr( implode( ' ', array_filter( $classes ) ) ) . '"';
+                return preg_replace( '/\bclass=(["\'])[^"\']*\1/i', $class_attr, $tag, 1 );
+            }
+
+            return preg_replace(
+                '/^<([a-z0-9-]+)/i',
+                '<$1 class="' . esc_attr( trim( $legacy_id . ' ' . $block_slug ) ) . '"',
+                $tag,
+                1
+            );
+        },
+        $html,
+        1
+    );
 }
 
 function burger_block_html_is_valid( $html ) {

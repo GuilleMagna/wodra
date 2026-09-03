@@ -1,33 +1,33 @@
-#conoce-mas .card-conoce-img {
+.conoce-mas .card-conoce-img {
     width: 100%;
     overflow: hidden;
 }
 
-#conoce-mas .card-conoce-fecha {
+.conoce-mas .card-conoce-fecha {
     font-size: 1.35rem;
     font-weight: 400;
     line-height: 1.15;
 }
 
-#conoce-mas .card-conoce-texto {
+.conoce-mas .card-conoce-texto {
     font-size: .95rem;
     line-height: 1.25;
     min-height: 44px;
 }
 
-#conoce-mas .btn-ver-mas {
+.conoce-mas .btn-ver-mas {
     font-size: .78rem;
     font-weight: 700;
     text-transform: uppercase;
     text-decoration: none;
 }
 
-#conoce-mas .btn-ver-mas:hover {
+.conoce-mas .btn-ver-mas:hover {
     opacity: .8;
 }
 
-#conoce-mas .owl-nav button.owl-prev,
-#conoce-mas .owl-nav button.owl-next {
+.conoce-mas .owl-nav button.owl-prev,
+.conoce-mas .owl-nav button.owl-next {
     width: 32px;
     height: 32px;
     color: #fff !important;
@@ -39,21 +39,21 @@
     transform: translateY(-50%);
 }
 
-#conoce-mas .owl-nav button.owl-prev {
+.conoce-mas .owl-nav button.owl-prev {
     left: -55px;
 }
 
-#conoce-mas .owl-nav button.owl-next {
+.conoce-mas .owl-nav button.owl-next {
     right: -55px;
 }
 
-#conoce-mas .owl-nav button span {
+.conoce-mas .owl-nav button span {
     filter: brightness(0) invert(1);
     width: 14px;
     height: 14px;
 }
 
-#conoce-mas .btn-agenda-comunidad {
+.conoce-mas .btn-agenda-comunidad {
     border: 1px solid #fff;
     color: #fff;
     border-radius: 999px;
@@ -63,53 +63,53 @@
     letter-spacing: .04em;
 }
 
-#conoce-mas .circulos-conocenos h5 {
+.conoce-mas .circulos-conocenos h5 {
 	transition: all 0.3s ease;
 }
 
-#conoce-mas .icono-mas {
+.conoce-mas .icono-mas {
     max-width: 90px;
 }
 
-#conoce-mas .circulos-conocenos:hover h5 {
+.conoce-mas .circulos-conocenos:hover h5 {
 	color: var(--primary);
 	transition: all 0.3s ease;
 }
 
-#conoce-mas .circulos-conocenos:hover .icon-container img {
+.conoce-mas .circulos-conocenos:hover .icon-container img {
 	transition: all 0.3s ease;
 }
 
-#conoce-mas .icon-container img:nth-child(2) {
+.conoce-mas .icon-container img:nth-child(2) {
   	display: none; 
     transition: all 0.3s ease;
 }
 
-#conoce-mas .circulos-conocenos:hover img:nth-child(1) {
+.conoce-mas .circulos-conocenos:hover img:nth-child(1) {
   	display: none;
     transition: all 0.3s ease;
 }
 
-#conoce-mas .circulos-conocenos:hover img:nth-child(2) {
+.conoce-mas .circulos-conocenos:hover img:nth-child(2) {
   	display: block;
     transition: all 0.3s ease;
 }
 
-#conoce-mas .titulo-conocer{
+.conoce-mas .titulo-conocer{
     height: 82px;
 }
 
 /* NAVS */
-#conoce-mas .owl-carousel .owl-prev,
-#conoce-mas .owl-carousel .owl-next {
+.conoce-mas .owl-carousel .owl-prev,
+.conoce-mas .owl-carousel .owl-next {
     position: absolute;
     top: 0;
     height: 30px;
     top: 40%;
 }
 
-#conoce-mas .owl-carousel .owl-prev:hover,
-#conoce-mas .owl-carousel .owl-next:hover {
+.conoce-mas .owl-carousel .owl-prev:hover,
+.conoce-mas .owl-carousel .owl-next:hover {
     position: absolute;
     top: 0;
     height: 30px;
@@ -117,22 +117,22 @@
     background-color: transparent !important;
 }
 
-#conoce-mas .owl-carousel .owl-prev {
+.conoce-mas .owl-carousel .owl-prev {
     left: -60px;
 }
 
-#conoce-mas .owl-carousel .owl-next {
+.conoce-mas .owl-carousel .owl-next {
     right: -60px;
 }
 
 @media (max-width: 576px) {
 
-    #conoce-mas .owl-nav button.owl-prev {
+    .conoce-mas .owl-nav button.owl-prev {
         left: 15px !important;
         top: 97% !important;
     }
 
-    #conoce-mas .owl-nav button.owl-next {
+    .conoce-mas .owl-nav button.owl-next {
         right: 15px !important;
         top: 97% !important;
     }
@@ -140,11 +140,11 @@
 
 @media  (min-width: 577px) and (max-width: 767px) {
 
-    #conoce-mas .owl-carousel .owl-prev {
+    .conoce-mas .owl-carousel .owl-prev {
         left: 0px;
     }
 
-    #conoce-mas .owl-carousel .owl-next {
+    .conoce-mas .owl-carousel .owl-next {
         right: 0px;
     }
 
@@ -152,11 +152,11 @@
 
 @media (min-width: 768px) and (max-width: 991px) {
 
-    #conoce-mas .owl-carousel .owl-prev {
+    .conoce-mas .owl-carousel .owl-prev {
         left: -30px;
     }
 
-    #conoce-mas .owl-carousel .owl-next {
+    .conoce-mas .owl-carousel .owl-next {
         right: -30px;
     }
 

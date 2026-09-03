@@ -14,7 +14,7 @@
 
 }
 
-#footer-contenido .certificado{
+.footer-contenido .certificado{
 
     max-width: 75%!important;
 
@@ -22,7 +22,7 @@
 
 }
 
-#footer-contenido .data{
+.footer-contenido .data{
 
     min-width: 84px;
 
@@ -32,14 +32,14 @@
 
 }
 
-#footer-contenido a:hover,
-#footer-contenido a:hover span {
+.footer-contenido a:hover,
+.footer-contenido a:hover span {
     color: var(--secondary) !important;
 }
 
 /* OWL */
 
-#footer-contenido .owl-theme .owl-dots {
+.footer-contenido .owl-theme .owl-dots {
 
     text-align: center;
 
@@ -51,7 +51,7 @@
 
   
 
-#footer-contenido .owl-theme .owl-dots .owl-dot {
+.footer-contenido .owl-theme .owl-dots .owl-dot {
 
     display: inline-block;
 
@@ -63,7 +63,7 @@
 
   
 
-#footer-contenido .owl-theme .owl-dots .owl-dot span {
+.footer-contenido .owl-theme .owl-dots .owl-dot span {
 
     width: 8px;
 
@@ -83,7 +83,7 @@
 
   
 
-#footer-contenido .owl-theme .owl-dots .owl-dot.active span, .owl-theme .owl-dots .owl-dot:hover span {
+.footer-contenido .owl-theme .owl-dots .owl-dot.active span, .owl-theme .owl-dots .owl-dot:hover span {
 
     background: #faa419;
 
@@ -91,7 +91,7 @@
 
 
 
-#footer-contenido .owl-theme .owl-dots .owl-dot span {
+.footer-contenido .owl-theme .owl-dots .owl-dot span {
 
     width: 10px !important;
 
@@ -105,7 +105,7 @@
 
 
 
-#footer-contenido .owl-theme .owl-dots .owl-dot.active span, #footer-contenido .owl-theme .owl-dots .owl-dot:hover span {
+.footer-contenido .owl-theme .owl-dots .owl-dot.active span, .footer-contenido .owl-theme .owl-dots .owl-dot:hover span {
 
     background: #faa419 !important;
 
@@ -113,7 +113,7 @@
 
 
 
-#footer-contenido .item.item-footer-contenido {
+.footer-contenido .item.item-footer-contenido {
 
     height: 150px;
 
@@ -127,7 +127,7 @@
 
 
 
-#footer-contenido .item.item-footer-contenido img {
+.footer-contenido .item.item-footer-contenido img {
 
     filter: grayscale(1);
 
@@ -135,9 +135,9 @@
 
 
 
-#footer-contenido .owl-carousel .owl-prev,
+.footer-contenido .owl-carousel .owl-prev,
 
-#footer-contenido .owl-carousel .owl-next {
+.footer-contenido .owl-carousel .owl-next {
 
     position: absolute;
 
@@ -151,9 +151,9 @@
 
 
 
-#footer-contenido .owl-carousel .owl-prev:hover,
+.footer-contenido .owl-carousel .owl-prev:hover,
 
-#footer-contenido .owl-carousel .owl-next:hover {
+.footer-contenido .owl-carousel .owl-next:hover {
 
     position: absolute;
 
@@ -169,7 +169,7 @@
 
 
 
-#footer-contenido .owl-carousel .owl-prev {
+.footer-contenido .owl-carousel .owl-prev {
 
     left: var(--footer-contenido-flecha, -25px);
 
@@ -177,7 +177,7 @@
 
 
 
-#footer-contenido .owl-carousel .owl-next {
+.footer-contenido .owl-carousel .owl-next {
 
     right: var(--footer-contenido-flecha, -25px);
 
@@ -191,7 +191,7 @@
        (min-width: 768px) and (max-width: 769.98px),
        (min-width: 992px) and (max-width: 1009.98px) {
 
-    #footer-contenido .owl-carousel {
+    .footer-contenido .owl-carousel {
 
         --footer-contenido-flecha: 5px;
 
