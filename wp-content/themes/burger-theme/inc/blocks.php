@@ -2520,32 +2520,7 @@ add_filter('acf/location/rule_types', function ($choices) {
 });
 
 add_filter('acf/location/rule_values/burger_preset_group', function ($choices) {
-
-    $choices = [];
-
-    $blocks_path = defined('NAKAMA_THEME_PATH')
-        ? NAKAMA_THEME_PATH . '/blocks/*'
-        : get_template_directory() . '/blocks/*';
-
-    $dirs = glob($blocks_path, GLOB_ONLYDIR);
-
-    if (empty($dirs) || !is_array($dirs)) {
-        return $choices;
-    }
-
-    foreach ($dirs as $dir) {
-
-        $slug = basename($dir);
-
-        if (empty($slug)) {
-            continue;
-        }
-
-        $choices[$slug] = ucwords(str_replace('-', ' ', $slug));
-    }
-
-    return $choices;
-
+    return burger_get_block_choices();
 });
 
 add_filter('acf/location/rule_match/burger_preset_group', function ($match, $rule, $options) {
@@ -2599,38 +2574,39 @@ add_filter('acf/prepare_field/name=preset', function ($field) {
 if (!function_exists('burger_get_block_choices')) {
 
     function burger_get_block_choices() {
+        static $choices = null;
 
-        $choices = [];
-
-        $blocks_path = defined('NAKAMA_THEME_PATH')
-            ? NAKAMA_THEME_PATH . '/blocks/*'
-            : get_template_directory() . '/blocks/*';
-
-        $dirs = glob($blocks_path, GLOB_ONLYDIR);
-
-        if (empty($dirs) || !is_array($dirs)) {
+        if ( $choices !== null ) {
             return $choices;
         }
 
-        foreach ($dirs as $dir) {
+        $choices = [];
+        $blocks  = defined( 'BURGER_OPTIONS' )
+            ? ( BURGER_OPTIONS['bloques_disponibles'] ?? [] )
+            : [];
 
-            if (!file_exists($dir . '/content.php')) {
+        foreach ( (array) $blocks as $block ) {
+            if ( empty( $block['activo'] ) || empty( $block['slug'] ) ) {
                 continue;
             }
 
-            $slug = basename($dir);
+            $slug  = sanitize_title( $block['slug'] );
+            $label = trim( (string) ( $block['nombre'] ?? '' ) );
 
-            if (empty($slug)) {
+            if ( $slug === '' ) {
                 continue;
             }
 
-            $choices[$slug] = ucwords(str_replace('-', ' ', $slug));
+            $choices[ $slug ] = $label !== ''
+                ? $label
+                : ucwords( str_replace( '-', ' ', $slug ) );
         }
 
-        asort($choices);
+        asort( $choices );
 
         return $choices;
     }
+
 }
 
 add_filter('acf/load_field/name=grupo_acf_preset', function ($field) {
