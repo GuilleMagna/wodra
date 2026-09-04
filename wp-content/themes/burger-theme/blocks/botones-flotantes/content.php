@@ -1,9 +1,11 @@
 <?php 
 //Block Name: Botones Flotantes
 
-$content_fields = [ 'botones_flotantes' ];
+$content_fields = [ 'botones_flotantes', 'bottom_posicion' ];
 $fields = get_block_content_fields( $block, $content_fields );
 extract( $fields );
+
+$bottom_posicion = trim( (string) $bottom_posicion ) ?: '51px';
 
 $design = get_block_design( $block );
 extract( $design );
@@ -13,8 +15,9 @@ $block_id = $block['id'];
 
 <style>
     .<?= $block_id ?> {
+        bottom: <?= esc_attr( $bottom_posicion ) ?> !important;
         margin: <?= $section_margin ?> !important;
-        padding: <?= $section_padding ?> !important;
+        padding: 0 !important;
         border-radius: <?= $border_radius ?> !important;
         background-color: <?= $color_fondo ?>; 
         background-image: url('<?= $imagen_fondo ?>')

@@ -1,6 +1,6 @@
 #fixedNav {
     height: 105px;
-    z-index: 9;
+    z-index: 1050;
 }
 
 #mainNav .logo-head {
@@ -452,4 +452,29 @@
         font-style: normal;
     }
 
+}
+/* Alineación del menú desplegable en tablet y mobile. */
+@media (max-width: 991.98px) {
+    #mainNav .nav-item.dropdown > .btn-group {
+        flex-wrap: wrap;
+        width: 100%;
+    }
+
+    #mainNav .dropdown-menu[data-bs-popper] {
+        position: static !important;
+        inset: auto !important;
+        transform: none !important;
+        flex: 0 0 100%;
+        width: 100%;
+    }
+
+    #mainNav .dropdown-menu .dropdown-item {
+        padding-left: 5px !important;
+        text-align: left;
+    }
+
+    #offcanvasNavbar .flags a.glink {
+        padding-left: 5px !important;
+        padding-right: 5px !important;
+    }
 }

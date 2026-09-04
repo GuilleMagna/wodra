@@ -387,3 +387,24 @@ ul.personalizado {
 .um-field-radio:not(.um-field) {
     margin: 20px 0 !important;
 }
+/* Evita que las animaciones laterales amplíen el viewport en mobile. */
+@media (max-width: 767.98px) {
+    .container > .row.g-5 {
+        --bs-gutter-x: 1.5rem;
+    }
+
+    .parallax .section.container > .row {
+        margin-right: 0;
+        margin-left: 0;
+    }
+
+    [data-aos="fade-left"][data-aos="fade-left"],
+    [data-aos="fade-right"][data-aos="fade-right"] {
+        transform: translate3d(0, 100px, 0);
+    }
+
+    [data-aos="fade-left"][data-aos="fade-left"].aos-animate,
+    [data-aos="fade-right"][data-aos="fade-right"].aos-animate {
+        transform: translate3d(0, 0, 0);
+    }
+}
