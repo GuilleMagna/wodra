@@ -53,7 +53,7 @@ $redes = BURGER_OPTIONS['redes'] ?? [];
 
 			<div class="col-12 col-lg-5 me-lg-auto  <?= $text_align_class ?> me-xl-3">
 
-                <<?= $encabezado ?> class="color-primario mb-2" style="text-transform: none; letter-spacing: 0px;" data-aos="fade-up">
+                <<?= $encabezado ?> class="color-primario mb-2" style="text-transform: none;" data-aos="fade-up">
                     <?= $titulo_newsletter ?>  <span><?= $subtitulo_newsletter ?></span>
                 </<?= $encabezado ?>>
 

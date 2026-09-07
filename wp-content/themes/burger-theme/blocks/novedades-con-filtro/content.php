@@ -53,7 +53,6 @@ $block_id = $block['id'];
         background-color: <?= $color_fondo ?>;
         color: <?= $color_secundario ?>;
         border-left: 1px solid <?= $color_primario ?> !important;
-        font-weight: 800;
     }
 
     .novedades-con-filtro .nav-pills .show>.nav-link.first-item {

@@ -35,7 +35,7 @@ $block_id = $block['id'];
 
 		<div class="mx-auto <?= $col_container_class ?> <?= $col_md_container_class ?> <?= $col_lg_container_class ?> <?= $text_align_class ?>">
 
-			<<?= $encabezado ?> class="titulo text-big-titulos text-dark light mb-0" style="text-transform: none; letter-spacing: 0px;">
+			<<?= $encabezado ?> class="titulo text-big-titulos text-dark light mb-0" style="text-transform: none;">
 				<?php echo $titulo_producto ?> <span><?php echo $subtitulo_producto ?></span>
 			</<?= $encabezado ?>>
 

@@ -80,7 +80,6 @@ $block_id = $block['id'];
     .<?= $block_id ?> .titulo,
     .<?= $block_id ?> .color-secundario {
         color: <?php echo $color_secundario ?>;
-        line-height: 1.05;
         margin-inline: auto;
     }
     .<?= $block_id ?> .titulo span,

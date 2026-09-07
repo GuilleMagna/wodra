@@ -1,3 +1,15 @@
+/* Las familias se configuran en ACF; PHP solo publica sus variables. */
+body { font-family: var(--font-family, "Lato", sans-serif); }
+h1 { font-family: var(--font-family-h1, var(--font-family, "Lato", sans-serif)); }
+h2 { font-family: var(--font-family-h2, var(--font-family, "Lato", sans-serif)); }
+h3 { font-family: var(--font-family-h3, var(--font-family, "Lato", sans-serif)); }
+h4 { font-family: var(--font-family-h4, var(--font-family, "Lato", sans-serif)); }
+h5, h1.h5 { font-family: var(--font-family-h5, var(--font-family, "Lato", sans-serif)); }
+h6 { font-family: var(--font-family-h6, var(--font-family, "Lato", sans-serif)); }
+.text-contador, .text-parallax, .slide p {
+  font-family: var(--font-family-h1, var(--font-family, "Lato", sans-serif));
+}
+
 a {
   text-decoration: none;
   color: inherit;
@@ -7,56 +19,56 @@ a {
   font-weight: 400;
   font-size: clamp(50px, 2.8rem + 2vw, 100px);
   line-height: 1;
-  letter-spacing: 0%;
+  letter-spacing: normal;
 }
 
 .text-parallax p {
   font-weight: 400;
   font-size: clamp(30px, 2.2rem + 2vw, 40px);
   line-height: 1;
-  letter-spacing: 0%;
+  letter-spacing: normal;
 }
 
 h1 {
   font-weight: 400;
   font-size: clamp(35px, 2.2rem + 2vw, 45px);
   line-height: 1;
-  letter-spacing: 0%;
+  letter-spacing: normal;
 }
 
 h2 {
   font-weight: 400;
   font-size: clamp(35px, 2.2rem + 2vw, 45px);
   line-height: 1;
-  letter-spacing: 0%;
+  letter-spacing: normal;
 }
 
 h3 {
   font-weight: 500;
   font-size: clamp(25px, 1.5rem + 2vw, 30px);
   line-height: 1;
-  letter-spacing: 0%;
+  letter-spacing: normal;
 }
 
 h4 {
   font-weight: 400;
   font-size: clamp(20px, 1.2rem + 2vw, 25px);
   line-height: 1;
-  letter-spacing: 0%;
+  letter-spacing: normal;
 }
 
 h5 {
   font-weight: 400;
   font-size: clamp(18px, 1.1rem + 2vw, 22px);
   line-height: 1;
-  letter-spacing: 0%;
+  letter-spacing: normal;
 }
 
 h6 {
   font-weight: 400;
   font-size: clamp(18px, 1rem + 2vw, 22px);
   line-height: 1;
-  letter-spacing: 0%;
+  letter-spacing: normal;
 }
 
 p,
@@ -64,13 +76,14 @@ li {
   font-weight: 400;
   font-size: clamp(14px, 1rem + 2vw, 16px);
   line-height: 1;
-  letter-spacing: 0%;
+  letter-spacing: normal;
 }
 
 .btn {
-  font-weight: 500;
+  font-weight: 600;
   font-size: clamp(14px, 1rem, 16px) !important;
-  line-height: 1;
+  line-height: 1rem;
+  letter-spacing: 0.5px;
   text-transform: uppercase;
 }
 
@@ -91,42 +104,42 @@ li {
   font-weight: 400 !important;
   font-size: clamp(35px, 1rem + 2vw, 50px);
   line-height: 1;
-  letter-spacing: 0%;
+  letter-spacing: normal;
 }
 
 #footer-contenido p, #footer-contenido li {
   font-weight: 400;
   font-size: clamp(12px, 0.8rem, 14px);
   line-height: 1;
-  letter-spacing: 0%;
+  letter-spacing: normal;
 }
 
 #footer p, #footer li {
   font-weight: 400;
   font-size: clamp(12px, 0.8rem, 14px);
   line-height: 1;
-  letter-spacing: 0%;
+  letter-spacing: normal;
 }
 
 #descripcion-empresa-tres-columnas h2 {
     font-weight: 400;
     font-size: clamp(18px, 1.1rem + 2vw, 22px);
     line-height: 1;
-    letter-spacing: 0%;
+    letter-spacing: normal;
 }
 
 .text-form-contacto {
   font-weight: 400;
   font-size: 0.87rem;
   line-height: 20px;
-  letter-spacing: 0%;
+  letter-spacing: normal;
 }
 
 .text-contador {
   font-weight: 700;
   font-size: 5.5rem;
   line-height: 6rem;
-  letter-spacing: 0%;
+  letter-spacing: normal;
 }
 
 .btn-text {
@@ -140,14 +153,14 @@ li {
   font-weight: 300;
   font-size: 4.75rem;
   line-height: 4rem;
-  letter-spacing: 0%;
+  letter-spacing: normal;
 }
 
 .h5 {
   font-weight: 400;
   font-size: clamp(18px, 1.1rem + 2vw, 22px);
   line-height: 1;
-  letter-spacing: 0%;
+  letter-spacing: normal;
 }
 
 #preNav .nav-item .nav-link {
@@ -168,7 +181,7 @@ li {
   font-weight: 400;
   font-size: clamp(12px, 1rem, 14px);
   line-height: 1;
-  letter-spacing: 0%;
+  letter-spacing: normal;
 }
 
 /* 
@@ -306,7 +319,7 @@ li {
     font-weight: 700;
     font-size: 1.87rem;
     line-height: 2.07rem;
-    letter-spacing: 0%;
+    letter-spacing: normal;
   }
 
   .btn-text {
@@ -395,7 +408,7 @@ li {
     font-weight: 700;
     font-size: 1.87rem;
     line-height: 2.07rem;
-    letter-spacing: 0%;
+    letter-spacing: normal;
   }
 
   .btn-text {
@@ -717,3 +730,30 @@ li {
 }
 
 */
+
+/* Tipografía global consolidada desde styler.css y buttons.css. */
+.titulo.fs-4 {
+  line-height: 1.6rem;
+}
+
+.btn-lg {
+  font-size: 1rem;
+  line-height: 1.2rem;
+  font-weight: 400;
+}
+
+.text-btn-01 {
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 20px;
+}
+
+/* Reglas de bloque sin valores dinámicos: no necesitan estilos inline. */
+.conoce-mas .titulo,
+.conoce-mas .color-secundario {
+  line-height: 1.05;
+}
+.novedades-con-filtro .nav-pills .nav-link.active,
+.novedades-con-filtro .nav-pills .show > .nav-link {
+  font-weight: 800;
+}

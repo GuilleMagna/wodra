@@ -242,22 +242,17 @@ function generate_dynamic_css() {
 
     return "
 
-        body                { font-family: $font_family }
-        h1                  { font-family: $font_family_h1 }
-        h2                  { font-family: $font_family_h2 }
-        h3                  { font-family: $font_family_h3 }
-        h4                  { font-family: $font_family_h4 }
-        h5                  { font-family: $font_family_h5 }
-        h1.h5               { font-family: $font_family_h5 }
-        h6                  { font-family: $font_family_h6 }
-        .text-contador      { font-family: $font_family_h1 }
-        .text-parallax      { font-family: $font_family_h1 }
         .btn                { border-radius: $rounded_botones; padding: $padding_botones; transition: all 0.3s ease-in-out !important; }
-        .slide p            { font-family: $font_family_h1 }
 
         :root {
 
             --font-family: $font_family;
+            --font-family-h1: $font_family_h1;
+            --font-family-h2: $font_family_h2;
+            --font-family-h3: $font_family_h3;
+            --font-family-h4: $font_family_h4;
+            --font-family-h5: $font_family_h5;
+            --font-family-h6: $font_family_h6;
             --primary: $primary;
             --primary-dos: $primary_dos;
             --primary-text: $primary_text;

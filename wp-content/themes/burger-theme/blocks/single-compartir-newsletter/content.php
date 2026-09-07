@@ -121,7 +121,7 @@ $block_id = $block['id'];
 
                     <div class="col-12 col-md-10 col-lg-9 mx-auto" data-aos="fade-left">
 
-                        <<?= $encabezado ?> class="titulo fs-3 fw-bold text-big-titulos light mb-3" style="text-transform: none; letter-spacing: 0px;">
+                        <<?= $encabezado ?> class="titulo fs-3 fw-bold text-big-titulos light mb-3" style="text-transform: none;">
                             <span class="text-white"><?= $titulo_formulario_newsletter ?></span> <span><?= $subtitulo_formulario_newsletter ?></span>
                         </<?= $encabezado ?>>
 

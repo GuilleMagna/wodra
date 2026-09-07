@@ -36,7 +36,7 @@ $block_id = $block['id'];
 
         <div class="text-start border-start border-primary border-4 mb-5 ps-3">
 
-            <<?= $encabezado ?> class="titulo text-big-titulos text-dark light mb-0 mx-auto <?= $col_container_class ?> <?= $col_md_container_class ?> <?= $col_lg_container_class ?> <?= $text_align_class ?>" style="text-transform: none; letter-spacing: 0px;">
+            <<?= $encabezado ?> class="titulo text-big-titulos text-dark light mb-0 mx-auto <?= $col_container_class ?> <?= $col_md_container_class ?> <?= $col_lg_container_class ?> <?= $text_align_class ?>" style="text-transform: none;">
                 <?php echo $titulo_acordeon ?><br>
                 <span class="text-big-titulos medium"><?php echo $subtitulo_acordeon ?></span>
             </<?= $encabezado ?>>

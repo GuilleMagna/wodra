@@ -2,9 +2,7 @@
     top: 32px !important;
 }
 
-.titulo.fs-4 {
-    line-height: 1.6rem;
-}
+
 
 .wpcf7 form.sent .wpcf7-response-output {
     background-color: #46b450;
@@ -61,11 +59,6 @@
 }
 
 .btn {
-    text-transform: uppercase;
-    font-size: 0.8rem;
-    line-height: 1rem;
-    font-weight: 600;
-    letter-spacing: 0.5px;
     text-align: center;
     border-radius: 50rem;
     display: inline-block;
@@ -75,10 +68,7 @@
 }
 
 .btn-lg {
-    font-size: 1rem;
-    line-height: 1.2rem;
     padding: 20px 40px 19px 40px;
-    font-weight: 400;
 }
 
 .page-numbers {

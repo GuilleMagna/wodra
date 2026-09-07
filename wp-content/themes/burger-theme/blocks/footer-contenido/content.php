@@ -2,8 +2,11 @@
 //Block Name: Footer contenido
 
 $logo_footer_contenidos = BURGER_OPTIONS['logo_footer_contenidos'] ?? BURGER_URL . '/wp-content/uploads/2025/04/a331a68ac769459f7e91cd073a6527e9-1.png';
+$link_logo_footer_contenidos = BURGER_OPTIONS['link_logo_footer_contenidos'] ?? 'http://qr.afip.gob.ar/?qr=0BMrsiS7edpbML4j5IHtDw,,';
 
 $logo_datafiscal = BURGER_OPTIONS['logo_datafiscal'] ?? BURGER_THEME_URL . '/themes/images/data-fiscal.png';
+$link_logo_datafiscal = BURGER_OPTIONS['link_logo_datafiscal'] ?? 'http://qr.afip.gob.ar/?qr=0BMrsiS7edpbML4j5IHtDw,,';
+
 $logo_certificados = BURGER_OPTIONS['logo_certificados'] ?? BURGER_THEME_URL . '/themes/images/certificados-color.png';
 
 $titulo_asociados = BURGER_OPTIONS['titulo_asociados'] ?? 'Lorem Ipsum';
@@ -52,8 +55,8 @@ $block_id = $block['id'];
 
 			<div class="col-auto d-flex text-center align-items-start">
 
-				<a href="http://qr.afip.gob.ar/?qr=0BMrsiS7edpbML4j5IHtDw,," target="_F960AFIPInfo">
-					<img loading="lazy" decoding="async" src="<?php echo $logo_datafiscal ?>" alt="logo" data-aos="fade-in" data-aos-delay="200"
+				<a href="<?= $link_logo_datafiscal ?>" target="_F960AFIPInfo">
+					<img loading="lazy" decoding="async" src="<?php echo $logo_datafiscal ?>" alt="logo_datafiscal" data-aos="fade-in" data-aos-delay="200"
 						style="width: 60px;">
 				</a>
 
@@ -61,8 +64,10 @@ $block_id = $block['id'];
 
 			<div class="col-auto d-flex flex-column">
 
-				<img loading="lazy" decoding="async" src="<?php echo $logo_footer_contenidos ?>" alt="logo" class="mb-2" data-aos="fade-in"
-					data-aos-delay="000" style="width: 125px !important;">
+                <a href="<?= $link_logo_footer_contenidos ?>" target="_blank">
+                    <img loading="lazy" decoding="async" src="<?php echo $logo_footer_contenidos ?>" alt="logo_footer_contenidos" class="mb-2" data-aos="fade-in"
+                        data-aos-delay="000" style="width: 125px !important;">
+                </a>
 
 				<div>
 
