@@ -431,3 +431,8 @@ add_action('manage_preset_posts_custom_column', function($column, $post_id) {
         echo get_the_post_thumbnail($post_id, 'medium' );
     }
 }, 10, 2);
+
+// Firma del pie del panel de administración.
+add_filter( 'admin_footer_text', function () {
+    return 'Powered by <a href="' . esc_url( 'https://theblitzinc.com/?utm_source=backend&utm_medium=referral&utm_campaign=footer' ) . '">blitz.</a>';
+} );
