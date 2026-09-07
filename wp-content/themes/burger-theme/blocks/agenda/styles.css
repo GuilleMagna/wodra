@@ -167,3 +167,12 @@
 .agenda [data-agenda-pagination] {
   transition: opacity 0.2s ease;
 }
+
+/* Los fondos necesitan altura propia cuando las columnas se apilan. */
+@media (max-width: 991.98px) {
+  [data-agenda-block] .img-descripcion {
+    aspect-ratio: 2 / 1;
+    min-height: 220px;
+    height: auto;
+  }
+}
