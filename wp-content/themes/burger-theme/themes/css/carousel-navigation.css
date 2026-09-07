@@ -1,0 +1,45 @@
+/* Owl oculta los puntitos cuando no hay más páginas para navegar. */
+@media (max-width: 599.98px) {
+    body .owl-carousel > .owl-nav {
+        display: none !important;
+    }
+    body .owl-carousel > .owl-dots:not(.disabled) {
+        display: flex !important;
+        position: static !important;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 0;
+        width: 100%;
+        margin: 20px 0 0 !important;
+        padding: 0;
+    }
+    body .owl-carousel > .owl-dots.disabled {
+        display: none !important;
+    }
+    body .owl-carousel > .owl-dots > button.owl-dot {
+        display: inline-flex !important;
+        align-items: center;
+        justify-content: center;
+        width: 28px;
+        height: 28px;
+        margin: 0;
+        padding: 0 !important;
+    }
+    body .owl-carousel > .owl-dots > button.owl-dot > span {
+        display: block;
+        width: 8px;
+        height: 8px;
+        margin: 0 !important;
+        border: 0 !important;
+        border-radius: 50%;
+        background: var(--carousel-dot-color, var(--primary)) !important;
+        opacity: .4;
+        transform: none !important;
+        transition: opacity 200ms ease;
+    }
+    body .owl-carousel > .owl-dots > button.owl-dot.active > span,
+    body .owl-carousel > .owl-dots > button.owl-dot:hover > span {
+        opacity: 1;
+    }
+}

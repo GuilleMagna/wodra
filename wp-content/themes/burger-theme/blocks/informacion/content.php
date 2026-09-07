@@ -42,7 +42,7 @@ $block_id = $block['id'];
 
 					<div class="d-flex flex-column mt-lg-5 my-lg-5 py-4 py-lg-5">
 
-                        <div class="w-75 mx-auto <?= $col_container_class ?> <?= $col_md_container_class ?> <?= $col_lg_container_class ?> <?= $text_align_class ?>">
+                        <div class="mx-auto <?= $col_container_class ?> <?= $col_md_container_class ?> <?= $col_lg_container_class ?> <?= $text_align_class ?>">
 
                             <?php if(!empty($titulo_informacion)): ?>
 

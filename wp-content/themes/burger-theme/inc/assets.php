@@ -149,3 +149,23 @@ add_action( 'wp_enqueue_scripts', function () {
         false // en el <head>, mismo orden/momento que antes (evita romper scripts inline que ya asumen jQuery cargado ahí)
     );
 }, 5 );
+
+// Cargar después de Owl y también en previews del editor.
+function burger_enqueue_carousel_navigation() {
+    $dependency = is_admin() ? 'burger-editor-owl' : 'owl-carousel';
+    wp_enqueue_script(
+        'burger-carousel-navigation',
+        BURGER_THEME_URL . '/themes/js/carousel-navigation.js',
+        [ $dependency ],
+        filemtime( BURGER_THEME_PATH . '/themes/js/carousel-navigation.js' ),
+        ! is_admin()
+    );
+    wp_enqueue_style(
+        'burger-carousel-navigation',
+        BURGER_THEME_URL . '/themes/css/carousel-navigation.css',
+        [],
+        filemtime( BURGER_THEME_PATH . '/themes/css/carousel-navigation.css' )
+    );
+}
+add_action( 'wp_enqueue_scripts', 'burger_enqueue_carousel_navigation', 20 );
+add_action( 'enqueue_block_editor_assets', 'burger_enqueue_carousel_navigation', 30 );

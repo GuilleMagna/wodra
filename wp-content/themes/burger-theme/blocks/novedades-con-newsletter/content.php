@@ -94,7 +94,7 @@ $block_id = $block['id'];
 
                 <div class="mx-auto <?= $col_container_class ?> <?= $col_md_container_class ?> <?= $col_lg_container_class ?> <?= $text_align_class ?> pb-5">
 
-                    <<?= $encabezado ?> class="titulo text-big-titulos fw-bold light mb-5 w-50 me-5 pe-3">
+                    <<?= $encabezado ?> class="titulo text-big-titulos fw-bold light mb-5 me-3">
                         <span><?php echo $titulo_novedades_newsletter ?></span>
                         <?php echo $subtitulo_novedades_newsletter ?>
                     </<?= $encabezado ?>>
@@ -152,7 +152,7 @@ $block_id = $block['id'];
 
                     <?php if ($ver_boton_mas_novedades && !empty($boton_mas_novedades) && count($boton_mas_novedades) > 0): ?>
 
-                        <div class="w-100 d-flex justify-content-center justify-content-md-start">
+                        <div class="w-100 d-flex justify-content-center justify-content-md-start pt-3">
                             <?php echo get_burger_button( $boton_mas_novedades, $estilo_boton_mas_novedades ); ?>
                         </div>
 

@@ -75,6 +75,7 @@ $block_id = $block['id'];
         background-image: url('<?= $imagen_fondo ?>');
         background-size: cover;
         background-repeat: no-repeat;
+        --carousel-dot-color: <?= $color_primario ?: 'var(--primary)' ?>;
     }
     .<?= $block_id ?> .titulo,
     .<?= $block_id ?> .color-secundario {

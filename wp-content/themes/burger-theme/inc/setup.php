@@ -388,6 +388,13 @@ function ocultar_menus_para_editores() {
 }
 
 add_action('admin_menu', 'ocultar_menus_para_editores', 999);
+// El menú de Yoast queda visible únicamente para el rol administrador.
+function burger_hide_yoast_menu_for_non_admins() {
+    if ( ! in_array( 'administrator', (array) wp_get_current_user()->roles, true ) ) {
+        remove_menu_page( 'wpseo_dashboard' );
+    }
+}
+add_action( 'admin_menu', 'burger_hide_yoast_menu_for_non_admins', 9999 );
 
 function add_cfdb7_cap_to_editor() {
 

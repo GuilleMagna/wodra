@@ -67,3 +67,19 @@
     transition: 0.3s all ease-out;
 
 }
+/* El contenedor fija el cuadrado; la foto se recorta sin deformarse. */
+#informacion-tres-columnas .info-image {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+}
+
+#informacion-tres-columnas .info-image > img {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}

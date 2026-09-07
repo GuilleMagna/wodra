@@ -48,7 +48,7 @@ $block_id = $block['id'];
                     <?php echo $titulo_compartir ?> <span><?php echo $subtitulo_compartir ?></span>
                 </<?= $encabezado ?>>
 
-                <div class="d-flex align-items-center justify-content-center justify-content-lg-start" style="gap: 12px;">
+                <div class="d-flex align-items-center justify-content-start" style="gap: 12px;">
 
                     <a href="https://api.whatsapp.com/send?text=<?php echo $post->post_title . ' ' . $post->post_permalink; ?>" target="_blank">
                         <?php echo get_burger_icon( 'icon-whatsapp' ) ?>

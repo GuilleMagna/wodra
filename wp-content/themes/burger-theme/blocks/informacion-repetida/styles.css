@@ -157,3 +157,11 @@
   }
 
 }
+/* Al apilarse las columnas, los fondos ya no heredan altura del texto. */
+@media (max-width: 991.98px) {
+  #informacion-repetida .img-descripcion[style*="background-image"] {
+    aspect-ratio: 2 / 1;
+    min-height: 220px;
+    height: auto !important;
+  }
+}

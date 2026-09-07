@@ -85,7 +85,6 @@ li {
   font-weight: normal;
   font-size: clamp(14px, 1rem, 18px);
   line-height: 1;
-  text-transform: uppercase;
 }
 
 .text-parallax {
@@ -125,7 +124,7 @@ li {
 
 .text-contador {
   font-weight: 700;
-  font-size: 6.5rem;
+  font-size: 5.5rem;
   line-height: 6rem;
   letter-spacing: 0%;
 }

@@ -27,3 +27,9 @@
     transform: rotate(45deg);
     transition: 0.3s all ease-out;
 } */
+/* Centrado móvil independiente de la alineación elegida para escritorio. */
+@media (max-width: 767.98px) {
+    #zocalo-mensajes .titulo {
+        text-align: center !important;
+    }
+}

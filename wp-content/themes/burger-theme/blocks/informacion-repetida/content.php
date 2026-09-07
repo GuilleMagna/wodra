@@ -153,7 +153,7 @@ $block_id = $block['id'];
 
                     <?php elseif( $mostrar_imagen && $imagen && $imagen_de_fondo ): ?>
 
-                        <div class="col-12 col-lg-6 p-0 img img-descripcion <?php if( $multimedia_derecha ) echo 'order-0 order-lg-1'; else echo 'order-0 order-lg-0' ?>" style="background-image: url( '<?php echo $imagen ?>'); background-size: 100%; border-radius: <?= $radio_de_los_bordes ?>; min-heigth: 220px;"></div>
+                        <div class="col-12 col-lg-6 p-0 img img-descripcion <?php if( $multimedia_derecha ) echo 'order-0 order-lg-1'; else echo 'order-0 order-lg-0' ?>" style="background-image: url( '<?php echo $imagen ?>'); background-size: 100%; border-radius: <?= $radio_de_los_bordes ?>; min-height: 220px;"></div>
                     
                     <?php elseif( $mostrar_imagen && $imagen ): ?>
                     
