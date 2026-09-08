@@ -145,3 +145,6 @@
         --equipo-flecha: 10px;
     }
 }
+#equipo .card {
+    overflow: hidden;
+}

@@ -571,11 +571,12 @@ function burger_extend_blocks() {
                 if( $bloque['activo'] == 0 ) continue;
 
                 $slug = $bloque['slug'];
+                $title = burger_fixed_structure_choices()[ $slug ] ?? ucfirst( $slug );
     
                 acf_register_block( array(
                     'name'              => $slug,
-                    'title'             => ucfirst($slug),
-                    'description'       => 'Imprime el '.ucfirst($slug).' del sitio',
+                    'title'             => $title,
+                    'description'       => 'Imprime el '.$title.' del sitio',
                     'render_callback'   => 'burger_render_blocks',
                     'api_version'       => $acf_blocks_v3 ? 3 : 2,
                     'acf_block_version' => $acf_blocks_v3 ? 3 : 2,
@@ -2586,7 +2587,7 @@ if (!function_exists('burger_get_block_choices')) {
             }
 
             $slug  = sanitize_title( $block['slug'] );
-            $label = trim( (string) ( $block['nombre'] ?? '' ) );
+            $label = burger_fixed_structure_choices()[ $slug ] ?? trim( (string) ( $block['nombre'] ?? '' ) );
 
             if ( $slug === '' ) {
                 continue;

@@ -1,5 +1,5 @@
 <?php
-//Block Name: Footer
+//Block Name: Sub-footer
 
 $copyright = BURGER_OPTIONS['copyright'] ?: '&copy; Copyright 2025 Milicic';
 $menu_footer = BURGER_OPTIONS['menu_footer'] ?: [];

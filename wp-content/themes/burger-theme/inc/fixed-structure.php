@@ -4,8 +4,8 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 function burger_fixed_structure_choices() {
     return [
         'header'           => 'Header',
-        'footer-contenido' => 'Contenido del footer',
-        'footer'           => 'Footer',
+        'footer-contenido' => 'Footer',
+        'footer'           => 'Sub-footer',
     ];
 }
 

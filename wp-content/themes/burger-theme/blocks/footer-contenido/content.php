@@ -1,5 +1,5 @@
 <?php
-//Block Name: Footer contenido
+//Block Name: Footer
 
 $logo_footer_contenidos = BURGER_OPTIONS['logo_footer_contenidos'] ?? BURGER_URL . '/wp-content/uploads/2025/04/a331a68ac769459f7e91cd073a6527e9-1.png';
 $link_logo_footer_contenidos = BURGER_OPTIONS['link_logo_footer_contenidos'] ?? 'http://qr.afip.gob.ar/?qr=0BMrsiS7edpbML4j5IHtDw,,';

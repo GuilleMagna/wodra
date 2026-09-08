@@ -137,3 +137,8 @@
         grid-template-columns: repeat(var(--servicios-columnas-lg), minmax(0, 1fr));
     }
 }
+/* Fade-in sólo cambia opacidad: translateZ(0) deja costuras entre columnas. */
+#servicios .servicios-grid > [data-aos="fade-in"] {
+    transform: none;
+    transition-property: opacity;
+}
