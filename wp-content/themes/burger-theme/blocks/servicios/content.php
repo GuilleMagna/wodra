@@ -5,7 +5,12 @@ $content_fields = ['titulo_servicios', 'subtitulo_servicios', 'encabezado', 'ser
 $fields = get_block_content_fields($block, $content_fields);
 extract($fields);
 
-if( empty($cantidad_columnas) ) $cantidad_columnas = 'col-lg-3';
+if ( empty( $cantidad_columnas ) ) $cantidad_columnas = 'col-lg-3';
+
+// Conserva la opción ACF (col-lg-3, col-lg-4, etc.) al usar CSS Grid.
+$span_lg = preg_match( '/col-lg-(\d+)/', (string) $cantidad_columnas, $matches ) ? (int) $matches[1] : 3;
+$span_lg = max( 1, min( 12, $span_lg ) );
+$columnas_lg = max( 1, (int) ( 12 / $span_lg ) );
 
 $design = get_block_design($block);
 extract($design);
@@ -57,7 +62,7 @@ $block_id = $block['id'];
 
         <div class="container-fluid px-0">
 
-            <div class="row g-0">
+            <div class="row g-0 servicios-grid" style="--servicios-columnas-lg: <?= $columnas_lg ?>;">
 
                 <?php foreach( $servicios as $key => $item ): extract($item) ?>
 

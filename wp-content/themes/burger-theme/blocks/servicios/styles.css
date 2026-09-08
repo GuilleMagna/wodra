@@ -4,7 +4,7 @@
 }
 
 .servicios .card-servicios .card-body div.text-white {
-    font-size: 16px !important;
+    font-size: 1rem !important;
     line-height: 20px !important;
     font-weight: 400;
 }
@@ -80,7 +80,7 @@
 
 .servicios .text-btn-01 {
     font-weight: 700;
-    font-size: 14px;
+    font-size: 0.875rem;
     line-height: 20px;
 }
 
@@ -108,3 +108,32 @@
 
 }
 
+
+/* La grilla evita costuras de redondeo entre columnas de ancho fraccionario. */
+#servicios .servicios-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    width: 100%;
+    margin: 0;
+    --bs-gutter-x: 0;
+    --bs-gutter-y: 0;
+}
+
+#servicios .servicios-grid > [class*="col-"] {
+    width: auto;
+    max-width: none;
+    margin: 0;
+    padding: 0;
+}
+
+@media (min-width: 768px) {
+    #servicios .servicios-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (min-width: 992px) {
+    #servicios .servicios-grid {
+        grid-template-columns: repeat(var(--servicios-columnas-lg), minmax(0, 1fr));
+    }
+}

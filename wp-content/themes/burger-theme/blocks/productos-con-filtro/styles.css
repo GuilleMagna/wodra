@@ -111,7 +111,7 @@
     background: var(--white);
     color: var(--secondary);
     text-decoration: none;
-    font-size: 16px;
+    font-size: 1rem;
     border: 1px solid var(--secondary);
     border-radius: 50rem;
     padding: 0.5rem 1.5rem;
@@ -131,7 +131,7 @@
     background: var(--secondary);
     color: var(--white);
     text-decoration: none;
-    font-size: 16px;
+    font-size: 1rem;
     border: 1px solid var(--secondary);
     border-radius: 50rem;
     padding: 0.5rem 1.5rem;
@@ -172,6 +172,6 @@
 
 .productos-con-filtro .text-btn-01 {
     font-weight: 700;
-    font-size: 16px;
+    font-size: 1rem;
     line-height: 20px;
 }
