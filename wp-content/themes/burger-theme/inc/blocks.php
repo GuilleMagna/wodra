@@ -590,6 +590,8 @@ function burger_extend_blocks() {
                     ),
                     'enqueue_assets'    => function() use ($slug) {
 
+                        if ( 'single-agenda' === $slug ) burger_agenda_media_assets();
+
                         $style_path  = get_template_directory() . '/blocks/' . $slug . '/styles.css';
                         $script_path = get_template_directory() . '/blocks/' . $slug . '/scripts.js';
 
@@ -1556,6 +1558,12 @@ add_filter('acf/get_field_groups', function ($groups) {
 });
 
 function get_block_content_fields($block, $fields = []) {
+
+    // Contenido ya formateado de las secciones integradas en Single Agenda.
+    if ( isset( $block['burger_content_fields'] ) ) {
+        return array_intersect_key( $block['burger_content_fields'], array_flip( $fields ) )
+            + array_fill_keys( $fields, '' );
+    }
 
     if (!empty($block['data']['preset'])) {
 

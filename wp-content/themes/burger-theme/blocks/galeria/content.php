@@ -23,6 +23,7 @@ $design = get_block_design( $block );
 extract( $design );
 
 $block_id = $block['id'];
+$carousel_id = 'carousel-' . sanitize_html_class( $block_id );
 
 $thumbs_col_class = is_single() ? 'col-lg-2' : 'col-lg-1';
 $main_col_class   = is_single() ? 'col-lg-10' : 'col-lg-11';
@@ -65,7 +66,7 @@ $main_col_class   = is_single() ? 'col-lg-10' : 'col-lg-11';
 
         <?php if( $tipo_de_galeria == 'slider' ): ?>
 
-            <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+            <div id="<?= esc_attr( $carousel_id ) ?>" class="carousel slide" data-bs-ride="carousel">
 
                 <div class="row">
 
@@ -82,7 +83,7 @@ $main_col_class   = is_single() ? 'col-lg-10' : 'col-lg-11';
                             <div class="carousel-indicators flex-lg-column">
 
                                 <?php if( !empty( $galeria ) and count( $galeria ) > 0 ) foreach( $galeria as $key => $img ): ?>
-                                    <button type="button" data-bs-target="#carouselExampleIndicators" class="img img-indicators rounded rounded-4 <?php if( $key==0 ) echo 'active' ?>" data-bs-slide-to="<?php echo $key ?>" <?php if( $key==0 ) echo 'aria-current="true"' ?> aria-label="Slide <?php echo $key+1 ?>" style="background-image: url('<?php echo $img ?>');"></button>
+                                    <button type="button" data-bs-target="#<?= esc_attr( $carousel_id ) ?>" class="img img-indicators rounded rounded-4 <?php if( $key==0 ) echo 'active' ?>" data-bs-slide-to="<?php echo $key ?>" <?php if( $key==0 ) echo 'aria-current="true"' ?> aria-label="Slide <?php echo $key+1 ?>" style="background-image: url('<?php echo $img ?>');"></button>
                                 <?php endforeach ?>
 
                             </div>
@@ -107,11 +108,11 @@ $main_col_class   = is_single() ? 'col-lg-10' : 'col-lg-11';
                                 
                         <?php if( !empty( $galeria ) and count( $galeria ) > 1 ): ?>
 
-                            <button class="carousel-control-prev h-100" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                            <button class="carousel-control-prev h-100" type="button" data-bs-target="#<?= esc_attr( $carousel_id ) ?>" data-bs-slide="prev">
                                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                 <span class="visually-hidden">Previous</span>
                             </button>
-                            <button class="carousel-control-next h-100" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                            <button class="carousel-control-next h-100" type="button" data-bs-target="#<?= esc_attr( $carousel_id ) ?>" data-bs-slide="next">
                                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                 <span class="visually-hidden">Next</span>
                             </button>
@@ -133,7 +134,7 @@ $main_col_class   = is_single() ? 'col-lg-10' : 'col-lg-11';
                     <div class="item">
 
                         <div class="img galeria-owl rounded-4 mx-auto w-75" style="background-image: url('<?php echo $img ?>')">
-                            <a href="<?php echo $img ?>" class="position-absolute h-100 w-100" data-fancybox="galeria"></a>
+                            <a href="<?php echo $img ?>" class="position-absolute h-100 w-100" data-fancybox="<?= esc_attr( $block_id ) ?>"></a>
                         </div>
 
                     </div>
