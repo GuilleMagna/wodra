@@ -591,6 +591,7 @@ function burger_extend_blocks() {
                     'enqueue_assets'    => function() use ($slug) {
 
                         if ( 'single-agenda' === $slug ) burger_agenda_media_assets();
+                        if ( 'single' === $slug ) burger_agenda_media_assets( [ 'galeria' ] );
 
                         $style_path  = get_template_directory() . '/blocks/' . $slug . '/styles.css';
                         $script_path = get_template_directory() . '/blocks/' . $slug . '/scripts.js';

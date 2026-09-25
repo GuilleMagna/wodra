@@ -130,3 +130,5 @@ $block_id = $block['id'];
     </div>
 
 </section>
+
+<?php burger_render_agenda_media( $post->ID, $block, 'single', [ 'galeria' ] ); ?>

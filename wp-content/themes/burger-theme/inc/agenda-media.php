@@ -31,10 +31,10 @@ function burger_agenda_media_schema() {
     ];
 }
 
-function burger_agenda_media_fields() {
+function burger_agenda_media_fields( $namespace = 'agenda', $sections = [ 'galeria', 'video' ] ) {
     $fields = [];
-    foreach ( burger_agenda_media_schema() as $section => $schema ) {
-        $prefix = 'agenda_' . $section . '_';
+    foreach ( array_intersect_key( burger_agenda_media_schema(), array_flip( $sections ) ) as $section => $schema ) {
+        $prefix = $namespace . '_' . $section . '_';
         $toggle = 'field_burger_' . $prefix . 'visible';
         $fields[] = [ 'key' => 'field_burger_' . $prefix . 'tab', 'label' => ucfirst( $section ), 'name' => '', 'type' => 'tab' ];
         $fields[] = [
@@ -46,7 +46,7 @@ function burger_agenda_media_fields() {
             [ $label, $type, $default ] = $definition;
             $rules = [ [ 'field' => $toggle, 'operator' => '==', 'value' => '1' ] ];
             if ( 'galeria' === $section && in_array( $name, [ 'items', 'items_desktop', 'items_tablet', 'items_mobile', 'autoplay', 'nav', 'dots', 'loop', 'margen', 'overflow' ], true ) ) {
-                $rules[] = [ 'field' => 'field_burger_agenda_galeria_tipo_de_galeria', 'operator' => '==', 'value' => 'carrusel' ];
+                $rules[] = [ 'field' => 'field_burger_' . $prefix . 'tipo_de_galeria', 'operator' => '==', 'value' => 'carrusel' ];
             }
             $field = [
                 'key' => 'field_burger_' . $prefix . $name, 'name' => $prefix . $name,
@@ -85,8 +85,8 @@ add_filter( 'acf/load_fields', function ( $fields, $parent ) {
 }, 30, 2 );
 
 /** También se ejecuta cuando Single Agenda sale de la caché de HTML. */
-function burger_agenda_media_assets() {
-    foreach ( [ 'galeria', 'video' ] as $slug ) {
+function burger_agenda_media_assets( $sections = [ 'galeria', 'video' ] ) {
+    foreach ( array_intersect( [ 'galeria', 'video' ], $sections ) as $slug ) {
         foreach ( [ 'css' => 'styles.css', 'js' => 'scripts.js' ] as $type => $file ) {
             $relative = '/blocks/' . $slug . '/' . $file;
             $path = BURGER_THEME_PATH . $relative;
@@ -97,9 +97,9 @@ function burger_agenda_media_assets() {
     }
 }
 
-function burger_render_agenda_media( $post_id, $parent_block ) {
-    foreach ( burger_agenda_media_schema() as $slug => $schema ) {
-        $prefix = 'agenda_' . $slug . '_';
+function burger_render_agenda_media( $post_id, $parent_block, $namespace = 'agenda', $sections = [ 'galeria', 'video' ] ) {
+    foreach ( array_intersect_key( burger_agenda_media_schema(), array_flip( $sections ) ) as $slug => $schema ) {
+        $prefix = $namespace . '_' . $slug . '_';
         if ( ! get_field( $prefix . 'visible', $post_id ) ) continue;
         $values = [];
         foreach ( $schema as $name => $definition ) {
@@ -116,7 +116,7 @@ function burger_render_agenda_media( $post_id, $parent_block ) {
         }
         $block = [
             'name' => 'acf/' . $slug,
-            'id' => sanitize_html_class( $parent_block['id'] . '-agenda-' . $slug ),
+            'id' => sanitize_html_class( $parent_block['id'] . '-' . $namespace . '-' . $slug ),
             'data' => [ 'preset' => 0 ],
             'burger_content_fields' => $values,
         ];

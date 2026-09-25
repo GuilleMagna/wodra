@@ -17,6 +17,7 @@ if ( function_exists( 'acf_add_local_field_group' ) ) {
         }
     }
     unset( $single_field );
+    $single_fields = array_merge( $single_fields, burger_agenda_media_fields( 'single', [ 'galeria' ] ) );
     acf_add_local_field_group( [
         'key' => 'group_burger_single', 'title' => 'Block Single', 'fields' => $single_fields,
         'location' => [
