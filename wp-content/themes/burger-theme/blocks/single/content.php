@@ -2,7 +2,7 @@
 //Block Name: Single
 if( get_post_type() == 'page' ) return null;
 
-$content_fields = [ 'imagen_servicio', 'titulo_compartir', 'subtitulo_compartir', 'boton' ];
+$content_fields = [ 'titulo_single', 'subtitulo_single', 'encabezado_single', 'contenido_single', 'imagen_servicio', 'titulo_compartir', 'subtitulo_compartir', 'boton' ];
 $fields = get_block_content_fields( $block, $content_fields );
 
 
@@ -26,6 +26,9 @@ extract( $fields );
 $post_id            = $post->ID ?? '';
 $post_title         = $post->post_title ?? '';
 $post_content       = $post->post_content ?? '';
+$display_title = '' !== trim( (string) $titulo_single ) ? $titulo_single : $post_title;
+$heading = in_array( $encabezado_single, [ 'h1', 'h2', 'h3' ], true ) ? $encabezado_single : 'h1';
+$fixed_content = 'bloque-fijo' === burger_editor_mode( 'post' );
 $post_permalink     = get_permalink( $post_id );
 $post_categories    = get_the_category( $post_id );
 $post_category      = ! empty( $post_categories ) ? $post_categories[0] : null;
@@ -71,9 +74,9 @@ $block_id = $block['id'];
 
                 <div class="text-start mb-5">
 
-                    <h1 class="color-primario regular mb-3 <?= $col_container_class ?> <?= $col_md_container_class ?> <?= $col_lg_container_class ?> <?= $text_align_class ?>">
-                        <?php echo $post_title ?>
-                    </h1>
+                    <<?= $heading ?> class="color-primario regular mb-3 <?= $col_container_class ?> <?= $col_md_container_class ?> <?= $col_lg_container_class ?> <?= $text_align_class ?>">
+                        <?= esc_html( $display_title ) ?> <span><?= esc_html( $subtitulo_single ) ?></span>
+                    </<?= $heading ?>>
 
                     <?php if ( $post_category ) : ?>
                         <a class="color-secundario" href="<?= esc_url( get_category_link( $post_category->term_id ) ); ?>">
@@ -84,7 +87,7 @@ $block_id = $block['id'];
                 </div>
 
                 <div class="color-secundario">
-                    <?= apply_filters( 'the_content', $post_content ) ?>
+                    <?= $fixed_content ? $contenido_single : apply_filters( 'the_content', $post_content ) ?>
                 </div>
 
                 <div id="compartir-ahora" class="mt-5">

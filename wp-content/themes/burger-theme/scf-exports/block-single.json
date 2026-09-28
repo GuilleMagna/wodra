@@ -1,0 +1,865 @@
+[
+    {
+        "key": "group_burger_single",
+        "title": "Block Single",
+        "fields": [
+            {
+                "key": "field_burger_single_tab",
+                "label": "Configuración",
+                "name": "",
+                "aria-label": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": false,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "placement": "left",
+                "endpoint": 0,
+                "selected": 0
+            },
+            {
+                "key": "field_burger_single_titulo",
+                "label": "Título",
+                "name": "titulo_single",
+                "aria-label": "",
+                "type": "text",
+                "instructions": "",
+                "required": false,
+                "conditional_logic": false,
+                "wrapper": {
+                    "width": "40",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "maxlength": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": ""
+            },
+            {
+                "key": "field_burger_single_subtitulo",
+                "label": "Subtítulo",
+                "name": "subtitulo_single",
+                "aria-label": "",
+                "type": "text",
+                "instructions": "",
+                "required": false,
+                "conditional_logic": false,
+                "wrapper": {
+                    "width": "40",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "maxlength": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": ""
+            },
+            {
+                "key": "field_burger_single_encabezado",
+                "label": "Encabezado",
+                "name": "encabezado_single",
+                "aria-label": "",
+                "type": "select",
+                "instructions": "",
+                "required": false,
+                "conditional_logic": false,
+                "wrapper": {
+                    "width": "20",
+                    "class": "",
+                    "id": ""
+                },
+                "choices": {
+                    "h1": "H1",
+                    "h2": "H2",
+                    "h3": "H3"
+                },
+                "default_value": "h1",
+                "return_format": "value",
+                "multiple": 0,
+                "allow_null": 0,
+                "ui": 0,
+                "ajax": 0,
+                "placeholder": "",
+                "create_options": 0,
+                "save_options": 0
+            },
+            {
+                "key": "field_burger_single_contenido",
+                "label": "Contenido",
+                "name": "contenido_single",
+                "aria-label": "",
+                "type": "wysiwyg",
+                "instructions": "",
+                "required": false,
+                "conditional_logic": false,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "tabs": "all",
+                "toolbar": "full",
+                "media_upload": 1,
+                "default_value": "",
+                "delay": 0
+            },
+            {
+                "key": "field_burger_single_imagen",
+                "label": "Imagen servicio",
+                "name": "imagen_servicio",
+                "aria-label": "",
+                "type": "image",
+                "instructions": "",
+                "required": false,
+                "conditional_logic": [
+                    [
+                        {
+                            "field": "field_burger_single_preset",
+                            "operator": "!=",
+                            "value": "1"
+                        }
+                    ]
+                ],
+                "wrapper": {
+                    "width": "50",
+                    "class": "",
+                    "id": ""
+                },
+                "return_format": "url",
+                "preview_size": "medium",
+                "library": "all",
+                "min_width": 0,
+                "min_height": 0,
+                "min_size": 0,
+                "max_width": 0,
+                "max_height": 0,
+                "max_size": 0,
+                "mime_types": ""
+            },
+            {
+                "key": "field_burger_single_boton",
+                "label": "Botón",
+                "name": "boton",
+                "aria-label": "",
+                "type": "link",
+                "instructions": "",
+                "required": false,
+                "conditional_logic": [
+                    [
+                        {
+                            "field": "field_burger_single_preset",
+                            "operator": "!=",
+                            "value": "1"
+                        }
+                    ]
+                ],
+                "wrapper": {
+                    "width": "50",
+                    "class": "",
+                    "id": ""
+                },
+                "return_format": "array"
+            },
+            {
+                "key": "field_burger_single_titulo_compartir",
+                "label": "Título Compartir",
+                "name": "titulo_compartir",
+                "aria-label": "",
+                "type": "text",
+                "instructions": "",
+                "required": false,
+                "conditional_logic": [
+                    [
+                        {
+                            "field": "field_burger_single_preset",
+                            "operator": "!=",
+                            "value": "1"
+                        }
+                    ]
+                ],
+                "wrapper": {
+                    "width": "50",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "¡Compartí ahora esta novedad",
+                "maxlength": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": ""
+            },
+            {
+                "key": "field_burger_single_subtitulo_compartir",
+                "label": "Subtítulo Compartir",
+                "name": "subtitulo_compartir",
+                "aria-label": "",
+                "type": "text",
+                "instructions": "",
+                "required": false,
+                "conditional_logic": [
+                    [
+                        {
+                            "field": "field_burger_single_preset",
+                            "operator": "!=",
+                            "value": "1"
+                        }
+                    ]
+                ],
+                "wrapper": {
+                    "width": "50",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "con colegas!",
+                "maxlength": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": ""
+            },
+            {
+                "key": "field_burger_single_preset",
+                "label": "Configuración por defecto",
+                "name": "preset",
+                "aria-label": "",
+                "type": "true_false",
+                "instructions": "",
+                "required": false,
+                "conditional_logic": false,
+                "wrapper": {
+                    "width": "30",
+                    "class": "",
+                    "id": ""
+                },
+                "ui": 1,
+                "default_value": 0,
+                "message": "",
+                "ui_on_text": "",
+                "ui_off_text": ""
+            },
+            {
+                "key": "field_burger_preset_58041af87b584481",
+                "label": "Preset seleccionado",
+                "name": "preset_seleccionado",
+                "aria-label": "",
+                "type": "select_preset",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": [
+                    [
+                        {
+                            "field": "field_burger_single_preset",
+                            "operator": "==",
+                            "value": "1"
+                        }
+                    ]
+                ],
+                "wrapper": {
+                    "width": "70",
+                    "class": "",
+                    "id": ""
+                },
+                "choices": [],
+                "default_value": "",
+                "allow_null": 1,
+                "multiple": 0,
+                "ui": 1,
+                "ajax": 0,
+                "return_format": "value",
+                "placeholder": "Usar preset predeterminado"
+            },
+            {
+                "key": "field_burger_single_galeria_tab",
+                "label": "Galeria",
+                "name": "",
+                "aria-label": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": false,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "placement": "top",
+                "endpoint": 0,
+                "selected": 0
+            },
+            {
+                "key": "field_burger_single_galeria_visible",
+                "label": "Mostrar galeria",
+                "name": "single_galeria_visible",
+                "aria-label": "",
+                "type": "true_false",
+                "instructions": "Podés ocultar esta sección sin borrar su contenido.",
+                "required": false,
+                "conditional_logic": false,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "ui": 1,
+                "default_value": 0,
+                "message": "",
+                "ui_on_text": "",
+                "ui_off_text": ""
+            },
+            {
+                "key": "field_burger_single_galeria_titulo_galeria",
+                "label": "Título",
+                "name": "single_galeria_titulo_galeria",
+                "aria-label": "",
+                "type": "text",
+                "instructions": "",
+                "required": false,
+                "conditional_logic": [
+                    [
+                        {
+                            "field": "field_burger_single_galeria_visible",
+                            "operator": "==",
+                            "value": "1"
+                        }
+                    ]
+                ],
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "maxlength": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": ""
+            },
+            {
+                "key": "field_burger_single_galeria_subtitulo_galeria",
+                "label": "Subtítulo",
+                "name": "single_galeria_subtitulo_galeria",
+                "aria-label": "",
+                "type": "text",
+                "instructions": "",
+                "required": false,
+                "conditional_logic": [
+                    [
+                        {
+                            "field": "field_burger_single_galeria_visible",
+                            "operator": "==",
+                            "value": "1"
+                        }
+                    ]
+                ],
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "maxlength": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": ""
+            },
+            {
+                "key": "field_burger_single_galeria_encabezado",
+                "label": "Encabezado",
+                "name": "single_galeria_encabezado",
+                "aria-label": "",
+                "type": "select",
+                "instructions": "",
+                "required": false,
+                "conditional_logic": [
+                    [
+                        {
+                            "field": "field_burger_single_galeria_visible",
+                            "operator": "==",
+                            "value": "1"
+                        }
+                    ]
+                ],
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "h2",
+                "choices": {
+                    "h2": "H2",
+                    "h3": "H3"
+                },
+                "return_format": "value",
+                "multiple": 0,
+                "allow_null": 0,
+                "ui": 0,
+                "ajax": 0,
+                "placeholder": "",
+                "create_options": 0,
+                "save_options": 0
+            },
+            {
+                "key": "field_burger_single_galeria_galeria",
+                "label": "Imágenes",
+                "name": "single_galeria_galeria",
+                "aria-label": "",
+                "type": "gallery",
+                "instructions": "",
+                "required": false,
+                "conditional_logic": [
+                    [
+                        {
+                            "field": "field_burger_single_galeria_visible",
+                            "operator": "==",
+                            "value": "1"
+                        }
+                    ]
+                ],
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "return_format": "url",
+                "preview_size": "thumbnail",
+                "library": "all",
+                "insert": "append",
+                "min": 0,
+                "max": 0,
+                "min_width": 0,
+                "min_height": 0,
+                "min_size": 0,
+                "max_width": 0,
+                "max_height": 0,
+                "max_size": 0,
+                "mime_types": ""
+            },
+            {
+                "key": "field_burger_single_galeria_tipo_de_galeria",
+                "label": "Tipo de galería",
+                "name": "single_galeria_tipo_de_galeria",
+                "aria-label": "",
+                "type": "select",
+                "instructions": "",
+                "required": false,
+                "conditional_logic": [
+                    [
+                        {
+                            "field": "field_burger_single_galeria_visible",
+                            "operator": "==",
+                            "value": "1"
+                        }
+                    ]
+                ],
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "slider",
+                "choices": {
+                    "slider": "Slider",
+                    "carrusel": "Carrusel"
+                },
+                "return_format": "value",
+                "multiple": 0,
+                "allow_null": 0,
+                "ui": 0,
+                "ajax": 0,
+                "placeholder": "",
+                "create_options": 0,
+                "save_options": 0
+            },
+            {
+                "key": "field_burger_single_galeria_items",
+                "label": "Imágenes en pantallas grandes",
+                "name": "single_galeria_items",
+                "aria-label": "",
+                "type": "number",
+                "instructions": "",
+                "required": false,
+                "conditional_logic": [
+                    [
+                        {
+                            "field": "field_burger_single_galeria_visible",
+                            "operator": "==",
+                            "value": "1"
+                        },
+                        {
+                            "field": "field_burger_single_galeria_tipo_de_galeria",
+                            "operator": "==",
+                            "value": "carrusel"
+                        }
+                    ]
+                ],
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": 4,
+                "min": 1,
+                "step": 1,
+                "max": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": ""
+            },
+            {
+                "key": "field_burger_single_galeria_items_desktop",
+                "label": "Imágenes en escritorio",
+                "name": "single_galeria_items_desktop",
+                "aria-label": "",
+                "type": "number",
+                "instructions": "",
+                "required": false,
+                "conditional_logic": [
+                    [
+                        {
+                            "field": "field_burger_single_galeria_visible",
+                            "operator": "==",
+                            "value": "1"
+                        },
+                        {
+                            "field": "field_burger_single_galeria_tipo_de_galeria",
+                            "operator": "==",
+                            "value": "carrusel"
+                        }
+                    ]
+                ],
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": 3,
+                "min": 1,
+                "step": 1,
+                "max": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": ""
+            },
+            {
+                "key": "field_burger_single_galeria_items_tablet",
+                "label": "Imágenes en tablet",
+                "name": "single_galeria_items_tablet",
+                "aria-label": "",
+                "type": "number",
+                "instructions": "",
+                "required": false,
+                "conditional_logic": [
+                    [
+                        {
+                            "field": "field_burger_single_galeria_visible",
+                            "operator": "==",
+                            "value": "1"
+                        },
+                        {
+                            "field": "field_burger_single_galeria_tipo_de_galeria",
+                            "operator": "==",
+                            "value": "carrusel"
+                        }
+                    ]
+                ],
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": 2,
+                "min": 1,
+                "step": 1,
+                "max": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": ""
+            },
+            {
+                "key": "field_burger_single_galeria_items_mobile",
+                "label": "Imágenes en celular",
+                "name": "single_galeria_items_mobile",
+                "aria-label": "",
+                "type": "number",
+                "instructions": "",
+                "required": false,
+                "conditional_logic": [
+                    [
+                        {
+                            "field": "field_burger_single_galeria_visible",
+                            "operator": "==",
+                            "value": "1"
+                        },
+                        {
+                            "field": "field_burger_single_galeria_tipo_de_galeria",
+                            "operator": "==",
+                            "value": "carrusel"
+                        }
+                    ]
+                ],
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": 1,
+                "min": 1,
+                "step": 1,
+                "max": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": ""
+            },
+            {
+                "key": "field_burger_single_galeria_autoplay",
+                "label": "Reproducción automática",
+                "name": "single_galeria_autoplay",
+                "aria-label": "",
+                "type": "true_false",
+                "instructions": "",
+                "required": false,
+                "conditional_logic": [
+                    [
+                        {
+                            "field": "field_burger_single_galeria_visible",
+                            "operator": "==",
+                            "value": "1"
+                        },
+                        {
+                            "field": "field_burger_single_galeria_tipo_de_galeria",
+                            "operator": "==",
+                            "value": "carrusel"
+                        }
+                    ]
+                ],
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": 0,
+                "ui": 1,
+                "message": "",
+                "ui_on_text": "",
+                "ui_off_text": ""
+            },
+            {
+                "key": "field_burger_single_galeria_nav",
+                "label": "Flechas",
+                "name": "single_galeria_nav",
+                "aria-label": "",
+                "type": "true_false",
+                "instructions": "",
+                "required": false,
+                "conditional_logic": [
+                    [
+                        {
+                            "field": "field_burger_single_galeria_visible",
+                            "operator": "==",
+                            "value": "1"
+                        },
+                        {
+                            "field": "field_burger_single_galeria_tipo_de_galeria",
+                            "operator": "==",
+                            "value": "carrusel"
+                        }
+                    ]
+                ],
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": 1,
+                "ui": 1,
+                "message": "",
+                "ui_on_text": "",
+                "ui_off_text": ""
+            },
+            {
+                "key": "field_burger_single_galeria_dots",
+                "label": "Indicadores",
+                "name": "single_galeria_dots",
+                "aria-label": "",
+                "type": "true_false",
+                "instructions": "",
+                "required": false,
+                "conditional_logic": [
+                    [
+                        {
+                            "field": "field_burger_single_galeria_visible",
+                            "operator": "==",
+                            "value": "1"
+                        },
+                        {
+                            "field": "field_burger_single_galeria_tipo_de_galeria",
+                            "operator": "==",
+                            "value": "carrusel"
+                        }
+                    ]
+                ],
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": 0,
+                "ui": 1,
+                "message": "",
+                "ui_on_text": "",
+                "ui_off_text": ""
+            },
+            {
+                "key": "field_burger_single_galeria_loop",
+                "label": "Repetir carrusel",
+                "name": "single_galeria_loop",
+                "aria-label": "",
+                "type": "true_false",
+                "instructions": "",
+                "required": false,
+                "conditional_logic": [
+                    [
+                        {
+                            "field": "field_burger_single_galeria_visible",
+                            "operator": "==",
+                            "value": "1"
+                        },
+                        {
+                            "field": "field_burger_single_galeria_tipo_de_galeria",
+                            "operator": "==",
+                            "value": "carrusel"
+                        }
+                    ]
+                ],
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": 1,
+                "ui": 1,
+                "message": "",
+                "ui_on_text": "",
+                "ui_off_text": ""
+            },
+            {
+                "key": "field_burger_single_galeria_margen",
+                "label": "Separación entre imágenes (px)",
+                "name": "single_galeria_margen",
+                "aria-label": "",
+                "type": "number",
+                "instructions": "",
+                "required": false,
+                "conditional_logic": [
+                    [
+                        {
+                            "field": "field_burger_single_galeria_visible",
+                            "operator": "==",
+                            "value": "1"
+                        },
+                        {
+                            "field": "field_burger_single_galeria_tipo_de_galeria",
+                            "operator": "==",
+                            "value": "carrusel"
+                        }
+                    ]
+                ],
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": 10,
+                "min": 0,
+                "step": 1,
+                "max": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": ""
+            },
+            {
+                "key": "field_burger_single_galeria_overflow",
+                "label": "Desbordamiento del contenedor",
+                "name": "single_galeria_overflow",
+                "aria-label": "",
+                "type": "select",
+                "instructions": "",
+                "required": false,
+                "conditional_logic": [
+                    [
+                        {
+                            "field": "field_burger_single_galeria_visible",
+                            "operator": "==",
+                            "value": "1"
+                        },
+                        {
+                            "field": "field_burger_single_galeria_tipo_de_galeria",
+                            "operator": "==",
+                            "value": "carrusel"
+                        }
+                    ]
+                ],
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "visible",
+                "choices": {
+                    "visible": "Visible",
+                    "hidden": "Oculto"
+                },
+                "return_format": "value",
+                "multiple": 0,
+                "allow_null": 0,
+                "ui": 0,
+                "ajax": 0,
+                "placeholder": "",
+                "create_options": 0,
+                "save_options": 0
+            }
+        ],
+        "location": [
+            [
+                {
+                    "param": "block",
+                    "operator": "==",
+                    "value": "acf/single"
+                }
+            ],
+            [
+                {
+                    "param": "post_type",
+                    "operator": "==",
+                    "value": "post"
+                }
+            ],
+            [
+                {
+                    "param": "burger_preset_group",
+                    "operator": "==",
+                    "value": "single"
+                }
+            ]
+        ],
+        "menu_order": 0,
+        "position": "normal",
+        "style": "default",
+        "label_placement": "top",
+        "instruction_placement": "label",
+        "hide_on_screen": [],
+        "active": true,
+        "description": "",
+        "show_in_rest": false,
+        "display_title": "",
+        "allow_ai_access": false,
+        "ai_description": ""
+    }
+]
