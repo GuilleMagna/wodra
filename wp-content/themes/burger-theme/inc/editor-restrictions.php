@@ -180,3 +180,41 @@ function burger_hide_legacy_event_text_field( $field ) {
     return $field;
 }
 add_filter( 'acf/prepare_field/name=texto_evento', 'burger_hide_legacy_event_text_field' );
+
+/** SCF descarta metaboxes con cualquier regla de bloque, incluso si coincide post_type. */
+function burger_rigid_editor_field_groups( $groups ) {
+    $screen = function_exists( 'get_current_screen' ) ? get_current_screen() : null;
+    if ( ! is_admin() || ! $screen || 'post' !== $screen->base ) return $groups;
+
+    $slug = burger_rigid_post_types()[ $screen->post_type ] ?? '';
+    if ( ! $slug ) return $groups;
+
+    foreach ( $groups as &$group ) {
+        if ( sanitize_title( $group['title'] ?? '' ) !== 'block-' . sanitize_title( $slug ) ) continue;
+        // Sólo cambia la copia usada por el formulario fijo. Gutenberg y presets
+        // conservan las reglas originales, sin guardar cambios en la base.
+        $group['location'] = array_values( array_filter( (array) ( $group['location'] ?? [] ), static function ( $rules ) {
+            foreach ( $rules as $rule ) {
+                if ( 'block' === ( $rule['param'] ?? '' ) ) return false;
+            }
+            return true;
+        } ) );
+    }
+    unset( $group );
+    return $groups;
+}
+add_filter( 'acf/get_field_groups', 'burger_rigid_editor_field_groups', 20 );
+add_filter( 'acf/load_field_group', static function ( $group ) {
+    return burger_rigid_editor_field_groups( [ $group ] )[0];
+}, 20 );
+// Recarga sólo la definición temporal del grupo fijo si ACF la leyó antes
+// de conocer la pantalla; no modifica datos ni cachés persistentes del sitio.
+add_action( 'current_screen', static function ( $screen ) {
+    if ( 'post' !== $screen->base || ! function_exists( 'acf_get_store' ) ) return;
+    $slug = burger_rigid_post_types()[ $screen->post_type ] ?? '';
+    if ( ! $slug ) return;
+    $store = acf_get_store( 'field-groups' );
+    foreach ( (array) $store->get() as $key => $group ) {
+        if ( sanitize_title( $group['title'] ?? '' ) === 'block-' . sanitize_title( $slug ) ) $store->remove( $key );
+    }
+} );
