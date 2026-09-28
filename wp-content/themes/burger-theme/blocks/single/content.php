@@ -22,11 +22,15 @@ if ( empty( $block['data']['preset'] ) ) {
         }
     }
 }
+// El contenido editorial pertenece a la Novedad, nunca al preset de la plantilla.
+foreach ( [ 'titulo_single', 'subtitulo_single', 'encabezado_single', 'contenido_single' ] as $field_name ) {
+    $fields[ $field_name ] = get_field( $field_name, $post->ID ) ?? '';
+}
 extract( $fields );
 $post_id            = $post->ID ?? '';
 $post_title         = $post->post_title ?? '';
 $post_content       = $post->post_content ?? '';
-$display_title = '' !== trim( (string) $titulo_single ) ? $titulo_single : $post_title;
+$display_title = (string) $titulo_single;
 $heading = in_array( $encabezado_single, [ 'h1', 'h2', 'h3' ], true ) ? $encabezado_single : 'h1';
 $fixed_content = 'bloque-fijo' === burger_editor_mode( 'post' );
 $post_permalink     = get_permalink( $post_id );
