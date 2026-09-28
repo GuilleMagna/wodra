@@ -5,7 +5,6 @@ if( get_post_type() == 'page' ) return null;
 $content_fields = [ 'titulo_single', 'subtitulo_single', 'encabezado_single', 'contenido_single', 'imagen_servicio', 'titulo_compartir', 'subtitulo_compartir', 'boton' ];
 $fields = get_block_content_fields( $block, $content_fields );
 
-
 global $wp_query;
 $post = $wp_query->queried_object;
 
@@ -78,7 +77,7 @@ $block_id = $block['id'];
 
                 <div class="text-start mb-5">
 
-                    <<?= $heading ?> class="color-primario regular mb-3 <?= $col_container_class ?> <?= $col_md_container_class ?> <?= $col_lg_container_class ?> <?= $text_align_class ?>">
+                    <<?= $heading ?> class="titulo regular mb-3 <?= $col_container_class ?> <?= $col_md_container_class ?> <?= $col_lg_container_class ?> <?= $text_align_class ?>">
                         <?= esc_html( $display_title ) ?> <span><?= esc_html( $subtitulo_single ) ?></span>
                     </<?= $heading ?>>
 
