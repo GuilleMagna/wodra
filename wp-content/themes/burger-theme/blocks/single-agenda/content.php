@@ -2,7 +2,7 @@
 //Block Name: Single agenda
 if( get_post_type() == 'page' ) return null;
 
-$content_fields = [ 'titulo', 'subtitulo', 'encabezado', 'contenido', 'botones_evento', 'informacion', 'logo_evento' ];
+$content_fields = [ 'titulo_single', 'subtitulo_single', 'encabezado_single', 'contenido_single', 'texto_evento', 'botones_evento', 'informacion', 'logo_evento' ];
 $fields = get_block_content_fields( $block, $content_fields );
 
 global $wp_query;
@@ -85,6 +85,30 @@ $block_id = $block['id'];
                 </div>
 
             </div>
+
+            <?php if ( !empty($logo_evento) ): ?>
+
+                <div class="col-12 col-md-3 d-flex align-items-center justify-content-center">
+                    <div class="single-agenda-logo" data-aos="fade-up">
+
+                        <?php if ( is_array($logo_evento) ): ?>
+                            <img
+                                src="<?= esc_url($logo_evento['url']) ?>"
+                                alt="<?= esc_attr($logo_evento['alt'] ?? $display_title) ?>"
+                                class="img-fluid"
+                            >
+                        <?php else: ?>
+                            <img
+                                src="<?= esc_url($logo_evento) ?>"
+                                alt="<?= esc_attr($display_title) ?>"
+                                class="img-fluid"
+                            >
+                        <?php endif; ?>
+
+                    </div>
+                </div>
+
+            <?php endif; ?>
 
             <?php if ( !empty($informacion) && count($informacion) > 0 ): ?>
 
