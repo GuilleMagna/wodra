@@ -16,7 +16,7 @@ $contenido_bloques = '';
 if ( $modo_contenido ) {
     $contenido_bloques = apply_filters( 'the_content', $post_content );
 }
-$design = get_block_design($block);
+$design = get_block_design( $block, true );
 extract($design);
 
 $block_id = $block['id'];

@@ -44,7 +44,7 @@ foreach ( $post_categories as $category ) {
     }
 }
 
-$design = get_block_design( $block );
+$design = get_block_design( $block, true );
 extract( $design );
 
 $block_id = $block['id'];

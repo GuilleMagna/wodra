@@ -2413,14 +2413,18 @@ function burger_apply_button_icons( $html ) {
 }
 */
 
-function get_block_design( $block ) {
+function get_block_design( $block, $use_general_design = false ) {
 
-    $slug    = str_replace( 'acf/', '', $block['name'] );
-    $presets = get_block_values( $slug, $block );
-
-    $source = ! empty( $block['data']['preset_design'] )
-        ? ( $presets ?: [] )
-        : ( $block['data'] ?? [] );
+    if ( $use_general_design ) {
+        // Los singles se administran desde Configuración General, sin overrides
+        // antiguos guardados en la plantilla ni presets de diseño.
+        $source = [ 'color_fondo' => burger_option( 'color_fondo', 'transparent' ) ];
+    } else {
+        $slug = str_replace( 'acf/', '', $block['name'] );
+        $source = ! empty( $block['data']['preset_design'] )
+            ? ( get_block_values( $slug, $block ) ?: [] )
+            : ( $block['data'] ?? [] );
+    }
 
     $imagen_fondo = $source['imagen_fondo'] ?? '';
 
