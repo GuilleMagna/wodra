@@ -56,9 +56,9 @@ $block_id = $block['id'];
 
                     <div class="<?= $col_container_class ?> <?= $col_md_container_class ?> <?= $col_lg_container_class ?> <?= $text_align_class ?>">
 
-                        <<?= $heading ?> class="titulo regular mb-5">
+                        <<?= $encabezado_single ?> class="titulo regular mb-5">
                             <?= esc_html( $display_title ) ?> <span><?= esc_html( $subtitulo_single ) ?></span>
-                        </<?= $heading ?>>
+                        </<?= $encabezado_single ?>>
 
                     </div>
 
