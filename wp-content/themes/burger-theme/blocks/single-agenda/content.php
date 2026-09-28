@@ -1,17 +1,29 @@
 <?php
 //Block Name: Single agenda
-if( get_post_type() == 'page' ) return null;
-
-$content_fields = [ 'titulo_single', 'subtitulo_single', 'encabezado_single', 'contenido_single', 'texto_evento', 'botones_evento', 'informacion', 'logo_evento' ];
-$fields = get_block_content_fields( $block, $content_fields );
 
 global $wp_query;
 $post = $wp_query->queried_object;
+if ( ! $post instanceof WP_Post ) return;
 
-$post_title        = $post->post_title;
-$post_content      = $post->post_content ?? '';
+// El contenido pertenece al evento consultado, no a la página de plantilla ni al preset.
+$event_field = static function ( $names, $fallback = '' ) use ( $post ) {
+    foreach ( (array) $names as $name ) {
+        $value = get_field( $name, $post->ID );
+        if ( null !== $value && false !== $value ) return $value;
+    }
+    return $fallback;
+};
+$post_title = $post->post_title ?? '';
+$post_content = $post->post_content ?? '';
+$titulo_single = $event_field( [ 'titulo_single', 'titulo_evento' ], $post_title );
+$subtitulo_single = $event_field( [ 'subtitulo_single', 'subtitulo_evento' ] );
+$encabezado_single = $event_field( [ 'encabezado_single', 'encabezado_evento', 'encabezado' ], 'h1' );
+$encabezado_single = in_array( $encabezado_single, [ 'h1', 'h2', 'h3' ], true ) ? $encabezado_single : 'h1';
 $display_title = (string) $titulo_single;
-
+$texto_evento = $event_field( 'texto_evento' );
+$botones_evento = $event_field( 'botones_evento', [] );
+$informacion = $event_field( 'informacion', [] );
+$logo_evento = $event_field( 'logo_evento' );
 $modo_contenido    = function_exists( 'burger_editor_mode' ) && 'contenido' === burger_editor_mode( 'evento' );
 $contenido_bloques = '';
 
