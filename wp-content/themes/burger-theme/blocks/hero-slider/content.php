@@ -45,7 +45,7 @@ $block_id = $block['id'];
 
                             <div class="d-flex align-items-center text-start my-4 mx-auto <?= $col_container_class ?> <?= $col_md_container_class ?> <?= $col_lg_container_class ?> <?= $text_align_class ?>">
 
-                                <div data-aos="fade-in">
+                                <div class="w-100" data-aos="fade-in">
                                         
                                     <?php if( $logo_slider ): ?>
                                         <img src="<?php echo $logo_slider ?>" class="logo-slider" alt="<?php echo $texto_slider ?>">
@@ -59,7 +59,7 @@ $block_id = $block['id'];
 
                                     <?php endif ?>
 
-                                    <div class="me-5" data-aos="fade-in">
+                                    <div data-aos="fade-in">
 
                                         <?php if (!empty($botones) && count($botones) > 0): ?>
 

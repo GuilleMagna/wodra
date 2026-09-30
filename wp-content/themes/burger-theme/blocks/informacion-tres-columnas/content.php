@@ -57,31 +57,31 @@ $block_id = $block['id'];
 
             <?php if( !empty($columnas) && count($columnas) > 0 ) foreach( $columnas as $key => $item ): extract($item) ?>
 
-                <div class="col-12 col-md-6 col-lg-4 mb-4">
+                <div class="col-12 col-md-6 col-lg-4">
 
-                    <div class="card card-info border-0 rounded-0">
+                    <div class="card card-info bg-transparent border-0 rounded-0 mb-5" data-aos="fade-in" data-aos-delay="<?= $key ?>00">
 
-                        <div class="card-body p-3 py-0 py-lg-3" data-aos="fade-in" data-aos-delay="<?= $key ?>00">
+                        <?php if(!empty($imagen)): ?>
 
-                            <?php if(!empty($imagen)): ?>
+                            <div class="info-image">
+                                <img loading="lazy" decoding="async" src="<?= $imagen ?>" class="img-fluid" alt="<?= $titulo ?>" style="border-radius: <?= $radio_de_los_bordes ?>;">
+                            </div>
 
-                                <div class="info-image text-start <?php if( $key%2==0 ) echo 'text-md-start'; ?> mb-5">
-                                    <img loading="lazy" decoding="async" src="<?= $imagen ?>" class="img-fluid" alt="<?= $titulo ?>" style="border-radius: <?= $radio_de_los_bordes ?>;">
-                                </div>
+                        <?php endif ?>
 
-                            <?php endif ?>
+                        <div class="card-body px-0 border-0 d-flex flex-column">
 
-                            <h3 class="fs-4 fw-bold mb-4 color-secundario">
+                            <h3 class="color-secundario mb-3">
                                 <?php echo $titulo ?>
                             </h3>
 
                             <? if( $subtitulo ): ?>
-                                <div class="text-small mb-4 color-secundario">
+                                <div class="color-secundario mb-3">
                                     <?php echo $subtitulo ?>
                                 </div>
                             <? endif ?>
 
-                            <div class="color-primario">
+                            <div class="color-primario mb-3">
                                 <?= $contenido ?>
                             </div>
 
