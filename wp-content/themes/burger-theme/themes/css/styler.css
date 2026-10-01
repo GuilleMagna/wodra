@@ -1,3 +1,29 @@
+/* Reservar el header y el menú secundario al navegar a compartir. */
+#compartir-ahora {
+    --share-header-height: 105px;
+    --share-toolbar-height: 0px;
+    --share-menu-height: 0px;
+    scroll-margin-top: calc(var(--share-header-height) + var(--share-toolbar-height) + var(--share-menu-height) + 16px);
+}
+
+body:has(#secondNav) #compartir-ahora {
+    --share-menu-height: 49px;
+}
+
+.customize-support #compartir-ahora {
+    --share-toolbar-height: 32px;
+}
+
+@media (max-width: 991px) {
+    #compartir-ahora {
+        --share-header-height: 80px;
+    }
+
+    body:has(#secondNav) #compartir-ahora {
+        --share-menu-height: 60px;
+    }
+}
+
 .customize-support .fixed-top {
     top: 32px !important;
 }
