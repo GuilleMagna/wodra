@@ -1,44 +1,4 @@
-.novedades-carrusel .card-novedades .novedades-img  {
-    aspect-ratio: 1/1;
-}
-
-.novedades-carrusel .card-novedades .novedades-titulo {
-    height: 90px;
-    overflow: hidden;
-}
-
-.novedades-carrusel .card-novedades .novedades-descripcion {
-    min-height: 88px;
-    overflow: hidden;
-}
-
-@media (max-width: 576px) {
-
-    .novedades-carrusel .card-novedades .novedades-titulo {
-        height: auto;
-        overflow: hidden;
-    } 
-
-    .novedades-carrusel .card-novedades .novedades-descripcion {
-        height: auto;
-        overflow: hidden;
-    }
-
-}
-
-@media  (min-width: 577px) and (max-width: 767px) {
-
-    .novedades-carrusel .card-novedades .novedades-titulo {
-        height: auto;
-        overflow: hidden;
-    } 
-
-    .novedades-carrusel .card-novedades .novedades-descripcion {
-        height: auto;
-        overflow: hidden;
-    }
-
-}
+.novedades-carrusel .novedades-img { aspect-ratio: 1 / 1; }
 
 /* OWL */
 
@@ -77,4 +37,64 @@
 
 .novedades-carrusel .owl-theme .owl-dots .owl-dot.active span, .novedades-carrusel .owl-theme .owl-dots .owl-dot:hover span {
     background: var(--primary) !important;
+}
+/* Las cards siguen visibles antes del init y en la preview del editor. */
+.novedades-carrusel .owl-novedades:not(.owl-loaded) {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+}
+@media (min-width: 768px) {
+    .novedades-carrusel .owl-novedades:not(.owl-loaded) { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (min-width: 992px) {
+    .novedades-carrusel .owl-novedades:not(.owl-loaded) { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+/* Flechas circulares del theme, sin el fondo predeterminado de Owl. */
+.novedades-carrusel .owl-theme .owl-nav:not(.disabled) {
+    margin: 0;
+}
+.novedades-carrusel .owl-theme .owl-nav button.owl-prev,
+.novedades-carrusel .owl-theme .owl-nav button.owl-next {
+    position: absolute;
+    top: 40%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    margin: 0;
+    padding: 0;
+    background: transparent;
+    color: var(--primary);
+    border: 0;
+}
+.novedades-carrusel .owl-nav button svg {
+    width: 40px;
+    height: 40px;
+}
+.novedades-carrusel .owl-nav button.disabled {
+    opacity: .35;
+    cursor: default;
+}
+.novedades-carrusel .owl-nav button:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 3px;
+    border-radius: 50%;
+}
+.novedades-carrusel .owl-nav button.owl-prev {
+    left: var(--novedades-flecha, -60px);
+}
+.novedades-carrusel .owl-nav button.owl-next {
+    right: var(--novedades-flecha, -60px);
+}
+/* Mismas franjas de Bootstrap que clientes y equipo. */
+@media (max-width: 659.98px),
+       (min-width: 768px) and (max-width: 839.98px),
+       (min-width: 992px) and (max-width: 1079.98px),
+       (min-width: 1200px) and (max-width: 1259.98px),
+       (min-width: 1400px) and (max-width: 1439.98px) {
+    .novedades-carrusel .owl-carousel {
+        --novedades-flecha: 10px;
+    }
 }

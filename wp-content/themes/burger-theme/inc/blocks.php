@@ -2624,3 +2624,20 @@ add_filter('acf/load_field/name=grupo_acf_preset', function ($field) {
 
     return $field;
 });
+
+// Novedades y su carrusel comparten los mismos campos de contenido y presets.
+add_filter( 'acf/load_field_group', static function ( $group ) {
+    foreach ( $group['location'] ?? [] as $rules ) {
+        foreach ( $rules as $index => $rule ) {
+            if ( '==' !== ( $rule['operator'] ?? '' ) ) continue;
+            $value = $rule['value'] ?? '';
+            if ( ( 'block' === $rule['param'] && 'acf/novedades' === $value )
+                || ( 'burger_preset_group' === $rule['param'] && 'novedades' === $value ) ) {
+                $rules[ $index ]['value'] = 'block' === $rule['param'] ? 'acf/novedades-carrusel' : 'novedades-carrusel';
+                $group['location'][] = $rules;
+                break;
+            }
+        }
+    }
+    return $group;
+} );

@@ -70,7 +70,7 @@ $block_id = $block['id'];
 
             </div>
 
-            <div class="col-6 mx-auto mt-4 mt-md-0 col-lg-3 d-flex align-items-center">
+            <div class="col-6 me-auto ms-0 mx-md-auto mt-4 mt-md-0 col-lg-3 d-flex align-items-center">
                 <img loading="lazy" decoding="async" src="<?php echo $logo_compartir ?>" alt="logo" class="img-fluid w-100">
             </div>
 
