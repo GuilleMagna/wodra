@@ -25,6 +25,13 @@ if ( empty( $block['data']['preset'] ) ) {
 foreach ( [ 'titulo_single', 'subtitulo_single', 'encabezado_single', 'contenido_single' ] as $field_name ) {
     $fields[ $field_name ] = get_field( $field_name, $post->ID ) ?? '';
 }
+// Los valores guardados en la Novedad prevalecen sobre la plantilla y su preset.
+// El vacío explícito permite quitar la imagen, el botón o los textos de compartir.
+foreach ( [ 'imagen_servicio', 'boton', 'titulo_compartir', 'subtitulo_compartir' ] as $field_name ) {
+    if ( metadata_exists( 'post', $post->ID, $field_name ) ) {
+        $fields[ $field_name ] = get_field( $field_name, $post->ID ) ?: '';
+    }
+}
 extract( $fields );
 $post_id            = $post->ID ?? '';
 $post_title         = $post->post_title ?? '';
