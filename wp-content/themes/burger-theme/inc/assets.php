@@ -169,3 +169,31 @@ function burger_enqueue_carousel_navigation() {
 }
 add_action( 'wp_enqueue_scripts', 'burger_enqueue_carousel_navigation', 20 );
 add_action( 'enqueue_block_editor_assets', 'burger_enqueue_carousel_navigation', 30 );
+
+// Inicializar las pestañas cuando SCF remonta el formulario del editor extendido.
+add_action( 'enqueue_block_editor_assets', function () {
+    wp_enqueue_script(
+        'burger-editor-tabs',
+        BURGER_THEME_URL . '/themes/js/editor-tabs.js',
+        [ 'acf-input', 'acf-blocks' ],
+        filemtime( BURGER_THEME_PATH . '/themes/js/editor-tabs.js' ),
+        true
+    );
+}, 30 );
+
+// Reemplazar la descarga global de Turnstile de CF7 por carga al interactuar.
+// Conservar el handle para respetar dependencias, sin el reset global del plugin.
+add_action( 'wp_enqueue_scripts', function () {
+    if ( is_admin() || ! wp_script_is( 'cloudflare-turnstile', 'enqueued' ) ) {
+        return;
+    }
+    wp_dequeue_script( 'cloudflare-turnstile' );
+    wp_deregister_script( 'cloudflare-turnstile' );
+    wp_enqueue_script(
+        'cloudflare-turnstile',
+        BURGER_THEME_URL . '/themes/js/turnstile-lazy.js',
+        [],
+        filemtime( BURGER_THEME_PATH . '/themes/js/turnstile-lazy.js' ),
+        true
+    );
+}, 100 );

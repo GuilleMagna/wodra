@@ -31,7 +31,8 @@ $block_id = $block['id'];
         padding: <?= $section_padding ?> !important;
         border-radius: <?= $border_radius ?> !important;
         background-color: <?= $color_fondo ?>; 
-        background-image: url('<?= $imagen_fondo ?>')
+        background-image: url('<?= $imagen_fondo ?>');
+        --carousel-dot-color: <?= $color_primario ?: 'var(--primary)' ?>;
     }
     .<?= $block_id ?> .titulo,
     .<?= $block_id ?> .color-secundario {

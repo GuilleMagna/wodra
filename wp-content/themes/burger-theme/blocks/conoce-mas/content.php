@@ -102,13 +102,13 @@ $block_id = $block['id'];
         position: relative;
     }
 
-    #<?= $block_id ?> .owl-theme .owl-dots {
+    .<?= $block_id ?> .owl-theme .owl-dots {
         text-align: center;
         -webkit-tap-highlight-color: transparent;
         margin-top: 30px;
     }
 
-    #<?= $block_id ?> .owl-theme .owl-dots .owl-dot span {
+    .<?= $block_id ?> .owl-theme .owl-dots .owl-dot span {
         width: 8px;
         height: 8px;
         margin: 7px 10px;
@@ -119,19 +119,19 @@ $block_id = $block['id'];
         border-radius: 30px;
     }
 
-    #<?= $block_id ?> .owl-theme .owl-dots .owl-dot span {
-        background: var(--primary);
-        border: 1px var(--primary) solid !important;
+    .<?= $block_id ?> .owl-theme .owl-dots .owl-dot span {
+        background: var(--carousel-dot-color, var(--primary));
+        border: 1px var(--carousel-dot-color, var(--primary)) solid !important;
     }
 
-    #<?= $block_id ?> .owl-theme .owl-dots .owl-dot:hover span {
-        background: var(--primary) !important;
+    .<?= $block_id ?> .owl-theme .owl-dots .owl-dot:hover span {
+        background: var(--carousel-dot-color, var(--primary)) !important;
         transition: all 200ms ease;
         opacity: 1;
     }
 
-    #<?= $block_id ?> .owl-theme .owl-dots .owl-dot.active span {
-        background: var(--primary) !important;
+    .<?= $block_id ?> .owl-theme .owl-dots .owl-dot.active span {
+        background: var(--carousel-dot-color, var(--primary)) !important;
         opacity: 1;
         transform: scale(2);
         transition: all 200ms ease;
