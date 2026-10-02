@@ -2,7 +2,7 @@
 //Block Name: Single
 if( get_post_type() == 'page' ) return null;
 
-$content_fields = [ 'titulo_single', 'subtitulo_single', 'encabezado_single', 'contenido_single', 'imagen_servicio', 'titulo_compartir', 'subtitulo_compartir', 'boton' ];
+$content_fields = [ 'titulo_single', 'subtitulo_single', 'encabezado_single', 'contenido_single', 'imagen_servicio', 'titulo_compartir', 'subtitulo_compartir', 'boton', 'botones_single' ];
 $fields = get_block_content_fields( $block, $content_fields );
 
 global $wp_query;
@@ -27,10 +27,14 @@ foreach ( [ 'titulo_single', 'subtitulo_single', 'encabezado_single', 'contenido
 }
 // Los valores guardados en la Novedad prevalecen sobre la plantilla y su preset.
 // El vacío explícito permite quitar la imagen, el botón o los textos de compartir.
-foreach ( [ 'imagen_servicio', 'boton', 'titulo_compartir', 'subtitulo_compartir' ] as $field_name ) {
+foreach ( [ 'imagen_servicio', 'boton', 'botones_single', 'titulo_compartir', 'subtitulo_compartir' ] as $field_name ) {
     if ( metadata_exists( 'post', $post->ID, $field_name ) ) {
         $fields[ $field_name ] = get_field( $field_name, $post->ID ) ?: '';
     }
+}
+// Conservar el botón previo hasta configurar la lista; una lista vacía lo elimina.
+if ( ( empty( $fields['botones_single'] ) || metadata_exists( 'post', $post->ID, 'boton' ) ) && ! metadata_exists( 'post', $post->ID, 'botones_single' ) && ! array_key_exists( 'botones_single', $block['data'] ?? [] ) && is_array( $fields['boton'] ) && ! empty( $fields['boton']['url'] ) ) {
+    $fields['botones_single'] = [ [ 'enlace' => $fields['boton'], 'estilo' => 'btn-linea' ] ];
 }
 extract( $fields );
 $post_id            = $post->ID ?? '';
@@ -124,10 +128,13 @@ $block_id = $block['id'];
 
                 </div>
 
-                <?php if( is_array( $boton ) && !empty( $boton ) ): ?>
+                <?php if( is_array( $botones_single ) && !empty( $botones_single ) ): ?>
 
                     <div class="text-center text-md-start mt-3 mt-md-0">
-                        <?php echo get_burger_button( $boton, 'btn-linea' ) ?>
+                        <?php foreach ( $botones_single as $single_button ) : ?>
+                            <?php if ( ! is_array( $single_button['enlace'] ?? null ) || empty( $single_button['enlace']['url'] ) ) continue; ?>
+                            <?php echo get_burger_button( $single_button['enlace'], ( $single_button['estilo'] ?? '' ) ?: 'btn-linea' ); ?>
+                        <?php endforeach; ?>
                     </div>
 
                 <?php endif ?>

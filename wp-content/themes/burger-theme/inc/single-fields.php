@@ -71,3 +71,42 @@ add_filter( 'acf/load_fields', static function ( $fields, $parent ) {
     }
     return $fields;
 }, 30, 2 );
+
+function burger_single_buttons_field() {
+    return [
+        'key' => 'field_burger_single_botones', 'name' => 'botones_single',
+        'label' => 'Botones Novedad', 'type' => 'repeater', 'layout' => 'block',
+        'button_label' => 'Agregar botón', 'min' => 0, 'max' => 0,
+        'sub_fields' => [
+            [ 'key' => 'field_burger_single_botones_estilo', 'name' => 'estilo', 'label' => 'Estilo', 'type' => 'select_button', 'default_value' => 'btn-linea', 'return_format' => 'value', 'wrapper' => [ 'width' => '50' ] ],
+            [ 'key' => 'field_burger_single_botones_enlace', 'name' => 'enlace', 'label' => 'Enlace', 'type' => 'link', 'return_format' => 'array', 'wrapper' => [ 'width' => '50' ] ],
+        ],
+    ];
+}
+if ( function_exists( 'acf_add_local_fields' ) ) {
+    $single_buttons_field = burger_single_buttons_field();
+    $single_buttons_field['parent'] = 'group_burger_single_buttons_virtual';
+    acf_add_local_fields( [ $single_buttons_field ] );
+    unset( $single_buttons_field );
+}
+add_filter( 'acf/load_fields', static function ( $fields, $parent ) {
+    if ( ( $parent['key'] ?? '' ) !== 'group_burger_single' ) return $fields;
+    $replacement = burger_single_buttons_field();
+    $replacement['parent'] = $parent['key'];
+    $replacement['prefix'] = 'acf';
+    $result = [];
+    foreach ( $fields as $field ) {
+        if ( 'botones_single' === $field['name'] ) continue;
+        $result[] = 'boton' === $field['name'] ? acf_validate_field( $replacement ) : $field;
+    }
+    if ( ! in_array( 'boton', array_column( $fields, 'name' ), true ) ) $result[] = acf_validate_field( $replacement );
+    return $result;
+}, 40, 2 );
+// Mostrar el botón anterior como primera fila sin escribir ni migrar metadatos.
+add_filter( 'acf/load_value/name=botones_single', static function ( $value, $post_id ) {
+    $decoded = acf_decode_post_id( $post_id );
+    if ( 'post' !== $decoded['type'] || metadata_exists( 'post', $decoded['id'], 'botones_single' ) ) return $value;
+    $legacy = get_field( 'boton', $post_id );
+    if ( ! is_array( $legacy ) || empty( $legacy['url'] ) ) return $value;
+    return [ [ 'field_burger_single_botones_enlace' => $legacy, 'field_burger_single_botones_estilo' => 'btn-linea' ] ];
+}, 20, 2 );

@@ -44,3 +44,29 @@ foreach ( [ 0, 1 ] as $preset ) {
     if ( ! str_contains( $render( $preset ), 'src="https://example.org/template.jpg"' ) ) throw new RuntimeException( 'No conserva fallback de plantilla.' );
 }
 echo "OK: imagen, botón y compartir de la entrada; vacíos y fallback con y sin preset.\n";
+
+$button_rows = [
+    [ 'enlace' => [ 'url' => 'https://example.org/uno', 'title' => 'Uno', 'target' => '' ], 'estilo' => 'btn-primario' ],
+    [ 'enlace' => [ 'url' => 'https://example.org/dos', 'title' => 'Dos', 'target' => '' ], 'estilo' => 'btn-linea' ],
+];
+add_filter( 'get_post_metadata', static function ( $pre, $id, $key ) {
+    return 987654321 === (int) $id && 'botones_single' === $key ? 'saved' : $pre;
+}, 20, 3 );
+add_filter( 'acf/pre_load_value', static function ( $pre, $id, $field ) use ( &$button_rows ) {
+    return 987654321 === (int) $id && 'botones_single' === $field['name'] ? $button_rows : $pre;
+}, 20, 3 );
+add_filter( 'acf/pre_format_value', static function ( $pre, $value, $id, $field ) use ( &$button_rows ) {
+    return 987654321 === (int) $id && 'botones_single' === $field['name'] ? $button_rows : $pre;
+}, 20, 4 );
+foreach ( [ 0, 1 ] as $preset ) {
+    $has_image = true;
+    $image = 'https://example.org/novedad.jpg';
+    $html = $render( $preset );
+    foreach ( [ 'https://example.org/uno', 'https://example.org/dos', 'btn-primario', 'btn-linea' ] as $expected ) {
+        if ( ! str_contains( $html, $expected ) ) throw new RuntimeException( 'Falta botón o estilo: ' . $expected );
+    }
+    if ( str_contains( $html, 'boton-novedad' ) ) throw new RuntimeException( 'Se duplicó el botón anterior.' );
+}
+$button_rows = [];
+if ( str_contains( $render( 1 ), 'boton-novedad' ) ) throw new RuntimeException( 'Lista vacía recupera botón anterior.' );
+echo "OK: múltiples botones, estilos y eliminación explícita.\n";
