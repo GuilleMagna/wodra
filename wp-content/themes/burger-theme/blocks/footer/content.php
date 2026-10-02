@@ -74,7 +74,7 @@ $color_fondo_footer = BURGER_OPTIONS['color_fondo_footer'] ?: 'var(--primary)';
         <div class="whatsapp-button">
             <a href="https://wa.me/<?php echo BURGER_OPTIONS['whatsapp'] ?>?text=<?php echo urlencode(BURGER_OPTIONS['texto_whatsapp']) ?>"
                 class="text-decoration-none" target="_blank">
-                <img loading="lazy" decoding="async" src="<?php echo BURGER_OPTIONS['logo_whatsapp'] ?>" style="width:120px" alt="logo wapp">
+                <img loading="lazy" decoding="async" src="<?php echo BURGER_OPTIONS['logo_whatsapp'] ?>" style="width:80px" alt="logo wapp">
             </a>
         </div>
 
