@@ -137,4 +137,4 @@ $block_id = $block['id'];
 
 </section>
 
-<?php burger_render_agenda_media( $post->ID, $block, 'single', [ 'galeria' ] ); ?>
+<?php burger_render_agenda_media( $post->ID, $block, 'single', [ 'galeria', 'video' ] ); ?>

@@ -22,7 +22,7 @@ if ( function_exists( 'acf_add_local_field_group' ) && ! acf_get_raw_field_group
         }
     }
     unset( $single_field );
-    $single_fields = array_merge( $single_fields, burger_agenda_media_fields( 'single', [ 'galeria' ] ) );
+    $single_fields = array_merge( $single_fields, burger_agenda_media_fields( 'single', [ 'galeria', 'video' ] ) );
     acf_add_local_field_group( [
         'key' => 'group_burger_single', 'title' => 'Block Single', 'fields' => $single_fields,
         'location' => [
@@ -50,3 +50,24 @@ function burger_single_load_legacy_content( $value, $post_id, $field ) {
 }
 add_filter( 'acf/load_value/name=titulo_single', 'burger_single_load_legacy_content', 10, 3 );
 add_filter( 'acf/load_value/name=contenido_single', 'burger_single_load_legacy_content', 10, 3 );
+// Incorporar Video también cuando el grupo Single ya está guardado en la BD.
+if ( function_exists( 'acf_add_local_fields' ) ) {
+    $single_video_fields = burger_agenda_media_fields( 'single', [ 'video' ] );
+    foreach ( $single_video_fields as &$single_video_field ) {
+        $single_video_field['parent'] = 'group_burger_single_video_virtual';
+    }
+    unset( $single_video_field );
+    acf_add_local_fields( $single_video_fields );
+    unset( $single_video_fields );
+}
+add_filter( 'acf/load_fields', static function ( $fields, $parent ) {
+    if ( ( $parent['key'] ?? '' ) !== 'group_burger_single' ) return $fields;
+    $existing = array_column( (array) $fields, 'key' );
+    foreach ( burger_agenda_media_fields( 'single', [ 'video' ] ) as $field ) {
+        if ( in_array( $field['key'], $existing, true ) ) continue;
+        $field['parent'] = $parent['key'];
+        $field['prefix'] = 'acf';
+        $fields[] = acf_validate_field( $field );
+    }
+    return $fields;
+}, 30, 2 );
