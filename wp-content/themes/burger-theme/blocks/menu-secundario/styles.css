@@ -161,3 +161,10 @@
         cursor: default;
     }
 }
+/* Unificar el margen móvil aunque el padding ACF varíe entre páginas. */
+@media (max-width: 991.98px) {
+    .secondNav.menu-secundario {
+        padding-left: 16px !important;
+        padding-right: 16px !important;
+    }
+}
