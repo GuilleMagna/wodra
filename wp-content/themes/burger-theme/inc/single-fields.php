@@ -73,7 +73,7 @@ add_filter( 'acf/load_fields', static function ( $fields, $parent ) {
 }, 30, 2 );
 
 function burger_single_buttons_field() {
-    return [
+    $field = [
         'key' => 'field_burger_single_botones', 'name' => 'botones_single',
         'label' => 'Botones Novedad', 'type' => 'repeater', 'layout' => 'block',
         'button_label' => 'Agregar botón', 'min' => 0, 'max' => 0,
@@ -82,6 +82,9 @@ function burger_single_buttons_field() {
             [ 'key' => 'field_burger_single_botones_enlace', 'name' => 'enlace', 'label' => 'Enlace', 'type' => 'link', 'return_format' => 'array', 'wrapper' => [ 'width' => '50' ] ],
         ],
     ];
+    // Los subcampos inyectados no pasan por acf/load_field al renderizar.
+    $field['sub_fields'][0] = burger_convert_button_style_field( $field['sub_fields'][0] );
+    return $field;
 }
 if ( function_exists( 'acf_add_local_fields' ) ) {
     $single_buttons_field = burger_single_buttons_field();
