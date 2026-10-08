@@ -1,9 +1,12 @@
 <?php
 //Block Name: Conoce más
 
-$content_fields = ['titulo_conoce_mas', 'subtitulo_conoce_mas', 'encabezado', 'carga_automatica', 'tipo_publicacion', 'cantidad_publicaciones', 'servicios', 'items', 'items_mobile', 'items_tablet', 'items_desktop', 'margin', 'autoplay', 'nav', 'dots', 'loop', 'overflow', 'mostrar_boton_final', 'boton_final', 'estilo_del_boton_final', 'tipo_de_imagen' ];
+$content_fields = ['titulo_conoce_mas', 'subtitulo_conoce_mas', 'encabezado', 'texto_conoce_mas', 'carga_automatica', 'tipo_publicacion', 'cantidad_publicaciones', 'servicios', 'items', 'items_mobile', 'items_tablet', 'items_desktop', 'margin', 'autoplay', 'nav', 'dots', 'loop', 'overflow', 'mostrar_boton_final', 'boton_final', 'estilo_del_boton_final', 'tipo_de_imagen' ];
 $fields = get_block_content_fields($block, $content_fields);
 extract($fields);
+
+$texto_conoce_mas = trim( (string) ( $texto_conoce_mas ?? '' ) );
+
 if ( ! empty( $carga_automatica ) ) {
     $tipo_publicacion = in_array( $tipo_publicacion, [ 'post', 'evento' ], true ) ? $tipo_publicacion : 'post';
     $cantidad_publicaciones = min( 24, max( 1, absint( $cantidad_publicaciones ?: 6 ) ) );
@@ -150,9 +153,15 @@ $block_id = $block['id'];
 
         <div class="mx-auto <?= $col_container_class ?> <?= $col_md_container_class ?> <?= $col_lg_container_class ?> <?= $text_align_class ?>">
 
-            <<?= $encabezado ?> class="titulo mb-5 pb-4" data-aos="fade-up">
+            <<?= $encabezado ?> class="titulo <?= $texto_conoce_mas !== '' ? 'mb-3' : 'mb-5 pb-4' ?>" data-aos="fade-up">
                 <?= $titulo_conoce_mas ?><span><?= $subtitulo_conoce_mas ?></span>
             </<?= $encabezado ?>>
+
+            <?php if ( $texto_conoce_mas !== '' ): ?>
+                <p class="color-secundario mb-5 pb-4" data-aos="fade-up">
+                    <?= nl2br( esc_html( $texto_conoce_mas ) ) ?>
+                </p>
+            <?php endif; ?>
 
         </div>
 
