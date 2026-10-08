@@ -55,21 +55,27 @@ $block_id = $block['id'];
 
         <? if( !empty($informacion) && count($informacion) > 0 ): ?>
 
-            <? foreach( $informacion as $key => $item ): extract($item) ?>
+            <? foreach( $informacion as $key => $item ): extract($item);
+                // Calcular por fila, sin reutilizar multimedia del item anterior.
+                $tiene_galeria = ! empty( $item['mostrar_galeria'] ) && ! empty( $item['galeria_informacion'] );
+                $tiene_imagen = ! empty( $item['mostrar_imagen'] ) && ! empty( $item['imagen'] );
+                $tiene_video = ! empty( $item['mostrar_video'] ) && ! empty( $item['video'] );
+                $tiene_multimedia = $tiene_galeria || $tiene_imagen || $tiene_video;
+            ?>
 
                 <div class="row justify-content-evenly">
 
-                    <div class="col-12 col-lg-6 d-flex align-items-center justify-content-start justify-content-lg-center <?php if( $multimedia_derecha ) echo 'order-1 order-lg-0'; else echo 'order-1 order-lg-1' ?>" style="border-radius: <?= $radio_de_los_bordes ?>">
+                    <div class="col-12<?= $tiene_multimedia ? ' col-lg-6' : '' ?> d-flex align-items-center justify-content-start justify-content-lg-center <?php if( $multimedia_derecha ) echo 'order-1 order-lg-0'; else echo 'order-1 order-lg-1' ?>" style="border-radius: <?= $radio_de_los_bordes ?>">
 
-                        <div class="col-12 col-md-10 col-lg-9 my-4 pe-lg-5">
+                        <div class="col-12<?= $tiene_multimedia ? ' col-md-10 col-lg-9 pe-lg-5' : '' ?> my-4">
 
                             <div class="d-flex flex-column mt-lg-5 my-lg-5 py-4 py-lg-5">
 
-                                <div class="col-12 col-lg-10 mx-auto">
+                                <div class="col-12<?= $tiene_multimedia ? ' col-lg-10' : '' ?> mx-auto">
 
                                     <?php if(!empty($titulo)): ?>
     
-                                        <div class="mb-3 me-5">
+                                        <div class="mb-3<?= $tiene_multimedia ? ' me-5' : '' ?>">
     
                                             <<?= $encabezado ?> class="color-primario">
                                                 <?php echo $titulo ?>
@@ -92,7 +98,7 @@ $block_id = $block['id'];
     
                                     <?php endif ?>
     
-                                    <div class="mb-2 me-5 color-secundario">
+                                    <div class="mb-2 color-secundario<?= $tiene_multimedia ? ' me-5' : '' ?>">
                                         <?php echo $contenido ?>
                                     </div>
     
@@ -116,7 +122,7 @@ $block_id = $block['id'];
 
                     </div>
 
-                    <?php if( $mostrar_galeria && $galeria ): ?>
+                    <?php if( $tiene_galeria ): ?>
 
                         <div class="col-12 col-md-12 col-lg-6 px-0 <?php if( $multimedia_derecha ) echo 'order-0 order-lg-1'; else echo 'order-0 order-lg-0'; ?>">
                                 
@@ -151,11 +157,11 @@ $block_id = $block['id'];
 
                         </div>
 
-                    <?php elseif( $mostrar_imagen && $imagen && $imagen_de_fondo ): ?>
+                    <?php elseif( $tiene_imagen && ! empty( $item['imagen_de_fondo'] ) ): ?>
 
                         <div class="col-12 col-lg-6 p-0 img img-descripcion <?php if( $multimedia_derecha ) echo 'order-0 order-lg-1'; else echo 'order-0 order-lg-0' ?>" style="background-image: url( '<?php echo $imagen ?>'); background-size: 100%; border-radius: <?= $radio_de_los_bordes ?>; min-height: 220px;"></div>
                     
-                    <?php elseif( $mostrar_imagen && $imagen ): ?>
+                    <?php elseif( $tiene_imagen ): ?>
                     
                         <div class="col-12 col-lg-6 d-flex align-items-center justify-content-center p-0 img img-descripcion <?php if( $multimedia_derecha ) echo 'order-0 order-lg-1'; else echo 'order-0 order-lg-0' ?>">
                             <img loading="lazy" decoding="async" src="<?php echo $imagen ?>" 
@@ -164,7 +170,7 @@ $block_id = $block['id'];
                                 style="border-radius: <?= $radio_de_los_bordes ?>">
                         </div>
 
-                    <?php elseif ( $mostrar_video && $video ): ?>
+                    <?php elseif ( $tiene_video ): ?>
                         
                         <div class="col-12 col-lg-6 d-flex align-items-center justify-content-center p-0 img img-descripcion <?php if( $multimedia_derecha ) echo 'order-0 order-lg-1'; else echo 'order-0 order-lg-0' ?>">
                             <video class="info-hero-media" autoplay muted loop playsinline poster="<?= esc_url($poster_video) ?>">
