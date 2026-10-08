@@ -67,15 +67,15 @@ $block_id = $block['id'];
 
                     <div class="col-12<?= $tiene_multimedia ? ' col-lg-6' : '' ?> d-flex align-items-center justify-content-start justify-content-lg-center <?php if( $multimedia_derecha ) echo 'order-1 order-lg-0'; else echo 'order-1 order-lg-1' ?>" style="border-radius: <?= $radio_de_los_bordes ?>">
 
-                        <div class="col-12<?= $tiene_multimedia ? ' col-md-10 col-lg-9 pe-lg-5' : '' ?> my-4">
+                        <div class="col-12 col-md-10 col-lg-9 my-4 pe-lg-5">
 
                             <div class="d-flex flex-column mt-lg-5 my-lg-5 py-4 py-lg-5">
 
-                                <div class="col-12<?= $tiene_multimedia ? ' col-lg-10' : '' ?> mx-auto">
+                                <div class="col-12 col-lg-10 mx-auto">
 
                                     <?php if(!empty($titulo)): ?>
     
-                                        <div class="mb-3<?= $tiene_multimedia ? ' me-5' : '' ?>">
+                                        <div class="mb-3 me-5">
     
                                             <<?= $encabezado ?> class="color-primario">
                                                 <?php echo $titulo ?>
@@ -98,7 +98,7 @@ $block_id = $block['id'];
     
                                     <?php endif ?>
     
-                                    <div class="mb-2 color-secundario<?= $tiene_multimedia ? ' me-5' : '' ?>">
+                                    <div class="mb-2 me-5 color-secundario">
                                         <?php echo $contenido ?>
                                     </div>
     
