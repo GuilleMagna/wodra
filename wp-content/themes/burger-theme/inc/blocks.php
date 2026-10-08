@@ -707,6 +707,11 @@ function burger_render_blocks( $block ) {
         'block_id'      => $block['id'] ?? '',
         'anchor'        => $block['anchor'] ?? '',
         'request_pag'   => isset( $_GET['pag'] ) ? absint( $_GET['pag'] ) : 1,
+        // La paginacion filtrada tambien depende de la categoria seleccionada.
+        'filter_request' => $slug === 'novedades-con-filtro' ? [
+            'pag' => isset($_GET['pag']) && is_scalar($_GET['pag']) ? max(0, (int) $_GET['pag']) : 0,
+            'tab' => isset($_GET['tab']) && is_string($_GET['tab']) ? sanitize_title(wp_unslash($_GET['tab'])) : '',
+        ] : null,
         'block_data'    => $block['data'] ?? [],
         'post_id'       => $post_id,
         'queried_id'    => get_queried_object_id(),

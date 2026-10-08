@@ -1,9 +1,8 @@
 <?php 
 //Block Name: Novedades con filtro
 
-if( !empty( $_GET['pag'] ) ) $actual_page = $_GET['pag'];
-else $actual_page = 0;
-
+$requested_page = isset($_GET['pag']) && is_scalar($_GET['pag']) ? max(0, (int) $_GET['pag']) : 0;
+$requested_tab = isset($_GET['tab']) && is_string($_GET['tab']) ? sanitize_title(wp_unslash($_GET['tab'])) : '';
 $content_fields = [ 'titulo_novedades',  'subtitulo_novedades', 'encabezado', 'titulo_categorias',  'categorias',  'cantidad_categoria', 'estilo_boton', 'mostrar_paginador', 'cantidad_por_categoria_total', 'titulo_sin_resultados', 'texto_sin_resultados', 'imagen_sin_resultados', 'color_flechas_paginador' ];
 $fields = get_block_content_fields( $block, $content_fields );
 extract( $fields );
@@ -11,17 +10,17 @@ extract( $fields );
 $design = get_block_design( $block );
 extract( $design );
 
-if( is_numeric($cantidad_por_categoria_total) AND is_numeric($cantidad_categoria) )
-    $total_pages = ( $cantidad_por_categoria_total / $cantidad_categoria - 1 );
-else
-    $total_pages = 1;
-
-$mostrar_ante = false;
-if( $actual_page > 0 OR ( !empty( $_GET['pag'] ) and $_GET['pag'] > 0 ) ) $mostrar_ante = true;
-
-$mostrar_sgte = false;
-if( ($actual_page+1) < $total_pages ) $mostrar_sgte = true;
-
+$categorias = is_array($categorias) ? array_values($categorias) : [];
+$per_page = is_numeric($cantidad_categoria) && (int) $cantidad_categoria > 0 ? (int) $cantidad_categoria : 3;
+$total_limit = is_numeric($cantidad_por_categoria_total) && (int) $cantidad_por_categoria_total > 0 ? (int) $cantidad_por_categoria_total : 0;
+$active_tab = $categorias[0]->slug ?? '';
+foreach ($categorias as $term) {
+    if ($term->slug === $requested_tab) {
+        $active_tab = $term->slug;
+        break;
+    }
+}
+$pagination_anchor = sanitize_title($block['anchor'] ?? '') ?: 'novedades-con-filtro';
 $block_id = $block['id'];
 ?>
 
@@ -97,7 +96,7 @@ $block_id = $block['id'];
             <?php foreach( $categorias as $key => $term ): ?>
 
                 <li class="nav-item <?php if( $key != 0 ): ?>border-start<?php endif; ?>" role="presentation" data-aos="fade-in" data-aos-delay="<?= $key ?>00">
-                    <button class="nav-link text-btn rounded-0 py-0 first-item<?php if( $key == 0 ) echo ' active ps-0' ?>" id="pills-<?= $term->slug ?>-tab" data-bs-toggle="pill" data-bs-target="#pills-<?= $term->slug ?>" type="button" role="tab" aria-controls="pills-<?= $term->slug ?>" <?php if( $key == 0 ) echo 'aria-selected="true"' ?>>
+                    <button class="nav-link text-btn rounded-0 py-0 first-item<?php if( $term->slug === $active_tab ) echo ' active'; if( $key == 0 ) echo ' ps-0' ?>" id="pills-<?= $term->slug ?>-tab" data-bs-toggle="pill" data-bs-target="#pills-<?= $term->slug ?>" type="button" role="tab" aria-controls="pills-<?= $term->slug ?>" <?php echo 'aria-selected="' . ($term->slug === $active_tab ? 'true' : 'false') . '"' ?>>
                         <?= $term->name ?>
                     </button>
                 </li>
@@ -110,27 +109,35 @@ $block_id = $block['id'];
                 
             <?php foreach( $categorias as $key => $term ): ?>
 
-                <div class="tab-pane fade<?php if( $key == 0 ) echo ' show active' ?>" id="pills-<?= $term->slug ?>" role="tabpanel" aria-labelledby="pills-<?= $term->slug ?>-tab">
+                <div class="tab-pane fade<?php if( $term->slug === $active_tab ) echo ' show active' ?>" id="pills-<?= $term->slug ?>" role="tabpanel" aria-labelledby="pills-<?= $term->slug ?>-tab">
 
                     <div class="row px-1">
 
                         <?php 
 
-                        $offset = 0;
-                        $actual_page = 0;
-                        if( !empty( $_GET['tab'] ) && $term->slug == $_GET['tab'] ){
-                            $offset = $cantidad_categoria*$actual_page;
-                            $actual_page = $_GET['pag'];
-                        }  
-
-                        $args = array(  
-                                        'posts_per_page'    => $cantidad_categoria, 
-                                        'offset'            => $offset, 
-                                        'cat'               => $term->term_id 
-                        );
-
-                        $novedades = get_posts( $args );
-                        
+                        $count_query = new WP_Query([
+                            'post_type' => 'post',
+                            'post_status' => 'publish',
+                            'posts_per_page' => 1,
+                            'cat' => $term->term_id,
+                            'ignore_sticky_posts' => true,
+                            'fields' => 'ids',
+                        ]);
+                        $total_posts = (int) $count_query->found_posts;
+                        if ($total_limit > 0) $total_posts = min($total_posts, $total_limit);
+                        $total_pages = (int) ceil($total_posts / $per_page);
+                        $actual_page = $term->slug === $active_tab ? $requested_page : 0;
+                        $actual_page = min($actual_page, max(0, $total_pages - 1));
+                        $offset = $per_page * $actual_page;
+                        $mostrar_ante = $actual_page > 0;
+                        $mostrar_sgte = $actual_page + 1 < $total_pages;
+                        $novedades = $total_posts > 0 ? get_posts([
+                            'post_type' => 'post',
+                            'post_status' => 'publish',
+                            'posts_per_page' => min($per_page, $total_posts - $offset),
+                            'offset' => $offset,
+                            'cat' => $term->term_id,
+                        ]) : [];
                         if( count( $novedades ) > 0 ): ?>
                         
                             <?php foreach( $novedades as $post ): ?>
@@ -232,7 +239,7 @@ $block_id = $block['id'];
 
                                             <?php echo get_burger_button( 
                                                 [
-                                                    'url'    => '?tab=' . ($term->slug) . '&pag=' . ($actual_page-1) . '#novedades-con-filtro',
+                                                    'url'    => esc_url(add_query_arg(['tab' => $term->slug, 'pag' => $actual_page-1]) . '#' . $pagination_anchor),
                                                     'title'  => BURGER_OPTIONS['anterior_paginador'],
                                                     'target' => '_self',
                                                 ],
@@ -273,7 +280,7 @@ $block_id = $block['id'];
                                                 
                                              <?php echo get_burger_button( 
                                                 [
-                                                    'url'    => '?tab=' . ($term->slug) . '&pag=' . ($actual_page+1) . '#novedades-con-filtro',
+                                                    'url'    => esc_url(add_query_arg(['tab' => $term->slug, 'pag' => $actual_page+1]) . '#' . $pagination_anchor),
                                                     'title'  => BURGER_OPTIONS['posterior_paginador'],
                                                     'target' => '_self',
                                                 ],
@@ -321,11 +328,3 @@ $block_id = $block['id'];
 	</div>
 
 </section>
-
-<script>
-    <? if( isset( $_GET['pag'] ) && isset( $_GET['tab'] ) ): ?>
-        $(document).ready(function() {
-            $('#pills-<?= $_GET['tab'] ?>-tab').trigger('click');
-        });
-    <? endif ?>
-</script>
