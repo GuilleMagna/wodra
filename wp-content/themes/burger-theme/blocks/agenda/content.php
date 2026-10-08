@@ -28,7 +28,9 @@ $cantidad_eventos = $cantidad_eventos*$pagina;
 $eventos_query = new WP_Query(
     [
         'post_type'             => 'evento',
+        // Solo eventos publicos: sin privados ni protegidos con contrasena.
         'post_status'           => 'publish',
+        'has_password'          => false,
         'posts_per_page'        => $cantidad_eventos,
         'meta_query'            => [
             [

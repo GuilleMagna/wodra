@@ -16,6 +16,7 @@ if ( ! empty( $carga_automatica ) ) {
     ];
 
     if ( 'evento' === $tipo_publicacion ) {
+        $query_args['has_password'] = false;
         $query_args['meta_key'] = 'fecha_evento';
         $query_args['meta_query'] = [ [
             'key' => 'fecha_evento',
@@ -60,6 +61,10 @@ if ( ! empty( $carga_automatica ) ) {
     }
 }
 
+// Si no hay eventos publicos proximos, no imprimir titulo, boton ni carrusel.
+if ( ! empty( $carga_automatica ) && 'evento' === $tipo_publicacion && empty( $servicios ) ) {
+    return;
+}
 $design = get_block_design($block);
 extract($design);
 
