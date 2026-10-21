@@ -70,3 +70,25 @@
 .novedades-con-filtro .card-productos {
     transition: 0.3s all ease;
 }
+/* Reservar el ancho mobile para los dos controles, sin el logo central. */
+@media (max-width: 767.98px) {
+    .novedades-con-filtro .novedades-paginacion {
+        gap: 12px;
+    }
+    .novedades-con-filtro .novedades-paginacion > * {
+        min-width: 0;
+        max-width: calc(50% - 6px);
+        overflow-wrap: anywhere;
+    }
+    .novedades-con-filtro .novedades-paginacion > .btn {
+        padding: .5rem;
+        white-space: normal;
+    }
+    .novedades-con-filtro .novedades-paginacion svg {
+        flex-shrink: 0;
+        width: 20px;
+        height: 20px;
+    }
+    .novedades-con-filtro .novedades-paginacion .me-3 { margin-right: .5rem !important; }
+    .novedades-con-filtro .novedades-paginacion .ms-3 { margin-left: .5rem !important; }
+}

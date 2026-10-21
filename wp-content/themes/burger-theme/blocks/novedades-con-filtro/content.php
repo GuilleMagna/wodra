@@ -233,7 +233,7 @@ $block_id = $block['id'];
 
                                 <div class="col-12 text-center">
 
-                                    <div class="d-flex align-items-center justify-content-between">
+                                    <div class="novedades-paginacion d-flex align-items-center justify-content-between">
                                         
                                         <? if ( $mostrar_ante ){ ?>
 
@@ -270,7 +270,7 @@ $block_id = $block['id'];
 
                                         <? if( BURGER_OPTIONS['logo_paginador'] ): ?>
 
-                                            <div class="col-6 col-md-4 col-lg-3 col-xxl-2">
+                                            <div class="d-none d-md-block col-md-4 col-lg-3 col-xxl-2">
                                                 <img loading="lazy" decoding="async" src="<?= BURGER_OPTIONS['logo_paginador'] ?>" alt="logo" class="img-fluid">
                                             </div>
 
