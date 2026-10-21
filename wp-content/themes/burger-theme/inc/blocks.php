@@ -629,7 +629,7 @@ function burger_extend_blocks() {
 
 }
 
-function burger_render_blocks( $block ) {
+function burger_render_blocks( $block, $content = '', $is_preview = false ) {
 
     $slug = str_replace( 'acf/', '', $block['name'] ?? '' );
 
@@ -754,6 +754,15 @@ function burger_render_blocks( $block ) {
 
     $html = ob_get_clean();
     $html = burger_apply_block_anchor( $html, $block );
+    // El canvas pertenece a React: sus enlaces no deben navegar el iframe.
+    if ( $is_preview && $slug === 'novedades-carrusel' ) {
+        $preview_html = new WP_HTML_Tag_Processor( $html );
+        while ( $preview_html->next_tag( 'A' ) ) {
+            $preview_html->remove_attribute( 'href' );
+            $preview_html->remove_attribute( 'target' );
+        }
+        $html = $preview_html->get_updated_html();
+    }
 
     // SCF v3 convierte la preview a JSX y descarta los <style>. Transportamos
     // una copia codificada junto al bloque; un controlador del editor la vuelve

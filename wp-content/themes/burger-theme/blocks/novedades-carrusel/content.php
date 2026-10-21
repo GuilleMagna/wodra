@@ -118,6 +118,7 @@ $block_id = $block['id'];
 	</div>
 
 </section>
+<?php if ( empty( $is_preview ) ) : ?>
 <script>
 jQuery(function ($) {
     const $carousel = $(document.getElementById(<?= wp_json_encode( 'owl-novedades-' . $block_id ) ?>));
@@ -137,3 +138,4 @@ jQuery(function ($) {
     });
 });
 </script>
+<?php endif; ?>
