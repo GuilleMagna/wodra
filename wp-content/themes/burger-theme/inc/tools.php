@@ -82,4 +82,21 @@ function auditar_bloques_por_post_type($post_types = ['page', 'template']) {
 }
 
 
+/** Descripción de las novedades: extracto manual o contenido editorial del single. */
+function burger_get_news_excerpt( $news ) {
+    $news = get_post( $news );
+    if ( ! $news ) return '';
+
+    if ( trim( $news->post_excerpt ) !== '' ) {
+        return get_the_excerpt( $news );
+    }
+
+    $content = get_field( 'contenido_single', $news->ID );
+    if ( is_string( $content ) && trim( wp_strip_all_tags( $content ) ) !== '' ) {
+        $text = wp_strip_all_tags( strip_shortcodes( $content ), true );
+        return wp_trim_words( $text, (int) apply_filters( 'excerpt_length', 55 ), apply_filters( 'excerpt_more', ' [&hellip;]' ) );
+    }
+
+    return get_the_excerpt( $news );
+}
 ?>

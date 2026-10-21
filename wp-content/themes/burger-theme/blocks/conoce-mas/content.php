@@ -233,27 +233,27 @@ $block_id = $block['id'];
     jQuery(document).ready(function ($) {
         $('#owl-slider-<?php echo $block['id'] ?>').owlCarousel({
             center: false,
-            loop: <?php echo $loop ?>,
-            items: <?php echo $items ?>,
-            margin: <?php echo $margin ?>,
-            autoplay: <?php echo $autoplay ?>,
-            nav: <?php echo $nav ?>,
-            dots: <?php echo $dots ?>,
+            loop: <?php echo wp_json_encode( (bool) $loop ); ?>,
+            items: <?php echo wp_json_encode( max( 1, (int) ( $items ?: 5 ) ) ); ?>,
+            margin: <?php echo wp_json_encode( max( 0, (int) $margin ) ); ?>,
+            autoplay: <?php echo wp_json_encode( (bool) $autoplay ); ?>,
+            nav: <?php echo wp_json_encode( (bool) $nav ); ?>,
+            dots: <?php echo wp_json_encode( (bool) $dots ); ?>,
             navText: [
                 '<svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M21.6666 14.167L15.8333 20.0003L21.6666 25.8337" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 36.6663C10.7953 36.6663 3.33329 29.2043 3.33329 19.9997C3.33329 10.7949 10.7953 3.33301 20 3.33301C29.2047 3.33301 36.6666 10.7949 36.6666 19.9997C36.6666 29.2043 29.2047 36.6663 20 36.6663Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>',
                 '<svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M18.3333 14.167L24.1666 20.0003L18.3333 25.8337" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M19.9999 36.6663C29.2046 36.6663 36.6666 29.2043 36.6666 19.9997C36.6666 10.7949 29.2046 3.33301 19.9999 3.33301C10.7952 3.33301 3.33325 10.7949 3.33325 19.9997C3.33325 29.2043 10.7952 36.6663 19.9999 36.6663Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>'],
             responsive: {
                 0: {
-                    items: <?php echo $items_mobile ?>
+                    items: <?php echo wp_json_encode( max( 1, (int) ( $items_mobile ?: 1 ) ) ); ?>
                 },
                 600: {
-                    items: <?php echo $items_tablet ?>
+                    items: <?php echo wp_json_encode( max( 1, (int) ( $items_tablet ?: 2 ) ) ); ?>
                 },
                 1000: {
-                    items: <?php echo $items_desktop ?>
+                    items: <?php echo wp_json_encode( max( 1, (int) ( $items_desktop ?: 3 ) ) ); ?>
                 },
                 1400: {
-                    items: <?php echo $items ?>
+                    items: <?php echo wp_json_encode( max( 1, (int) ( $items ?: 5 ) ) ); ?>
                 }
             }
         });

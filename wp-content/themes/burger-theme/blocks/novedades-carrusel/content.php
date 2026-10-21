@@ -100,7 +100,7 @@ $block_id = $block['id'];
                             </p>
 
                             <div class="color-primario mb-3">
-                                <?= $news->post_excerpt ?>
+                                <?= wp_kses_post( burger_get_news_excerpt( $news ) ) ?>
                             </div>
 
                             <?php echo get_burger_button ( $boton, $estilo ) ?>
