@@ -92,11 +92,11 @@ function burger_get_news_excerpt( $news ) {
     }
 
     $content = get_field( 'contenido_single', $news->ID );
-    if ( is_string( $content ) && trim( wp_strip_all_tags( $content ) ) !== '' ) {
-        $text = wp_strip_all_tags( strip_shortcodes( $content ), true );
-        return wp_trim_words( $text, (int) apply_filters( 'excerpt_length', 55 ), apply_filters( 'excerpt_more', ' [&hellip;]' ) );
+    if ( ! is_string( $content ) || trim( wp_strip_all_tags( $content ) ) === '' ) {
+        $content = excerpt_remove_blocks( $news->post_content );
     }
 
-    return get_the_excerpt( $news );
+    $text = wp_strip_all_tags( strip_shortcodes( $content ), true );
+    return wp_trim_words( $text, 35, '...' );
 }
 ?>
