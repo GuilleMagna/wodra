@@ -114,11 +114,13 @@ add_filter( 'acf/load_value/name=botones_single', static function ( $value, $pos
     return [ [ 'field_burger_single_botones_enlace' => $legacy, 'field_burger_single_botones_estilo' => 'btn-linea' ] ];
 }, 20, 2 );
 
-/** Texto editorial para la descripción automática de Yoast de las Novedades. */
+/** Texto editorial para la descripción automática de Yoast de Novedades y Eventos. */
 function burger_single_meta_description( $post_id ) {
-    if ( get_post_type( $post_id ) !== 'post' || ! function_exists( 'get_field' ) ) return '';
+    $fields = [ 'post' => 'contenido_single', 'evento' => 'texto_evento' ];
+    $post_type = get_post_type( $post_id );
+    if ( ! isset( $fields[ $post_type ] ) || ! function_exists( 'get_field' ) ) return '';
 
-    $content = get_field( 'contenido_single', $post_id, false );
+    $content = get_field( $fields[ $post_type ], $post_id, false );
     if ( ! is_string( $content ) ) return '';
     $text = html_entity_decode( wp_strip_all_tags( strip_shortcodes( $content ), true ), ENT_QUOTES | ENT_HTML5, 'UTF-8' );
     $text = trim( preg_replace( '/\s+/u', ' ', $text ) );
@@ -133,17 +135,18 @@ function burger_single_meta_description( $post_id ) {
 add_filter( 'option_wpseo_titles', static function ( $options ) {
     if ( is_array( $options ) ) {
         $options['metadesc-post'] = '%%excerpt%%';
+        $options['metadesc-evento'] = '%%excerpt%%';
     }
     return $options;
 } );
 
 add_filter( 'wpseo_replacements', static function ( $replacements, $args ) {
     $post_id = absint( $args->ID ?? 0 );
-    if ( ! $post_id || ( $args->post_type ?? '' ) !== 'post' ) return $replacements;
+    if ( ! $post_id || ! in_array( $args->post_type ?? '', [ 'post', 'evento' ], true ) ) return $replacements;
     $description = burger_single_meta_description( $post_id );
     if ( $description !== '' ) {
         foreach ( [ '%%excerpt%%', '%%excerpt_only%%' ] as $variable ) {
-            if ( array_key_exists( $variable, $replacements ) ) $replacements[ $variable ] = $description;
+            $replacements[ $variable ] = $description;
         }
     }
     return $replacements;
@@ -152,7 +155,7 @@ add_filter( 'wpseo_replacements', static function ( $replacements, $args ) {
 // Resolver también indexables existentes sin exigir regenerarlos ni guardar cada entrada.
 add_filter( 'wpseo_metadesc', static function ( $description, $presentation ) {
     $model = $presentation->model ?? null;
-    if ( ! $model || $model->object_type !== 'post' || $model->object_sub_type !== 'post' ) return $description;
+    if ( ! $model || $model->object_type !== 'post' || ! in_array( $model->object_sub_type, [ 'post', 'evento' ], true ) ) return $description;
     $post_id = (int) $model->object_id;
     if ( trim( (string) get_post_meta( $post_id, '_yoast_wpseo_metadesc', true ) ) !== '' ) return $description;
     return burger_single_meta_description( $post_id ) ?: $description;
