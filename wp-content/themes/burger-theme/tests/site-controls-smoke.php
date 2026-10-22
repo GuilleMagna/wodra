@@ -17,12 +17,12 @@ add_filter( 'pre_option', static function ( $pre, $option ) use ( &$settings ) {
     return array_key_exists( $option, $settings ) ? $settings[ $option ] : $pre;
 }, 10, 2 );
 $set = static function ( $name, $value ) use ( &$settings ) { $settings[ 'options_burger_' . $name ] = $value; };
-foreach ( [ 'comments_disabled', 'login_enabled', 'soon_enabled' ] as $name ) $set( $name, '0' );
+foreach ( [ 'svg_enabled', 'comments_disabled', 'login_enabled', 'soon_enabled' ] as $name ) $set( $name, '0' );
 check_control( ! burger_comments_disabled() && ! burger_soon_blocks_request(), 'Los switches apagados deben preservar el sitio.' );
 
 $fields = acf_get_fields( 'group_66ec98973649f' );
 $tabs = array_column( array_filter( $fields, static fn( $f ) => 'tab' === $f['type'] ), 'label' );
-foreach ( [ 'Header', 'Estructura fija', 'Comentarios', 'Custom Login', 'Próximamente' ] as $label ) check_control( in_array( $label, $tabs, true ), 'Falta tab: ' . $label );
+foreach ( [ 'Header', 'Estructura fija', 'SVG', 'Comentarios', 'Custom Login', 'Próximamente' ] as $label ) check_control( in_array( $label, $tabs, true ), 'Falta tab: ' . $label );
 $keys = array_column( $fields, 'key' );
 check_control( count( $keys ) === count( array_unique( $keys ) ), 'Hay keys repetidas.' );
 
@@ -32,7 +32,7 @@ add_filter( 'acf/pre_update_metadata', static function ( $pre, $id, $name, $valu
     $saved[ ( $hidden ? '_' : '' ) . $name ] = $value;
     return true;
 }, 10, 5 );
-foreach ( [ 'comments_disabled' => 1, 'login_logo' => 123, 'soon_title' => 'Próximamente: comunidad', 'soon_allowed_roles' => [ 'editor' ] ] as $name => $value ) {
+foreach ( [ 'svg_enabled' => 1, 'comments_disabled' => 1, 'login_logo' => 123, 'soon_title' => 'Próximamente: comunidad', 'soon_allowed_roles' => [ 'editor' ] ] as $name => $value ) {
     $key = 'field_burger_' . $name;
     check_control( (bool) acf_get_field( $key ), 'ACF no resuelve ' . $key );
     update_field( $key, $value, 'option' );
@@ -53,7 +53,7 @@ foreach ( $xpath->query( '//input[@name]|//textarea[@name]|//select[@name]' ) as
     $name = $input->getAttribute( 'name' );
     check_control( str_starts_with( $name, 'acf[' ), 'Input fuera del payload ACF: ' . $name );
 }
-foreach ( [ 'comments_disabled', 'login_enabled', 'soon_enabled' ] as $name ) {
+foreach ( [ 'svg_enabled', 'comments_disabled', 'login_enabled', 'soon_enabled' ] as $name ) {
     $input = $xpath->query( '//input[@type="checkbox" and @name="acf[field_burger_' . $name . ']"]' )->item( 0 );
     check_control( (bool) $input, 'Falta el interruptor en el formulario: ' . $name );
     foreach ( [ '1', '0' ] as $value ) {

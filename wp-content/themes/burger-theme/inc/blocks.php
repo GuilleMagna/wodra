@@ -1500,7 +1500,9 @@ function cargar_novedades() {
 
     $page = isset($_POST['page']) ? $_POST['page'] : 1;
     $cat = isset($_POST['cat']) ? $_POST['cat'] : 0;
-    $per_page = isset($_POST['per_page']) ? $_POST['per_page'] : 3;
+    $per_page = isset($_POST['per_page']) && is_scalar($_POST['per_page']) ? (int) $_POST['per_page'] : 3;
+    // El endpoint público nunca debe permitir consultas sin límite (0 o -1).
+    $per_page = max(1, min(30, $per_page));
 
     $query = new WP_Query(array(
         'posts_per_page' => $per_page,

@@ -1,0 +1,2 @@
+# Pruebas de desarrollo: sólo ejecutar por consola, nunca servir por HTTP.
+Require all denied

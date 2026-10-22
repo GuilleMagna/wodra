@@ -41,6 +41,9 @@ function burger_site_control_fields() {
         $add( $name, $label, 'color_picker', [ 'default_value' => $default, 'wrapper' => [ 'width' => '33' ] ] );
     };
 
+    $tab( 'svg', 'SVG' );
+    $switch( 'svg_enabled', 'Permitir subir SVG', 'Permite subir archivos .svg de hasta 2 MB sólo a administradores. Elimina scripts y referencias externas antes de guardarlos. Activá y guardá esta opción antes de retirar Safe SVG. Los SVG existentes no se modifican. No admite SVG comprimidos (.svgz).' );
+
     $tab( 'comments', 'Comentarios' );
     $switch( 'comments_disabled', 'Desactivar comentarios', 'Cierra comentarios, pingbacks y trackbacks en todos los tipos de contenido; oculta los existentes sin borrarlos. Al desactivarlo se recupera la configuración anterior. Reemplaza Disable Comments cuando retires ese plugin.' );
 
@@ -107,5 +110,6 @@ add_filter( 'acf/load_fields', function ( $fields, $parent ) {
 }, 30, 2 );
 
 require_once __DIR__ . '/site-comments.php';
+require_once __DIR__ . '/site-svg.php';
 require_once __DIR__ . '/site-login.php';
 require_once __DIR__ . '/site-coming-soon.php';
