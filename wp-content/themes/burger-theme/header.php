@@ -17,7 +17,6 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="<?php echo BURGER_OPTIONS['url_font_family'] ?>" rel="stylesheet">
 
     <?php wp_head() ?>
 

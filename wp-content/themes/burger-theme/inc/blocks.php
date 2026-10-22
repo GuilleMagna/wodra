@@ -616,6 +616,7 @@ function burger_extend_blocks() {
                                 filemtime($script_path),
                                 true
                             );
+                            if ( ! is_admin() ) wp_script_add_data( 'burger-block-' . $slug, 'strategy', 'defer' );
                         }
                         
                     },
@@ -733,7 +734,7 @@ function burger_render_blocks( $block, $content = '', $is_preview = false ) {
             false !== $cached_html
             && burger_block_html_is_valid( $cached_html )
         ) {
-            echo $cached_html;
+            echo burger_prepare_front_block_html( $cached_html, $slug );
             return;
         }
 
@@ -794,7 +795,7 @@ function burger_render_blocks( $block, $content = '', $is_preview = false ) {
         );
     }
 
-    echo $html;
+    echo burger_prepare_front_block_html( $html, $slug );
 }
 
 function burger_apply_block_anchor( $html, $block ) {

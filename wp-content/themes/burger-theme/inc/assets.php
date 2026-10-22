@@ -1,9 +1,10 @@
 <?php
 
+require_once __DIR__ . '/image-dimensions.php';
+
 /**
- * Junta varios archivos CSS/JS del theme en un solo archivo cacheado en
- * disco, para bajar la cantidad de requests del front (hoy header.php/
- * footer.php cargan ~9 CSS y ~6 JS por separado).
+ * Junta el CSS base del theme en un archivo cacheado en disco.
+ * Los vendors opcionales se encolan por bloque y su JS se difiere al footer.
  *
  * El nombre del bundle incluye un hash de los mtimes de los archivos
  * fuente, así que si se actualiza cualquier vendor el bundle se
@@ -20,7 +21,7 @@ function burger_get_asset_bundle_url( $type, array $files ) {
         wp_mkdir_p( $cache_dir );
     }
 
-    $sig = [];
+    $sig = [ 'bundle-v2-font-swap' ];
 
     foreach ( $files as $file ) {
         $path = $theme_path . '/' . ltrim( $file, '/' );
@@ -62,6 +63,10 @@ function burger_write_asset_bundle( $bundle_path, $type, array $files, $theme_pa
         $content = file_get_contents( $path );
 
         if ( $type === 'css' ) {
+            // Font Awesome no debe ocultar los íconos mientras descarga la fuente.
+            if ( false !== strpos( $file, 'font-awesome' ) ) {
+                $content = preg_replace( '/font-display\s*:\s*block/', 'font-display:swap', $content );
+            }
             // Los archivos quedan todos en /cache/, así que hay que
             // volver absolutas las url() relativas de cada uno (fuentes,
             // íconos, sprites) usando la carpeta original de cada archivo.
@@ -113,25 +118,19 @@ add_action( 'wp_enqueue_scripts', function () {
         return;
     }
 
+    $font_url = trim( BURGER_OPTIONS['url_font_family'] ?? '' );
+    if ( $font_url ) {
+        if ( 'fonts.googleapis.com' === wp_parse_url( $font_url, PHP_URL_HOST ) ) $font_url = add_query_arg( 'display', 'swap', $font_url );
+        wp_enqueue_style( 'burger-fonts', $font_url, [], null );
+    }
+
     $css_files = [
         'vendors/bootstrap5.2/css/bootstrap.min.css',
         'vendors/font-awesome6/css/all.min.css',
-        'vendors/fancybox/fancybox.css',
-        'vendors/swiperjs/swiper-bundle.min.css',
-        'vendors/aos/aos.css',
         'themes/css/fonts.css',
         'themes/css/colors.css',
         'themes/css/styler.css',
         'themes/css/buttons.css',
-    ];
-
-    $js_files = [
-        'vendors/jquery-3.6.0.min.js',
-        'vendors/countUp.min.js',
-        'vendors/bootstrap5.2/js/bootstrap.bundle.min.js',
-        'vendors/fancybox/fancybox.umd.js',
-        'vendors/swiperjs/swiper-bundle.min.js',
-        'vendors/aos/aos.js',
     ];
 
     wp_enqueue_style(
@@ -141,13 +140,60 @@ add_action( 'wp_enqueue_scripts', function () {
         null
     );
 
-    wp_enqueue_script(
-        'burger-front-bundle',
-        burger_get_asset_bundle_url( 'js', $js_files ),
-        [],
-        null,
-        false // en el <head>, mismo orden/momento que antes (evita romper scripts inline que ya asumen jQuery cargado ahí)
-    );
+    // Los inline existentes registran callbacks de ready durante el parseo.
+    wp_enqueue_script( 'jquery' );
+    wp_enqueue_script( 'burger-bootstrap', BURGER_THEME_URL . '/vendors/bootstrap5.2/js/bootstrap.bundle.min.js', [], '5.2', [ 'in_footer' => true, 'strategy' => 'defer' ] );
+    foreach ( burger_optional_vendors() as $handle => $vendor ) {
+        // Owl ya fue registrado por setup.php: sustituir su registro global.
+        wp_dequeue_script( $handle );
+        wp_deregister_script( $handle );
+        wp_register_script( $handle, BURGER_THEME_URL . '/' . $vendor['js'], $vendor['deps'] ?? [], filemtime( BURGER_THEME_PATH . '/' . $vendor['js'] ), [ 'in_footer' => true, 'strategy' => 'defer' ] );
+    }
+}, 5 );
+
+// setup.php también encola Owl en prioridad 10; la carga pasa a ser por bloque.
+add_action( 'wp_enqueue_scripts', static function () {
+    wp_dequeue_script( 'owl-carousel' );
+    wp_dequeue_style( 'owl-carousel' );
+}, 30 );
+
+function burger_optional_vendors() {
+    return [
+        'owl-carousel' => [ 'js' => 'vendors/owlcarousel2/owl.carousel.min.js', 'css' => 'vendors/owlcarousel2/assets/owl.carousel.min.css', 'deps' => [ 'jquery' ] ],
+        'burger-swiper' => [ 'js' => 'vendors/swiperjs/swiper-bundle.min.js', 'css' => 'vendors/swiperjs/swiper-bundle.min.css' ],
+        'burger-fancybox' => [ 'js' => 'vendors/fancybox/fancybox.umd.js', 'css' => 'vendors/fancybox/fancybox.css' ],
+        'burger-aos' => [ 'js' => 'vendors/aos/aos.js', 'css' => 'vendors/aos/aos.css' ],
+        'burger-countup' => [ 'js' => 'vendors/countUp.min.js' ],
+    ];
+}
+
+/** Usa el HTML real, incluso cacheado, y el script del bloque que se está mostrando. */
+function burger_prepare_front_block_html( $html, $slug ) {
+    if ( is_admin() ) return $html;
+    $script = BURGER_THEME_PATH . '/blocks/' . $slug . '/scripts.js';
+    $source = $html . ( is_file( $script ) ? file_get_contents( $script ) : '' );
+    $needed = [
+        'owl-carousel' => false !== strpos( $source, 'owlCarousel' ),
+        'burger-swiper' => false !== strpos( $source, 'new Swiper' ),
+        'burger-fancybox' => false !== strpos( $source, 'data-fancybox' ),
+        'burger-aos' => false !== strpos( $html, 'data-aos=' ),
+        'burger-countup' => false !== strpos( $source, 'new CountUp' ),
+    ];
+    foreach ( burger_optional_vendors() as $handle => $vendor ) {
+        if ( ! $needed[ $handle ] ) continue;
+        wp_enqueue_script( $handle );
+        if ( isset( $vendor['css'] ) ) wp_enqueue_style( $handle, BURGER_THEME_URL . '/' . $vendor['css'], [], filemtime( BURGER_THEME_PATH . '/' . $vendor['css'] ) );
+        if ( 'owl-carousel' === $handle ) burger_enqueue_carousel_navigation();
+    }
+    return burger_block_image_dimensions( $html );
+}
+
+add_action( 'wp_footer', static function () {
+    $deps = [];
+    foreach ( [ 'burger-aos', 'burger-fancybox' ] as $handle ) {
+        if ( wp_script_is( $handle, 'enqueued' ) ) $deps[] = $handle;
+    }
+    if ( $deps ) wp_enqueue_script( 'burger-vendor-init', BURGER_THEME_URL . '/themes/js/vendor-init.js', $deps, filemtime( BURGER_THEME_PATH . '/themes/js/vendor-init.js' ), [ 'in_footer' => true, 'strategy' => 'defer' ] );
 }, 5 );
 
 // Cargar después de Owl y también en previews del editor.
@@ -160,6 +206,7 @@ function burger_enqueue_carousel_navigation() {
         filemtime( BURGER_THEME_PATH . '/themes/js/carousel-navigation.js' ),
         ! is_admin()
     );
+    if ( ! is_admin() ) wp_script_add_data( 'burger-carousel-navigation', 'strategy', 'defer' );
     wp_enqueue_style(
         'burger-carousel-navigation',
         BURGER_THEME_URL . '/themes/css/carousel-navigation.css',
@@ -167,7 +214,6 @@ function burger_enqueue_carousel_navigation() {
         filemtime( BURGER_THEME_PATH . '/themes/css/carousel-navigation.css' )
     );
 }
-add_action( 'wp_enqueue_scripts', 'burger_enqueue_carousel_navigation', 20 );
 add_action( 'enqueue_block_editor_assets', 'burger_enqueue_carousel_navigation', 30 );
 
 // Inicializar las pestañas cuando SCF remonta el formulario del editor extendido.

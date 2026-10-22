@@ -1,3 +1,6 @@
+/* Mantener la proporción intrínseca cuando el ancho de una imagen es responsive. */
+:where(img.burger-intrinsic-image) { width: auto; height: auto; }
+
 /* Reservar el header y el menú secundario al navegar a compartir. */
 #compartir-ahora {
     --share-header-height: 105px;

@@ -93,6 +93,7 @@ function burger_agenda_media_assets( $sections = [ 'galeria', 'video' ] ) {
             if ( ! file_exists( $path ) ) continue;
             if ( 'css' === $type ) wp_enqueue_style( 'burger-block-' . $slug, BURGER_THEME_URL . $relative, [], filemtime( $path ) );
             else wp_enqueue_script( 'burger-block-' . $slug, BURGER_THEME_URL . $relative, [ 'jquery' ], filemtime( $path ), true );
+            if ( 'js' === $type && ! is_admin() ) wp_script_add_data( 'burger-block-' . $slug, 'strategy', 'defer' );
         }
     }
 }
