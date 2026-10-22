@@ -6,7 +6,9 @@ $content_fields = [ 'titulo_single', 'subtitulo_single', 'encabezado_single', 'c
 $fields = get_block_content_fields( $block, $content_fields );
 
 global $wp_query;
-$post = $wp_query->queried_object;
+$post = $wp_query->queried_object ?? null;
+// Una vista previa o una consulta vacía puede no tener una entrada asociada.
+if ( ! ( $post instanceof WP_Post ) ) return;
 
 // Las plantillas leen los campos de la entrada; un bloque o preset explícito prevalece.
 if ( empty( $block['data']['preset'] ) ) {

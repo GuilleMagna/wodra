@@ -9,6 +9,8 @@ if( !$seleccionar_novedades ):
 	$novedades = get_posts( [ 'posts_per_page' => $cantidad_novedades, 'cat' => $categoria_novedades ] );
 endif;	
 
+$novedades = is_array( $novedades ) ? $novedades : [];
+
 $design = get_block_design( $block );
 extract( $design );
 
@@ -56,10 +58,10 @@ $block_id = $block['id'];
 
                 <?php 
                 $post->post_thumbnail = '';
-                $post->post_category = '';
+                $post_categories = get_the_category( $post->ID );
+                $post_category_name = $post_categories[0]->name ?? '';
                 if( has_post_thumbnail( $post->ID ) ) {
                     $post->post_thumbnail = get_the_post_thumbnail_url( $post->ID, 'large' );
-                    $post->post_category = get_the_category( $post->ID );
                 }
 
                 $boton['title']     = 'Leer Más';
@@ -84,7 +86,7 @@ $block_id = $block['id'];
                             </h3>
 
                             <p class="color-secundario mb-3">
-                                <?= $post->post_category[0]->name; ?>
+                                <?= esc_html( $post_category_name ); ?>
                             </p>
 
                             <div class="color-primario mb-3">
