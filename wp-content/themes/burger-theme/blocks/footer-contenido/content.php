@@ -101,9 +101,9 @@ $block_id = $block['id'];
 
 			<div class="col-12 col-md">
 
-				<h6 class="mb-2 text-center text-md-start fw-bold">
+				<h2 class="h6 mb-2 text-center text-md-start fw-bold">
 					<?= $titulo_sedes ?>
-				</h6>
+				</h2>
 
                 <? if($habilitar_sedes_dos): ?>
 
@@ -258,9 +258,9 @@ $block_id = $block['id'];
 
 				<div class="text-center text-md-start">
 
-					<h6 class="fw-bold">
+					<h2 class="h6 fw-bold">
 						<?php echo $titulo_asociados ?>
-					</h6>
+					</h2>
 
 					<?php if ( !empty($galeria_asociados) && count($galeria_asociados) > 0): ?>
 

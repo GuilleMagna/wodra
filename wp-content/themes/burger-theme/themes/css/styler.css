@@ -182,7 +182,7 @@ ul.personalizado {
 
 /*************************************************************************** AGREGADO FLOR **********************************************/
 /* .bg-green-image{
-    background: -webkit-linear-gradient(90deg,#d7ff7a 0%,#d7ff7a 35%,#d7ff7a 100%), url(https://gruposit.wodra.ar/wp-content/uploads/2025/06/bg-contador-scaled.jpg);
+    background: -webkit-linear-gradient(90deg,#d7ff7a 0%,#d7ff7a 35%,#d7ff7a 100%), url(/wp-content/uploads/2026/08/DSC03256-copia-scaled.jpg);
     background-size: cover;
     background-position: center;
 } */
@@ -192,7 +192,7 @@ ul.personalizado {
 
 .bg-green-image {
     position: relative;
-    background: url(https://gruposit.wodra.ar/wp-content/uploads/2025/06/bg-contador-scaled.jpg);
+    background: url(/wp-content/uploads/2026/08/DSC03256-copia-scaled.jpg);
     background-size: cover;
     background-position: center;
     border-radius: 0 0 66px 66px;
@@ -217,7 +217,7 @@ ul.personalizado {
 
 .bg-count-image {
     position: relative;
-    background: url(https://gruposit.wodra.ar/wp-content/uploads/2025/06/d86714775af60bb772f744e2a5f0817a27e5dd2c-scaled.jpg);
+    background: url(/wp-content/uploads/2026/07/asociate-scaled.jpg);
     background-size: cover;
     background-position: center;
     border-radius: 0 0 66px 66px;
@@ -426,4 +426,157 @@ ul.personalizado {
     [data-aos="fade-right"][data-aos="fade-right"].aos-animate {
         transform: translate3d(0, 0, 0);
     }
+}
+
+/* ==========================================================================
+   Formularios (Contact Form 7) — blitz.
+   Rehecho el 23/10/2026: el rearmado del sitio del 22/10 repuso un tema anterior
+   y se perdieron los ajustes del 15/10. Sumados los arreglos del 23/10.
+   ========================================================================== */
+
+/* Ajustes Figma formularios — blitz. 15/10/2026
+   Contacto (396) y Contá tu historia (11811): campos de 50 px y textarea de 156 px. */
+:is([id^="wpcf7-f396-"], [id^="wpcf7-f11811-"]) :is(input.wpcf7-form-control:not([type="checkbox"]):not([type="hidden"]):not([type="file"]):not([type="submit"]), select.wpcf7-form-control) {
+    height: 50px;
+}
+
+:is([id^="wpcf7-f396-"], [id^="wpcf7-f11811-"]) textarea.wpcf7-form-control {
+    height: 156px;
+}
+
+/* Botón de Contacto (página Contacto, fondo blanco): el celeste del sitio, como btn-primario. */
+[id^="wpcf7-f396-p10155-"] button[type="submit"] {
+    background-color: var(--primary) !important;
+    border-color: var(--white) !important;
+    color: var(--white) !important;
+}
+
+[id^="wpcf7-f396-p10155-"] button[type="submit"]:hover,
+[id^="wpcf7-f396-p10155-"] button[type="submit"]:focus-visible {
+    background-color: var(--white) !important;
+    border-color: var(--primary) !important;
+    color: var(--primary) !important;
+}
+
+/* Newsletter en banda (802): botón con relleno celeste. */
+[id^="wpcf7-f802-"] button[type="submit"] {
+    background-color: var(--primary) !important;
+}
+
+/* Select: flecha de 12 × 6 y "Vínculo" a ancho completo. */
+[id^="wpcf7-f396-"] select.wpcf7-form-control {
+    background-size: 12px 6px;
+}
+
+@media (min-width: 768px) {
+    [id^="wpcf7-f396-"] [class*="col-md-6"]:has(select[name="select-vinculo"]) {
+        flex: 0 0 auto;
+        width: 100%;
+    }
+}
+
+/* Opción vacía ("Seleccioná una opción") en itálica celeste; las opciones, normales. */
+[id^="wpcf7-f396-"] select.wpcf7-form-control:has(option[value=""]:checked) {
+    font-style: italic;
+    color: var(--primary);
+}
+
+[id^="wpcf7-f396-"] select.wpcf7-form-control option {
+    font-style: normal;
+    color: var(--dark);
+}
+
+/* Foco (23/10/2026): el tema dejaba el borde transparente al hacer foco y, con el campo
+   blanco sobre fondo blanco, la caja desaparecía. Se marca con el color del sitio. */
+.wpcf7 .form-control:focus,
+.wpcf7 .form-select:focus,
+.wpcf7 .wpcf7-form-control:is(input, select, textarea):focus {
+    border-color: var(--primary) !important;
+    outline: 2px solid var(--primary) !important;
+    outline-offset: 2px;
+}
+
+/* Casilla de Términos (23/10/2026): campo de aceptación de CF7 dentro de <div class="blitz-tyc">.
+   Con los <span> de CF7 (inc/setup.php ya no los quita) queda
+   <span class="wpcf7-list-item"><label><input> <span class="wpcf7-list-item-label">texto <a>…</a></span></label></span>.
+   El texto se distingue de los links: los links llevan el color de link del sitio; cambia el color del texto. */
+.wpcf7 :is(.blitz-tyc, .form-check) label a {
+    color: var(--primary-text) !important;
+}
+
+/* CF7 corre 1em a la derecha cada .wpcf7-list-item; la casilla queda alineada con los campos. */
+.wpcf7 :is(.blitz-tyc, .form-check) .wpcf7-list-item {
+    margin-left: 0;
+}
+
+/* Contacto, fondo blanco: texto y links en azul oscuro. */
+[id^="wpcf7-f396-p10155-"] :is(.blitz-tyc, .form-check) label {
+    color: var(--secondary-text);
+}
+
+/* El subrayado distingue el enlace; el azul oscuro también corrige el contraste. */
+[id^="wpcf7-f396-p10155-"] :is(.blitz-tyc, .form-check) label a,
+[id^="wpcf7-f396-p10155-"] :is(.blitz-tyc, .form-check) label a:hover,
+[id^="wpcf7-f396-p10155-"] :is(.blitz-tyc, .form-check) label a:focus-visible {
+    color: var(--secondary-text) !important;
+    text-decoration: underline;
+}
+
+/* Contá tu historia (azul oscuro) y newsletters: texto blanco, links celestes. */
+:is([id^="wpcf7-f11811-"], [id^="wpcf7-f802-"], [id^="wpcf7-f1033-"]) :is(.blitz-tyc, .form-check) label {
+    color: var(--white);
+}
+
+/* Azul oscuro, parche-2 (23/10/2026): el celeste del sitio (#4890ff) sobre el azul oscuro (#15355b) da 3,96:1,
+   debajo del contraste AA (4,5:1). Los links pasan a un celeste más claro, #8ab8ff (6,13:1).
+   Misma especificidad que .wpcf7 :is(.blitz-tyc, .form-check) label a y también con !important: gana por ir después,
+   también en :hover (no hay regla de hover que la pise). */
+:is([id^="wpcf7-f11811-"], [id^="wpcf7-f802-"], [id^="wpcf7-f1033-"]) :is(.blitz-tyc, .form-check) label a {
+    color: #8ab8ff !important;
+    text-decoration: underline;
+}
+
+/* Formulario de consulta sobre celeste: texto oscuro para contraste de lectura. */
+[id^="wpcf7-f396-"]:not([id^="wpcf7-f396-p10155-"]) :is(.blitz-tyc, .form-check) label {
+    color: #10243a !important;
+}
+
+[id^="wpcf7-f396-"]:not([id^="wpcf7-f396-p10155-"]) :is(.blitz-tyc, .form-check) label a {
+    color: #10243a !important;
+    text-decoration: underline;
+}
+
+/* Aviso de error debajo de cada campo: es el aviso propio de CF7 (.wpcf7-not-valid-tip, dentro de
+   .wpcf7-form-control-wrap). Caja clara con texto bordó: legible sobre cualquier fondo del sitio
+   (blanco, celeste, azul oscuro o foto). blocks/formulario/scripts.js lleva el foco al primer campo con error. */
+.wpcf7 .wpcf7-not-valid-tip {
+    display: block;
+    margin-top: .375rem;
+    padding: .25rem .625rem;
+    border-radius: 4px;
+    background-color: #ffe6e6;
+    color: #a4001a;
+    font-size: .875rem;
+    font-weight: 400;
+    line-height: 1.4;
+}
+
+/* Flotante "Espacios Kehilá" (#botones-flotantes), 23/10/2026.
+   La franja ocupa todo el ancho: fuera de sus botones no toma clics (antes tapaba ENVIAR).
+   Se oculta cuando el botón de envío del formulario del pie entra en pantalla: blocks/botones-flotantes/scripts.js
+   pone la clase blitz-form-visible en <body>. visibility:hidden para que tampoco tome clics ni foco.
+   Sin JS la clase no se pone y el flotante queda visible. */
+.botones-flotantes {
+    pointer-events: none;
+    transition: opacity .3s ease, visibility .3s ease;
+}
+
+.botones-flotantes a,
+.botones-flotantes button {
+    pointer-events: auto;
+}
+
+body.blitz-form-visible .botones-flotantes {
+    opacity: 0;
+    visibility: hidden;
 }

@@ -2,10 +2,10 @@
 body { font-family: var(--font-family, "Lato", sans-serif); }
 h1 { font-family: var(--font-family-h1, var(--font-family, "Lato", sans-serif)); }
 h2 { font-family: var(--font-family-h2, var(--font-family, "Lato", sans-serif)); }
-h3 { font-family: var(--font-family-h3, var(--font-family, "Lato", sans-serif)); }
+h3, h2.h3 { font-family: var(--font-family-h3, var(--font-family, "Lato", sans-serif)); }
 h4 { font-family: var(--font-family-h4, var(--font-family, "Lato", sans-serif)); }
-h5, h1.h5 { font-family: var(--font-family-h5, var(--font-family, "Lato", sans-serif)); }
-h6 { font-family: var(--font-family-h6, var(--font-family, "Lato", sans-serif)); }
+h5, h1.h5, h3.h5 { font-family: var(--font-family-h5, var(--font-family, "Lato", sans-serif)); }
+h6, h2.h6 { font-family: var(--font-family-h6, var(--font-family, "Lato", sans-serif)); }
 .text-contador, .text-parallax, .slide p {
   font-family: var(--font-family-h1, var(--font-family, "Lato", sans-serif));
 }
@@ -43,7 +43,7 @@ h2 {
   letter-spacing: normal;
 }
 
-h3 {
+h3, h2.h3 {
   font-weight: 500;
   font-size: clamp(1.5625rem, 1.5rem + 2vw, 1.875rem);
   line-height: 1;
@@ -64,7 +64,7 @@ h5 {
   letter-spacing: normal;
 }
 
-h6 {
+h6, h2.h6 {
   font-weight: 400;
   font-size: clamp(1.125rem, 1rem + 2vw, 1.375rem);
   line-height: 1;
@@ -156,7 +156,7 @@ li {
   letter-spacing: normal;
 }
 
-.h5 {
+.h5, .modal-menu-footer .modal-body h3 {
   font-weight: 400;
   font-size: clamp(1.125rem, 1.1rem + 2vw, 1.375rem);
   line-height: 1;
@@ -263,7 +263,7 @@ li {
     line-height: 1.95rem;
   }
 
-  h3 {
+  h3, h2.h3 {
     font-size: 1.5rem;
     line-height: 1.7rem;
   }
@@ -278,7 +278,7 @@ li {
     line-height: 1.38rem;
   }
 
-  h6 {
+  h6, h2.h6 {
     font-size: 1rem;
     line-height: 1.2rem;
   }
@@ -333,7 +333,7 @@ li {
     line-height: 2.2rem !important;
   }
 
-  .h5 {
+  .h5, .modal-menu-footer .modal-body h3 {
     font-size: 1.2rem !important;
     line-height: 1.4rem !important;
   }
@@ -352,7 +352,7 @@ li {
     line-height: 1.95rem;
   }
 
-  h3 {
+  h3, h2.h3 {
     font-size: 1.5rem;
     line-height: 1.7rem;
   }
@@ -367,7 +367,7 @@ li {
     line-height: 1.4rem;
   }
 
-  h6 {
+  h6, h2.h6 {
     font-size: 1rem;
     line-height: 1.2rem;
   }
@@ -422,7 +422,7 @@ li {
     line-height: 2.2rem !important;
   }
 
-  .h5 {
+  .h5, .modal-menu-footer .modal-body h3 {
     font-size: 1.2rem !important;
     line-height: 1.4rem !important;
   }
@@ -440,7 +440,7 @@ li {
     line-height: 1.8rem;
   }
 
-  h3 {
+  h3, h2.h3 {
     font-size: 1.5rem;
     line-height: 1.7rem;
   }
@@ -455,7 +455,7 @@ li {
     line-height: 1.3rem;
   }
 
-  h6 {
+  h6, h2.h6 {
     font-size: 0.9rem;
     line-height: 1.1rem;
   }
@@ -497,7 +497,7 @@ li {
     line-height: 2.1rem !important;
   }
 
-  .h5 {
+  .h5, .modal-menu-footer .modal-body h3 {
     font-size: 1.1rem !important;
     line-height: 1.3rem !important;
   }
@@ -516,7 +516,7 @@ li {
     line-height: 2.07rem;
   }
 
-  h3 {
+  h3, h2.h3 {
     font-size: 1.75rem;
     line-height: 1.95rem;
   }
@@ -531,7 +531,7 @@ li {
     line-height: 1.45rem;
   }
 
-  h6 {
+  h6, h2.h6 {
     font-size: 1rem;
     line-height: 1.2rem;
   }
@@ -573,7 +573,7 @@ li {
     line-height: 2.3rem !important;
   }
 
-  .h5 {
+  .h5, .modal-menu-footer .modal-body h3 {
     font-size: 1.25rem !important;
     line-height: 1.4rem !important;
   }
@@ -591,7 +591,7 @@ li {
     line-height: 2.07rem;
   }
 
-  h3 {
+  h3, h2.h3 {
     font-size: 1.75rem;
     line-height: 1.95rem;
   }
@@ -606,7 +606,7 @@ li {
     line-height: 1.45rem;
   }
 
-  h6 {
+  h6, h2.h6 {
     font-size: 1rem;
     line-height: 1.2rem;
   }
@@ -647,7 +647,7 @@ li {
     line-height: 2.5rem !important;
   }
 
-  .h5 {
+  .h5, .modal-menu-footer .modal-body h3 {
     font-size: 1.3rem !important;
     line-height: 1.5rem !important;
   }
@@ -666,7 +666,7 @@ li {
     line-height: 2.26rem;
   }
 
-  h3 {
+  h3, h2.h3 {
     font-size: 1.87rem;
     line-height: 2.07rem;
   }
@@ -681,7 +681,7 @@ li {
     line-height: 1.57rem;
   }
 
-  h6 {
+  h6, h2.h6 {
     font-size: 1.06rem;
     line-height: 1.26rem;
   }
@@ -722,7 +722,7 @@ li {
     line-height: 2.5rem !important;
   }
 
-  .h5 {
+  .h5, .modal-menu-footer .modal-body h3 {
     font-size: 1.3rem !important;
     line-height: 1.5rem !important;
   }

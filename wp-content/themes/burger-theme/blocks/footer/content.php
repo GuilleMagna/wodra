@@ -1,7 +1,7 @@
 <?php
 //Block Name: Sub-footer
 
-$copyright = BURGER_OPTIONS['copyright'] ?: '&copy; Copyright 2025 Milicic';
+$copyright = ( BURGER_OPTIONS['copyright'] ?? '' ) ?: '&copy; ' . wp_date( 'Y' ) . ' ' . esc_html( get_bloginfo( 'name' ) );
 $menu_footer = BURGER_OPTIONS['menu_footer'] ?: [];
 $modales_menu_footer = BURGER_OPTIONS['modales_menu_footer'] ?: [];
 $texto_agencia = BURGER_OPTIONS['texto_agencia'] ?? 'Powered by';
@@ -67,7 +67,7 @@ $color_fondo_footer = BURGER_OPTIONS['color_fondo_footer'] ?: 'var(--primary)';
 
     </div>
 
-    </footer>
+    </div>
 
     <?php if (BURGER_OPTIONS['mostrar_whatsapp']): ?>
 
@@ -83,8 +83,8 @@ $color_fondo_footer = BURGER_OPTIONS['color_fondo_footer'] ?: 'var(--primary)';
     <?php if (!empty($modales_menu_footer) and count($modales_menu_footer) > 0)
         foreach ($modales_menu_footer as $modal): ?>
 
-            <div class="modal modal-lg fade" id="<?php echo $modal['id_modal'] ?>" data-bs-backdrop="static"
-                data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal modal-lg fade modal-menu-footer" id="<?php echo $modal['id_modal'] ?>" data-bs-backdrop="static"
+                data-bs-keyboard="false" tabindex="-1" aria-labelledby="modal-titulo-<?php echo esc_attr( $modal['id_modal'] ) ?>" aria-hidden="true">
 
                 <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
 
@@ -92,9 +92,9 @@ $color_fondo_footer = BURGER_OPTIONS['color_fondo_footer'] ?: 'var(--primary)';
 
                         <div class="modal-header">
 
-                            <h5 class="modal-title" id="staticBackdropLabel">
+                            <h2 class="modal-title h3" id="modal-titulo-<?php echo esc_attr( $modal['id_modal'] ) ?>">
                                 <?php echo $modal['titulo'] ?>
-                            </h5>
+                            </h2>
 
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 

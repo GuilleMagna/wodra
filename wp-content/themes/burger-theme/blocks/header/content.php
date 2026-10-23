@@ -104,11 +104,11 @@ $color_header = BURGER_OPTIONS['color_header'] ?? 'var(--secondary)';
 
                     <div class="offcanvas-header justify-content-between bg-secondary pt-3">
 
-                        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">
+                        <div class="offcanvas-title" id="offcanvasNavbarLabel">
                             <a href="<?php echo BURGER_URL ?>" style="text-decoration: none;" class="logo-head">
                                 <img src="<?php echo $logo ?>" class="ms-3" alt="Logo">
                             </a>
-                        </h5>
+                        </div>
 
                         <button type="button" class="btn  border-0 text-reset" data-bs-dismiss="offcanvas"
                             aria-label="Close">

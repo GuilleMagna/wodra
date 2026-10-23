@@ -12,9 +12,24 @@ jQuery(document).ready(function($) {
 
     $('.wpcf7-submit').replaceWith(html);
 
+    // Newsletters (802 y 1033): se quedan en la página, sin ir a /gracias/. blitz. 23/10/2026
+    const formulariosSinGracias = ['802', '1033'];
+
+    function idDelFormulario(event) {
+        if (event.detail && event.detail.contactFormId) {
+            return String(event.detail.contactFormId);
+        }
+        // Respaldo: el campo oculto _wpcf7 que CF7 pone en cada formulario.
+        var oculto = event.target.querySelector('input[name="_wpcf7"]');
+        return oculto ? String(oculto.value) : '';
+    }
+
     document.addEventListener('wpcf7submit', function(event) {
 
         if (event.detail.apiResponse && event.detail.apiResponse.status === 'mail_sent') {
+            if (formulariosSinGracias.indexOf(idDelFormulario(event)) !== -1) {
+                return;
+            }
             var form = event.target;
             var nameInput = form.querySelector('[name="your-name"]');
             if (nameInput) {
@@ -23,6 +38,40 @@ jQuery(document).ready(function($) {
             }
         }
         
+    }, false);
+
+    // Avisos por campo (23/10/2026): los pone CF7 (.wpcf7-not-valid-tip dentro de
+    // .wpcf7-form-control-wrap) y el estilo está en styler.css. Acá sólo se suma lo que CF7 no hace:
+    // llevar el foco al primer campo con error y, si CF7 no lo puso, asociar el aviso al campo.
+    document.addEventListener('wpcf7invalid', function(event) {
+
+        var contenedor = event.target;
+
+        setTimeout(function() {
+
+            var invalidos = contenedor.querySelectorAll('.wpcf7-form-control.wpcf7-not-valid');
+
+            invalidos.forEach(function(control) {
+                var campo = control.matches('input, select, textarea') ? control : control.querySelector('input, select, textarea');
+                var wrap = control.closest('.wpcf7-form-control-wrap');
+                var aviso = wrap ? wrap.querySelector('.wpcf7-not-valid-tip') : null;
+                if (!campo || !aviso) return;
+                if (!aviso.id) {
+                    aviso.id = 'blitz-aviso-' + (campo.name || 'campo').replace(/[^0-9a-z_-]+/ig, '') + '-' + Math.random().toString(36).slice(2, 8);
+                }
+                var referencias = (campo.getAttribute('aria-describedby') || '').split(/\s+/).filter(Boolean);
+                if (referencias.indexOf(aviso.id) === -1) referencias.push(aviso.id);
+                campo.setAttribute('aria-describedby', referencias.join(' '));
+            });
+
+            var primero = invalidos[0];
+            if (primero) {
+                var foco = primero.matches('input, select, textarea') ? primero : primero.querySelector('input, select, textarea');
+                if (foco) foco.focus();
+            }
+
+        }, 0);
+
     }, false);
 
 });

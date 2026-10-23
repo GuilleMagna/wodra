@@ -2,12 +2,13 @@
     position: relative;
 }
 
-.modal {
-    z-index: 999;
+.modal-menu-footer {
+    /* Por encima del header (#fixedNav 1050), los flotantes (997/999) y la barra de admin (99999). blitz. 17/10/2026, rehecho 23/10/2026 */
+    z-index: 100001;
 }
 
-.modal-backdrop {
-    z-index: 9;
+body:has(.modal-menu-footer.show) .modal-backdrop {
+    z-index: 100000;
 }
 
 .whatsapp-button {
@@ -47,4 +48,44 @@
         transform: scale(0.9);
     }
 
+}
+
+/* Modales legales del pie (Términos y Políticas): estilos del sitio.
+   Tamaños: el título usa .h3 y los subtítulos .h5 de fonts.css; colores con las variables del sitio.
+   blitz. 17/10/2026, rehecho el 23/10/2026 (el rearmado del 22/10 repuso un tema anterior). */
+.modal-menu-footer .modal-title {
+    color: var(--secondary-text);
+    margin-bottom: 0;
+}
+
+.modal-menu-footer .modal-body {
+    color: var(--dark);
+    padding: 1.5rem 2rem;
+}
+
+.modal-menu-footer .modal-body p,
+.modal-menu-footer .modal-body li {
+    font-size: 1rem;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+}
+
+.modal-menu-footer .modal-body h3 {
+    color: var(--secondary-text);
+    margin-top: 1.75rem;
+    margin-bottom: .75rem;
+}
+
+.modal-menu-footer .modal-body h3:first-child {
+    margin-top: 0;
+}
+
+.modal-menu-footer .modal-body a {
+    color: var(--primary-text);
+}
+
+@media (max-width: 576px) {
+    .modal-menu-footer .modal-body {
+        padding: 1.25rem;
+    }
 }

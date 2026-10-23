@@ -1,6 +1,7 @@
 .hero-video {
     height: 100vh;
     position: relative;
+    overflow: hidden;
 }
 
 .hero-video .overlay-video {
@@ -45,14 +46,16 @@
 }
 
 .hero-video .video-home {
+    /* blitz. 23/10/2026: cubre siempre la sección (antes, en celular quedaban franjas
+       sin video arriba y abajo, y en escritorio 100vw generaba scroll horizontal). */
     position: absolute;
-    min-width: 100vw;
-    min-height: 100vh;
     z-index: 0;
-    right: auto;
-    left: 0;
     top: 0;
-    bottom: auto;
+    left: 0;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover;
+    object-position: center;
 }
 
 .hero-video .trama-hero-video {
@@ -78,11 +81,6 @@
 
     .hero-video .video-home {
         z-index: 9;
-        width: 100%;
-        right: 0;
-        left: auto;
-        top: 0;
-        bottom: auto;
     }
 
     .hero-video .trama-hero-video {

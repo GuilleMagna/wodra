@@ -79,46 +79,6 @@ add_action('wp_enqueue_scripts', function() {
 
 });
 
-function custom_wp_mail_message( $args ) {
-
-    $to = $args['to'];
-    $subject = $args['subject']; 
-
-    $logo = BURGER_URL.'/wp-content/uploads/2025/04/76af47b739efbfe4e160b57623006bf9.png';
-    $bg_color = '#796e65';
-
-    $message = '
-        <!DOCTYPE html>
-        <html lang="es">
-        <head>
-            <meta charset="UTF-8">
-            <title>'.$subject.'</title>
-        </head>
-        <body style="font-family: Arial, sans-serif; background-color: #fff; color: #796e65; margin: 0; padding: 0;">
-            <div style="background-color: '.$bg_color.'; padding: 20px; text-align: center;">
-                <img src="'.$logo.'" alt="Logo Andemira" style="display: block; max-width: 100%; margin: 0px auto;">
-            </div>
-            <div style="style="font-family: Arial, sans-serif; color: #796e65; padding: 20px;">
-                <p>' . nl2br( $args['message'] ) . '</p>
-            </div>
-        </body>
-        </html>
-    ';
-
-    $headers = array(
-        'Content-Type: text/html; charset=UTF-8',
-    );
-
-    return array(
-        'to' => $to,
-        'subject' => $subject,
-        'message' => $message,
-        'headers' => $headers,
-    );
-
-}
-
-add_filter( 'wp_mail', 'custom_wp_mail_message' );
 
 function enviar_email( $post ) {
 
@@ -283,12 +243,70 @@ add_action('wp_enqueue_scripts', 'enqueue_block_styles');
 
 add_filter('wpcf7_form_elements', function($content) {
 
-    $content = preg_replace('/<span(?:\s[^>]*)?>|<\/span>/', '', $content); // Elimina <span> y </span>
     $content = preg_replace('/<p(?:\s[^>]*)?>|<\/p>/', '', $content);       // Elimina <p> y </p> (sin tocar <path>, <pre>, etc.)
 
     return $content;
 
 });
+
+/*
+ * Etiqueta especial de CF7 [_wa_celular]: URL de WhatsApp (wa.me) armada con el celular
+ * de la persona, para el link del dato "Celular" en los mails de los formularios.
+ * Se usa dentro de un href, por eso devuelve sólo la URL, sin HTML.
+ * Toma your-codigo (Celular) o, si no está, your-telefono. Número argentino: los
+ * diez dígitos nacionales con 549 adelante; rechaza formatos incompletos o ambiguos.
+ * blitz. 14/10/2026 · rehecho el 23/10/2026: el rearmado del 22/10 repuso un tema anterior.
+ */
+add_filter( 'wpcf7_special_mail_tags', function ( $output, $name, $html ) {
+	if ( '_wa_celular' !== $name ) {
+		return $output;
+	}
+	if ( ! class_exists( 'WPCF7_Submission' ) ) {
+		return '';
+	}
+	$submission = WPCF7_Submission::get_instance();
+	if ( ! $submission ) {
+		return '';
+	}
+	$data = (array) $submission->get_posted_data();
+	$raw  = '';
+	foreach ( array( 'your-codigo', 'your-telefono' ) as $campo ) {
+		if ( ! empty( $data[ $campo ] ) ) {
+			$raw = is_array( $data[ $campo ] ) ? (string) reset( $data[ $campo ] ) : (string) $data[ $campo ];
+			break;
+		}
+	}
+	return esc_url( burger_whatsapp_url( $raw ) );
+}, 10, 3 );
+
+function burger_whatsapp_url( $raw ) {
+    if ( ! is_string( $raw ) || preg_match( '/[^0-9\s()+.\-]/u', $raw ) ) return '';
+	$digitos = preg_replace( '/\D+/', '', $raw );
+	if ( 0 === strpos( $digitos, '00' ) ) $digitos = substr( $digitos, 2 );
+    if ( preg_match( '/^\s*(?:\+|00)/', $raw ) && 0 !== strpos( $digitos, '54' ) ) return '';
+	// Prefijos que no van en wa.me: 54 (país), 9 (celular) y el 0 de la característica.
+	if ( 0 === strpos( $digitos, '549' ) && strlen( $digitos ) > 10 ) {
+		$digitos = substr( $digitos, 3 );
+	} elseif ( 0 === strpos( $digitos, '54' ) && strlen( $digitos ) > 10 ) {
+		$digitos = substr( $digitos, 2 );
+	}
+	$digitos = ltrim( $digitos, '0' );
+	// Característica (2 a 4 dígitos) + 15 + número: se saca el 15.
+	if ( 12 === strlen( $digitos ) ) {
+		$candidatos = [];
+		foreach ( array( 2, 3, 4 ) as $largo ) {
+			if ( '15' === substr( $digitos, $largo, 2 ) ) {
+				$candidatos[] = substr( $digitos, 0, $largo ) . substr( $digitos, $largo + 2 );
+			}
+		}
+		if ( 1 !== count( $candidatos ) ) return '';
+		$digitos = $candidatos[0];
+	}
+	if ( ! preg_match( '/^[1-9][0-9]{9}$/', $digitos ) ) {
+		return '';
+	}
+	return 'https://wa.me/549' . $digitos;
+}
 
 function get_previous_post_by_id( $post ) {
 

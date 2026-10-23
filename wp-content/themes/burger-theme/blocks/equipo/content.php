@@ -70,7 +70,7 @@ $block_id = $block['id'];
                                     </div>
 
                                     <div class="card-body border-0">
-                                        <h5><?= $item['nombre'] ?></h5>
+                                        <h3 class="h5"><?= $item['nombre'] ?></h3>
                                         <p class="mb-0"><?= $item['cargo'] ?></p>
                                     </div>
 
