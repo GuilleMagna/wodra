@@ -2642,6 +2642,24 @@ add_filter('acf/load_field/name=grupo_acf_preset', function ($field) {
     return $field;
 });
 
+// Etiqueta editorial tanto en los resultados como en las novedades ya seleccionadas.
+add_filter( 'acf/fields/post_object/result/name=novedades', static function ( $text, $post, $field, $post_id ) {
+    if ( 'post' !== $post->post_type ) return $text;
+
+    $parts = [];
+    foreach ( [ 'titulo_single', 'subtitulo_single' ] as $name ) {
+        $value = get_field( $name, $post->ID );
+        $value = is_string( $value ) ? trim( wp_strip_all_tags( $value, true ) ) : '';
+        if ( '' !== $value ) $parts[] = $value;
+    }
+    if ( ! $parts ) return $text;
+
+    // Conservar los indicadores de estado que ACF agrega al título.
+    $title = get_the_title( $post->ID );
+    $suffix = '' !== $title && 0 === strpos( $text, $title ) ? substr( $text, strlen( $title ) ) : '';
+    return implode( ' — ', $parts ) . $suffix;
+}, 10, 4 );
+
 // Novedades y su carrusel comparten los mismos campos de contenido y presets.
 add_filter( 'acf/load_field_group', static function ( $group ) {
     foreach ( $group['location'] ?? [] as $rules ) {

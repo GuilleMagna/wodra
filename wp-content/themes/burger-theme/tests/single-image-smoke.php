@@ -39,7 +39,7 @@ foreach ( [ 0, 1 ] as $preset ) {
     $image = '';
     $empty_html = $render( $preset );
     if ( str_contains( $empty_html, 'boton-novedad' ) || str_contains( $empty_html, 'Texto propio' ) ) throw new RuntimeException( 'No respeta campos borrados.' );
-    if ( str_contains( $render( $preset ), 'src="https://example.org/template.jpg"' ) ) throw new RuntimeException( 'No respeta eliminación explícita.' );
+    if ( ! str_contains( $empty_html, 'src="https://example.org/template.jpg"' ) ) throw new RuntimeException( 'Imagen vacía no recupera la imagen de plantilla.' );
     $has_image = false;
     if ( ! str_contains( $render( $preset ), 'src="https://example.org/template.jpg"' ) ) throw new RuntimeException( 'No conserva fallback de plantilla.' );
 }

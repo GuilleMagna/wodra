@@ -4,6 +4,7 @@ if( get_post_type() == 'page' ) return null;
 
 $content_fields = [ 'titulo_single', 'subtitulo_single', 'encabezado_single', 'contenido_single', 'imagen_servicio', 'titulo_compartir', 'subtitulo_compartir', 'boton', 'botones_single' ];
 $fields = get_block_content_fields( $block, $content_fields );
+$template_image = $fields['imagen_servicio'] ?? '';
 
 global $wp_query;
 $post = $wp_query->queried_object ?? null;
@@ -28,12 +29,14 @@ foreach ( [ 'titulo_single', 'subtitulo_single', 'encabezado_single', 'contenido
     $fields[ $field_name ] = get_field( $field_name, $post->ID ) ?? '';
 }
 // Los valores guardados en la Novedad prevalecen sobre la plantilla y su preset.
-// El vacío explícito permite quitar la imagen, el botón o los textos de compartir.
-foreach ( [ 'imagen_servicio', 'boton', 'botones_single', 'titulo_compartir', 'subtitulo_compartir' ] as $field_name ) {
+// El vacío explícito permite quitar el botón o los textos de compartir.
+foreach ( [ 'boton', 'botones_single', 'titulo_compartir', 'subtitulo_compartir' ] as $field_name ) {
     if ( metadata_exists( 'post', $post->ID, $field_name ) ) {
         $fields[ $field_name ] = get_field( $field_name, $post->ID ) ?: '';
     }
 }
+// Sin imagen propia, conservar la configurada en el bloque del template o su preset.
+$fields['imagen_servicio'] = get_field( 'imagen_servicio', $post->ID ) ?: $template_image;
 // Conservar el botón previo hasta configurar la lista; una lista vacía lo elimina.
 if ( ( empty( $fields['botones_single'] ) || metadata_exists( 'post', $post->ID, 'boton' ) ) && ! metadata_exists( 'post', $post->ID, 'botones_single' ) && ! array_key_exists( 'botones_single', $block['data'] ?? [] ) && is_array( $fields['boton'] ) && ! empty( $fields['boton']['url'] ) ) {
     $fields['botones_single'] = [ [ 'enlace' => $fields['boton'], 'estilo' => 'btn-linea' ] ];

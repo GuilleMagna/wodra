@@ -32,9 +32,11 @@ if ( ! empty( $carga_automatica ) ) {
 
     $novedades = [];
     foreach ( get_posts( $query_args ) as $publicacion ) {
-        $texto = has_excerpt( $publicacion )
+        $texto = 'post' === $tipo_publicacion
+            ? burger_get_news_excerpt( $publicacion )
+            : ( has_excerpt( $publicacion )
             ? get_the_excerpt( $publicacion )
-            : wp_trim_words( wp_strip_all_tags( strip_shortcodes( $publicacion->post_content ) ), 28 );
+            : wp_trim_words( wp_strip_all_tags( strip_shortcodes( $publicacion->post_content ) ), 28 ) );
 
         if ( 'evento' === $tipo_publicacion ) {
             $fecha_guardada = get_post_meta( $publicacion->ID, 'fecha_evento', true );

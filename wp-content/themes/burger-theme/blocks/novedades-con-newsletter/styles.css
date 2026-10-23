@@ -1,3 +1,10 @@
+.novedades-con-newsletter .img-novedades img {
+    display: block;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    object-position: center;
+}
+
 .novedades-con-newsletter .form-label {
 
     font-size: 0.875rem;
@@ -206,4 +213,4 @@
 
     border-color: var(--white);
 
-} */ 
+} */
