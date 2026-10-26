@@ -117,3 +117,18 @@
   margin-right: auto;
 
 }
+/* El video ocupa el mismo fondo que la imagen; texto y botones quedan encima. */
+[id="hero-slider"] .carousel-item { position: relative; overflow: hidden; }
+[id="hero-slider"] .hero-slider-video,
+[id="hero-slider"] .hero-slider-video-overlay {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+[id="hero-slider"] .hero-slider-video { object-fit: cover; }
+[id="hero-slider"] .hero-slider-video-overlay {
+  background: linear-gradient(180deg, transparent 0%, rgba(79, 72, 66, .5) 100%);
+}
+[id="hero-slider"] .hero-slider-content { z-index: 1; }

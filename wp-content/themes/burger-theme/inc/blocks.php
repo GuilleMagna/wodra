@@ -1,5 +1,27 @@
 <?php
 
+// Extiende las filas existentes del Hero Slider, también en sus presets.
+add_filter( 'acf/load_fields', static function ( $fields, $parent ) {
+    $names = array_column( $fields, 'name' );
+    if ( ! in_array( 'imagen_slider', $names, true ) || ! in_array( 'texto_slider', $names, true ) ) return $fields;
+    if ( in_array( 'video_slider', $names, true ) ) return $fields;
+
+    acf_add_local_field( [
+        'key' => 'field_burger_hero_slider_video',
+        'parent' => $parent,
+        'label' => 'Video de fondo',
+        'name' => 'video_slider',
+        'type' => 'file',
+        'return_format' => 'url',
+        'library' => 'all',
+        'mime_types' => 'mp4,webm',
+        'required' => 0,
+        'instructions' => 'Opcional. MP4 o WebM, automático y sin sonido. La imagen se usa como portada. Dejá vacío para mostrar solo la imagen.',
+    ] );
+    $fields[] = acf_get_field( 'field_burger_hero_slider_video' );
+    return $fields;
+}, 10, 2 );
+
 /**
  * CF7 sanitiza el HTML de cada formulario con su propio wp_kses (ver
  * wpcf7_kses() en contact-form-7/includes/formatting.php), que arranca
