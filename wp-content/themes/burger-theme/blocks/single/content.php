@@ -87,9 +87,9 @@ $block_id = $block['id'];
 
     <div class="container">
 
-        <div class="row">
+        <div class="row g-0 justify-content-between">
 
-            <div class="col-12 col-md-6 mx-auto text-start">
+            <div class="col-12 <?= $imagen_servicio ? 'col-md-7 col-lg-6' : 'col-md-10 col-lg-8 mx-auto' ?> text-start">
 
                 <div class="text-start mb-5">
 
@@ -105,7 +105,7 @@ $block_id = $block['id'];
 
                 </div>
 
-                <div class="color-secundario">
+                <div class="single-content color-secundario">
                     <?= $fixed_content ? $contenido_single : apply_filters( 'the_content', $post_content ) ?>
                 </div>
 
@@ -146,9 +146,11 @@ $block_id = $block['id'];
 
             </div>
 
-            <div class="col-12 col-md-6 text-center d-flex align-items-start justify-content-center">
-                <?php if ( $imagen_servicio ) : ?><img loading="lazy" decoding="async" src="<?= esc_url( $imagen_servicio ) ?>" class="py-4 w-75" alt="<?= esc_attr( wp_strip_all_tags( $post_title ) ) ?>" title="<?= esc_attr( wp_strip_all_tags( $post_title ) ) ?>"><?php endif; ?>
+<?php if ( $imagen_servicio ) : ?>
+            <div class="col-12 col-md-3 text-center d-flex align-items-start justify-content-center">
+                <img loading="lazy" decoding="async" src="<?= esc_url( $imagen_servicio ) ?>" class="img-fluid" alt="<?= esc_attr( wp_strip_all_tags( $post_title ) ) ?>" title="<?= esc_attr( wp_strip_all_tags( $post_title ) ) ?>">
             </div>
+            <?php endif; ?>
 
         </div>
 

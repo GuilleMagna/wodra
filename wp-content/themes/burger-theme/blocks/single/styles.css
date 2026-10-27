@@ -1,0 +1,10 @@
+/* Mismo interlineado que el contenido de single-agenda. */
+#single .single-content,
+#single .single-content p,
+#single .single-content li {
+    line-height: 1.5;
+}
+
+#single .single-content :is(strong, b, em, i, a, span) {
+    line-height: inherit;
+}
