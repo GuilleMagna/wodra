@@ -87,7 +87,7 @@ $block_id = $block['id'];
 
     <div class="container">
 
-        <div class="row g-0 justify-content-between">
+        <div class="row g-0">
 
             <div class="col-12 <?= $imagen_servicio ? 'col-md-7 col-lg-6' : 'col-md-10 col-lg-8 mx-auto' ?> text-start">
 
@@ -146,9 +146,9 @@ $block_id = $block['id'];
 
             </div>
 
-<?php if ( $imagen_servicio ) : ?>
-            <div class="col-12 col-md-3 col-lg-4 text-center d-flex align-items-start justify-content-center">
-                <img loading="lazy" decoding="async" src="<?= esc_url( $imagen_servicio ) ?>" class="img-fluid" alt="<?= esc_attr( wp_strip_all_tags( $post_title ) ) ?>" title="<?= esc_attr( wp_strip_all_tags( $post_title ) ) ?>">
+            <?php if ( $imagen_servicio ) : ?>
+            <div class="col-12 col-md-5 col-lg-4 d-flex align-items-center mx-auto">
+                <img loading="lazy" decoding="async" src="<?= esc_url( $imagen_servicio ) ?>" class="img-fluid w-75 single-image pt-3 pt-md-0 mx-auto mx-lg-0" alt="<?= esc_attr( wp_strip_all_tags( $post_title ) ) ?>" title="<?= esc_attr( wp_strip_all_tags( $post_title ) ) ?>">
             </div>
             <?php endif; ?>
 
