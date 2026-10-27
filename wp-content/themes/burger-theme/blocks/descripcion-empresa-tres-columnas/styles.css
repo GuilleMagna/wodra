@@ -18,12 +18,12 @@
 }
 
 /* Interlineado uniforme del contenido. */
-#descripcion-empresa-tres-columnas .descripcion-content,
-#descripcion-empresa-tres-columnas .descripcion-content p,
-#descripcion-empresa-tres-columnas .descripcion-content li {
+.descripcion-content,
+.descripcion-content p,
+.descripcion-content li {
     line-height: 1.5;
 }
 
-#descripcion-empresa-tres-columnas .descripcion-content :is(strong, b, em, i, a, span) {
+.descripcion-content :is(strong, b, em, i, a, span) {
     line-height: inherit;
 }
