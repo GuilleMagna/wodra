@@ -242,7 +242,7 @@ ul.personalizado {
 
 .bg-video {
     position: relative;
-    background: url(https://gruposit.wodra.ar/wp-content/uploads/2025/06/Mineria-argentina-Grupo-SIT-Servicios-Integrales-Topograficos-720p-h264.mp4);
+    background: linear-gradient(135deg, #263e4e, #6d7867);
     background-size: cover;
     background-position: center;
     border-radius: 0 0 66px 66px;
@@ -255,7 +255,7 @@ ul.personalizado {
     left: 0;
     width: 100%;
     height: 100%;
-    background: url(https://gruposit.wodra.ar/wp-content/uploads/2025/06/overlay-video-scaled.png);
+    background: linear-gradient(transparent, #263e4e80);
     z-index: 1;
     border-radius: 0 0 66px 66px;
 }
@@ -267,7 +267,7 @@ ul.personalizado {
 
 .bg-conoce-image {
     position: relative;
-    background: url(https://gruposit.wodra.ar/wp-content/uploads/2025/06/626ce5e0656906babaebe6412c7d70889734a361-scaled.jpg);
+    background: linear-gradient(135deg, #3a5b5c, #9b8468);
     background-size: cover;
     background-position: center;
     border-radius: 0;
@@ -561,7 +561,7 @@ ul.personalizado {
     line-height: 1.4;
 }
 
-/* Flotante "Espacios Kehilá" (#botones-flotantes), 23/10/2026.
+/* Flotante "Accesos de ejemplo" (#botones-flotantes), 23/10/2026.
    La franja ocupa todo el ancho: fuera de sus botones no toma clics (antes tapaba ENVIAR).
    Se oculta cuando el botón de envío del formulario del pie entra en pantalla: blocks/botones-flotantes/scripts.js
    pone la clase blitz-form-visible en <body>. visibility:hidden para que tampoco tome clics ni foco.
