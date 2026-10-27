@@ -59,7 +59,7 @@ $block_id = $block['id'];
 
                     <?php endif; ?>
 
-                    <div class="color-secundario">
+                    <div class="descripcion-content color-secundario">
                         <?php echo $texto_empresa ?>
                     </div>
 

@@ -51,7 +51,7 @@ $block_id = $block['id'];
 
             </div>
 
-            <div class="col-12 col-md-5 fs-6 d-flex align-items-center color-primario mb-0" data-aos="fade-in" data-aos-delay="200">
+            <div class="col-12 col-md-5 fs-6 d-flex align-items-center color-primario mb-0 descripcion-content" data-aos="fade-in" data-aos-delay="200">
                 <?php echo $texto_empresa ?>
             </div>
 
