@@ -19,3 +19,14 @@
     }
 
 }
+
+/* Interlineado uniforme para el contenido clásico y el editor de bloques. */
+#single-agenda .single-agenda-content,
+#single-agenda .single-agenda-content p,
+#single-agenda .single-agenda-content li {
+    line-height: 1.5;
+}
+
+#single-agenda .single-agenda-content :is(strong, b, em, i, a, span) {
+    line-height: inherit;
+}

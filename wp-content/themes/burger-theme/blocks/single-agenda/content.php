@@ -81,7 +81,7 @@ $block_id = $block['id'];
                     <?php endif; ?>
 
                     <?php if ( ! $modo_contenido && '' !== trim( (string) $texto_evento ) ) : ?>
-                        <div class="color-secundario">
+                        <div class="single-agenda-content color-secundario">
                             <?php echo $texto_evento; ?>
                         </div>
                     <?php endif; ?>
@@ -124,7 +124,7 @@ $block_id = $block['id'];
 
             <?php if ( !empty($informacion) && count($informacion) > 0 ): ?>
 
-                <div class="col-12 col-md-4 col-lg-3 d-flex align-items-center mx-auto">
+                <div class="col-12 col-md-4 col-lg-3 d-flex align-items-start mx-auto">
                     <ul class="list-group list-group-flush">
                         <?php foreach( $informacion as $item ): extract( $item ) ?>
                             <li class="list-group-item border-0">
