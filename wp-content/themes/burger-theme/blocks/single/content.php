@@ -147,7 +147,7 @@ $block_id = $block['id'];
             </div>
 
 <?php if ( $imagen_servicio ) : ?>
-            <div class="col-12 col-md-3 text-center d-flex align-items-start justify-content-center">
+            <div class="col-12 col-md-3 col-lg-4 text-center d-flex align-items-start justify-content-center">
                 <img loading="lazy" decoding="async" src="<?= esc_url( $imagen_servicio ) ?>" class="img-fluid" alt="<?= esc_attr( wp_strip_all_tags( $post_title ) ) ?>" title="<?= esc_attr( wp_strip_all_tags( $post_title ) ) ?>">
             </div>
             <?php endif; ?>
