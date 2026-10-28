@@ -23,7 +23,7 @@ async function flush() { await new Promise(resolve => setImmediate(resolve)); }
     listeners.pointerdown({ target: first });
     assert.equal(scripts.length, 1, 'una descarga con interacciones simultáneas');
     window.turnstile = {
-        ready(fn) { fn(); },
+        ready() { throw new Error('ready no está permitido con async/defer'); },
         render(element, options) { const id = 'widget-' + renders.length; renders.push({ element, options }); return id; },
         getResponse(id) { return tokens.get(id) || ''; },
         reset(id) { resets.push(id); tokens.delete(id); }

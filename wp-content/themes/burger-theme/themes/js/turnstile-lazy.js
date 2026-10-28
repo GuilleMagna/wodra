@@ -24,7 +24,7 @@
             script.onload = function () {
                 window.clearTimeout(timeout);
                 if (!window.turnstile) return fail();
-                window.turnstile.ready(function () { resolve(window.turnstile); });
+                resolve(window.turnstile);
             };
             document.head.appendChild(script);
         });

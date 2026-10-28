@@ -15,6 +15,18 @@ jQuery(document).ready(function($) {
     // Newsletters (802 y 1033): se quedan en la página, sin ir a /gracias/. blitz. 23/10/2026
     const formulariosSinGracias = ['802', '1033'];
 
+    function paginaDeGracias(form) {
+        var bloque = form.closest('[data-burger-thanks-url]');
+        var destino = bloque && bloque.getAttribute('data-burger-thanks-url');
+        try {
+            var url = new URL(destino || '/gracias/', window.location.href);
+            if (url.origin === window.location.origin && /^https?:$/.test(url.protocol)) {
+                return url.href;
+            }
+        } catch (e) {}
+        return '/gracias/';
+    }
+
     function idDelFormulario(event) {
         if (event.detail && event.detail.contactFormId) {
             return String(event.detail.contactFormId);
@@ -26,16 +38,16 @@ jQuery(document).ready(function($) {
 
     document.addEventListener('wpcf7submit', function(event) {
 
-        if (event.detail.apiResponse && event.detail.apiResponse.status === 'mail_sent') {
+        if (event.detail && event.detail.apiResponse && event.detail.apiResponse.status === 'mail_sent') {
             if (formulariosSinGracias.indexOf(idDelFormulario(event)) !== -1) {
                 return;
             }
             var form = event.target;
             var nameInput = form.querySelector('[name="your-name"]');
-            if (nameInput) {
-                var name = encodeURIComponent(nameInput.value);
-                window.location.href = '/gracias/?nombre=' + name;
-            }
+            try {
+                window.sessionStorage.setItem('burger_gracias_nombre', nameInput ? nameInput.value.trim().slice(0, 60) : '');
+            } catch (e) {}
+            window.location.href = paginaDeGracias(form);
         }
         
     }, false);

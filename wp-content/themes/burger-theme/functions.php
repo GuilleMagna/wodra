@@ -12,6 +12,7 @@ if ( function_exists('get_field') AND $options = get_fields( 'option' ) )
 require_once BURGER_THEME_PATH . '/inc/tools.php';
 require_once BURGER_THEME_PATH . '/inc/setup.php';
 require_once BURGER_THEME_PATH . '/inc/blocks.php';
+require_once BURGER_THEME_PATH . '/inc/form-thanks.php';
 require_once BURGER_THEME_PATH . '/inc/fixed-structure.php';
 require_once BURGER_THEME_PATH . '/inc/site-controls.php';
 require_once BURGER_THEME_PATH . '/inc/editor-restrictions.php';

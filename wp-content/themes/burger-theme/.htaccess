@@ -1,0 +1,5 @@
+# Impedir el acceso a material de desarrollo, incluso si quedó de un deploy anterior.
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteRule ^(?:docs|tests)(?:/|$) - [F,L,NC]
+</IfModule>

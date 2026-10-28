@@ -14,6 +14,8 @@ $markup = '<p><span class="wpcf7-form-control-wrap" data-name="email"><input nam
 $filtered = apply_filters( 'wpcf7_form_elements', $markup );
 verify_blitz_patch( ! str_contains( $filtered, '<p>' ) && str_contains( $filtered, '<span class=' ) && str_contains( $filtered, '<path ' ) && str_contains( $filtered, '<pre>' ), 'CF7 conserva contenedores, SVG y pre; elimina párrafos' );
 verify_blitz_patch( ! function_exists( 'custom_wp_mail_message' ), 'No existe el envoltorio global de correo heredado' );
+verify_blitz_patch( ! function_exists( 'verify_recaptcha' ) && ! function_exists( 'my_enqueue_recaptcha_script' ) && ! function_exists( 'enviar_consulta' ), 'Sin envío ni clave reCAPTCHA heredados' );
+verify_blitz_patch( ( acf_get_field( 'field_burger_form_thanks_page' )['type'] ?? '' ) === 'page_link', 'Destino de gracias registrado directamente en ACF' );
 foreach ( [ '+54 9 341 155-123456', '0341 15 5123456', '3415123456', '005493415123456' ] as $phone ) {
     verify_blitz_patch( 'https://wa.me/5493415123456' === burger_whatsapp_url( $phone ), 'Normaliza ' . $phone );
 }

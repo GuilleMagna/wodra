@@ -8,12 +8,8 @@ extract($fields);
 $design = get_block_design($block);
 extract($design);
 
-if (isset($_GET['nombre']) and !empty($_GET['nombre']))
-    $nombre = $_GET['nombre'];
-else
-    $nombre = 'Cliente';
-
-$titulo_empresa = str_replace('[nombre]', "<span class='text-primary'>{$nombre}</span>", $titulo_empresa);
+$mostrar_nombre = strpos( (string) $titulo_empresa, '[nombre]' ) !== false;
+$titulo_empresa = preg_replace('/\s?\[nombre\]/u', "<span class='text-primary' data-gracias-nombre></span>", $titulo_empresa);
 
 $block_id = $block['id'];
 ?>
@@ -90,3 +86,16 @@ $block_id = $block['id'];
     </div>
 
 </section>
+<?php if ( $mostrar_nombre ): ?>
+<script>
+(function () {
+    try {
+        var nombre = window.sessionStorage.getItem('burger_gracias_nombre');
+        if (!nombre) return;
+        document.querySelectorAll('[data-gracias-nombre]').forEach(function (el) {
+            el.textContent = ' ' + nombre.trim().slice(0, 60);
+        });
+    } catch (e) {}
+})();
+</script>
+<?php endif; ?>

@@ -1,7 +1,7 @@
 <?php 
 //Block Name: Formulario
 
-$content_fields = [ 'titulo_formulario',  'subtitulo_formulario',  'encabezado',  'texto_formulario',  'shortcode_formulario', 'botones_formulario' ];
+$content_fields = [ 'titulo_formulario',  'subtitulo_formulario',  'encabezado',  'texto_formulario',  'shortcode_formulario', 'botones_formulario', 'pagina_gracias' ];
 $fields = get_block_content_fields( $block, $content_fields );
 extract( $fields );
 
@@ -9,6 +9,7 @@ $design = get_block_design( $block );
 extract( $design );
 
 $block_id = $block['id'];
+$gracias_url = ( is_string( $pagina_gracias ) && $pagina_gracias !== '' ) ? $pagina_gracias : home_url( '/gracias/' );
 $wrapper_style = sprintf(
     'margin:%s !important;padding:%s !important;border-radius:%s !important;background-color:%s !important;background-image:url("%s");background-size:cover;background-repeat:no-repeat;',
     $section_margin,
@@ -39,7 +40,7 @@ $wrapper_style = sprintf(
     }
 </style>
 
-<section id="formulario" <?= get_block_wrapper_attributes( [ 'class' => $block_id .' '. $class_container, 'style' => $wrapper_style, 'data-burger-bg-color' => $color_fondo ] ) ?>>
+<section id="formulario" <?= get_block_wrapper_attributes( [ 'class' => $block_id .' '. $class_container, 'style' => $wrapper_style, 'data-burger-bg-color' => $color_fondo, 'data-burger-thanks-url' => $gracias_url ] ) ?>>
     
 	<div class="container">
 
