@@ -15,6 +15,9 @@ El apagado bloquea también formularios abiertos y accesos directos; la visibili
 por dispositivo ya guardada se conserva. Sin configuración guardada se mantiene
 el funcionamiento anterior.
 
+**Texto de crédito de Edita Fácil** permite personalizar el texto junto al nombre
+en la barra inferior. Por defecto está vacío; vacío oculta el crédito.
+
 1. Iniciar sesión en WordPress con un usuario que pueda editar la página.
 2. Visitar la página y pulsar **Editar la página** en la barra inferior.
    `?editar=1` también activa el modo.

@@ -123,7 +123,7 @@ add_action( 'wp_enqueue_scripts', function () {
     wp_enqueue_script( 'burger-edita-facil', burger_ef_asset( 'edita-facil.js' ), [], burger_ef_version( 'edita-facil.js' ), true );
     wp_localize_script( 'burger-edita-facil', 'editaFacil', [
         'form' => admin_url( 'admin.php?page=burger-edita-facil' ),
-        'marca' => 'Edita Fácil', 'autor' => 'by Nakama',
+        'marca' => 'Edita Fácil', 'autor' => sanitize_text_field( (string) burger_site_setting( 'edita_facil_credit', '' ) ),
     ] );
 } );
 

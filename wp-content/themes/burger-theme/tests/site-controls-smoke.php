@@ -32,7 +32,7 @@ add_filter( 'acf/pre_update_metadata', static function ( $pre, $id, $name, $valu
     $saved[ ( $hidden ? '_' : '' ) . $name ] = $value;
     return true;
 }, 10, 5 );
-foreach ( [ 'svg_enabled' => 1, 'comments_disabled' => 1, 'edita_facil_enabled' => 0, 'edita_facil_roles' => [ 'editor' ], 'login_logo' => 123, 'soon_title' => 'Próximamente: comunidad', 'soon_allowed_roles' => [ 'editor' ] ] as $name => $value ) {
+foreach ( [ 'svg_enabled' => 1, 'comments_disabled' => 1, 'edita_facil_enabled' => 0, 'edita_facil_roles' => [ 'editor' ], 'edita_facil_credit' => 'Mi equipo', 'login_logo' => 123, 'soon_title' => 'Próximamente: comunidad', 'soon_allowed_roles' => [ 'editor' ] ] as $name => $value ) {
     $key = 'field_burger_' . $name;
     check_control( (bool) acf_get_field( $key ), 'ACF no resuelve ' . $key );
     update_field( $key, $value, 'option' );

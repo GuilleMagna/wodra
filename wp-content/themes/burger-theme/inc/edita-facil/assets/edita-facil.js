@@ -26,7 +26,7 @@
     barra.innerHTML =
         '<button type="button" class="ef-barra__boton" aria-pressed="false"></button>' +
         ( cfg.inicio ? '<a class="ef-barra__panel" href="' + cfg.inicio + '">← Panel</a>' : '' ) +
-        '<span class="ef-barra__marca">' + ( cfg.marca || 'Edita Fácil' ) + ' <small>' + ( cfg.autor || '' ) + '</small></span>';
+        '<span class="ef-barra__marca">' + escapar( cfg.marca || 'Edita Fácil' ) + ( cfg.autor ? ' <small>' + escapar( cfg.autor ) + '</small>' : '' ) + '</span>';
     document.body.appendChild( barra );
     const botonModo = barra.querySelector( 'button' );
 

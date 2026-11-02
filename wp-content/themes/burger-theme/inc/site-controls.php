@@ -50,6 +50,9 @@ function burger_site_control_fields() {
     $tab( 'edita_facil', 'Edita Fácil' );
     $add( 'edita_facil_enabled', 'Activar Edita Fácil', 'true_false', [ 'ui' => 1, 'default_value' => 1,
         'instructions' => 'Desactivalo para quitar la edición desde el front para todos, incluidos los administradores. Gutenberg sigue disponible y se conserva la visibilidad de las secciones.' ] );
+    $add( 'edita_facil_credit', 'Texto de crédito de Edita Fácil', 'text', [
+        'default_value' => '', 'instructions' => 'Opcional. Se muestra junto a Edita Fácil en la barra inferior. Dejalo vacío para no mostrar ningún crédito.',
+    ] );
     $ef_roles = [];
     foreach ( wp_roles()->roles as $key => $role ) $ef_roles[ $key ] = translate_user_role( $role['name'] );
     $add( 'edita_facil_roles', 'Roles habilitados para Edita Fácil', 'checkbox', [ 'choices' => $ef_roles,
