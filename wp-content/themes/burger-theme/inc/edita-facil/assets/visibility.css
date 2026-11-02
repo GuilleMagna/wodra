@@ -1,0 +1,10 @@
+@media (max-width:575.98px) {
+    html:not(.ef-modo) [data-ef-hide~="movil"] { display:none!important; }
+}
+@media (min-width:576px) and (max-width:991.98px) {
+    html:not(.ef-modo) [data-ef-hide~="tablet"] { display:none!important; }
+}
+@media (min-width:992px) {
+    html:not(.ef-modo) [data-ef-hide~="escritorio"] { display:none!important; }
+}
+html.ef-modo [data-ef-hide] { outline:2px dashed #e67e22; outline-offset:-2px; }

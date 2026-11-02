@@ -19,6 +19,7 @@ require_once BURGER_THEME_PATH . '/inc/editor-restrictions.php';
 require_once BURGER_THEME_PATH . '/inc/agenda-media.php';
 require_once BURGER_THEME_PATH . '/inc/single-fields.php';
 require_once BURGER_THEME_PATH . '/inc/assets.php';
+require_once BURGER_THEME_PATH . '/inc/edita-facil/blocks.php';
 //require_once BURGER_THEME_PATH . '/inc/mail.php';
 
 ?>

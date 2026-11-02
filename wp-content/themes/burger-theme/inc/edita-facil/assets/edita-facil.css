@@ -1,0 +1,220 @@
+/* ==========================================================================
+   Edita Fácil · by Nakama — lo que se ve sobre la web
+   Colores propios (violeta Nakama) para que no se confundan con el diseño
+   del sitio. Todo con prefijo .ef- para no chocar con ningún tema.
+   ========================================================================== */
+
+:root {
+    --ef-color: #5b3df5;
+    --ef-color-osc: #3f25c9;
+    --ef-texto: #1d2327;
+    --ef-fuente: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+/* ── Barra de abajo ───────────────────────────────────────────────────── */
+
+.ef-barra {
+    position: fixed;
+    left: 50%;
+    bottom: 1.25rem;
+    z-index: 99990;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: .75rem;
+    padding: .4rem .9rem .4rem .4rem;
+    border-radius: 999px;
+    background: #fff;
+    box-shadow: 0 6px 24px rgba(0, 0, 0, .18);
+    font-family: var(--ef-fuente);
+    white-space: nowrap;
+}
+
+.ef-barra__boton,
+.ef-editar,
+.ef-panel__cerrar {
+    display: inline-flex;
+    align-items: center;
+    gap: .45rem;
+    border: 0;
+    border-radius: 999px;
+    font: 600 1rem/1 var(--ef-fuente);
+    cursor: pointer;
+}
+
+.ef-barra__boton {
+    padding: .75rem 1.2rem;
+    background: var(--ef-color);
+    color: #fff;
+}
+
+.ef-barra__boton:hover { background: var(--ef-color-osc); }
+.ef-barra__boton[aria-pressed="true"] { background: #128c4a; }
+
+.ef-barra__panel { padding: .5rem .8rem; border-radius: 999px; color: var(--ef-texto); font-size: .9rem; font-weight: 700; text-decoration: none; }
+.ef-barra__panel:hover { background: #f0f0f1; color: var(--ef-texto); }
+.ef-barra__marca { font-size: .85rem; font-weight: 700; color: var(--ef-texto); }
+.ef-barra__marca small { font-weight: 400; color: #646970; }
+
+.ef-barra svg,
+.ef-editar svg { width: 1.1em; height: 1.1em; fill: currentColor; }
+
+@media (max-width: 767.98px) {
+    .ef-barra { bottom: 5.5rem; }           /* arriba de los botones flotantes del sitio */
+    .ef-barra__marca { display: none; }
+}
+
+/* ── Secciones editables ──────────────────────────────────────────────── */
+
+.ef-editar { display: none; }
+
+.ef-modo .ef-seccion {
+    position: relative;
+    outline: 3px dashed rgba(91, 61, 245, .55);
+    outline-offset: -6px;
+    transition: outline-color .2s;
+}
+
+.ef-modo .ef-seccion:hover { outline-color: var(--ef-color); }
+
+.ef-modo .ef-editar {
+    display: inline-flex;
+    position: absolute;
+    top: var(--ef-tope, 14px);       /* el tema lo puede correr si hay un menú fijo encima */
+    left: 14px;
+    z-index: 50;
+    padding: .7rem 1.1rem;
+    background: var(--ef-color);
+    color: #fff;
+    box-shadow: 0 4px 14px rgba(91, 61, 245, .35);
+}
+
+.ef-modo .ef-editar:hover,
+.ef-modo .ef-editar:focus-visible { background: var(--ef-color-osc); outline: 3px solid #fff; }
+
+/* Una sección adentro de otra: su botón va arriba a la derecha */
+.ef-modo .ef-seccion .ef-seccion > .ef-editar { left: auto; right: 14px; }
+
+.ef-recien-guardada { animation: ef-brillo 2.4s ease-out; }
+
+@keyframes ef-brillo {
+    0%, 30% { box-shadow: inset 0 0 0 4px #128c4a; }
+    100%    { box-shadow: inset 0 0 0 4px transparent; }
+}
+
+/* ── "+ Agregar …": solo en modo edición ─────────────────────────────── */
+
+.ef-nuevo { display: none; }
+
+.ef-modo .ef-nuevo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin: 1.5rem 0;
+    padding: 1.1rem;
+    border: 3px dashed rgba(91, 61, 245, .55);
+    border-radius: 16px;
+    background: rgba(91, 61, 245, .06);
+    color: var(--ef-color-osc);
+    font: 600 1.1rem/1 var(--ef-fuente);
+    cursor: pointer;
+}
+
+.ef-modo a.ef-nuevo { text-decoration: none; }
+.ef-modo .ef-nuevo--gestor { border-style: solid; background: #fff; }
+
+.ef-modo .ef-nuevo:hover,
+.ef-modo .ef-nuevo:focus-visible { background: rgba(91, 61, 245, .14); border-color: var(--ef-color); }
+
+/* ── Ventana de edición (modal centrado) ─────────────────────────────── */
+
+.ef-panel { position: fixed; inset: 0; z-index: 99999; font-family: var(--ef-fuente); }
+.ef-panel[hidden] { display: none; }
+
+.ef-panel__fondo {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, .35);
+    opacity: 0;
+    transition: opacity .3s;
+}
+
+.ef-panel__caja {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    display: flex;
+    flex-direction: column;
+    width: min(1040px, calc(100% - 3rem));
+    height: min(920px, calc(100% - 3rem));
+    overflow: hidden;
+    border-radius: 22px;
+    background: #f6f7f7;
+    box-shadow: 0 24px 80px rgba(0, 0, 0, .35);
+    opacity: 0;
+    transform: translate(-50%, -46%) scale(.98);
+    transition: transform .25s cubic-bezier(.2, .75, .2, 1), opacity .2s;
+}
+
+.ef-panel.is-abierto .ef-panel__fondo { opacity: 1; }
+.ef-panel.is-abierto .ef-panel__caja { opacity: 1; transform: translate(-50%, -50%); }
+
+/* En el celular la ventana ocupa toda la pantalla */
+@media (max-width: 700px) {
+    .ef-panel__caja { top: 0; left: 0; width: 100%; height: 100%; border-radius: 0; transform: translateY(2rem); }
+    .ef-panel.is-abierto .ef-panel__caja { transform: none; }
+}
+
+.ef-panel__cabecera {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1rem 1.25rem;
+    background: #fff;
+    border-bottom: 1px solid #dcdcde;
+    color: var(--ef-texto);
+}
+
+.ef-panel__cabecera small { display: block; font-size: .85rem; color: #646970; }
+.ef-panel__cabecera strong { font-size: 1.25rem; }
+
+.ef-panel__cerrar {
+    padding: .7rem 1.1rem;
+    background: #f0f0f1;
+    color: var(--ef-texto);
+}
+
+.ef-panel__cerrar:hover { background: #dcdcde; }
+
+.ef-panel__marco { flex: 1; width: 100%; border: 0; }
+.ef-panel__cargando { display: none; padding: 2rem; font-size: 1.1rem; color: #646970; }
+.ef-panel.is-cargando .ef-panel__cargando { display: block; }
+.ef-panel.is-cargando .ef-panel__marco { visibility: hidden; }
+
+html.ef-panel-abierto { overflow: hidden; }
+
+/* ── Aviso "Cambios guardados" ────────────────────────────────────────── */
+
+.ef-aviso {
+    position: fixed;
+    top: 1.5rem;
+    left: 50%;
+    z-index: 99999;
+    transform: translateX(-50%);
+    padding: .9rem 1.5rem;
+    border-radius: 999px;
+    background: #128c4a;
+    color: #fff;
+    font: 600 1.05rem/1 var(--ef-fuente);
+    box-shadow: 0 6px 24px rgba(0, 0, 0, .2);
+    transition: opacity .5s, transform .5s;
+}
+
+.ef-aviso.is-fuera { opacity: 0; transform: translate(-50%, -1rem); }
+
+@media (prefers-reduced-motion: reduce) {
+    .ef-panel__caja, .ef-panel__fondo, .ef-aviso { transition: none; }
+    .ef-recien-guardada { animation: none; }
+}

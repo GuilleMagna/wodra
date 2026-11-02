@@ -1,0 +1,115 @@
+/* ==========================================================================
+   Edita Fácil · formulario de la ventana de edición
+   Más grande y más aireado que el panel de WordPress: pensado para gente
+   que no es "de la compu".
+   ========================================================================== */
+
+html, body { background: #f6f7f7 !important; }
+body { margin: 0; font-size: 16px; }
+#wpadminbar, #adminmenumain, #wpfooter { display: none !important; }
+
+.ef-form { max-width: 920px; margin: 0 auto; padding: 1.5rem 1.5rem 14rem; }   /* aire abajo: la barra de guardar es fija y taparía los desplegables */
+
+.ef-form .acf-fields > .acf-field {
+    padding: 1.1rem 1.25rem;
+    border: 0 !important;
+    border-radius: 12px;
+    background: #fff;
+    margin-bottom: 1rem;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, .06);
+}
+
+.ef-form .acf-fields { border: 0; background: transparent; }
+
+.ef-form .acf-label label { font-size: 1.1rem !important; font-weight: 600 !important; color: #1d2327; }
+.ef-form .acf-label .description,
+.ef-form p.description { font-size: .95rem; color: #50575e; }
+
+.ef-form input[type="text"],
+.ef-form input[type="url"],
+.ef-form input[type="email"],
+.ef-form input[type="number"],
+.ef-form textarea,
+.ef-form select {
+    min-height: 46px;
+    padding: .6rem .8rem !important;
+    font-size: 1.05rem !important;
+    line-height: 1.5 !important;
+    border-radius: 8px !important;
+}
+
+.ef-form textarea { min-height: 7rem; }
+
+/* El botón Guardar queda siempre a mano, abajo */
+.ef-form .acf-form-submit {
+    position: sticky;
+    bottom: 0;
+    margin: 0 -1.25rem;
+    padding: 1rem 1.25rem;
+    background: #fff;
+    border-top: 1px solid #dcdcde;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.ef-guardar {
+    flex: 1;
+    padding: 1rem 1.25rem;
+    border: 0;
+    border-radius: 999px;
+    background: var(--ef-color, #5b3df5);
+    color: #fff;
+    font: 600 1.1rem/1 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    cursor: pointer;
+}
+
+.ef-guardar:hover { background: var(--ef-color-osc, #3f25c9); }
+.ef-guardar:disabled { opacity: .6; cursor: wait; }
+
+/* Repeaters: filas más claras */
+.ef-form .acf-repeater .acf-row-handle.order { background: #f0eefe; }
+.ef-form .acf-repeater .acf-button { font-size: 1rem; padding: .5rem 1rem; }
+
+/* "Ocultar este servicio de la web" */
+.ef-form__ocultar { margin: 1.5rem 0 2rem; text-align: center; }
+.ef-form__ocultar button {
+    padding: .8rem 1.2rem;
+    border: 2px solid #dcdcde;
+    border-radius: 999px;
+    background: #fff;
+    color: #a15c00;
+    font: 600 1rem/1 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    cursor: pointer;
+}
+.ef-form__ocultar button:hover { border-color: #a15c00; }
+.ef-form__ocultar span { display: block; margin-top: .5rem; color: #646970; font-size: .9rem; }
+
+/* El texto largo (el cuerpo de una nota) necesita lugar para escribir */
+.ef-form .acf-editor-wrap .mce-edit-area iframe,
+.ef-form .acf-editor-wrap textarea.wp-editor-area { min-height: 380px !important; height: 380px !important; }
+
+/* Visibilidad por dispositivo (¿Dónde se ve esta sección?) */
+.ef-visibilidad {
+    margin: 1.75rem 0 .5rem;
+    padding: 1.1rem 1.2rem;
+    border: 1px solid #e3e3e6;
+    border-radius: 12px;
+    background: #fafafa;
+}
+.ef-visibilidad__tit { margin: 0 0 .85rem; font: 700 1.02rem/1.2 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; color: #1d2327; }
+.ef-visibilidad__ops { display: flex; gap: .6rem; flex-wrap: wrap; }
+.ef-visibilidad__op {
+    display: flex; align-items: center; gap: .5rem;
+    padding: .6rem .9rem;
+    border: 1.5px solid #dcdcde;
+    border-radius: 10px;
+    background: #fff;
+    cursor: pointer;
+    font: 600 .98rem/1 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    color: #1d2327;
+    user-select: none;
+}
+.ef-visibilidad__op:has( input:checked ) { border-color: #2271b1; background: #f0f6fc; }
+.ef-visibilidad__op input { width: 18px; height: 18px; accent-color: #2271b1; cursor: pointer; }
+.ef-visibilidad__ayuda { margin: .75rem 0 0; color: #646970; font-size: .9rem; }
