@@ -216,7 +216,14 @@ function burger_ef_submission( $virtual ) {
     if ( ! is_string( $hash ) || ! hash_equals( hash( 'sha256', $target['post']->post_content ), $hash ) ) {
         return new WP_Error( 'conflict', 'La página cambió desde que abriste esta ventana. Cerrala y volvé a abrir la sección para ver la última versión.' );
     }
-    if ( ! isset( $_POST['acf'] ) || ! is_array( $_POST['acf'] ) || array_diff( array_keys( $_POST['acf'] ), array_keys( $target['fields'] ) ) ) {
+    // ACF incluye este campo antispam auxiliar aunque no sea parte del bloque.
+    // Solo se admite vacío y nunca se persiste como contenido.
+    $submitted = $_POST['acf'] ?? null;
+    if ( is_array( $submitted ) && array_key_exists( '_validate_email', $submitted ) ) {
+        if ( $submitted['_validate_email'] !== '' ) return new WP_Error( 'spam', 'No se pudo validar el formulario. Recargá la página e intentá de nuevo.' );
+        unset( $submitted['_validate_email'] );
+    }
+    if ( ! is_array( $submitted ) || array_diff( array_keys( $submitted ), array_keys( $target['fields'] ) ) ) {
         return new WP_Error( 'fields', 'El formulario contiene campos que no pertenecen a esta sección.' );
     }
     return $target;
@@ -241,6 +248,7 @@ add_filter( 'acf/pre_save_post', function ( $virtual ) {
     $target = burger_ef_submission( $virtual );
     if ( is_wp_error( $target ) ) burger_ef_error( $target->get_error_message(), 409 );
     $values = wp_unslash( $_POST['acf'] ); // ACF ya aplicó kses y validó su nonce.
+    unset( $values['_validate_email'] );
     $data = $target['entry']['block']['attrs']['data'] ?? [];
     // Conservar campos no enviados; quitar filas viejas de los repetidores enviados.
     foreach ( array_keys( $values ) as $key ) {

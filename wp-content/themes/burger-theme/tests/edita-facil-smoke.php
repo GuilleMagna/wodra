@@ -76,6 +76,11 @@ try {
     $_POST = [ '_acf_post_id' => $virtual, 'burger_ef_nonce' => wp_create_nonce( $virtual ),
         'burger_ef_revision' => hash( 'sha256', $before ), 'acf' => wp_slash( $values ), 'burger_ef_hide' => [ 'movil' ] ];
     ef_check( ! is_wp_error( burger_ef_submission( $virtual ) ), 'Rechazó formulario autorizado.' );
+    $_POST['acf']['_validate_email'] = '';
+    ef_check( ! is_wp_error( burger_ef_submission( $virtual ) ), 'Rechazó el campo antispam vacío que agrega ACF.' );
+    $_POST['acf']['_validate_email'] = 'spam';
+    ef_check( is_wp_error( burger_ef_submission( $virtual ) ), 'Aceptó el campo antispam completo.' );
+    unset( $_POST['acf']['_validate_email'] );
     $_POST['burger_ef_nonce'] = 'incorrecto';
     ef_check( is_wp_error( burger_ef_submission( $virtual ) ), 'Aceptó nonce inválido.' );
     $_POST['burger_ef_nonce'] = wp_create_nonce( $virtual );
@@ -132,7 +137,11 @@ try {
     $signed_form = ob_get_clean();
     $_POST = [];
     $inputs = new WP_HTML_Tag_Processor( $signed_form );
+    $auxiliary = [];
     while ( $inputs->next_tag( 'INPUT' ) ) {
+        if ( $inputs->get_attribute( 'name' ) === 'acf[_validate_email]' ) {
+            $auxiliary['_validate_email'] = $inputs->get_attribute( 'value' ) ?? '';
+        }
         if ( $inputs->get_attribute( 'type' ) === 'hidden' ) {
             $name = $inputs->get_attribute( 'name' );
             if ( $name && ! str_contains( $name, '[' ) ) $_POST[ $name ] = $inputs->get_attribute( 'value' );
@@ -141,6 +150,8 @@ try {
     }
     $_POST += [ 'burger_ef_nonce' => wp_create_nonce( $virtual ), 'burger_ef_revision' => hash( 'sha256', $stored ),
         'acf' => [ 'field_ef_title' => 'Guardado por formulario firmado' ] ];
+    ef_check( array_key_exists( '_validate_email', $auxiliary ), 'La prueba no incluyó el antispam real del formulario.' );
+    $_POST['acf'] += $auxiliary;
     $redirect = static function () { throw new RuntimeException( 'ef_test_redirect' ); };
     add_filter( 'wp_redirect', $redirect );
     try {
@@ -152,6 +163,7 @@ try {
     }
     $saved_form = burger_ef_entries( parse_blocks( get_post( $fixture )->post_content ) )[1];
     ef_check( $saved_form['block']['attrs']['data']['titulo'] === 'Guardado por formulario firmado', 'ACF no guardó el formulario firmado.' );
+    ef_check( ! array_key_exists( '_validate_email', $saved_form['block']['attrs']['data'] ), 'Persistió el campo auxiliar antispam en el bloque.' );
     // Simular una página anterior solamente sobre la fila descartable creada arriba.
     global $wpdb;
     $wpdb->update( $wpdb->posts, [ 'post_content' => $raw ], [ 'ID' => $fixture ] );
