@@ -7,6 +7,14 @@ El almacenamiento de bloques es específico de este theme.
 
 ## Uso
 
+En **Configuración General → Edita Fácil** se puede apagar la función para todos
+con **Activar Edita Fácil**, o elegir sus **Roles habilitados**. Los administradores
+también deben estar marcados. Sin roles seleccionados nadie puede usarla. Habilitar
+un rol no le otorga permiso para editar páginas que WordPress no le permite editar.
+El apagado bloquea también formularios abiertos y accesos directos; la visibilidad
+por dispositivo ya guardada se conserva. Sin configuración guardada se mantiene
+el funcionamiento anterior.
+
 1. Iniciar sesión en WordPress con un usuario que pueda editar la página.
 2. Visitar la página y pulsar **Editar la página** en la barra inferior.
    `?editar=1` también activa el modo.

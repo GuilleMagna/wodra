@@ -22,7 +22,7 @@ check_control( ! burger_comments_disabled() && ! burger_soon_blocks_request(), '
 
 $fields = acf_get_fields( 'group_66ec98973649f' );
 $tabs = array_column( array_filter( $fields, static fn( $f ) => 'tab' === $f['type'] ), 'label' );
-foreach ( [ 'Header', 'Estructura fija', 'SVG', 'Comentarios', 'Custom Login', 'Próximamente' ] as $label ) check_control( in_array( $label, $tabs, true ), 'Falta tab: ' . $label );
+foreach ( [ 'Header', 'Estructura fija', 'SVG', 'Comentarios', 'Edita Fácil', 'Custom Login', 'Próximamente' ] as $label ) check_control( in_array( $label, $tabs, true ), 'Falta tab: ' . $label );
 $keys = array_column( $fields, 'key' );
 check_control( count( $keys ) === count( array_unique( $keys ) ), 'Hay keys repetidas.' );
 
@@ -32,7 +32,7 @@ add_filter( 'acf/pre_update_metadata', static function ( $pre, $id, $name, $valu
     $saved[ ( $hidden ? '_' : '' ) . $name ] = $value;
     return true;
 }, 10, 5 );
-foreach ( [ 'svg_enabled' => 1, 'comments_disabled' => 1, 'login_logo' => 123, 'soon_title' => 'Próximamente: comunidad', 'soon_allowed_roles' => [ 'editor' ] ] as $name => $value ) {
+foreach ( [ 'svg_enabled' => 1, 'comments_disabled' => 1, 'edita_facil_enabled' => 0, 'edita_facil_roles' => [ 'editor' ], 'login_logo' => 123, 'soon_title' => 'Próximamente: comunidad', 'soon_allowed_roles' => [ 'editor' ] ] as $name => $value ) {
     $key = 'field_burger_' . $name;
     check_control( (bool) acf_get_field( $key ), 'ACF no resuelve ' . $key );
     update_field( $key, $value, 'option' );

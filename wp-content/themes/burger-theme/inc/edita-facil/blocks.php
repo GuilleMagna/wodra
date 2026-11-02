@@ -5,6 +5,15 @@
  */
 defined( 'ABSPATH' ) || exit;
 
+/** Configuración general: sin excepción implícita para administradores. */
+function burger_ef_allowed() {
+    if ( ! is_user_logged_in() || ! (bool) burger_site_setting( 'edita_facil_enabled', 1 ) ) return false;
+    // Ausencia = comportamiento anterior. Una lista guardada vacía = nadie.
+    $roles = get_option( 'options_burger_edita_facil_roles', null );
+    if ( null === $roles ) return true;
+    return (bool) array_intersect( wp_get_current_user()->roles, (array) $roles );
+}
+
 function burger_ef_devices() {
     return [ 'escritorio' => 'Escritorio', 'tablet' => 'Tablet', 'movil' => 'Celular' ];
 }
@@ -107,7 +116,7 @@ function burger_ef_version( $name ) {
 }
 
 add_action( 'wp_enqueue_scripts', function () {
-    if ( ! is_user_logged_in() || ! function_exists( 'acf_form' ) ) return;
+    if ( ! burger_ef_allowed() || ! function_exists( 'acf_form' ) ) return;
     if ( ! current_user_can( 'edit_posts' ) && ! current_user_can( 'edit_pages' )
         && ! current_user_can( 'edit_post', get_queried_object_id() ) ) return;
     wp_enqueue_style( 'burger-edita-facil', burger_ef_asset( 'edita-facil.css' ), [], burger_ef_version( 'edita-facil.css' ) );
@@ -132,7 +141,7 @@ add_filter( 'render_block', function ( $html, $block, $instance ) {
     if ( is_admin() || ! str_starts_with( $block['blockName'] ?? '', 'acf/' ) || ! $html ) return $html;
     $hide = burger_ef_hide( $block['attrs']['efHide'] ?? '' );
     $attrs = $hide ? [ 'data-ef-hide' => $hide ] : [];
-    if ( is_user_logged_in() && function_exists( 'acf_form' ) && empty( $block['attrs']['data']['preset'] ) ) {
+    if ( burger_ef_allowed() && function_exists( 'acf_form' ) && empty( $block['attrs']['data']['preset'] ) ) {
         $owner = absint( $instance->context['postId'] ?? get_the_ID() );
         $post = $owner ? get_post( $owner ) : null;
         if ( $post && current_user_can( 'edit_post', $owner ) ) {
@@ -184,6 +193,7 @@ function burger_ef_error( $message, $status = 403 ) {
 
 /** Resolver y autorizar tanto al abrir como al guardar (incluyendo AJAX de ACF). */
 function burger_ef_target( $post_id, $locator ) {
+    if ( ! burger_ef_allowed() ) return new WP_Error( 'disabled', 'Edita Fácil está desactivado para tu usuario. Podés editar desde WordPress si tenés permiso.' );
     $post = get_post( $post_id );
     if ( ! $post || ! current_user_can( 'edit_post', $post_id ) || wp_is_post_revision( $post_id ) ) {
         return new WP_Error( 'permission', 'No tenés permiso para editar esta sección.' );

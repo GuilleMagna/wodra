@@ -47,6 +47,17 @@ function burger_site_control_fields() {
     $tab( 'comments', 'Comentarios' );
     $switch( 'comments_disabled', 'Desactivar comentarios', 'Cierra comentarios, pingbacks y trackbacks en todos los tipos de contenido; oculta los existentes sin borrarlos. Al desactivarlo se recupera la configuración anterior. Reemplaza Disable Comments cuando retires ese plugin.' );
 
+    $tab( 'edita_facil', 'Edita Fácil' );
+    $add( 'edita_facil_enabled', 'Activar Edita Fácil', 'true_false', [ 'ui' => 1, 'default_value' => 1,
+        'instructions' => 'Desactivalo para quitar la edición desde el front para todos, incluidos los administradores. Gutenberg sigue disponible y se conserva la visibilidad de las secciones.' ] );
+    $ef_roles = [];
+    foreach ( wp_roles()->roles as $key => $role ) $ef_roles[ $key ] = translate_user_role( $role['name'] );
+    $add( 'edita_facil_roles', 'Roles habilitados para Edita Fácil', 'checkbox', [ 'choices' => $ef_roles,
+        'default_value' => array_keys( $ef_roles ), 'return_format' => 'value',
+        'instructions' => 'Marcá los roles que pueden usarlo. Sin roles marcados, nadie puede usar Edita Fácil. También se exige permiso para editar cada página; esta selección no otorga permisos nuevos.',
+        'conditional_logic' => [ [ [ 'field' => 'field_burger_edita_facil_enabled', 'operator' => '==', 'value' => '1' ] ] ],
+    ] );
+
     $tab( 'login', 'Custom Login' );
     $switch( 'login_enabled', 'Personalizar el acceso', 'Personaliza el formulario de WordPress, incluida la recuperación de contraseña. Configurá y guardá el diseño antes de retirar Custom Login. La dirección de acceso sigue siendo la misma.' );
     $image( 'login_logo', 'Logo del acceso' );

@@ -72,6 +72,34 @@ try {
     ef_check( count( $entries ) === 2 && $entries[0]['id'] !== $entries[1]['id'], 'No persistió efid por instancia.' );
     $target = burger_ef_target( $fixture, $entries[1]['id'] );
     ef_check( ! is_wp_error( $target ) && isset( $target['fields']['field_ef_title'] ), 'No encontró campos del bloque: ' . ( is_wp_error( $target ) ? $target->get_error_message() : implode( ',', array_keys( $target['fields'] ) ) ) );
+    $ef_settings = [];
+    $ef_options_filter = static function ( $pre, $option ) use ( &$ef_settings ) {
+        return array_key_exists( $option, $ef_settings ) ? $ef_settings[ $option ] : $pre;
+    };
+    add_filter( 'pre_option', $ef_options_filter, 10, 2 );
+    try {
+        $ef_settings = [ 'options_burger_edita_facil_enabled' => '1', 'options_burger_edita_facil_roles' => null ];
+        ef_check( burger_ef_allowed(), 'Sin configuración no conserva el acceso anterior.' );
+        $ef_settings['options_burger_edita_facil_enabled'] = '0';
+        ef_check( ! burger_ef_allowed(), 'El apagado general no bloquea al administrador.' );
+        ef_check( is_wp_error( burger_ef_target( $fixture, $entries[1]['id'] ) ), 'El formulario directo sigue accesible estando apagado.' );
+        $hidden_block = $entries[1]['block'];
+        $hidden_block['attrs']['efHide'] = 'movil';
+        $disabled_html = apply_filters( 'render_block', '<section>Prueba</section>', $hidden_block, new WP_Block( $hidden_block, [ 'postId' => $fixture ] ) );
+        ef_check( ! str_contains( $disabled_html, 'data-ef-bloque' ) && str_contains( $disabled_html, 'data-ef-hide="movil"' ), 'Apagar la interfaz altera la visibilidad o deja controles.' );
+        $ef_settings['options_burger_edita_facil_enabled'] = '1';
+        $ef_settings['options_burger_edita_facil_roles'] = [ 'editor' ];
+        ef_check( ! burger_ef_allowed(), 'Un administrador saltea la selección de roles.' );
+        ef_check( is_wp_error( burger_ef_target( $fixture, $entries[1]['id'] ) ), 'El rol excluido puede abrir/guardar el formulario.' );
+        $ef_settings['options_burger_edita_facil_roles'] = [ 'administrator' ];
+        ef_check( burger_ef_allowed(), 'El rol habilitado no puede usar Edita Fácil.' );
+        $ef_settings['options_burger_edita_facil_roles'] = [];
+        ef_check( ! burger_ef_allowed(), 'Una lista vacía habilita roles.' );
+        $ef_settings['options_burger_edita_facil_roles'] = '';
+        ef_check( ! burger_ef_allowed(), 'Una lista vacía serializada habilita roles.' );
+    } finally {
+        remove_filter( 'pre_option', $ef_options_filter );
+    }
     $virtual = burger_ef_virtual( $fixture, $entries[1]['id'] );
     $_POST = [ '_acf_post_id' => $virtual, 'burger_ef_nonce' => wp_create_nonce( $virtual ),
         'burger_ef_revision' => hash( 'sha256', $before ), 'acf' => wp_slash( $values ), 'burger_ef_hide' => [ 'movil' ] ];
