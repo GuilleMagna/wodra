@@ -82,7 +82,7 @@
     position: absolute;
     top: var(--ef-tope, 14px);       /* el tema lo puede correr si hay un menú fijo encima */
     left: 14px;
-    z-index: 50;
+    z-index: 1060;                 /* por encima de #fixedNav (1050), también sobre el hero */
     padding: .7rem 1.1rem;
     background: var(--ef-color);
     color: #fff;
