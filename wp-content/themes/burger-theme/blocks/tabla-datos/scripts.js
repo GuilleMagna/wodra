@@ -95,20 +95,36 @@
 
                 $pagination.append($prev);
 
+                // Conservar los extremos y una ventana corta alrededor de la pagina actual.
+                var pages = [];
+                var firstVisible = currentPage <= 3 ? 1 : (currentPage >= totalPages - 2 ? totalPages - 2 : currentPage);
+                var lastVisible = currentPage <= 3 ? 3 : (currentPage >= totalPages - 2 ? totalPages : currentPage);
+
                 for (var i = 1; i <= totalPages; i++) {
+                    if (totalPages <= 5 || i === 1 || i === totalPages || (i >= firstVisible && i <= lastVisible)) {
+                        pages.push(i);
+                    }
+                }
+
+                pages.forEach(function(page, index){
+                    if (index > 0 && page - pages[index - 1] > 1) {
+                        $pagination.append('<span class="burger-table-pagination-ellipsis" aria-hidden="true">...</span>');
+                    }
+
                     var $btn = $('<button type="button" class="btn btn-sm me-1"></button>');
-                    $btn.text(i);
-                    $btn.addClass(i === currentPage ? 'btn-white' : 'btn-outline-white');
+                    $btn.text(page);
+                    $btn.addClass(page === currentPage ? 'btn-white' : 'btn-outline-white');
+                    if (page === currentPage) $btn.attr('aria-current', 'page');
 
                     (function(page){
                         $btn.on('click', function(){
                             currentPage = page;
                             render();
                         });
-                    })(i);
+                    })(page);
 
                     $pagination.append($btn);
-                }
+                });
 
                 $pagination.append($next);
             }
@@ -159,6 +175,7 @@
                 responsive: true,
                 searching: burgerTablaDatosBool($table.data('searching')),
                 paging: burgerTablaDatosBool($table.data('paging')),
+                pagingType: 'simple_numbers',
                 info: burgerTablaDatosBool($table.data('info')),
                 pageLength: parseInt($table.data('page-length'), 10) || 10,
                 lengthChange: true,
