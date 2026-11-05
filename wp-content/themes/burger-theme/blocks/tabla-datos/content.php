@@ -434,6 +434,11 @@ if ($origen_datos === 'csv') {
 
 $dataset_columns = $dataset['columns'] ?? [];
 $dataset_rows = $dataset['rows'] ?? [];
+$preview_row_limit = 10;
+$preview_is_truncated = !empty($is_preview) && count($dataset_rows) > $preview_row_limit;
+if ($preview_is_truncated) {
+    $dataset_rows = array_slice($dataset_rows, 0, $preview_row_limit);
+}
 
 $columns_to_render = [];
 if (!empty($columnas)) {
@@ -558,19 +563,17 @@ foreach ($columns_to_render as $index => $column) {
                                 <?php endforeach; ?>
                             </tr>
                         </thead>
-                        <tbody>
-                            <?php foreach ($dataset_rows as $row) : ?>
-                                <tr>
-                                    <?php foreach ($columns_to_render as $column) : ?>
-                                        <td class="<?= esc_attr($column['class']); ?>">
-                                            <?= burger_td_format_value($row[$column['key']] ?? '', $column['type']); ?>
-                                        </td>
-                                    <?php endforeach; ?>
-                                </tr>
-                            <?php endforeach; ?>
-                        </tbody>
+                        <tbody><?php foreach ($dataset_rows as $row) : ?>
+<tr><?php foreach ($columns_to_render as $column) : ?>
+<td class="<?= esc_attr($column['class']); ?>"><?= burger_td_format_value($row[$column['key']] ?? '', $column['type']); ?></td>
+<?php endforeach; ?></tr>
+<?php endforeach; ?></tbody>
                     </table>
                 </div>
+
+                <?php if ($preview_is_truncated) : ?>
+                    <p class="mt-3">Vista previa de las primeras <?= esc_html($preview_row_limit); ?> filas. La página muestra la tabla completa.</p>
+                <?php endif; ?>
 
                 <?php if (!empty($descripcion)) : ?>
                     <div class="descripcion pt-5 <?= esc_attr($text_align_class); ?>">
